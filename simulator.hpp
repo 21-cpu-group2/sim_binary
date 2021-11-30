@@ -75,7 +75,7 @@ typedef struct {
     // cache_line *cache;
     // statistics stat;
 } Emulator;
-
+uint32_t hex2int(string hex);
 void init_emulator(Emulator* emu, uint32_t pc_init);
 void destroy_emulator(Emulator* emu);
 void print_reg(Emulator* emu);

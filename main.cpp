@@ -16,23 +16,22 @@ double elapsed(){
 	return ts.tv_sec + ts.tv_nsec*1.0e-9;
 }
 
-uint32_t hex2int(string hex) {
-    uint32_t ret = stoi(hex, nullptr, 16);
-    return ret;
-}
-
 int main(int argc, char **argv){
     // initialize emulator
     Emulator* emu;
     emu = (Emulator*)malloc(sizeof(Emulator));
     init_emulator(emu, 0x0000);
 
+    emu->memory[0x00000010] = 0x11111111;
+
     cout << "simulator is ready." << endl;
-    
+
     while (1) {
         
         string inst_hex;
         cin >> inst_hex;
+        if (inst_hex == "reg") {print_reg(emu); continue;}
+        else if (inst_hex == "mem") {print_mem(emu); continue;}
         uint32_t inst = hex2int(inst_hex);
         judge_optype(emu, inst);
         

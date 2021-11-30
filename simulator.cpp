@@ -3,6 +3,12 @@
 #include <stdlib.h>
 
 #include "simulator.hpp"
+
+uint32_t hex2int(string hex) {
+    uint32_t ret = stoi(hex, nullptr, 16);
+    return ret;
+}
+
 void init_emulator(Emulator* emu, uint32_t pc_init){
     for (int i=0; i<REG_SIZE; i++){
         emu->reg[i] = 0x00000000;
@@ -66,8 +72,9 @@ void print_reg(Emulator* emu){
 
 void print_mem(Emulator* emu){
     // startから 128 byte　表示
-    int start;
-    cin >> start;
+    string address_hex;
+    cin >> address_hex;
+    uint32_t start = hex2int(address_hex);
     start /= 4;
     cout << "----------------------------------------------------------------------------------------------------------------" << endl;
     for (int i=0; i<4; i++){

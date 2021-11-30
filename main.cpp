@@ -22,8 +22,6 @@ int main(int argc, char **argv){
     emu = (Emulator*)malloc(sizeof(Emulator));
     init_emulator(emu, 0x0000);
 
-    emu->memory[0x00000010] = 0x11111111;
-
     cout << "simulator is ready." << endl;
 
     while (1) {

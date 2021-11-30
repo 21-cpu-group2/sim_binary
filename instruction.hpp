@@ -103,7 +103,6 @@ inline int LHU(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
 }
 
 ///////////   STORE   ////////////
-
 inline int SB(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
@@ -124,6 +123,130 @@ inline int SW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
     emu->memory[(rs1 + imm)/4] = rs2;
+    emu->pc++;
+    return 0;
+}
+
+///////////   IMM   ////////////
+inline int ADDI(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
+    uint32_t rs1 = emu->reg[rs1_];
+    emu->reg[rd_] = rs1 + imm;
+    emu->pc++;
+    return 0;
+}
+
+inline int SLTI(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
+    uint32_t rs1 = emu->reg[rs1_];
+    emu->reg[rd_] = ((int)rs1 < imm) ? 1 : 0;
+    emu->pc++;
+    return 0;
+}
+
+inline int SLTIU(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
+    uint32_t rs1 = emu->reg[rs1_];
+    emu->reg[rd_] = (rs1 < (uint32_t)imm) ? 1 : 0;
+    emu->pc++;
+    return 0;
+}
+
+inline int XORI(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
+    uint32_t rs1 = emu->reg[rs1_];
+    emu->reg[rd_] = rs1 ^ imm;
+    emu->pc++;
+    return 0;
+}
+
+inline int ORI(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
+    uint32_t rs1 = emu->reg[rs1_];
+    emu->reg[rd_] = rs1 | imm;
+    emu->pc++;
+    return 0;
+}
+
+inline int ANDI(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
+    uint32_t rs1 = emu->reg[rs1_];
+    emu->reg[rd_] = rs1 & imm;
+    emu->pc++;
+    return 0;
+}
+
+///////////   OP   ////////////
+inline int ADD(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
+    emu->reg[rd_] = rs1 + rs2;
+    emu->pc++;
+    return 0;
+}
+
+inline int SUB(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
+    emu->reg[rd_] = rs1 - rs2;
+    emu->pc++;
+    return 0;
+}
+
+inline int SLL(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
+    uint32_t shift = rs2 & 0x0000001F;
+    emu->reg[rd_] = rs1 << rs2;
+    emu->pc++;
+    return 0;
+}
+
+inline int SLT(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
+    emu->reg[rd_] = (rs1 < rs2) ? 1 : 0;
+    emu->pc++;
+    return 0;
+}
+
+inline int XOR(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
+    emu->reg[rd_] = rs1 ^ rs2;
+    emu->pc++;
+    return 0;
+}
+
+inline int SRL(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
+    uint32_t shift = rs2 & 0x0000001F;
+    emu->reg[rd_] = rs1 >> rs2;
+    emu->pc++;
+    return 0;
+}
+
+inline int SRA(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
+    uint32_t shift = rs2 & 0x0000001F;
+    emu->reg[rd_] = rs1 >> rs2;
+    if (rs1 & (1<<31)){
+        // if rs1 is neg
+        uint32_t mask = 0xFFFFFFFF << (32-rs2);
+        emu->reg[rd_] |= mask;
+    }
+    emu->pc++;
+    return 0;
+}
+
+inline int OR(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
+    emu->reg[rd_] = rs1 | rs2;
+    emu->pc++;
+    return 0;
+}
+
+inline int AND(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
+    emu->reg[rd_] = rs1 & rs2;
     emu->pc++;
     return 0;
 }

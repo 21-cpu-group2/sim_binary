@@ -99,7 +99,6 @@ int inst_load(Emulator* emu, uint32_t instruction) {
             LB(emu, rs1, rd, imm);
             if (DEBUG) cout << "LB" << endl;
             break;
-        /*
         case 0b001 :
             LH(emu, rs1, rd, imm);
             if (DEBUG) cout << "LH" << endl;
@@ -116,7 +115,50 @@ int inst_load(Emulator* emu, uint32_t instruction) {
             LHU(emu, rs1, rd, imm);
             if (DEBUG) cout << "LHU" << endl;
             break;
-        */
+        default :
+            cout << "no function matched" << endl;
+            return 1;
+    }
+    return 0;
+}
+
+int inst_store(Emulator* emu, uint32_t instruction) {
+    // S-type
+    //  sb, sh, sw
+
+    //  imm1   rs2    rs1    funct3   imm2   opcode
+    //   7      5      5        3      5        7
+
+    uint32_t funct3 = (instruction & 0x00007000) >> 12;
+    uint32_t imm1 = (instruction & 0xFE000000) >> 20;
+    uint32_t imm2 = (instruction & 0x00000F80) >> 7;
+    int imm = imm1 + imm2;
+    if (imm & (1<<11)){
+        // if MSB = 1 then change sign
+        imm = (imm ^ 0x00000FFF) + 1;
+    }
+    uint32_t rs2 = (instruction & 0x01F00000) >> 20;
+    uint32_t rs1 = (instruction & 0x000F8000) >> 15;
+    if (DEBUG) {
+        cout << dec;
+        cout << "----------------" << endl;
+        cout << "imm : " << imm << endl
+             << "rs1 : " << rs1 << " (-> " << reg_name[rs1] << ")" << endl
+             << "rs2 : " << rs2 << " (-> " << reg_name[rs2] << ")" << endl;
+    }
+    switch (funct3) {
+        case 0b000 :
+            SB(emu, rs1, rs2, imm);
+            if (DEBUG) cout << "SB" << endl;
+            break;
+        case 0b001 :
+            SH(emu, rs1, rs2, imm);
+            if (DEBUG) cout << "SH" << endl;
+            break;
+        case 0b010 :
+            SW(emu, rs1, rs2, imm);
+            if (DEBUG) cout << "SW" << endl;
+            break;
         default :
             cout << "no function matched" << endl;
             return 1;
@@ -133,10 +175,10 @@ int judge_optype(Emulator* emu, uint32_t instruction){
         case LOAD :
             inst_load(emu, instruction);
             break;
-        /*
         case STORE :
-            inst_store(instruction);
+            inst_store(emu, instruction);
             break;
+        /*
         case IMM :
             inst_imm(instruction);
             break;

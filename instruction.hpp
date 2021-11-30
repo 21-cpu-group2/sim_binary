@@ -62,6 +62,7 @@ inline int LB(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
         // if MSB = 1 then extend sign
         emu->reg[rd_] |= 0xFFFFFF00;
     }
+    emu->pc++;
     return 0;
 }
 
@@ -73,6 +74,7 @@ inline int LH(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
         // if MSB = 1 then extend sign
         emu->reg[rd_] |= 0xFFFF0000;
     }
+    emu->pc++;
     return 0;
 }
 
@@ -80,6 +82,7 @@ inline int LW(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t address = (rs1 + imm) / 4;
     emu->reg[rd_] = emu->memory[address];
+    emu->pc++;
     return 0;
 }
 
@@ -87,6 +90,7 @@ inline int LBU(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t address = (rs1 + imm) / 4;
     emu->reg[rd_] = (emu->memory[address] & 0xFF000000) >> 24;
+    emu->pc++;
     return 0;
 }
 
@@ -94,6 +98,34 @@ inline int LHU(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t address = (rs1 + imm) / 4;
     emu->reg[rd_] = (emu->memory[address] & 0xFFFF0000) >> 16;
+    emu->pc++;
     return 0;
 }
+
+///////////   STORE   ////////////
+
+inline int SB(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
+    emu->memory[(rs1 + imm)/4] = rs2 & 0x000000FF;
+    emu->pc++;
+    return 0;
+}
+
+inline int SH(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
+    emu->memory[(rs1 + imm)/4] = rs2 & 0x0000FFFF;
+    emu->pc++;
+    return 0;
+}
+
+inline int SW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
+    emu->memory[(rs1 + imm)/4] = rs2;
+    emu->pc++;
+    return 0;
+}
+
 #endif

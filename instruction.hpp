@@ -7,7 +7,7 @@
 using namespace std;
 
 //////////////////////   RV32I   /////////////////////////
-int judge_optype(Emulator* emu, uint32_t instruction);
+int exec_one_instruction(Emulator* emu, uint32_t instruction);
 
 ///////////   BRANCH   ////////////
 inline int BEQ(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
@@ -199,6 +199,14 @@ inline int SLL(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
 inline int SLT(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
+    emu->reg[rd_] = ((int)rs1 < (int)rs2) ? 1 : 0;
+    emu->pc++;
+    return 0;
+}
+
+inline int SLTU(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->reg[rs2_];
     emu->reg[rd_] = (rs1 < rs2) ? 1 : 0;
     emu->pc++;
     return 0;
@@ -248,6 +256,43 @@ inline int AND(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     uint32_t rs2 = emu->reg[rs2_];
     emu->reg[rd_] = rs1 & rs2;
     emu->pc++;
+    return 0;
+}
+
+///////////   LUI   ////////////
+inline int LUI(Emulator* emu, uint32_t rd_, int imm) {
+    emu->reg[rd_] = imm;
+    emu->pc++;
+    return 0;
+}
+
+///////////   AUIPC   ////////////
+inline int AUIPC(Emulator* emu, uint32_t rd_, int imm) {
+    // 現在のpcに足すのか、それとも4(sim上では1)を足してから足すのか
+    emu->reg[rd_] = emu->pc * 4 + imm;
+    emu->pc++;
+    return 0;
+}
+
+///////////   JAL   ////////////
+inline int JAL(Emulator* emu, uint32_t rd_, int imm) {
+    // 現在のpcに足すのか、それとも4(sim上では1)を足してから足すのか
+    if (rd_ == 0){
+        rd_ = 1; // x1 register
+    }
+    emu->reg[rd_] = emu->pc * 4 + 4;
+    emu->pc += imm/4;
+    return 0;
+}
+
+///////////   JALR   ////////////
+inline int JALR(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
+    if (rd_ == 0){
+        rd_ = 1; // x1 register
+    }
+    uint32_t rs1 = emu->reg[rs1_];
+    emu->pc = (rs1 + imm) / 4;
+    emu->reg[rd_] = rs1 + 4;
     return 0;
 }
 

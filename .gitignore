@@ -1,6 +1,9 @@
 make_code.ipynb
 .ipynb_checkpoints/
+sample.cpp
 .access_token
 *.gch
 *.o
 simulator
+*.DS_Store
+*.out

@@ -1,11 +1,37 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
+#include <fstream>
 #include <stdlib.h>
 
 #include "simulator.hpp"
 
+uint32_t bin2int(string bin) {
+    // std::stoiがうまく機能しないので自分で実装。
+    int ofst = (bin.at(1) == 'b') ? 2 : 0;
+    uint32_t ret = 0x00000000;
+    for (int i=0; i<bin.size()-ofst; i++){
+        ret <<= 1;
+        if (bin.at(i + ofst) == '1'){
+            ret += 1;
+        }
+    }
+    return ret;
+}
+
 uint32_t hex2int(string hex) {
-    uint32_t ret = stoi(hex, nullptr, 16);
+    // std::stoiがうまく機能しないので自分で実装。
+    int ofst = (hex.at(1) == 'x') ? 2 : 0;
+    uint32_t ret = 0x00000000;
+    for (int i=0; i<hex.size()-ofst; i++){
+        ret <<= 4;
+        if ((uint32_t)(hex.at(i + ofst) - '0') < 10){ // num
+            ret += (uint32_t)(hex.at(i + ofst) - '0');
+        } 
+        else {
+            ret += (uint32_t)(hex.at(i + ofst) - 'A') + (uint32_t)10;
+        }
+    }
     return ret;
 }
 
@@ -27,7 +53,7 @@ void init_emulator(Emulator* emu, uint32_t pc_init){
 
     //メモリを動的に確保
     emu->memory = (uint32_t*)malloc(MEMORY_SIZE);
-    emu->instruction_memory = (inst*)malloc(INSTRUCTION_MEMORY_SIZE);
+    emu->instruction_memory = (uint32_t*)malloc(INSTRUCTION_MEMORY_SIZE);
     // emu->cache = (cache_line*)malloc(sizeof(cache_line) / 4 * CACHE_SIZE / CACHE_WAY);
 
     if (emu->memory == NULL || emu->instruction_memory == NULL){
@@ -45,6 +71,28 @@ void destroy_emulator(Emulator* emu) {
     free(emu->memory);
     free(emu->instruction_memory);
     free(emu);
+}
+
+int load_instructions(Emulator* emu, string file_path){
+    // read machine code and keep in instruction-memory
+    ifstream ifs(file_path);
+    if (ifs.fail()){
+        return 1;
+    }
+    string str;
+    while (getline(ifs, str)){
+        if (str.at(0) == '/' && str.at(1) == '/'){
+            continue;
+        }
+        uint32_t inst = bin2int(str);
+        emu->instruction_memory[emu->instruction_size++] = inst;
+    }
+    return 0;
+    if (DEBUG) {
+        for (int i=0; i<emu->instruction_size; i++){
+            cout << hex << "0x" << emu->instruction_memory[i] << endl;
+        }
+    }
 }
 
 void print_reg(Emulator* emu){

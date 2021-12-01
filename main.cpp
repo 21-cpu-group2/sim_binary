@@ -22,17 +22,35 @@ int main(int argc, char **argv){
     emu = (Emulator*)malloc(sizeof(Emulator));
     init_emulator(emu, 0x0000);
 
+    // load machine code to instruction-memory
+    string file_path = argv[1];
+    load_instructions(emu, file_path);
+    
+    //  test 
+    // test
+
+
     cout << "simulator is ready." << endl;
 
     while (1) {
         
-        string inst_hex;
-        cin >> inst_hex;
-        if (inst_hex == "reg") {print_reg(emu); continue;}
-        else if (inst_hex == "mem") {print_mem(emu); continue;}
-        uint32_t inst = hex2int(inst_hex);
-        judge_optype(emu, inst);
-        
+        string query; cin >> query;
+        if (query == "reg") {
+            print_reg(emu); 
+            continue;
+        }
+        else if (query == "mem") {
+            print_mem(emu); 
+            continue;
+        }
+        else if (query == "n") {
+            uint32_t inst = emu->instruction_memory[emu->pc];
+            exec_one_instruction(emu, inst);
+            continue;
+        }
+        else if (query == "exit") {
+            break;
+        }
     }
     destroy_emulator(emu);
     return 0;

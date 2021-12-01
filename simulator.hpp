@@ -60,24 +60,22 @@ static map<string, int> freg_num{
     { "ft8", 28 },{ "ft9", 29 },{ "ft10", 30 },{ "ft11", 31 }
 };
 
-
-typedef struct {
-    uint32_t inst;
-} inst;
-
 typedef struct {
     uint32_t reg[REG_SIZE];
     uint32_t freg[FREG_SIZE];
     int32_t pc;
     uint32_t* memory;
-    inst *instruction_memory;
+    uint32_t *instruction_memory;
     int instruction_size;
     // cache_line *cache;
     // statistics stat;
 } Emulator;
+
+uint32_t bin2int(string bin);
 uint32_t hex2int(string hex);
 void init_emulator(Emulator* emu, uint32_t pc_init);
 void destroy_emulator(Emulator* emu);
+int load_instructions(Emulator* emu, string file_path);
 void print_reg(Emulator* emu);
 void print_mem(Emulator* emu);
 

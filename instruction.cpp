@@ -6,15 +6,15 @@
 using namespace std;
 
 // オペコード
-#define BRANCH 0b1100011 // beq, bne, blt, bge, bltu, bgeu
-#define LOAD   0b0000011 // lb, lh, lw, lbu, lhu, 
-#define STORE  0b0100011 // sb, sh, sw
-#define IMM    0b0010011 // addi, slti, sltiu, xori, ori, andi, slli, srli, srai
-#define OP     0b0110011 // add, sub, sll, slt, sltu, xor, srl, sra, or, and
-#define LUI    0b0110111 // lui
-#define AUIPC  0b0010111 // auipc
-#define JAL    0b1101111 // jal
-#define JALR   0b1100111 // jalr
+#define _BRANCH 0b1100011 // beq, bne, blt, bge, bltu, bgeu
+#define _LOAD   0b0000011 // lb, lh, lw, lbu, lhu, 
+#define _STORE  0b0100011 // sb, sh, sw
+#define _IMM    0b0010011 // addi, slti, sltiu, xori, ori, andi, slli, srli, srai
+#define _OP     0b0110011 // add, sub, sll, slt, sltu, xor, srl, sra, or, and
+#define _LUI    0b0110111 // lui
+#define _AUIPC  0b0010111 // auipc
+#define _JAL    0b1101111 // jal
+#define _JALR   0b1100111 // jalr
 
 int inst_branch(Emulator* emu, uint32_t instruction) {
     // B-type
@@ -45,14 +45,14 @@ int inst_branch(Emulator* emu, uint32_t instruction) {
             BEQ(emu, rs1, rs2, imm);
             if (DEBUG) cout << "BEQ" << endl;
             break;
-        case 0b001 :
+        case 0b100 : // in risc-v 0b001
             BNE(emu, rs1, rs2, imm);
             if (DEBUG) cout << "BNE" << endl;
             break;
-        case 0b100 :
-            BLT(emu, rs1, rs2, imm);
-            if (DEBUG) cout << "BLT" << endl;
-            break;
+        // case 0b100 :
+        //     BLT(emu, rs1, rs2, imm);
+        //     if (DEBUG) cout << "BLT" << endl;
+        //     break;
         case 0b101 :
             BGE(emu, rs1, rs2, imm);
             if (DEBUG) cout << "BGE" << endl;
@@ -228,7 +228,7 @@ int inst_op(Emulator* emu, uint32_t instruction) {
     //     7      5      5        3      5      7
 
     uint32_t funct3 = (instruction & 0x00007000) >> 12;
-    uint32_t funct7 = (instruction & 0xFE000000) >> 20;
+    uint32_t funct7 = (instruction & 0xFE000000) >> 22;
     uint32_t funct = funct7 + funct3;
     uint32_t rs2 = (instruction & 0x01F00000) >> 20;
     uint32_t rs1 = (instruction & 0x000F8000) >> 15;
@@ -289,38 +289,135 @@ int inst_op(Emulator* emu, uint32_t instruction) {
     return 0;
 }
 
-int judge_optype(Emulator* emu, uint32_t instruction){
+int inst_lui(Emulator* emu, uint32_t instruction) {
+    // U-type
+    //  LUI
+
+    //  imm   rd   opcode
+    //   20    5    7
+
+    int imm = instruction & 0xFFFFF000;
+    uint32_t rd = (instruction & 0x00000F80) >> 7;
+    if (DEBUG) {
+        cout << dec;
+        cout << "----------------" << endl;
+        cout << "imm : " << imm << endl
+             << "rd : " << rd << " (-> " << reg_name[rd] << ")" << endl;
+    }
+    LUI(emu, rd, imm);
+    if (DEBUG) cout << "LUI" << endl;
+    return 0;
+}
+
+int inst_auipc(Emulator* emu, uint32_t instruction) {
+    // U-type
+    //  AUIPC
+
+    //  imm   rd   opcode
+    //   20    5    7
+
+    int imm = instruction & 0xFFFFF000;
+    uint32_t rd = (instruction & 0x00000F80) >> 7;
+    if (DEBUG) {
+        cout << dec;
+        cout << "----------------" << endl;
+        cout << "imm : " << imm << endl
+             << "rd : " << rd << " (-> " << reg_name[rd] << ")" << endl;
+    }
+    AUIPC(emu, rd, imm);
+    if (DEBUG) cout << "AUIPC" << endl;
+    return 0;
+}
+
+int inst_jal(Emulator* emu, uint32_t instruction) {
+    // U-type
+    //  AUIPC
+
+    //  imm   rd   opcode
+    //   20    5    7
+
+    int imm = (instruction & 0xFFFFF000) >> 12;
+    if (imm & (1<<19)){
+        // if MSB = 1 then sign extend
+        imm = (imm | 0xFFF00000);
+    }
+    uint32_t rd = (instruction & 0x00000F80) >> 7;
+    if (DEBUG) {
+        cout << dec;
+        cout << "----------------" << endl;
+        cout << "imm : " << imm << endl
+             << "rd : " << rd << " (-> " << reg_name[rd] << ")" << endl;
+    }
+    JAL(emu, rd, imm);
+    if (DEBUG) cout << "JAL" << endl;
+    return 0;
+}
+
+int inst_jalr(Emulator* emu, uint32_t instruction) {
+    // I-type
+    //  addi, slti, sltiu, xori, ori, andi, slli, srli, srai
+
+    //  imm   rs1   funct3   rd   opcode
+    //   12    5      3       5    7
+
+    uint32_t funct3 = (instruction & 0x00007000) >> 12;
+    int imm = (instruction & 0xFFF00000) >> 20;
+    if (imm & (1<<11)){
+        // if MSB = 1 then sign extend
+        imm = (imm | 0xFFFFF000);
+    }
+    uint32_t rs1 = (instruction & 0x000F8000) >> 15;
+    uint32_t rd = (instruction & 0x00000F80) >> 7;
+    if (DEBUG) {
+        cout << dec;
+        cout << "----------------" << endl;
+        cout << "imm : " << imm << endl
+             << "rs1 : " << rs1 << " (-> " << reg_name[rs1] << ")" << endl
+             << "rd : " << rd << " (-> " << reg_name[rd] << ")" << endl;
+    }
+    switch (funct3) {
+        case 0b000 :
+            JALR(emu, rs1, rd, imm);
+            if (DEBUG) cout << "JALR" << endl;
+            break;
+        default :
+            cout << "no function matched" << endl;
+            return 1;
+    }
+    return 0;
+}
+
+int exec_one_instruction(Emulator* emu, uint32_t instruction){
     uint32_t opcode = instruction & 0x007F;
+    if (DEBUG) cout << dec << "pc : " << emu->pc << endl;
     switch (opcode) {
-        case BRANCH :
+        case _BRANCH :
             inst_branch(emu, instruction);
             break;
-        case LOAD :
+        case _LOAD :
             inst_load(emu, instruction);
             break;
-        case STORE :
+        case _STORE :
             inst_store(emu, instruction);
             break;
-        case IMM :
+        case _IMM :
             inst_imm(emu, instruction);
             break;
-        case OP :
+        case _OP :
             inst_op(emu, instruction);
             break;
-        /*
-        case LUI :
+        case _LUI :
             inst_lui(emu, instruction);
             break;
-        case AUIPC :
+        case _AUIPC :
             inst_auipc(emu, instruction);
             break;
-        case JAL :
+        case _JAL :
             inst_jal(emu, instruction);
             break;
-        case JALR :
+        case _JALR :
             inst_jalr(emu, instruction);
             break;
-        */
         default :
             cout << "no opcode matched" << endl;
             return 1;

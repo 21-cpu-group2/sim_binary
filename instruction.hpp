@@ -13,42 +13,42 @@ int exec_one_instruction(Emulator* emu, uint32_t instruction);
 inline int BEQ(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    emu->pc = ((int)rs1 == (int)rs2) ? emu->pc + imm / 4 : emu->pc + 1; 
+    emu->pc = ((int)rs1 == (int)rs2) ? emu->pc + imm : emu->pc + 1; 
     return 0;
 }
 
 inline int BNE(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    emu->pc = ((int)rs1 != (int)rs2) ? emu->pc + imm / 4 : emu->pc + 1; 
+    emu->pc = ((int)rs1 != (int)rs2) ? emu->pc + imm : emu->pc + 1; 
     return 0;
 }
 
 inline int BLT(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    emu->pc = ((int)rs1 < (int)rs2) ? emu->pc + imm / 4 : emu->pc + 1; 
+    emu->pc = ((int)rs1 < (int)rs2) ? emu->pc + imm : emu->pc + 1; 
     return 0;
 }
 
 inline int BGE(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    emu->pc = ((int)rs1 >= (int)rs2) ? emu->pc + imm / 4 : emu->pc + 1; 
+    emu->pc = ((int)rs1 >= (int)rs2) ? emu->pc + imm : emu->pc + 1; 
     return 0;
 }
 
 inline int BLTU(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    emu->pc = (rs1 < rs2) ? emu->pc + imm / 4 : emu->pc + 1; 
+    emu->pc = (rs1 < rs2) ? emu->pc + imm : emu->pc + 1; 
     return 0;
 }
 
 inline int BGEU(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    emu->pc = (rs1 >= rs2) ? emu->pc + imm / 4 : emu->pc + 1; 
+    emu->pc = (rs1 >= rs2) ? emu->pc + imm : emu->pc + 1; 
     return 0;
 }
 
@@ -269,7 +269,7 @@ inline int LUI(Emulator* emu, uint32_t rd_, int imm) {
 ///////////   AUIPC   ////////////
 inline int AUIPC(Emulator* emu, uint32_t rd_, int imm) {
     // 現在のpcに足すのか、それとも4(sim上では1)を足してから足すのか
-    emu->reg[rd_] = emu->pc * 4 + imm;
+    emu->reg[rd_] = emu->pc + imm;
     emu->pc++;
     return 0;
 }
@@ -280,7 +280,7 @@ inline int JAL(Emulator* emu, uint32_t rd_, int imm) {
     if (rd_ == 0){
         rd_ = 1; // x1 register
     }
-    emu->reg[rd_] = emu->pc * 4 + 4;
+    emu->reg[rd_] = emu->pc + 1;
     emu->pc += imm/4;
     return 0;
 }
@@ -291,7 +291,7 @@ inline int JALR(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
         rd_ = 1; // x1 register
     }
     uint32_t rs1 = emu->reg[rs1_];
-    emu->pc = (rs1 + imm) / 4;
+    emu->pc = rs1 + imm;
     emu->reg[rd_] = rs1 + 4;
     return 0;
 }

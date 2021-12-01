@@ -48,6 +48,13 @@ int main(int argc, char **argv){
             exec_one_instruction(emu, inst);
             continue;
         }
+        else if (query == "p") {
+            int n; cin >> n;
+            for (int i=0; i<n; i++){
+                uint32_t inst = emu->instruction_memory[emu->pc];
+                exec_one_instruction(emu, inst);
+            }
+        }
         else if (query == "exit") {
             break;
         }

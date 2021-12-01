@@ -108,7 +108,7 @@ void print_reg(Emulator* emu){
     // float用レジスタの表示
     for (int i=0; i<FREG_SIZE; i++){
         cout << setfill(' ') << right << setw(8) << freg_name[i] << " : " << 
-            "0x" << hex << setfill('0') << right << setw(8) << emu->reg[i];
+            "0x" << hex << setfill('0') << right << setw(8) << emu->freg[i];
         cout << "     ";
         if (i % 4 == 3) {cout << endl;}
     }

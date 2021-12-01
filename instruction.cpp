@@ -15,6 +15,7 @@ using namespace std;
 #define _AUIPC  0b0010111 // auipc
 #define _JAL    0b1101111 // jal
 #define _JALR   0b1100111 // jalr
+#define _NOP    0b1111111 // nop
 
 int inst_branch(Emulator* emu, uint32_t instruction) {
     // B-type
@@ -418,9 +419,12 @@ int exec_one_instruction(Emulator* emu, uint32_t instruction){
         case _JALR :
             inst_jalr(emu, instruction);
             break;
+        case _NOP  :
+            if (instruction & 0xFFFFFFFF) break;
         default :
             cout << "no opcode matched" << endl;
             return 1;
     }
+     // emu->reg[0] = 0x00000000;
     return 0;
 }

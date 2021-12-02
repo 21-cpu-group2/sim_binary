@@ -90,7 +90,7 @@ int main(int argc, char **argv){
             else {
                 emu->args.flg_a = false;
             }
-            if (emu->args.flg_a && emu->args.flg_r) {
+            if (emu->args.flg_a) {
                 cout << dec << endl;
                 if (iteration % 10 == 1) cout << iteration << "st instruction" << endl;
                 else if (iteration % 10 == 2) cout << iteration << "nd instruction" << endl;
@@ -107,15 +107,30 @@ int main(int argc, char **argv){
         while (1){
             uint32_t pc_pred = emu->pc;
             uint32_t inst = emu->instruction_memory[emu->pc];
+            bool flg = false;
+            if ((!emu->args.flg_s || emu->args.start <= iteration)
+                && (!emu->args.flg_g || emu->args.goal >= iteration)){
+                flg = true;
+            } 
+            else {
+                flg = false;
+            }
+            if (flg && emu->args.flg_r) {
+                cout << dec << endl;
+                if (iteration % 10 == 1) cout << iteration << "st instruction" << endl;
+                else if (iteration % 10 == 2) cout << iteration << "nd instruction" << endl;
+                else if (iteration % 10 == 3) cout << iteration << "rd instruction" << endl;
+                else cout << iteration << "th instruction" << endl;
+            }
             exec_one_instruction(emu, inst);
             iteration++;
-            if (emu->args.flg_r) print_reg(emu);
+            if (emu->args.flg_r && flg) print_reg(emu);
             if (pc_pred == emu->pc) break;  
         }
     }
     double t_end = elapsed();
     cout << t_end - t_start << "[s] elapsed" << endl;
-    cout << (iteration-1) << " instructions executed" << endl;
+    cout << dec << (iteration-1) << " instructions executed" << endl;
     cout << (iteration-1) / (t_end - t_start) << " instructions/sec" << endl;
     /*
     while (1) {

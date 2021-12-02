@@ -276,7 +276,7 @@ int inst_op(Emulator* emu, uint32_t instruction) {
         case 0b0100000000 :
             SUB(emu, rs1, rs2, rd);
             if (emu->args.flg_a) {
-                cout << "add " << reg_name[rd] << ", " << reg_name[rs1] << ", " << reg_name[rs2] << endl;
+                cout << "sub " << reg_name[rd] << ", " << reg_name[rs1] << ", " << reg_name[rs2] << endl;
             }
             break;
         case 0b0000000001 :
@@ -294,7 +294,7 @@ int inst_op(Emulator* emu, uint32_t instruction) {
         case 0b0000000100 :
             XOR(emu, rs1, rs2, rd);
             if (emu->args.flg_a) {
-                cout << "add " << reg_name[rd] << ", " << reg_name[rs1] << ", " << reg_name[rs2] << endl;
+                cout << "xor " << reg_name[rd] << ", " << reg_name[rs1] << ", " << reg_name[rs2] << endl;
             }
             break;
         case 0b0000000101 :

@@ -58,7 +58,9 @@ int inst_branch(Emulator* emu, uint32_t instruction) {
     switch (funct3) {
         case 0b000 :
             BEQ(emu, rs1, rs2, imm);
-            if (DEBUG) cout << "BEQ" << endl;
+            if (emu->args.flg_a) {
+                cout << "beq " << reg_name[rs1] << ", " << reg_name[rs2] << ", " << imm << endl;
+            }
             break;
         case 0b100 : // in risc-v 0b001
             BNE(emu, rs1, rs2, imm);

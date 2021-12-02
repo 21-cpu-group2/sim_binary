@@ -6,7 +6,7 @@
 #define REG_SIZE 32
 #define FREG_SIZE 32
 
-#define DEBUG 0
+#define DEBUG 1
 #define DEBUG2 0 // if 1 then showing specific registers
 #define RM 0b000 // Round Mode(float)
 
@@ -63,12 +63,23 @@ static map<string, int> freg_num{
 };
 
 typedef struct {
+    bool flg_p;
+    bool flg_a;
+    bool flg_r;
+    bool flg_s;
+    bool flg_g;
+    int start;
+    int goal;
+} cmdline_args;
+
+typedef struct {
     uint32_t reg[REG_SIZE];
     uint32_t freg[FREG_SIZE];
     int32_t pc;
     uint32_t* memory;
     uint32_t *instruction_memory;
     int instruction_size;
+    cmdline_args args;
     // cache_line *cache;
     // statistics stat;
 } Emulator;

@@ -22,17 +22,49 @@ int main(int argc, char **argv){
     emu = (Emulator*)malloc(sizeof(Emulator));
     init_emulator(emu, 0x0000);
 
+    // for command line option
+    string file_path;
+    for (int i=0; i<argc; i++){
+        if (argv[i][0] == '-'){
+            switch (argv[i][1]) {
+                case 'p':
+                    emu->args.flg_p = true;
+                    file_path = argv[i+1];
+                    i++;
+                    break;
+                case 'a':
+                    emu->args.flg_a = true;
+                    break;
+                case 'r':
+                    emu->args.flg_r = true;
+                    break;
+                case 's':
+                    emu->args.flg_s = true;
+                    emu->args.start = stoi(argv[i+1], 0, 10);
+                    i++;
+                    break;
+                case 'g':
+                    emu->args.flg_g = true;
+                    emu->args.goal = stoi(argv[i+1], 0, 10);
+                    i++;
+                    break;
+                default :
+                    cout << "option \"" << argv[i][1] << "\" unsupported" << endl;
+            }
+        }
+    }
+    if (!emu->args.flg_p){
+        cout << "error : no file input" << endl;
+        return 1;
+    }
+
     // load machine code to instruction-memory
-    string file_path = argv[1];
     load_instructions(emu, file_path);
     
-    //  test 
-    // test
-
-
     cout << "simulator is ready." << endl;
 
     int iteration = 0;
+    /*
     if (DEBUG2) {
         while (1){
             uint32_t pc_pred = emu->pc;
@@ -45,6 +77,7 @@ int main(int argc, char **argv){
         destroy_emulator(emu);
         return 0;
     }
+    */
     while (1) {
         
         string query; cin >> query;

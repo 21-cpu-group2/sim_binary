@@ -60,11 +60,20 @@ void init_emulator(Emulator* emu, uint32_t pc_init){
         printf("error : cannot allocate memory\n");
         exit(1);
     }
-
-    emu->instruction_size = 0x00000000;
     memset(emu->memory, 0, MEMORY_SIZE);
     memset(emu->instruction_memory, 0, INSTRUCTION_MEMORY_SIZE);
     // memset(emu->cache, 0, sizeof(cache_line) / 4 * CACHE_SIZE / CACHE_WAY);
+
+    emu->instruction_size = 0x00000000;
+
+    emu->args.flg_p = false;
+    emu->args.flg_a = false;
+    emu->args.flg_r = false;
+    emu->args.flg_s = false;
+    emu->args.flg_g = false;
+    emu->args.start = 0;
+    emu->args.goal = 0;
+
 }
 
 void destroy_emulator(Emulator* emu) {

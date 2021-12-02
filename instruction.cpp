@@ -64,7 +64,9 @@ int inst_branch(Emulator* emu, uint32_t instruction) {
             break;
         case 0b100 : // in risc-v 0b001
             BNE(emu, rs1, rs2, imm);
-            if (DEBUG) cout << "BNE" << endl;
+            if (emu->args.flg_a) {
+                cout << "bne " << reg_name[rs1] << ", " << reg_name[rs2] << ", " << imm << endl;
+            }
             break;
         // case 0b100 :
         //     BLT(emu, rs1, rs2, imm);
@@ -122,7 +124,9 @@ int inst_load(Emulator* emu, uint32_t instruction) {
             break;
         case 0b010 :
             LW(emu, rs1, rd, imm);
-            if (DEBUG) cout << "LW" << endl;
+            if (emu->args.flg_a) {
+                cout << "lw " << reg_name[rd] << ", " << imm << "(" << reg_name[rs1] << ")" << endl;
+            }
             break;
         case 0b100 :
             LBU(emu, rs1, rd, imm);
@@ -174,7 +178,9 @@ int inst_store(Emulator* emu, uint32_t instruction) {
             break;
         case 0b010 :
             SW(emu, rs1, rs2, imm);
-            if (DEBUG) cout << "SW" << endl;
+            if (emu->args.flg_a) {
+                cout << "sw " << reg_name[rs2] << ", " << imm << "(" << reg_name[rs1] << ")" << endl;
+            }
             break;
         default :
             cout << "no function matched" << endl;
@@ -208,7 +214,9 @@ int inst_imm(Emulator* emu, uint32_t instruction) {
     switch (funct3) {
         case 0b000 :
             ADDI(emu, rs1, rd, imm);
-            if (DEBUG) cout << "ADDI" << endl;
+            if (emu->args.flg_a) {
+                cout << "addi " << reg_name[rd] << ", " << reg_name[rs1] << ", " << imm << endl;
+            }
             break;
         case 0b010 :
             SLTI(emu, rs1, rd, imm);
@@ -261,11 +269,15 @@ int inst_op(Emulator* emu, uint32_t instruction) {
         // ²¼°Ì10bit(7bit->funct7, 3bit->funct3)
         case 0b0000000000 :
             ADD(emu, rs1, rs2, rd);
-            if (DEBUG) cout << "ADD" << endl;
+            if (emu->args.flg_a) {
+                cout << "add " << reg_name[rd] << ", " << reg_name[rs1] << ", " << reg_name[rs2] << endl;
+            }
             break;
         case 0b0100000000 :
             SUB(emu, rs1, rs2, rd);
-            if (DEBUG) cout << "SUB" << endl;
+            if (emu->args.flg_a) {
+                cout << "add " << reg_name[rd] << ", " << reg_name[rs1] << ", " << reg_name[rs2] << endl;
+            }
             break;
         case 0b0000000001 :
             SLL(emu, rs1, rs2, rd);
@@ -281,7 +293,9 @@ int inst_op(Emulator* emu, uint32_t instruction) {
             break;
         case 0b0000000100 :
             XOR(emu, rs1, rs2, rd);
-            if (DEBUG) cout << "XOR" << endl;
+            if (emu->args.flg_a) {
+                cout << "add " << reg_name[rd] << ", " << reg_name[rs1] << ", " << reg_name[rs2] << endl;
+            }
             break;
         case 0b0000000101 :
             SRL(emu, rs1, rs2, rd);

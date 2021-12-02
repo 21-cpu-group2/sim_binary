@@ -6,7 +6,7 @@
 #define REG_SIZE 32
 #define FREG_SIZE 32
 
-#define DEBUG 1
+#define DEBUG 0
 #define DEBUG2 0 // if 1 then showing specific registers
 #define RM 0b000 // Round Mode(float)
 

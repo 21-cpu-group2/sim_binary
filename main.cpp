@@ -63,7 +63,6 @@ int main(int argc, char **argv){
     
     cout << "simulator is ready." << endl;
 
-    int iteration = 0;
     /*
     if (DEBUG2) {
         while (1){
@@ -78,8 +77,48 @@ int main(int argc, char **argv){
         return 0;
     }
     */
+    double t_start = elapsed();
+    int iteration = 1;
+    if (emu->args.flg_a){
+        while (1){
+            uint32_t pc_pred = emu->pc;
+            uint32_t inst = emu->instruction_memory[emu->pc];
+            if ((!emu->args.flg_s || emu->args.start <= iteration)
+                && (!emu->args.flg_g || emu->args.goal >= iteration)){
+                emu->args.flg_a = true;
+            } 
+            else {
+                emu->args.flg_a = false;
+            }
+            if (emu->args.flg_a && emu->args.flg_r) {
+                cout << dec << endl;
+                if (iteration % 10 == 1) cout << iteration << "st instruction" << endl;
+                else if (iteration % 10 == 2) cout << iteration << "nd instruction" << endl;
+                else if (iteration % 10 == 3) cout << iteration << "rd instruction" << endl;
+                else cout << iteration << "th instruction" << endl;
+            }
+            exec_one_instruction(emu, inst);
+            iteration++;
+            if (emu->args.flg_a && emu->args.flg_r) print_reg(emu);
+            if (pc_pred == emu->pc) break;  
+        }
+    }
+    else {
+        while (1){
+            uint32_t pc_pred = emu->pc;
+            uint32_t inst = emu->instruction_memory[emu->pc];
+            exec_one_instruction(emu, inst);
+            iteration++;
+            if (emu->args.flg_r) print_reg(emu);
+            if (pc_pred == emu->pc) break;  
+        }
+    }
+    double t_end = elapsed();
+    cout << t_end - t_start << "[s] elapsed" << endl;
+    cout << (iteration-1) << " instructions executed" << endl;
+    cout << (iteration-1) / (t_end - t_start) << " instructions/sec" << endl;
+    /*
     while (1) {
-        
         string query; cin >> query;
         if (query == "reg") {
             print_reg(emu); 
@@ -103,7 +142,7 @@ int main(int argc, char **argv){
         }
         else if (query == "all") {
             double t_start = elapsed();
-            int iteration = 0;
+            int iteration = 1;
             while (1){
                 uint32_t pc_pred = emu->pc;
                 uint32_t inst = emu->instruction_memory[emu->pc];
@@ -121,6 +160,7 @@ int main(int argc, char **argv){
             break;
         }
     }
+    */
     destroy_emulator(emu);
     return 0;
 }

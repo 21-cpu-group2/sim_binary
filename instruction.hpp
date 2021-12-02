@@ -3,12 +3,17 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <cmath>
 #include "simulator.hpp"
 using namespace std;
 
-//////////////////////   RV32I   /////////////////////////
-int exec_one_instruction(Emulator* emu, uint32_t instruction);
+union fi{
+    uint32_t i;
+    float f;
+} ;
 
+int exec_one_instruction(Emulator* emu, uint32_t instruction);
+//////////////////////   RV32I   /////////////////////////
 ///////////   BRANCH   ////////////
 inline int BEQ(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
@@ -276,23 +281,250 @@ inline int AUIPC(Emulator* emu, uint32_t rd_, int imm) {
 
 ///////////   JAL   ////////////
 inline int JAL(Emulator* emu, uint32_t rd_, int imm) {
-    // 現在のpcに足すのか、それとも4(sim上では1)を足してから足すのか
-    if (rd_ == 0){
-        rd_ = 1; // x1 register
-    }
+    // if (rd_ == 0){
+    //     rd_ = 1; // x1 register
+    // }
     emu->reg[rd_] = emu->pc + 1;
-    emu->pc += imm/4;
+    emu->pc += imm;
     return 0;
 }
 
 ///////////   JALR   ////////////
 inline int JALR(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
+    // if (rd_ == 0){
+    //     rd_ = 1; // x1 register
+    // }
+    uint32_t rs1 = emu->reg[rs1_];
+    emu->pc = rs1 + imm;
+    emu->reg[rd_] = rs1 + 4;
+    return 0;
+}
+
+//////////////////////   RV32F   /////////////////////////
+///////////   FLW   ////////////
+inline int FLW(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
     if (rd_ == 0){
         rd_ = 1; // x1 register
     }
     uint32_t rs1 = emu->reg[rs1_];
-    emu->pc = rs1 + imm;
-    emu->reg[rd_] = rs1 + 4;
+    emu->freg[rd_] = emu->memory[(rs1 + imm)/4];
+    return 0;
+}
+
+///////////   FSW   ////////////
+inline int FSW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
+    uint32_t rs1 = emu->reg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    emu->memory[(rs1 + imm)/4] = rs2;
+    emu->pc++;
+    return 0;
+}
+
+// fmadd, fmsub, fnmsub, fnmadd -> suspended
+
+///////////   FOP   ////////////
+inline int FADDS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    union fi frs1, frs2, frd;
+    frs1.i = rs1;
+    frs2.i = rs2;
+    frd.f = frs1.f + frs2.f;
+    emu->freg[rd_] = frd.i;
+    emu->pc++;
+    return 0;
+}
+
+inline int FSUBS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    union fi frs1, frs2, frd;
+    frs1.i = rs1;
+    frs2.i = rs2;
+    frd.f = frs1.f - frs2.f;
+    emu->freg[rd_] = frd.i;
+    emu->pc++;
+    return 0;
+}
+
+inline int FMULS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    union fi frs1, frs2, frd;
+    frs1.i = rs1;
+    frs2.i = rs2;
+    frd.f = frs1.f * frs2.f;
+    emu->freg[rd_] = frd.i;
+    emu->pc++;
+    return 0;
+}
+
+inline int FDIVS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    union fi frs1, frs2, frd;
+    frs1.i = rs1;
+    frs2.i = rs2;
+    frd.f = frs1.f / frs2.f;
+    emu->freg[rd_] = frd.i;
+    emu->pc++;
+    return 0;
+}
+
+inline int FSQRTS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    union fi frs1, frd;
+    frs1.i = rs1;
+    frd.f = sqrt(frs1.f);
+    emu->freg[rd_] = frd.i;
+    emu->pc++;
+    return 0;
+}
+
+inline int FSGNJS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    if (rs2 & (1<<31)){
+        emu->freg[rd_] = rs1 | 0x80000000;
+    }
+    else {
+        emu->freg[rd_] = rs1 & 0x7FFFFFFF;
+    }
+    emu->pc++;
+    return 0;
+}
+
+inline int FSGNJNS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    if (rs2 & (1<<31)){
+        emu->freg[rd_] = rs1 & 0x7FFFFFFF;
+    }
+    else {
+        emu->freg[rd_] = rs1 | 0x80000000;
+    }
+    emu->pc++;
+    return 0;
+}
+
+inline int FSGNJXS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    if ((rs1 & (1<<31)) ^ (rs2 & (1<<31))){
+        emu->freg[rd_] = rs1 | 0x80000000;
+    }
+    else {
+        emu->freg[rd_] = rs1 & 0x7FFFFFFF;
+    }
+    emu->pc++;
+    return 0;
+}
+
+inline int FMINS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    union fi frs1, frs2;
+    frs1.i = rs1;
+    frs2.i = rs2;
+    emu->freg[rd_] = (frs1.f < frs2.f) ? frs1.i : frs2.i;
+    emu->pc++;
+    return 0;
+}
+
+inline int FMAXS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    union fi frs1, frs2;
+    frs1.i = rs1;
+    frs2.i = rs2;
+    emu->freg[rd_] = (frs1.f > frs2.f) ? frs1.i : frs2.i;
+    emu->pc++;
+    return 0;
+}
+
+inline int FCVTWS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    union fi frs1;
+    frs1.i = rs1;
+    emu->freg[rd_] = (int)frs1.f;
+    emu->pc++;
+    return 0;
+}
+
+inline int FCVTWUS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    union fi frs1;
+    frs1.i = rs1;
+    emu->freg[rd_] = (uint32_t)frs1.f;
+    emu->pc++;
+    return 0;
+}
+
+inline int FMVXW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    cout << "inst. \"fmv.x.w\" unsupported" << endl;
+    return 0;
+}
+
+inline int FEQS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    union fi frs1, frs2;
+    frs1.i = rs1;
+    frs2.i = rs2;
+    emu->reg[rd_] = (frs1.f == frs2.f) ? 1 : 0;
+    emu->pc++;
+    return 0;
+}
+
+inline int FLTS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    union fi frs1, frs2;
+    frs1.i = rs1;
+    frs2.i = rs2;
+    emu->reg[rd_] = (frs1.f < frs2.f) ? 1 : 0;
+    emu->pc++;
+    return 0;
+}
+
+inline int FLES(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->freg[rs1_];
+    uint32_t rs2 = emu->freg[rs2_];
+    union fi frs1, frs2;
+    frs1.i = rs1;
+    frs2.i = rs2;
+    emu->reg[rd_] = (frs1.f <= frs2.f) ? 1 : 0;
+    emu->pc++;
+    return 0;
+}
+
+inline int FCLASSS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    cout << "inst. \"fclass.s\" unsupported" << endl;
+    return 0;
+}
+
+inline int FCVTSW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    int rs1 = (int)emu->reg[rs1_];
+    union fi frd;
+    frd.f = (float)rs1;
+    emu->freg[rd_] = frd.i;
+    emu->pc++;
+    return 0;
+}
+
+inline int FCVTSWU(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->reg[rs1_];
+    union fi frd;
+    frd.f = (float)rs1;
+    emu->freg[rd_] = frd.i;
+    emu->pc++;
+    return 0;
+}
+
+inline int FMVWX(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
+    uint32_t rs1 = emu->reg[rs1_];
+    emu->freg[rd_] = rs1;
+    emu->pc++;
     return 0;
 }
 

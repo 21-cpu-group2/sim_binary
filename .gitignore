@@ -7,3 +7,4 @@ sample.cpp
 simulator
 *.DS_Store
 *.out
+*.txt

@@ -118,6 +118,15 @@ void print_reg(Emulator* emu){
     cout << "----------------------------------------------------------------------------------------------------------------" << endl;
 }
 
+void print_reg_for_debug(Emulator* emu){
+    //cout << "----------------------------------------------------------------------------------------------------------------" << endl;
+    for (int i=0; i<9; i++){
+        cout << dec << setfill('0') << right << setw(8) << emu->reg[i];
+        cout << "     ";
+    }
+    cout << dec << setfill('0') << right << setw(8) << emu->pc << endl;
+}
+
 void print_mem(Emulator* emu){
     // startから 128 byte　表示
     string address_hex;

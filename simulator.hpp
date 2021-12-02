@@ -6,7 +6,9 @@
 #define REG_SIZE 32
 #define FREG_SIZE 32
 
-#define DEBUG 1
+#define DEBUG 0
+#define DEBUG2 0 // if 1 then showing specific registers
+#define RM 0b000 // Round Mode(float)
 
 #include <stdlib.h>
 #include <string>
@@ -77,6 +79,7 @@ void init_emulator(Emulator* emu, uint32_t pc_init);
 void destroy_emulator(Emulator* emu);
 int load_instructions(Emulator* emu, string file_path);
 void print_reg(Emulator* emu);
+void print_reg_for_debug(Emulator* emu);
 void print_mem(Emulator* emu);
 
 #endif

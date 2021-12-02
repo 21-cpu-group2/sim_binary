@@ -1,8 +1,8 @@
 #ifndef _SIMULATOR
 #define _SIMULATOR
 
-#define MEMORY_SIZE  (1024*32) // 2^25(1024*1024*32)だけ欲しい
-#define INSTRUCTION_MEMORY_SIZE (1024*32) //どのくらい必要?
+#define MEMORY_SIZE  (1024*1024*32) // 2^25(1024*1024*32)だけ欲しい
+#define INSTRUCTION_MEMORY_SIZE (1024*1024) //どのくらい必要?
 #define REG_SIZE 32
 #define FREG_SIZE 32
 

@@ -654,20 +654,18 @@ int exec_one_instruction(Emulator* emu, uint32_t instruction){
         case _FSW :
             inst_fsw(emu, instruction);
             break;
-        /*
-        case _FMADDS :
-            inst_fmadds(emu, instruction);
-            break;
-        case _FMSUBS :
-            inst_fmsubs(emu, instruction);
-            break;
-        case _FNMSUBS :
-            inst_fnmsubs(emu, instruction);
-            break;
-        case _FNMADDS :
-            inst_fnmadds(emu, instruction);
-            break;
-        */
+        // case _FMADDS :
+        //     inst_fmadds(emu, instruction);
+        //     break;
+        // case _FMSUBS :
+        //     inst_fmsubs(emu, instruction);
+        //     break;
+        // case _FNMSUBS :
+        //     inst_fnmsubs(emu, instruction);
+        //     break;
+        // case _FNMADDS :
+        //     inst_fnmadds(emu, instruction);
+        //     break;
         case _FOP :
             inst_fop(emu, instruction);
             break;
@@ -680,3 +678,4 @@ int exec_one_instruction(Emulator* emu, uint32_t instruction){
     // emu->reg[0] = 0x00000000;
     return 0;
 }
+

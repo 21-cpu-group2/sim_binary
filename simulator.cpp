@@ -71,9 +71,14 @@ void init_emulator(Emulator* emu, uint32_t pc_init){
     emu->args.flg_r = false;
     emu->args.flg_s = false;
     emu->args.flg_g = false;
+    emu->args.flg_R = false;
+    emu->args.flg_m = false;
     emu->args.start = 0;
     emu->args.goal = 0;
-
+    emu->args.mem_s = 0;
+    for (int i=0; i<REG_SIZE + FREG_SIZE; i++){
+        emu->args.reg_for_print[i] = false;
+    }
 }
 
 void destroy_emulator(Emulator* emu) {
@@ -129,18 +134,20 @@ void print_reg(Emulator* emu){
 
 void print_reg_for_debug(Emulator* emu){
     //cout << "----------------------------------------------------------------------------------------------------------------" << endl;
-    for (int i=0; i<9; i++){
-        cout << dec << setfill('0') << right << setw(8) << emu->reg[i];
-        cout << "     ";
+    for (int i=0; i<REG_SIZE + FREG_SIZE; i++){
+        if (emu->args.reg_for_print[i]){
+            cout << dec << setfill('0') << right << setw(8) << emu->reg[i];
+            cout << "     ";
+        }
     }
     cout << dec << setfill('0') << right << setw(8) << emu->pc << endl;
 }
 
-void print_mem(Emulator* emu){
+void print_mem(Emulator* emu, int start){
     // startから 128 byte　表示
-    string address_hex;
-    cin >> address_hex;
-    uint32_t start = hex2int(address_hex);
+    // string address_hex;
+    // cin >> address_hex;
+    // uint32_t start = hex2int(address_hex);
     start /= 4;
     cout << "----------------------------------------------------------------------------------------------------------------" << endl;
     for (int i=0; i<4; i++){

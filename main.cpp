@@ -21,7 +21,6 @@ int main(int argc, char **argv){
     Emulator* emu;
     emu = (Emulator*)malloc(sizeof(Emulator));
     init_emulator(emu, 0x0000);
-
     // for command line option
     string file_path;
     for (int i=0; i<argc; i++){
@@ -48,6 +47,22 @@ int main(int argc, char **argv){
                     emu->args.goal = stoi(argv[i+1], 0, 10);
                     i++;
                     break;
+                case 'm':
+                    // -m start
+                    // showing memory-state from start to start+128;
+                    emu->args.flg_m = true;
+                    emu->args.mem_s = stoi(argv[i+1], 0, 10);
+                    i++;
+                    break;
+                case 'R':
+                    cout << "R" << endl;
+                    emu->args.flg_R = true;
+                    int j;
+                    for (j=i+1; j<argc; j++){
+                        emu->args.reg_for_print[stoi(argv[j], 0, 10)] = true;
+                    }
+                    i = j + 1;
+                    break;
                 default :
                     cout << "option \"" << argv[i][1] << "\" unsupported" << endl;
             }
@@ -61,25 +76,48 @@ int main(int argc, char **argv){
     // load machine code to instruction-memory
     load_instructions(emu, file_path);
     
-    cout << "simulator is ready." << endl;
-
-    /*
-    if (DEBUG2) {
+    double t_start = elapsed();
+    int iteration = 1;
+    
+    if (emu->args.flg_R){ 
+        for (int i=0; i<REG_SIZE + FREG_SIZE; i++){
+            if (emu->args.reg_for_print[i]){
+                if (i < 10){
+                    cout << dec << "   r" << i << "   ";
+                }
+                else if (i < 32){
+                    cout << dec << "   r" << i << "  ";
+                }
+                else if (i < 42){
+                    cout << dec << "   f" << i-32 << "   ";
+                }
+                else {
+                    cout << dec << "   f" << i-32 << "  ";
+                }
+                cout << "     ";
+            }
+        }
+        cout << dec << "   pc   " << endl;
         while (1){
             uint32_t pc_pred = emu->pc;
             uint32_t inst = emu->instruction_memory[emu->pc];
+            bool flg;
+            emu->args.flg_a = false; // not showing assembly
+            if ((!emu->args.flg_s || emu->args.start <= iteration)
+                && (!emu->args.flg_g || emu->args.goal >= iteration)){
+                flg = true;
+            } 
+            else {
+                flg = false;
+            }
             exec_one_instruction(emu, inst);
             iteration++;
-            print_reg_for_debug(emu);
-            if (pc_pred == emu->pc) break; 
-        } 
-        destroy_emulator(emu);
-        return 0;
+            if (flg) print_reg_for_debug(emu);
+            if (pc_pred == emu->pc) break;  
+        }
     }
-    */
-    double t_start = elapsed();
-    int iteration = 1;
-    if (emu->args.flg_a){
+    
+    else if (emu->args.flg_a){
         while (1){
             uint32_t pc_pred = emu->pc;
             uint32_t inst = emu->instruction_memory[emu->pc];
@@ -92,14 +130,16 @@ int main(int argc, char **argv){
             }
             if (emu->args.flg_a) {
                 cout << dec << endl;
-                if (iteration % 10 == 1) cout << iteration << "st instruction" << endl;
-                else if (iteration % 10 == 2) cout << iteration << "nd instruction" << endl;
-                else if (iteration % 10 == 3) cout << iteration << "rd instruction" << endl;
-                else cout << iteration << "th instruction" << endl;
+                if (iteration % 10 == 1) cout << iteration << "st instruction";
+                else if (iteration % 10 == 2) cout << iteration << "nd instruction";
+                else if (iteration % 10 == 3) cout << iteration << "rd instruction";
+                else cout << iteration << "th instruction";
+                cout << "  (pc : " << emu->pc << ")"<< endl;
             }
             exec_one_instruction(emu, inst);
             iteration++;
             if (emu->args.flg_a && emu->args.flg_r) print_reg(emu);
+            if (emu->args.flg_a && emu->args.flg_m) print_mem(emu, emu->args.mem_s);
             if (pc_pred == emu->pc) break;  
         }
     }
@@ -115,23 +155,27 @@ int main(int argc, char **argv){
             else {
                 flg = false;
             }
-            if (flg && emu->args.flg_r) {
+            if (flg && (emu->args.flg_r || emu->args.flg_m)) {
                 cout << dec << endl;
-                if (iteration % 10 == 1) cout << iteration << "st instruction" << endl;
-                else if (iteration % 10 == 2) cout << iteration << "nd instruction" << endl;
-                else if (iteration % 10 == 3) cout << iteration << "rd instruction" << endl;
-                else cout << iteration << "th instruction" << endl;
+                if (iteration % 10 == 1) cout << iteration << "st instruction";
+                else if (iteration % 10 == 2) cout << iteration << "nd instruction";
+                else if (iteration % 10 == 3) cout << iteration << "rd instruction";
+                else cout << iteration << "th instruction";
+                cout << "  (pc : " << emu->pc << ")"<< endl;
             }
             exec_one_instruction(emu, inst);
             iteration++;
-            if (emu->args.flg_r && flg) print_reg(emu);
+            if (flg && emu->args.flg_r) print_reg(emu);
+            if (flg && emu->args.flg_m) print_mem(emu, emu->args.mem_s);
             if (pc_pred == emu->pc) break;  
         }
     }
     double t_end = elapsed();
-    cout << t_end - t_start << "[s] elapsed" << endl;
-    cout << dec << (iteration-1) << " instructions executed" << endl;
-    cout << (iteration-1) / (t_end - t_start) << " instructions/sec" << endl;
+    if (DEBUG){
+        cout << t_end - t_start << "[s] elapsed" << endl;
+        cout << dec << (iteration-1) << " instructions executed" << endl;
+        cout << (iteration-1) / (t_end - t_start) << " instructions/sec" << endl;
+    }
     /*
     while (1) {
         string query; cin >> query;

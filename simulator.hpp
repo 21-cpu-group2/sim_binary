@@ -7,7 +7,7 @@
 #define FREG_SIZE 32
 
 #define DEBUG 0
-#define DEBUG2 0 // if 1 then showing specific registers
+//#define DEBUG2 0 // if 1 then showing specific registers
 #define RM 0b000 // Round Mode(float)
 
 #include <stdlib.h>
@@ -68,8 +68,12 @@ typedef struct {
     bool flg_r;
     bool flg_s;
     bool flg_g;
+    bool flg_R;
+    bool flg_m;
     int start;
     int goal;
+    int mem_s;
+    bool reg_for_print[64];
 } cmdline_args;
 
 typedef struct {
@@ -91,6 +95,6 @@ void destroy_emulator(Emulator* emu);
 int load_instructions(Emulator* emu, string file_path);
 void print_reg(Emulator* emu);
 void print_reg_for_debug(Emulator* emu);
-void print_mem(Emulator* emu);
+void print_mem(Emulator* emu, int start);
 
 #endif

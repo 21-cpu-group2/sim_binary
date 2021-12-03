@@ -55,7 +55,6 @@ int main(int argc, char **argv){
                     i++;
                     break;
                 case 'R':
-                    cout << "R" << endl;
                     emu->args.flg_R = true;
                     int j;
                     for (j=i+1; j<argc; j++){

@@ -58,13 +58,13 @@ int inst_branch(Emulator* emu, uint32_t instruction) {
     switch (funct3) {
         case 0b000 :
             BEQ(emu, rs1, rs2, imm);
-            if (emu->args.flg_a) {
+            if (emu->args.print_asm) {
                 cout << "beq " << reg_name[rs1] << ", " << reg_name[rs2] << ", " << imm << endl;
             }
             break;
         case 0b100 : // in risc-v 0b001
             BNE(emu, rs1, rs2, imm);
-            if (emu->args.flg_a) {
+            if (emu->args.print_asm) {
                 cout << "bne " << reg_name[rs1] << ", " << reg_name[rs2] << ", " << imm << endl;
             }
             break;
@@ -124,7 +124,7 @@ int inst_load(Emulator* emu, uint32_t instruction) {
             break;
         case 0b010 :
             LW(emu, rs1, rd, imm);
-            if (emu->args.flg_a) {
+            if (emu->args.print_asm) {
                 cout << "lw " << reg_name[rd] << ", " << imm << "(" << reg_name[rs1] << ")" << endl;
             }
             break;
@@ -178,7 +178,7 @@ int inst_store(Emulator* emu, uint32_t instruction) {
             break;
         case 0b010 :
             SW(emu, rs1, rs2, imm);
-            if (emu->args.flg_a) {
+            if (emu->args.print_asm) {
                 cout << "sw " << reg_name[rs2] << ", " << imm << "(" << reg_name[rs1] << ")" << endl;
             }
             break;
@@ -214,7 +214,7 @@ int inst_imm(Emulator* emu, uint32_t instruction) {
     switch (funct3) {
         case 0b000 :
             ADDI(emu, rs1, rd, imm);
-            if (emu->args.flg_a) {
+            if (emu->args.print_asm) {
                 cout << "addi " << reg_name[rd] << ", " << reg_name[rs1] << ", " << imm << endl;
             }
             break;
@@ -269,13 +269,13 @@ int inst_op(Emulator* emu, uint32_t instruction) {
         // ²¼°Ì10bit(7bit->funct7, 3bit->funct3)
         case 0b0000000000 :
             ADD(emu, rs1, rs2, rd);
-            if (emu->args.flg_a) {
+            if (emu->args.print_asm) {
                 cout << "add " << reg_name[rd] << ", " << reg_name[rs1] << ", " << reg_name[rs2] << endl;
             }
             break;
         case 0b0100000000 :
             SUB(emu, rs1, rs2, rd);
-            if (emu->args.flg_a) {
+            if (emu->args.print_asm) {
                 cout << "sub " << reg_name[rd] << ", " << reg_name[rs1] << ", " << reg_name[rs2] << endl;
             }
             break;
@@ -293,7 +293,7 @@ int inst_op(Emulator* emu, uint32_t instruction) {
             break;
         case 0b0000000100 :
             XOR(emu, rs1, rs2, rd);
-            if (emu->args.flg_a) {
+            if (emu->args.print_asm) {
                 cout << "xor " << reg_name[rd] << ", " << reg_name[rs1] << ", " << reg_name[rs2] << endl;
             }
             break;
@@ -380,7 +380,9 @@ int inst_jal(Emulator* emu, uint32_t instruction) {
              << "rd : " << rd << " (-> " << reg_name[rd] << ")" << endl;
     }
     JAL(emu, rd, imm);
-    if (DEBUG) cout << "JAL" << endl;
+    if (emu->args.print_asm) {
+        cout << "jal " << reg_name[rd] << ", " << imm << endl;
+    }
     return 0;
 }
 

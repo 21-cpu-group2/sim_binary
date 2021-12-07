@@ -7,12 +7,14 @@
 #define FREG_SIZE 32
 
 #define DEBUG 0
+#define PRINT_STAT 0
 //#define DEBUG2 0 // if 1 then showing specific registers
 #define RM 0b000 // Round Mode(float)
 
 #include <stdlib.h>
 #include <string>
 #include <map>
+#include "cache.hpp"
 
 using namespace std;
 
@@ -70,6 +72,7 @@ typedef struct {
     bool flg_g;
     bool flg_R;
     bool flg_m;
+    bool print_asm;
     int start;
     int goal;
     int mem_s;
@@ -84,8 +87,8 @@ typedef struct {
     uint32_t *instruction_memory;
     int instruction_size;
     cmdline_args args;
-    // cache_line *cache;
-    // statistics stat;
+    cache_line *cache;
+    masks mask;
 } Emulator;
 
 uint32_t bin2int(string bin);
@@ -96,5 +99,5 @@ int load_instructions(Emulator* emu, string file_path);
 void print_reg(Emulator* emu);
 void print_reg_for_debug(Emulator* emu);
 void print_mem(Emulator* emu, int start);
-
+bool cache_hit(Emulator* emu, uint32_t mem_address);
 #endif

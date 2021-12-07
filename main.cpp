@@ -71,6 +71,24 @@ int main(int argc, char **argv){
         cout << "error : no file input" << endl;
         return 1;
     }
+    if (emu->args.flg_R) {
+        if (emu->args.flg_r || emu->args.flg_a || emu->args.flg_m) {
+            cout << "you can selece atmost one option of (-a, -r, -R, -m)" << endl;
+            return 1;
+        }
+    }
+    else if (emu->args.flg_r) {
+        if (emu->args.flg_a || emu->args.flg_m) {
+            cout << "you can selece atmost one option of (-a, -r, -R, -m)" << endl;
+            return 1;
+        }
+    }
+    else if (emu->args.flg_a) {
+        if (emu->args.flg_m) {
+            cout << "you can selece atmost one option of (-a, -r, -R, -m)" << endl;
+            return 1;
+        }
+    }
 
     // load machine code to instruction-memory
     load_instructions(emu, file_path);
@@ -78,147 +96,56 @@ int main(int argc, char **argv){
     double t_start = elapsed();
     int iteration = 1;
     
+    // showing like vivado simulator
     if (emu->args.flg_R){ 
         for (int i=0; i<REG_SIZE + FREG_SIZE; i++){
             if (emu->args.reg_for_print[i]){
-                if (i < 10){
+                if (i < 10){ // r0 - r9
                     cout << dec << "   r" << i << "   ";
                 }
-                else if (i < 32){
+                else if (i < 32){ // r10 - r31
                     cout << dec << "   r" << i << "  ";
                 }
-                else if (i < 42){
+                else if (i < 42){ // f0 - f9
                     cout << dec << "   f" << i-32 << "   ";
                 }
-                else {
+                else { // f10 - f31
                     cout << dec << "   f" << i-32 << "  ";
                 }
                 cout << "     ";
             }
         }
         cout << dec << "   pc   " << endl;
-        while (1){
-            uint32_t pc_pred = emu->pc;
-            uint32_t inst = emu->instruction_memory[emu->pc];
-            bool flg;
-            emu->args.flg_a = false; // not showing assembly
-            if ((!emu->args.flg_s || emu->args.start <= iteration)
-                && (!emu->args.flg_g || emu->args.goal >= iteration)){
-                flg = true;
-            } 
-            else {
-                flg = false;
-            }
-            exec_one_instruction(emu, inst);
-            iteration++;
-            if (flg) print_reg_for_debug(emu);
-            if (pc_pred == emu->pc) break;  
-        }
     }
-    
-    else if (emu->args.flg_a){
-        while (1){
-            uint32_t pc_pred = emu->pc;
-            uint32_t inst = emu->instruction_memory[emu->pc];
-            if ((!emu->args.flg_s || emu->args.start <= iteration)
-                && (!emu->args.flg_g || emu->args.goal >= iteration)){
-                emu->args.flg_a = true;
-            } 
-            else {
-                emu->args.flg_a = false;
-            }
-            if (emu->args.flg_a) {
-                cout << dec << endl;
-                if (iteration % 10 == 1) cout << iteration << "st instruction";
-                else if (iteration % 10 == 2) cout << iteration << "nd instruction";
-                else if (iteration % 10 == 3) cout << iteration << "rd instruction";
-                else cout << iteration << "th instruction";
-                cout << "  (pc : " << emu->pc << ")"<< endl;
-            }
-            exec_one_instruction(emu, inst);
-            iteration++;
-            if (emu->args.flg_a && emu->args.flg_r) print_reg(emu);
-            if (emu->args.flg_a && emu->args.flg_m) print_mem(emu, emu->args.mem_s);
-            if (pc_pred == emu->pc) break;  
+    bool flg;
+    while (1){
+        uint32_t pc_pred = emu->pc;
+        uint32_t inst = emu->instruction_memory[emu->pc];
+        flg = ((!emu->args.flg_s || emu->args.start <= iteration)
+            && (!emu->args.flg_g || emu->args.goal >= iteration)) ? true : false;
+        
+        if (flg && (emu->args.flg_r || emu->args.flg_m || emu->args.flg_a)) {
+            cout << dec << endl;
+            if (iteration % 10 == 1) cout << iteration << "st instruction";
+            else if (iteration % 10 == 2) cout << iteration << "nd instruction";
+            else if (iteration % 10 == 3) cout << iteration << "rd instruction";
+            else cout << iteration << "th instruction";
+            cout << "  (pc : " << emu->pc << ")"<< endl;
         }
-    }
-    else {
-        while (1){
-            uint32_t pc_pred = emu->pc;
-            uint32_t inst = emu->instruction_memory[emu->pc];
-            bool flg = false;
-            if ((!emu->args.flg_s || emu->args.start <= iteration)
-                && (!emu->args.flg_g || emu->args.goal >= iteration)){
-                flg = true;
-            } 
-            else {
-                flg = false;
-            }
-            if (flg && (emu->args.flg_r || emu->args.flg_m)) {
-                cout << dec << endl;
-                if (iteration % 10 == 1) cout << iteration << "st instruction";
-                else if (iteration % 10 == 2) cout << iteration << "nd instruction";
-                else if (iteration % 10 == 3) cout << iteration << "rd instruction";
-                else cout << iteration << "th instruction";
-                cout << "  (pc : " << emu->pc << ")"<< endl;
-            }
-            exec_one_instruction(emu, inst);
-            iteration++;
-            if (flg && emu->args.flg_r) print_reg(emu);
-            if (flg && emu->args.flg_m) print_mem(emu, emu->args.mem_s);
-            if (pc_pred == emu->pc) break;  
-        }
+        emu->args.print_asm = (flg && emu->args.flg_a) ? true : false;
+        exec_one_instruction(emu, inst);
+        iteration++;
+        if (flg && emu->args.flg_r) print_reg(emu);
+        else if (flg && emu->args.flg_R) print_reg_for_debug(emu);
+        else if (flg && emu->args.flg_m) print_mem(emu, emu->args.mem_s);
+        if (pc_pred == emu->pc) break;  
     }
     double t_end = elapsed();
-    if (DEBUG){
+    if (PRINT_STAT){
         cout << t_end - t_start << "[s] elapsed" << endl;
         cout << dec << (iteration-1) << " instructions executed" << endl;
         cout << (iteration-1) / (t_end - t_start) << " instructions/sec" << endl;
     }
-    /*
-    while (1) {
-        string query; cin >> query;
-        if (query == "reg") {
-            print_reg(emu); 
-            continue;
-        }
-        else if (query == "mem") {
-            print_mem(emu); 
-            continue;
-        }
-        else if (query == "n") {
-            uint32_t inst = emu->instruction_memory[emu->pc];
-            exec_one_instruction(emu, inst);
-            continue;
-        }
-        else if (query == "p") {
-            int n; cin >> n;
-            for (int i=0; i<n; i++){
-                uint32_t inst = emu->instruction_memory[emu->pc];
-                exec_one_instruction(emu, inst);
-            }
-        }
-        else if (query == "all") {
-            double t_start = elapsed();
-            int iteration = 1;
-            while (1){
-                uint32_t pc_pred = emu->pc;
-                uint32_t inst = emu->instruction_memory[emu->pc];
-                exec_one_instruction(emu, inst);
-                iteration++;
-                if (DEBUG) print_reg(emu);
-                if (pc_pred == emu->pc) break;  
-            }
-            double t_end = elapsed();
-            cout << t_end - t_start << "[s] elapsed" << endl;
-            cout << iteration << " instructions executed" << endl;
-            cout << iteration / (t_end - t_start) << " instructions/sec" << endl;
-        }
-        else if (query == "exit") {
-            break;
-        }
-    }
-    */
     destroy_emulator(emu);
     return 0;
 }

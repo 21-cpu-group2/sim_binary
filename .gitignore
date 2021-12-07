@@ -1,6 +1,5 @@
 make_code.ipynb
 .ipynb_checkpoints/
-assembler/
 sample.cpp
 .access_token
 *.gch

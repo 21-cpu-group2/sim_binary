@@ -54,7 +54,7 @@ void init_emulator(Emulator* emu, uint32_t pc_init){
     //メモリを動的に確保
     emu->memory = (uint32_t*)malloc(MEMORY_SIZE);
     emu->instruction_memory = (uint32_t*)malloc(INSTRUCTION_MEMORY_SIZE);
-    // emu->cache = (cache_line*)malloc(sizeof(cache_line) / 4 * CACHE_SIZE / CACHE_WAY);
+    emu->cache = (cache_line*)malloc(sizeof(cache_line)/sizeof(uint32_t) * BLOCK_NUM);
 
     if (emu->memory == NULL || emu->instruction_memory == NULL){
         printf("error : cannot allocate memory\n");
@@ -62,10 +62,9 @@ void init_emulator(Emulator* emu, uint32_t pc_init){
     }
     memset(emu->memory, 0, MEMORY_SIZE);
     memset(emu->instruction_memory, 0, INSTRUCTION_MEMORY_SIZE);
-    // memset(emu->cache, 0, sizeof(cache_line) / 4 * CACHE_SIZE / CACHE_WAY);
+    memset(emu->cache, 0, sizeof(cache_line)/sizeof(uint32_t) * BLOCK_NUM);
 
     emu->instruction_size = 0x00000000;
-
     emu->args.flg_p = false;
     emu->args.flg_a = false;
     emu->args.flg_r = false;
@@ -73,12 +72,17 @@ void init_emulator(Emulator* emu, uint32_t pc_init){
     emu->args.flg_g = false;
     emu->args.flg_R = false;
     emu->args.flg_m = false;
+    emu->args.print_asm = false;
     emu->args.start = 0;
     emu->args.goal = 0;
     emu->args.mem_s = 0;
     for (int i=0; i<REG_SIZE + FREG_SIZE; i++){
         emu->args.reg_for_print[i] = false;
     }
+    uint32_t address_mask = 0x07FFFFFF;
+    emu->mask.tag_mask = (0xFFFFFFFF << (BLOCK_SIZE_BIT + BLOCK_NUM_BIT)) & address_mask;
+    emu->mask.index_mask = ((0xFFFFFFFF << (BLOCK_SIZE_BIT)) ^ emu->mask.tag_mask) & address_mask;
+    emu->mask.offset_mask = ((0xFFFFFFFF ^ emu->mask.tag_mask) ^ emu->mask.index_mask) & address_mask;
 }
 
 void destroy_emulator(Emulator* emu) {
@@ -163,4 +167,27 @@ void print_mem(Emulator* emu, int start){
         if (i % 4 == 3) {cout << endl;}
     }
     cout << "----------------------------------------------------------------------------------------------------------------" << endl;
+}
+
+void cache_save(Emulator* emu, uint32_t mem_address) {
+    uint32_t block_address = (mem_address & emu->mask.index_mask) >> BLOCK_SIZE_BIT;
+    uint32_t tag = (mem_address & emu->mask.tag_mask) >> (BLOCK_SIZE_BIT + BLOCK_NUM_BIT);
+    //uint32_t index = (mem_address & )
+    emu->cache[block_address].valid = true;
+    emu->cache[block_address].tag = tag;
+    // emu->cache[block_address].index = block_address;
+    uint32_t start_ind = (mem_address >> BLOCK_SIZE_BIT) << (BLOCK_SIZE_BIT - 2);
+    for (int i=0; i<BLOCK_SIZE/4; i++) {
+        emu->cache[block_address].data[i] = emu->memory[start_ind + i];
+    }
+}
+
+bool cache_hit(Emulator* emu, uint32_t mem_address) {
+    // 暫定的に
+    uint32_t block_address = (mem_address & emu->mask.index_mask) >> BLOCK_SIZE_BIT;
+    uint32_t tag = (mem_address & emu->mask.tag_mask) >> (BLOCK_SIZE_BIT + BLOCK_NUM_BIT);
+    if (emu->cache[block_address].tag == tag){
+        return true;
+    }
+    return false;
 }

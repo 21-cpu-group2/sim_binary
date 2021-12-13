@@ -35,19 +35,10 @@ uint32_t hex2int(string hex) {
     return ret;
 }
 
-void init_emulator(Emulator* emu, uint32_t pc_init){
+void init_emulator(Emulator* emu){
     for (int i=0; i<REG_SIZE; i++){
         emu->reg[i] = 0x00000000;
     }
-    for (int i=0; i<FREG_SIZE; i++){
-        emu->freg[i] = 0x00000000;
-    }
-
-    //////////////////////////////////////////
-    // とりあえず動くようにする。
-    // emu->registers[reg["sp"]] = 0x00100000;
-    emu->freg[freg_num["ft0"]] = 0x3FC00000;
-    emu->freg[freg_num["ft1"]] = 0x41200000;
     //////////////////////////////////////////
     emu->pc = 0x00000000;
 
@@ -76,9 +67,29 @@ void init_emulator(Emulator* emu, uint32_t pc_init){
     emu->args.start = 0;
     emu->args.goal = 0;
     emu->args.mem_s = 0;
-    for (int i=0; i<REG_SIZE + FREG_SIZE; i++){
+    for (int i=0; i<REG_SIZE; i++){
         emu->args.reg_for_print[i] = false;
     }
+
+    // memory <- input_data
+    int input_start = 25000; // 100000 / 4
+    ifstream ifs("data/contest.txt");
+    if (ifs.fail()){
+        cout << "cannot open the file \"contest.txt\"" << endl;
+        return ;
+    }
+    string str;
+    while (getline(ifs, str)){
+        uint32_t n = (uint32_t)stoul(str, nullptr, 10);
+        emu->memory[input_start++] = n;
+    }
+
+    if (DEBUG) {
+        for (int i=0; i<emu->instruction_size; i++){
+            cout << hex << "0x" << emu->instruction_memory[i] << endl;
+        }
+    }
+
     uint32_t address_mask = 0x07FFFFFF;
     emu->mask.tag_mask = (0xFFFFFFFF << (BLOCK_SIZE_BIT + BLOCK_NUM_BIT)) & address_mask;
     emu->mask.index_mask = ((0xFFFFFFFF << (BLOCK_SIZE_BIT)) ^ emu->mask.tag_mask) & address_mask;
@@ -98,7 +109,14 @@ int load_instructions(Emulator* emu, string file_path){
         return 1;
     }
     string str;
+    bool fst = true;
     while (getline(ifs, str)){
+        if (fst) {
+            uint32_t pc_init = (uint32_t)stoi(str, nullptr, 10);
+            emu->pc = pc_init;
+            fst = false;
+            continue;
+        }
         if (str.at(0) == '/' && str.at(1) == '/'){
             continue;
         }
@@ -123,14 +141,6 @@ void print_reg(Emulator* emu){
         if (i % 4 == 3) {cout << endl;}
     }
     cout << "----------------------------------------------------------------------------------------------------------------" << endl;
-    // float用レジスタの表示
-    for (int i=0; i<FREG_SIZE; i++){
-        cout << setfill(' ') << right << setw(8) << freg_name[i] << " : " << 
-            "0x" << hex << setfill('0') << right << setw(8) << emu->freg[i];
-        cout << "     ";
-        if (i % 4 == 3) {cout << endl;}
-    }
-    cout << "----------------------------------------------------------------------------------------------------------------" << endl;
     // cout << setfill(' ') << right << setw(8) << "pc" << " : " << 
     //     "0x" << hex << setfill('0') << right << setw(8) << emu->pc << endl;
     // cout << "----------------------------------------------------------------------------------------------------------------" << endl;
@@ -138,7 +148,7 @@ void print_reg(Emulator* emu){
 
 void print_reg_for_debug(Emulator* emu){
     //cout << "----------------------------------------------------------------------------------------------------------------" << endl;
-    for (int i=0; i<REG_SIZE + FREG_SIZE; i++){
+    for (int i=0; i<REG_SIZE; i++){
         if (emu->args.reg_for_print[i]){
             cout << dec << setfill('0') << right << setw(8) << emu->reg[i];
             cout << "     ";

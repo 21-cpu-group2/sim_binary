@@ -4,6 +4,8 @@ sample.cpp
 .access_token
 *.gch
 *.o
+fpu.cpp
+cache.hpp
 simulator
 *.DS_Store
 *.out

@@ -8,6 +8,7 @@
 
 #define DEBUG 0
 #define PRINT_STAT 0
+#define DISASSEMBLE 0
 //#define DEBUG2 0 // if 1 then showing specific registers
 #define RM 0b000 // Round Mode(float)
 
@@ -28,19 +29,30 @@ enum fRegister { ft0, ft1, ft2, ft3, ft4, ft5, ft6, ft7,
                 fa6, fa7, fs2, fs3, fs4, fs5, fs6, fs7, 
                 fs8, fs9, fs10, fs11, ft8, ft9, ft10, ft11};
 
-static char reg_name[REG_SIZE][8] = {
-                "zero", "ra", "sp", "gp", "tp", "t0", "t1", "t2", 
-                "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5", 
-                "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7", 
-                "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6", 
-                };
-
+static char reg_name[REG_SIZE][16] = {
+    "%zero","%ra","%sp","%min_caml_hp",
+    "%in","%out","%a0","%a1",
+    "%a2","%a3","%a4","%a5",
+    "%a6","%a7","%a8","%a9",
+    "%a10","%a11","%a12","%fzero",
+    "%f0","%f1","%f2","%f3",
+    "%f4","%f5","%f6","%f7",
+    "%f8","%f9","%f10","%f11",
+};
+/*
 static char freg_name[REG_SIZE][8] = {
                 "ft0", "ft1", "ft2", "ft3", "ft4", "ft5", "ft6", "ft7", 
                 "fs0", "fs1", "fa0", "fa1", "fa2", "fa3", "fa4", "fa5", 
                 "fa6", "fa7", "fs2", "fs3", "fs4", "fs5", "fs6", "fs7", 
                 "fs8", "fs9", "fs10", "fs11", "ft8", "ft9", "ft10", "ft11",
                 };
+*/
+static char freg_name[REG_SIZE][8] = {
+                "f0", "f1", "f2", "f3", "f4", "f5", "f6", "f7", 
+                "f8", "f9", "f10", "f11", "f12", "f13", "f14", "f15", 
+                "f16", "f17", "f18", "f19", "f20", "f21", "f22", "f23", 
+                "f24", "f25", "f26", "f27", "f28", "f29", "f30", "f31", 
+};
 
 static map<string, int> reg_num{
     { "zero", 0 }, { "ra", 1 }, { "sp", 2 }, { "gp", 3 }, 
@@ -75,13 +87,13 @@ typedef struct {
     bool print_asm;
     int start;
     int goal;
-    int mem_s;
+    int mem_s; // if print memory, show from memory address "mem_s"
     bool reg_for_print[64];
 } cmdline_args;
 
 typedef struct {
     uint32_t reg[REG_SIZE];
-    uint32_t freg[FREG_SIZE];
+    // uint32_t freg[FREG_SIZE];
     int32_t pc;
     uint32_t* memory;
     uint32_t *instruction_memory;
@@ -93,7 +105,7 @@ typedef struct {
 
 uint32_t bin2int(string bin);
 uint32_t hex2int(string hex);
-void init_emulator(Emulator* emu, uint32_t pc_init);
+void init_emulator(Emulator* emu);
 void destroy_emulator(Emulator* emu);
 int load_instructions(Emulator* emu, string file_path);
 void print_reg(Emulator* emu);

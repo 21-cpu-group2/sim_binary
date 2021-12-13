@@ -19,7 +19,7 @@ typedef struct {
     bool valid;
     // 下位ビットのみを使用
     uint32_t tag;
-    uint32_t index;
+    // uint32_t index;  emu->cache[ind] の indでわかる。
     uint32_t offset;
     uint32_t data[BLOCK_SIZE];
 } cache_line;

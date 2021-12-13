@@ -9,4 +9,3 @@ cache.hpp
 simulator
 *.DS_Store
 *.out
-*.txt

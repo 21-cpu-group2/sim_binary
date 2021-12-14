@@ -698,7 +698,6 @@ int inst_fop(Emulator* emu, uint32_t instruction) {
 int exec_one_instruction(Emulator* emu, uint32_t instruction){
     uint32_t opcode = instruction & 0x007F;
     if (DEBUG) cout << dec << "pc : " << emu->pc << endl;
-    if (emu->pc == 9551) cout << emu->reg[8] << endl;
     switch (opcode) {
         // RV32I
         case _BRANCH :

@@ -286,7 +286,8 @@ inline int AND(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
 */
 ///////////   LUI   ////////////
 inline int LUI(Emulator* emu, uint32_t rd_, int imm) {
-    emu->reg[rd_] = imm << 12;
+    uint32_t rd = emu->reg[rd_] & 0x00000FFF;
+    emu->reg[rd_] = (imm << 12) + rd;
     emu->pc++;
     return 0;
 }

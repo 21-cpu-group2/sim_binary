@@ -91,7 +91,6 @@ int main(int argc, char **argv){
         strbuf = cout.rdbuf(ofstr.rdbuf());
         disassemble_instructions(emu);
         cout.rdbuf(strbuf);
-        return 1;
     }
     double t_start = elapsed();
     int iteration = 1;

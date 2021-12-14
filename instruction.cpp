@@ -312,7 +312,7 @@ int inst_lui(Emulator* emu, uint32_t instruction) {
     //  imm   rd   opcode
     //   20    5    7
 
-    int imm = instruction & 0xFFFFF000;
+    int imm = (instruction & 0xFFFFF000) >> 12;
     uint32_t rd = (instruction & 0x00000F80) >> 7;
     LUI(emu, rd, imm);
     if (emu->args.print_asm) {

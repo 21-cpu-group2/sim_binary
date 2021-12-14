@@ -42,12 +42,12 @@ ftoi %a0 %f0
 jalr %ra %zero 0
 itof %f0 %a0 
 jalr %ra %zero 0
-lui %f2 1078525952
 addi %f2 %zero -37
+lui %f2 1078525952
 slli %f2 %f2 2
 lw %f1 %f2 0
-lui %f2 1073741824
 addi %f2 %zero 0
+lui %f2 1073741824
 slli %f2 %f2 2
 lw %f2 %f2 0
 fmul %f3 %f1 %f2
@@ -64,16 +64,16 @@ fsub %f0 %f0 %f3
 fhalf %f3 %f3
 beq %zero %zero -7
 jalr %ra %zero 0
-lui %f2 -1104502784
 addi %f2 %zero -1364
+lui %f2 -1104502784
 slli %f2 %f2 2
 lw %f1 %f2 0
-lui %f2 1007190016
 addi %f2 %zero 1638
+lui %f2 1007190016
 slli %f2 %f2 2
 lw %f4 %f2 0
-lui %f2 -1186111488
 addi %f2 %zero 1206
+lui %f2 -1186111488
 slli %f2 %f2 2
 lw %f6 %f2 0
 fmul %f2 %f0 %f0
@@ -87,16 +87,16 @@ fsub %f0 %f0 %f1
 fadd %f0 %f0 %f4
 fsub %f0 %f0 %f6
 jalr %ra %zero 0
-lui %f2 1065353216
 addi %f2 %zero 0
+lui %f2 1065353216
 slli %f2 %f2 2
 lw %f1 %f2 0
-lui %f2 1026203648
 addi %f2 %zero 1929
+lui %f2 1026203648
 slli %f2 %f2 2
 lw %f4 %f2 0
-lui %f2 -1162641408
 addi %f2 %zero 262
+lui %f2 -1162641408
 slli %f2 %f2 2
 lw %f6 %f2 0
 fmul %f2 %f0 %f0
@@ -121,8 +121,8 @@ addi %sp %sp 8
 jal %ra -76
 addi %sp %sp -8
 lw %ra %sp 4
-lui %f2 1078525952
 addi %f2 %zero -37
+lui %f2 1078525952
 slli %f2 %f2 2
 lw %f1 %f2 0
 fless %a0 %f0 %f1
@@ -166,8 +166,8 @@ addi %sp %sp 8
 jal %ra -121
 addi %sp %sp -8
 lw %ra %sp 4
-lui %f2 1078525952
 addi %f2 %zero -37
+lui %f2 1078525952
 slli %f2 %f2 2
 lw %f1 %f2 0
 fless %a0 %f0 %f1
@@ -211,28 +211,28 @@ lw %ra %sp 4
 blt %zero %a1 2
 fneg %f0 %f0
 jalr %ra %zero 0
-lui %f2 -1096114176
 addi %f2 %zero -1366
+lui %f2 -1096114176
 slli %f2 %f2 2
 lw %f1 %f2 0
-lui %f2 1045217280
 addi %f2 %zero -819
+lui %f2 1045217280
 slli %f2 %f2 2
 lw %f2 %f2 0
-lui %f2 -1106100224
 addi %f2 %zero -1755
+lui %f2 -1106100224
 slli %f2 %f2 2
 lw %f3 %f2 0
-lui %f2 1038319616
 addi %f2 %zero -456
+lui %f2 1038319616
 slli %f2 %f2 2
 lw %f4 %f2 0
-lui %f2 -1112027136
 addi %f2 %zero 1646
+lui %f2 -1112027136
 slli %f2 %f2 2
 lw %f5 %f2 0
-lui %f2 1031135232
 addi %f2 %zero 1989
+lui %f2 1031135232
 slli %f2 %f2 2
 lw %f6 %f2 0
 fmul %f7 %f0 %f0
@@ -256,16 +256,16 @@ fsub %f0 %f0 %f5
 fadd %f0 %f0 %f6
 jalr %ra %zero 0
 fabs %f1 %f0
-lui %f2 1054867456
 addi %f2 %zero 0
+lui %f2 1054867456
 slli %f2 %f2 2
 lw %f2 %f2 0
-lui %f2 1075576832
 addi %f2 %zero 0
+lui %f2 1075576832
 slli %f2 %f2 2
 lw %f3 %f2 0
-lui %f2 1065353216
 addi %f2 %zero 0
+lui %f2 1065353216
 slli %f2 %f2 2
 lw %f4 %f2 0
 fless %a0 %f1 %f2
@@ -278,8 +278,8 @@ addi %sp %sp 8
 jal %ra -64
 addi %sp %sp -8
 lw %ra %sp 4
-lui %f2 1078525952
 addi %f2 %zero -37
+lui %f2 1078525952
 slli %f2 %f2 2
 lw %f5 %f2 0
 fhalf %f5 %f5
@@ -299,8 +299,8 @@ addi %sp %sp 8
 jal %ra -85
 addi %sp %sp -8
 lw %ra %sp 4
-lui %f2 1078525952
 addi %f2 %zero -37
+lui %f2 1078525952
 slli %f2 %f2 2
 lw %f5 %f2 0
 fhalf %f5 %f5
@@ -368,18 +368,18 @@ addi %sp %sp -16
 lw %ra %sp 12
 addi %a12 %zero 0
 bne %a0 %a12 6
+addi %a0 %zero 0
 lui %a0 -1082130432
-addi %a0 %zero 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 jalr %ra %zero 0
+addi %a0 %zero 0
 lui %a0 1065353216
-addi %a0 %zero 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 jalr %ra %zero 0
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 jalr %ra %zero 0
@@ -401,8 +401,8 @@ sw %f0 %a0 0
 sw %f0 %a0 4
 sw %f0 %a0 8
 jalr %ra %zero 0
-lui %a1 0
 addi %a1 %zero 0
+lui %a1 0
 slli %a1 %a1 2
 lw %f0 %a1 0
 jal %zero -8
@@ -452,8 +452,8 @@ lw %ra %sp 28
 lw %f1 %sp 16
 fadd %f0 %f1 %f0
 jalr %ra %zero 0
-lui %a1 1065353216
 addi %a1 %zero 0
+lui %a1 1065353216
 slli %a1 %a1 2
 lw %f0 %a1 0
 lw %f1 %a0 0
@@ -551,22 +551,22 @@ bne %a0 %a12 18
 lw %a0 %sp 0
 addi %a12 %zero 0
 bne %a0 %a12 8
-lui %a0 1065353216
 addi %a0 %zero 0
+lui %a0 1065353216
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %f1 %sp 24
 fdiv %f0 %f0 %f1
 jal %zero 7
-lui %a0 -1082130432
 addi %a0 %zero 0
+lui %a0 -1082130432
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %f1 %sp 24
 fdiv %f0 %f0 %f1
 jal %zero 5
-lui %a0 1065353216
 addi %a0 %zero 0
+lui %a0 1065353216
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %a0 %sp 4
@@ -758,8 +758,8 @@ lw %a0 %a0 4
 jalr %ra %zero 0
 lw %f0 %a0 8
 jalr %ra %zero 0
-lui %a0 1016000512
 addi %a0 %zero -1483
+lui %a0 1016000512
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f0 %f0 %f1
@@ -846,15 +846,15 @@ addi %sp %sp -72
 lw %ra %sp 68
 lw %f1 %sp 32
 fmul %f2 %f1 %f0
-lui %a0 1128792064
 addi %a0 %zero 0
+lui %a0 1128792064
 slli %a0 %a0 2
 lw %f3 %a0 0
 fmul %f2 %f2 %f3
 lw %a0 %sp 12
 sw %f2 %a0 0
-lui %a1 -1018691584
 addi %a1 %zero 0
+lui %a1 -1018691584
 slli %a1 %a1 2
 lw %f2 %a1 0
 lw %f3 %sp 40
@@ -862,16 +862,16 @@ fmul %f2 %f3 %f2
 sw %f2 %a0 4
 lw %f2 %sp 56
 fmul %f4 %f1 %f2
-lui %a1 1128792064
 addi %a1 %zero 0
+lui %a1 1128792064
 slli %a1 %a1 2
 lw %f5 %a1 0
 fmul %f4 %f4 %f5
 sw %f4 %a0 8
 lw %a1 %sp 8
 sw %f2 %a1 0
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f4 %a2 0
 sw %f4 %a1 4
@@ -1213,8 +1213,8 @@ lw %f2 %sp 184
 fadd %f0 %f2 %f0
 lw %a0 %sp 0
 sw %f0 %a0 8
-lui %a0 1073741824
 addi %a0 %zero 0
+lui %a0 1073741824
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %f2 %sp 72
@@ -1236,8 +1236,8 @@ fadd %f4 %f4 %f10
 fmul %f0 %f0 %f4
 lw %a0 %sp 4
 sw %f0 %a0 0
-lui %a1 1073741824
 addi %a1 %zero 0
+lui %a1 1073741824
 slli %a1 %a1 2
 lw %f0 %a1 0
 lw %f4 %sp 88
@@ -1253,8 +1253,8 @@ fmul %f9 %f9 %f11
 fadd %f5 %f5 %f9
 fmul %f0 %f0 %f5
 sw %f0 %a0 4
-lui %a1 1073741824
 addi %a1 %zero 0
+lui %a1 1073741824
 slli %a1 %a1 2
 lw %f0 %a1 0
 fmul %f3 %f3 %f4
@@ -1301,8 +1301,8 @@ jal %ra -990
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 20
@@ -1335,8 +1335,8 @@ lw %ra %sp 28
 lw %a0 %sp 24
 sw %f0 %a0 8
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 add %a0 %a1 %zero
@@ -1378,8 +1378,8 @@ jal %ra -1340
 addi %sp %sp -40
 lw %ra %sp 36
 addi %a1 %zero 2
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 32
@@ -1405,8 +1405,8 @@ lw %ra %sp 44
 lw %a0 %sp 36
 sw %f0 %a0 4
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 add %a0 %a1 %zero
@@ -1438,8 +1438,8 @@ lw %ra %sp 44
 lw %a0 %sp 40
 sw %f0 %a0 8
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 add %a0 %a1 %zero
@@ -1496,8 +1496,8 @@ addi %a2 %zero 1
 jal %zero 2
 lw %a2 %sp 32
 addi %a3 %zero 4
-lui %a4 0
 addi %a4 %zero 0
+lui %a4 0
 slli %a4 %a4 2
 lw %f0 %a4 0
 sw %a2 %sp 48
@@ -1564,8 +1564,8 @@ lw %ra %sp 76
 lw %f1 %sp 64
 fdiv %f0 %f1 %f0
 jal %zero 5
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %a0 %sp 24
@@ -1596,8 +1596,8 @@ lw %ra %sp 92
 lw %f1 %sp 80
 fdiv %f0 %f1 %f0
 jal %zero 5
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %a0 %sp 24
@@ -1628,8 +1628,8 @@ lw %ra %sp 108
 lw %f1 %sp 96
 fdiv %f0 %f1 %f0
 jal %zero 5
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %a0 %sp 24
@@ -2366,8 +2366,8 @@ addi %sp %sp -80
 lw %ra %sp 76
 addi %a12 %zero 3
 bne %a0 %a12 8
-lui %a0 1065353216
 addi %a0 %zero 0
+lui %a0 1065353216
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %f1 %sp 64
@@ -2858,8 +2858,8 @@ addi %sp %sp -80
 lw %ra %sp 76
 addi %a12 %zero 3
 bne %a0 %a12 8
-lui %a0 1065353216
 addi %a0 %zero 0
+lui %a0 1065353216
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %f1 %sp 64
@@ -3231,8 +3231,8 @@ lw %a11 %sp 0
 lw %a10 %a11 0
 jalr %a10 %zero 0
 addi %a2 %zero 6
-lui %a3 0
 addi %a3 %zero 0
+lui %a3 0
 slli %a3 %a3 2
 lw %f0 %a3 0
 sw %a1 %sp 0
@@ -3290,8 +3290,8 @@ addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 8
 sw %f0 %a0 0
-lui %a1 1065353216
 addi %a1 %zero 0
+lui %a1 1065353216
 slli %a1 %a1 2
 lw %f0 %a1 0
 lw %a1 %sp 4
@@ -3299,8 +3299,8 @@ lw %f1 %a1 0
 fdiv %f0 %f0 %f1
 sw %f0 %a0 4
 jal %zero 7
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %a0 %sp 8
@@ -3351,8 +3351,8 @@ addi %sp %sp -32
 lw %ra %sp 28
 lw %a0 %sp 8
 sw %f0 %a0 8
-lui %a1 1065353216
 addi %a1 %zero 0
+lui %a1 1065353216
 slli %a1 %a1 2
 lw %f0 %a1 0
 lw %a1 %sp 4
@@ -3360,8 +3360,8 @@ lw %f1 %a1 4
 fdiv %f0 %f0 %f1
 sw %f0 %a0 12
 jal %zero 7
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %a0 %sp 8
@@ -3412,8 +3412,8 @@ addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 8
 sw %f0 %a0 16
-lui %a1 1065353216
 addi %a1 %zero 0
+lui %a1 1065353216
 slli %a1 %a1 2
 lw %f0 %a1 0
 lw %a1 %sp 4
@@ -3421,16 +3421,16 @@ lw %f1 %a1 8
 fdiv %f0 %f0 %f1
 sw %f0 %a0 20
 jal %zero 7
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %a0 %sp 8
 sw %f0 %a0 20
 jalr %ra %zero 0
 addi %a2 %zero 4
-lui %a3 0
 addi %a3 %zero 0
+lui %a3 0
 slli %a3 %a3 2
 lw %f0 %a3 0
 sw %a1 %sp 0
@@ -3491,15 +3491,15 @@ addi %sp %sp -72
 lw %ra %sp 68
 addi %a12 %zero 0
 bne %a0 %a12 8
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %a0 %sp 8
 sw %f0 %a0 0
 jal %zero 57
-lui %a0 -1082130432
 addi %a0 %zero 0
+lui %a0 -1082130432
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %f1 %sp 56
@@ -3556,8 +3556,8 @@ lw %a0 %sp 8
 sw %f0 %a0 12
 jalr %ra %zero 0
 addi %a2 %zero 5
-lui %a3 0
 addi %a3 %zero 0
+lui %a3 0
 slli %a3 %a3 2
 lw %f0 %a3 0
 sw %a1 %sp 0
@@ -3770,8 +3770,8 @@ addi %sp %sp -152
 lw %ra %sp 148
 addi %a12 %zero 0
 bne %a0 %a12 10
-lui %a0 1065353216
 addi %a0 %zero 0
+lui %a0 1065353216
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %f1 %sp 16
@@ -3971,8 +3971,8 @@ lw %ra %sp 52
 lw %a0 %sp 20
 addi %a12 %zero 3
 bne %a0 %a12 7
-lui %a0 1065353216
 addi %a0 %zero 0
+lui %a0 1065353216
 slli %a0 %a0 2
 lw %f1 %a0 0
 fsub %f0 %f0 %f1
@@ -4157,8 +4157,8 @@ addi %sp %sp -24
 lw %ra %sp 20
 addi %a12 %zero 3
 bne %a0 %a12 8
-lui %a0 1065353216
 addi %a0 %zero 0
+lui %a0 1065353216
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %f1 %sp 8
@@ -4328,8 +4328,8 @@ addi %a12 %zero 0
 bne %a0 %a12 3
 addi %a0 %a1 0
 jal %zero 10
-lui %a0 -1102266368
 addi %a0 %zero -819
+lui %a0 -1102266368
 slli %a0 %a0 2
 lw %f1 %a0 0
 sw %ra %sp 52
@@ -4361,8 +4361,8 @@ lw %a1 %sp 12
 lw %a11 %sp 16
 lw %a10 %a11 0
 jalr %a10 %zero 0
-lui %a0 1008979968
 addi %a0 %zero 1802
+lui %a0 1008979968
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %f1 %sp 40
@@ -4483,8 +4483,8 @@ addi %a0 %a1 0
 jal %zero 31
 lw %a0 %sp 20
 lw %f0 %a0 0
-lui %a0 -1110654976
 addi %a0 %zero -819
+lui %a0 -1110654976
 slli %a0 %a0 2
 lw %f1 %a0 0
 sw %a1 %sp 24
@@ -4602,8 +4602,8 @@ lw %a10 %a11 0
 jalr %a10 %zero 0
 lw %a2 %sp 24
 lw %f1 %a2 0
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 52
@@ -4628,8 +4628,8 @@ lw %ra %sp 76
 addi %a12 %zero 0
 bne %a0 %a12 2
 jal %zero 60
-lui %a0 1008979968
 addi %a0 %zero 1802
+lui %a0 1008979968
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %f1 %sp 64
@@ -4806,8 +4806,8 @@ jalr %a10 %zero 0
 lw %a1 %a11 12
 lw %a2 %a11 8
 lw %a3 %a11 4
-lui %a4 1315856384
 addi %a4 %zero -1240
+lui %a4 1315856384
 slli %a4 %a4 2
 lw %f0 %a4 0
 sw %f0 %a2 0
@@ -4826,8 +4826,8 @@ addi %sp %sp -8
 lw %ra %sp 4
 lw %a0 %sp 0
 lw %f1 %a0 0
-lui %a0 -1110654976
 addi %a0 %zero -819
+lui %a0 -1110654976
 slli %a0 %a0 2
 lw %f0 %a0 0
 sw %f1 %sp 8
@@ -4841,8 +4841,8 @@ addi %a12 %zero 0
 bne %a0 %a12 3
 addi %a0 %a1 0
 jalr %ra %zero 0
-lui %a0 1287565312
 addi %a0 %zero -992
+lui %a0 1287565312
 slli %a0 %a0 2
 lw %f1 %a0 0
 lw %f0 %sp 8
@@ -4921,8 +4921,8 @@ lw %a10 %a11 0
 jalr %a10 %zero 0
 lw %a2 %sp 24
 lw %f1 %a2 0
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 60
@@ -4947,8 +4947,8 @@ lw %ra %sp 84
 addi %a12 %zero 0
 bne %a0 %a12 2
 jal %zero 58
-lui %a0 1008979968
 addi %a0 %zero 1802
+lui %a0 1008979968
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %f1 %sp 72
@@ -5121,8 +5121,8 @@ jalr %a10 %zero 0
 lw %a1 %a11 12
 lw %a2 %a11 8
 lw %a3 %a11 4
-lui %a4 1315856384
 addi %a4 %zero -1240
+lui %a4 1315856384
 slli %a4 %a4 2
 lw %f0 %a4 0
 sw %f0 %a2 0
@@ -5141,8 +5141,8 @@ addi %sp %sp -8
 lw %ra %sp 4
 lw %a0 %sp 0
 lw %f1 %a0 0
-lui %a0 -1110654976
 addi %a0 %zero -819
+lui %a0 -1110654976
 slli %a0 %a0 2
 lw %f0 %a0 0
 sw %f1 %sp 8
@@ -5156,8 +5156,8 @@ addi %a12 %zero 0
 bne %a0 %a12 3
 addi %a0 %a1 0
 jalr %ra %zero 0
-lui %a0 1287565312
 addi %a0 %zero -992
+lui %a0 1287565312
 slli %a0 %a0 2
 lw %f1 %a0 0
 lw %f0 %sp 8
@@ -5502,8 +5502,8 @@ addi %sp %sp -32
 lw %ra %sp 28
 lw %f1 %sp 16
 fsub %f0 %f1 %f0
-lui %a0 1028440064
 addi %a0 %zero -819
+lui %a0 1028440064
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f1 %f0 %f1
@@ -5514,15 +5514,15 @@ addi %sp %sp 40
 jal %ra -5475
 addi %sp %sp -40
 lw %ra %sp 36
-lui %a0 1101004800
 addi %a0 %zero 0
+lui %a0 1101004800
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f0 %f0 %f1
 lw %f1 %sp 24
 fsub %f0 %f1 %f0
-lui %a0 1092616192
 addi %a0 %zero 0
+lui %a0 1092616192
 slli %a0 %a0 2
 lw %f1 %a0 0
 sw %ra %sp 36
@@ -5543,8 +5543,8 @@ addi %sp %sp -56
 lw %ra %sp 52
 lw %f1 %sp 40
 fsub %f0 %f1 %f0
-lui %a0 1028440064
 addi %a0 %zero -819
+lui %a0 1028440064
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f1 %f0 %f1
@@ -5555,15 +5555,15 @@ addi %sp %sp 64
 jal %ra -5516
 addi %sp %sp -64
 lw %ra %sp 60
-lui %a0 1101004800
 addi %a0 %zero 0
+lui %a0 1101004800
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f0 %f0 %f1
 lw %f1 %sp 48
 fsub %f0 %f1 %f0
-lui %a0 1092616192
 addi %a0 %zero 0
+lui %a0 1092616192
 slli %a0 %a0 2
 lw %f1 %a0 0
 sw %ra %sp 60
@@ -5576,25 +5576,25 @@ addi %a12 %zero 0
 bne %a1 %a12 13
 addi %a12 %zero 0
 bne %a0 %a12 6
-lui %a0 1132396544
 addi %a0 %zero 0
+lui %a0 1132396544
 slli %a0 %a0 2
 lw %f0 %a0 0
 jal %zero 5
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 jal %zero 12
 addi %a12 %zero 0
 bne %a0 %a12 6
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 jal %zero 5
-lui %a0 1132396544
 addi %a0 %zero 0
+lui %a0 1132396544
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %a0 %sp 4
@@ -5604,8 +5604,8 @@ addi %a12 %zero 2
 bne %a1 %a12 37
 lw %a1 %sp 0
 lw %f0 %a1 4
-lui %a1 1048576000
 addi %a1 %zero 0
+lui %a1 1048576000
 slli %a1 %a1 2
 lw %f1 %a1 0
 fmul %f0 %f0 %f1
@@ -5619,19 +5619,19 @@ addi %sp %sp 64
 jal %ra -5596
 addi %sp %sp -64
 lw %ra %sp 60
-lui %a0 1132396544
 addi %a0 %zero 0
+lui %a0 1132396544
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f1 %f1 %f0
 lw %a0 %sp 4
 sw %f1 %a0 0
-lui %a1 1132396544
 addi %a1 %zero 0
+lui %a1 1132396544
 slli %a1 %a1 2
 lw %f1 %a1 0
-lui %a1 1065353216
 addi %a1 %zero 0
+lui %a1 1065353216
 slli %a1 %a1 2
 lw %f2 %a1 0
 fsub %f0 %f2 %f0
@@ -5687,8 +5687,8 @@ addi %sp %sp 104
 jal %ra -5662
 addi %sp %sp -104
 lw %ra %sp 100
-lui %a0 1092616192
 addi %a0 %zero 0
+lui %a0 1092616192
 slli %a0 %a0 2
 lw %f1 %a0 0
 fdiv %f0 %f0 %f1
@@ -5700,8 +5700,8 @@ addi %sp %sp -112
 lw %ra %sp 108
 lw %f1 %sp 96
 fsub %f0 %f1 %f0
-lui %a0 1078525952
 addi %a0 %zero -37
+lui %a0 1078525952
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f0 %f0 %f1
@@ -5715,20 +5715,20 @@ addi %sp %sp 112
 jal %ra -5692
 addi %sp %sp -112
 lw %ra %sp 108
-lui %a0 1132396544
 addi %a0 %zero 0
+lui %a0 1132396544
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f1 %f0 %f1
 lw %a0 %sp 4
 sw %f1 %a0 4
-lui %a1 1065353216
 addi %a1 %zero 0
+lui %a1 1065353216
 slli %a1 %a1 2
 lw %f1 %a1 0
 fsub %f0 %f1 %f0
-lui %a1 1132396544
 addi %a1 %zero 0
+lui %a1 1132396544
 slli %a1 %a1 2
 lw %f1 %a1 0
 fmul %f0 %f0 %f1
@@ -5815,8 +5815,8 @@ addi %sp %sp 176
 jal %ra -5788
 addi %sp %sp -176
 lw %ra %sp 172
-lui %a0 953266176
 addi %a0 %zero 1815
+lui %a0 953266176
 slli %a0 %a0 2
 lw %f1 %a0 0
 sw %ra %sp 172
@@ -5839,19 +5839,19 @@ addi %sp %sp 176
 jal %ra -5581
 addi %sp %sp -176
 lw %ra %sp 172
-lui %a0 1106247680
 addi %a0 %zero 0
+lui %a0 1106247680
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f0 %f0 %f1
-lui %a0 1078525952
 addi %a0 %zero -37
+lui %a0 1078525952
 slli %a0 %a0 2
 lw %f1 %a0 0
 fdiv %f0 %f0 %f1
 jal %zero 5
-lui %a0 1097859072
 addi %a0 %zero 0
+lui %a0 1097859072
 slli %a0 %a0 2
 lw %f0 %a0 0
 sw %f0 %sp 168
@@ -5896,8 +5896,8 @@ addi %sp %sp 216
 jal %ra -5869
 addi %sp %sp -216
 lw %ra %sp 212
-lui %a0 953266176
 addi %a0 %zero 1815
+lui %a0 953266176
 slli %a0 %a0 2
 lw %f1 %a0 0
 sw %ra %sp 212
@@ -5920,19 +5920,19 @@ addi %sp %sp 216
 jal %ra -5662
 addi %sp %sp -216
 lw %ra %sp 212
-lui %a0 1106247680
 addi %a0 %zero 0
+lui %a0 1106247680
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f0 %f0 %f1
-lui %a0 1078525952
 addi %a0 %zero -37
+lui %a0 1078525952
 slli %a0 %a0 2
 lw %f1 %a0 0
 fdiv %f0 %f0 %f1
 jal %zero 5
-lui %a0 1097859072
 addi %a0 %zero 0
+lui %a0 1097859072
 slli %a0 %a0 2
 lw %f0 %a0 0
 sw %f0 %sp 208
@@ -5943,12 +5943,12 @@ addi %sp %sp -224
 lw %ra %sp 220
 lw %f1 %sp 208
 fsub %f0 %f1 %f0
-lui %a0 1041862656
 addi %a0 %zero -1638
+lui %a0 1041862656
 slli %a0 %a0 2
 lw %f1 %a0 0
-lui %a0 1056964608
 addi %a0 %zero 0
+lui %a0 1056964608
 slli %a0 %a0 2
 lw %f2 %a0 0
 lw %f3 %sp 176
@@ -5963,8 +5963,8 @@ addi %sp %sp -240
 lw %ra %sp 236
 lw %f1 %sp 224
 fsub %f0 %f1 %f0
-lui %a0 1056964608
 addi %a0 %zero 0
+lui %a0 1056964608
 slli %a0 %a0 2
 lw %f1 %a0 0
 lw %f2 %sp 216
@@ -5988,17 +5988,17 @@ addi %a12 %zero 0
 bne %a0 %a12 3
 lw %f0 %sp 240
 jal %zero 5
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
-lui %a0 1132396544
 addi %a0 %zero 0
+lui %a0 1132396544
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f0 %f1 %f0
-lui %a0 1050251264
 addi %a0 %zero -1638
+lui %a0 1050251264
 slli %a0 %a0 2
 lw %f1 %a0 0
 fdiv %f0 %f0 %f1
@@ -6422,8 +6422,8 @@ addi %sp %sp 168
 jal %ra -5717
 addi %sp %sp -168
 lw %ra %sp 164
-lui %a0 1056964608
 addi %a0 %zero 0
+lui %a0 1056964608
 slli %a0 %a0 2
 lw %f1 %a0 0
 sw %ra %sp 164
@@ -6463,12 +6463,12 @@ slli %a1 %a0 2
 lw %a2 %sp 164
 add %a12 %a2 %a1
 lw %a1 %a12 0
-lui %a2 1065353216
 addi %a2 %zero 0
+lui %a2 1065353216
 slli %a2 %a2 2
 lw %f0 %a2 0
-lui %a2 1132462080
 addi %a2 %zero 0
+lui %a2 1132462080
 slli %a2 %a2 2
 lw %f1 %a2 0
 fdiv %f0 %f0 %f1
@@ -6504,8 +6504,8 @@ lw %a2 %sp 160
 lw %a3 %sp 136
 add %a12 %a2 %a1
 sw %a3 %a12 0
-lui %a0 -1073741824
 addi %a0 %zero 0
+lui %a0 -1073741824
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %a0 %sp 112
@@ -6605,8 +6605,8 @@ addi %sp %sp 200
 jalr %a10 %ra 0
 addi %sp %sp -200
 lw %ra %sp 196
-lui %a0 1036828672
 addi %a0 %zero -819
+lui %a0 1036828672
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %f1 %sp 96
@@ -6632,8 +6632,8 @@ sw %a2 %a12 0
 lw %a1 %sp 148
 addi %a12 %zero 2
 bne %a1 %a12 28
-lui %a1 1065353216
 addi %a1 %zero 0
+lui %a1 1065353216
 slli %a1 %a1 2
 lw %f0 %a1 0
 lw %a1 %sp 144
@@ -6762,8 +6762,8 @@ addi %sp %sp -80
 lw %ra %sp 76
 addi %a12 %zero 0
 bne %a0 %a12 6
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
 jal %zero 2
@@ -6820,8 +6820,8 @@ slli %a1 %a0 2
 lw %a2 %sp 12
 add %a12 %a2 %a1
 lw %a1 %a12 0
-lui %a3 1125515264
 addi %a3 %zero 0
+lui %a3 1125515264
 slli %a3 %a3 2
 lw %f0 %a3 0
 lw %f1 %sp 24
@@ -6841,8 +6841,8 @@ slli %a1 %a1 2
 lw %a2 %sp 12
 add %a12 %a2 %a1
 lw %a1 %a12 0
-lui %a3 -1021968384
 addi %a3 %zero 0
+lui %a3 -1021968384
 slli %a3 %a3 2
 lw %f0 %a3 0
 lw %f1 %sp 24
@@ -7738,8 +7738,8 @@ addi %sp %sp 96
 jal %ra -7329
 addi %sp %sp -96
 lw %ra %sp 92
-lui %a0 1065353216
 addi %a0 %zero 0
+lui %a0 1065353216
 slli %a0 %a0 2
 lw %f0 %a0 0
 lw %a0 %sp 20
@@ -7747,8 +7747,8 @@ slli %a1 %a0 2
 lw %a2 %sp 16
 add %a12 %a2 %a1
 lw %a1 %a12 0
-lui %a3 0
 addi %a3 %zero 0
+lui %a3 0
 slli %a3 %a3 2
 lw %f1 %a3 0
 lw %a3 %sp 36
@@ -8036,8 +8036,8 @@ lw %a11 %sp 0
 lw %a10 %a11 0
 jalr %a10 %zero 0
 addi %a0 %zero 3
-lui %a1 0
 addi %a1 %zero 0
+lui %a1 0
 slli %a1 %a1 2
 lw %f0 %a1 0
 sw %ra %sp 4
@@ -8053,8 +8053,8 @@ jal %ra -8047
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 0
@@ -8067,8 +8067,8 @@ lw %ra %sp 4
 lw %a1 %sp 0
 sw %a0 %a1 4
 addi %a0 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %ra %sp 4
@@ -8079,8 +8079,8 @@ lw %ra %sp 4
 lw %a1 %sp 0
 sw %a0 %a1 8
 addi %a0 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %ra %sp 4
@@ -8091,8 +8091,8 @@ lw %ra %sp 4
 lw %a1 %sp 0
 sw %a0 %a1 12
 addi %a0 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %ra %sp 4
@@ -8105,8 +8105,8 @@ sw %a0 %a1 16
 addi %a0 %a1 0
 jalr %ra %zero 0
 addi %a0 %zero 3
-lui %a1 0
 addi %a1 %zero 0
+lui %a1 0
 slli %a1 %a1 2
 lw %f0 %a1 0
 sw %ra %sp 4
@@ -8243,8 +8243,8 @@ lw %f1 %sp 8
 fdiv %f0 %f1 %f0
 jalr %ra %zero 0
 fmul %f0 %f0 %f0
-lui %a0 1036828672
 addi %a0 %zero -819
+lui %a0 1036828672
 slli %a0 %a0 2
 lw %f2 %a0 0
 fadd %f0 %f0 %f2
@@ -8254,8 +8254,8 @@ addi %sp %sp 16
 jal %ra -8229
 addi %sp %sp -16
 lw %ra %sp 12
-lui %a0 1065353216
 addi %a0 %zero 0
+lui %a0 1065353216
 slli %a0 %a0 2
 lw %f1 %a0 0
 fdiv %f1 %f1 %f0
@@ -8299,8 +8299,8 @@ addi %sp %sp -48
 lw %ra %sp 44
 lw %f1 %sp 32
 fadd %f0 %f1 %f0
-lui %a0 1065353216
 addi %a0 %zero 0
+lui %a0 1065353216
 slli %a0 %a0 2
 lw %f1 %a0 0
 fadd %f0 %f0 %f1
@@ -8313,8 +8313,8 @@ lw %f1 %sp 16
 fdiv %f1 %f1 %f0
 lw %f2 %sp 24
 fdiv %f2 %f2 %f0
-lui %a0 1065353216
 addi %a0 %zero 0
+lui %a0 1065353216
 slli %a0 %a0 2
 lw %f3 %a0 0
 fdiv %f0 %f3 %f0
@@ -8560,22 +8560,22 @@ addi %sp %sp 40
 jal %ra -8517
 addi %sp %sp -40
 lw %ra %sp 36
-lui %a0 1045217280
 addi %a0 %zero -819
+lui %a0 1045217280
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f0 %f0 %f1
-lui %a0 1063673856
 addi %a0 %zero 1638
+lui %a0 1063673856
 slli %a0 %a0 2
 lw %f1 %a0 0
 fsub %f2 %f0 %f1
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f1 %a0 0
 lw %f3 %sp 8
@@ -8595,22 +8595,22 @@ addi %sp %sp 40
 jal %ra -8552
 addi %sp %sp -40
 lw %ra %sp 36
-lui %a0 1045217280
 addi %a0 %zero -819
+lui %a0 1045217280
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f0 %f0 %f1
-lui %a0 1036828672
 addi %a0 %zero -819
+lui %a0 1036828672
 slli %a0 %a0 2
 lw %f1 %a0 0
 fadd %f2 %f0 %f1
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f0 %a0 0
-lui %a0 0
 addi %a0 %zero 0
+lui %a0 0
 slli %a0 %a0 2
 lw %f1 %a0 0
 lw %a0 %sp 16
@@ -8659,13 +8659,13 @@ addi %sp %sp 24
 jal %ra -8616
 addi %sp %sp -24
 lw %ra %sp 20
-lui %a0 1045217280
 addi %a0 %zero -819
+lui %a0 1045217280
 slli %a0 %a0 2
 lw %f1 %a0 0
 fmul %f0 %f0 %f1
-lui %a0 1063673856
 addi %a0 %zero 1638
+lui %a0 1063673856
 slli %a0 %a0 2
 lw %f1 %a0 0
 fsub %f0 %f0 %f1
@@ -8700,8 +8700,8 @@ jalr %a10 %zero 0
 jalr %ra %zero 0
 lw %a0 %a11 4
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 0
@@ -8945,8 +8945,8 @@ addi %sp %sp -24
 lw %ra %sp 20
 lw %a1 %sp 12
 lw %a2 %a1 0
-lui %a3 1065353216
 addi %a3 %zero 0
+lui %a3 1065353216
 slli %a3 %a3 2
 lw %f0 %a3 0
 lw %a3 %sp 8
@@ -9054,8 +9054,8 @@ add %a5 %a5 %a0
 add %a0 %a5 %a0
 addi %a0 %a0 1
 lw %a5 %a2 0
-lui %a6 1065353216
 addi %a6 %zero 0
+lui %a6 1065353216
 slli %a6 %a6 2
 lw %f0 %a6 0
 sw %a2 %sp 0
@@ -9087,8 +9087,8 @@ addi %sp %sp 48
 jal %ra -8504
 addi %sp %sp -48
 lw %ra %sp 44
-lui %a0 1073741824
 addi %a0 %zero 0
+lui %a0 1073741824
 slli %a0 %a0 2
 lw %f1 %a0 0
 lw %a0 %sp 20
@@ -9106,8 +9106,8 @@ fmul %f0 %f0 %f1
 lw %a0 %sp 16
 lw %f2 %a0 0
 fsub %f0 %f0 %f2
-lui %a1 1073741824
 addi %a1 %zero 0
+lui %a1 1073741824
 slli %a1 %a1 2
 lw %f2 %a1 0
 lw %a1 %sp 20
@@ -9126,8 +9126,8 @@ fmul %f0 %f0 %f1
 lw %a0 %sp 16
 lw %f2 %a0 4
 fsub %f0 %f0 %f2
-lui %a1 1073741824
 addi %a1 %zero 0
+lui %a1 1073741824
 slli %a1 %a1 2
 lw %f2 %a1 0
 lw %a1 %sp 20
@@ -9189,8 +9189,8 @@ addi %sp %sp 24
 jal %ra -8484
 addi %sp %sp -24
 lw %ra %sp 20
-lui %a0 1065353216
 addi %a0 %zero 0
+lui %a0 1065353216
 slli %a0 %a0 2
 lw %f1 %a0 0
 sw %ra %sp 20
@@ -9276,8 +9276,8 @@ lw %a0 %sp 48
 sw %a0 %a1 0
 lw %a2 %sp 52
 sw %a2 %a1 4
-lui %a1 1124073472
 addi %a1 %zero 0
+lui %a1 1124073472
 slli %a1 %a1 2
 lw %f0 %a1 0
 sw %f0 %sp 64
@@ -9383,14 +9383,14 @@ lw %a3 %sp 80
 lw %a11 %sp 0
 lw %a10 %a11 0
 jalr %a10 %zero 0
-lui %sp 40960
 addi %sp %zero -1056
-lui %in 196608
+lui %sp 40960
 addi %in %zero -704
-lui %out 299008
+lui %in 196608
 addi %out %zero 992
-lui %min_caml_hp 397312
+lui %out 299008
 addi %min_caml_hp %zero -1408
+lui %min_caml_hp 397312
 addi %a0 %zero 1
 addi %a1 %zero 0
 sw %ra %sp 4
@@ -9399,8 +9399,8 @@ jal %ra -9393
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a1 %zero 0
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 0
@@ -9439,8 +9439,8 @@ jal %ra -9433
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 4
@@ -9451,8 +9451,8 @@ jal %ra -9437
 addi %sp %sp -16
 lw %ra %sp 12
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 8
@@ -9463,8 +9463,8 @@ jal %ra -9449
 addi %sp %sp -16
 lw %ra %sp 12
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 12
@@ -9475,8 +9475,8 @@ jal %ra -9461
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a1 %zero 1
-lui %a2 1132396544
 addi %a2 %zero 0
+lui %a2 1132396544
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 16
@@ -9524,8 +9524,8 @@ jal %ra -9518
 addi %sp %sp -40
 lw %ra %sp 36
 addi %a1 %zero 1
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 36
@@ -9546,8 +9546,8 @@ jal %ra -9540
 addi %sp %sp -48
 lw %ra %sp 44
 addi %a1 %zero 1
-lui %a2 1315856384
 addi %a2 %zero -1240
+lui %a2 1315856384
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 44
@@ -9558,8 +9558,8 @@ jal %ra -9544
 addi %sp %sp -56
 lw %ra %sp 52
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 48
@@ -9580,8 +9580,8 @@ jal %ra -9574
 addi %sp %sp -64
 lw %ra %sp 60
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 56
@@ -9592,8 +9592,8 @@ jal %ra -9578
 addi %sp %sp -64
 lw %ra %sp 60
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 60
@@ -9604,8 +9604,8 @@ jal %ra -9590
 addi %sp %sp -72
 lw %ra %sp 68
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 64
@@ -9616,8 +9616,8 @@ jal %ra -9602
 addi %sp %sp -72
 lw %ra %sp 68
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 68
@@ -9648,8 +9648,8 @@ jal %ra -9642
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a1 %zero 1
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 80
@@ -9660,8 +9660,8 @@ jal %ra -9646
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 84
@@ -9672,8 +9672,8 @@ jal %ra -9658
 addi %sp %sp -96
 lw %ra %sp 92
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 88
@@ -9684,8 +9684,8 @@ jal %ra -9670
 addi %sp %sp -96
 lw %ra %sp 92
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 92
@@ -9696,8 +9696,8 @@ jal %ra -9682
 addi %sp %sp -104
 lw %ra %sp 100
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 96
@@ -9708,8 +9708,8 @@ jal %ra -9694
 addi %sp %sp -104
 lw %ra %sp 100
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 100
@@ -9720,8 +9720,8 @@ jal %ra -9706
 addi %sp %sp -112
 lw %ra %sp 108
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 104
@@ -9732,8 +9732,8 @@ jal %ra -9718
 addi %sp %sp -112
 lw %ra %sp 108
 addi %a1 %zero 0
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 108
@@ -9774,8 +9774,8 @@ jal %ra -9768
 addi %sp %sp -120
 lw %ra %sp 116
 addi %a1 %zero 0
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 116
@@ -9786,8 +9786,8 @@ jal %ra -9772
 addi %sp %sp -128
 lw %ra %sp 124
 addi %a1 %zero 3
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 120
@@ -9814,8 +9814,8 @@ lw %a0 %sp 124
 sw %a0 %a1 0
 addi %a0 %a1 0
 addi %a1 %zero 0
-lui %a2 0
 addi %a2 %zero 0
+lui %a2 0
 slli %a2 %a2 2
 lw %f0 %a2 0
 sw %a0 %sp 128
@@ -9841,8 +9841,8 @@ sw %a0 %a1 0
 addi %a0 %a1 0
 addi %a1 %zero 180
 addi %a2 %zero 0
-lui %a3 0
 addi %a3 %zero 0
+lui %a3 0
 slli %a3 %a3 2
 lw %f0 %a3 0
 addi %a3 %min_caml_hp 0
@@ -9871,8 +9871,8 @@ addi %sp %sp -144
 lw %ra %sp 140
 addi %a1 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 24
-lui %a2 0
 addi %a2 %zero 767
+lui %a2 0
 sw %a2 %a1 0
 lw %a2 %sp 12
 sw %a2 %a1 20
@@ -9886,8 +9886,8 @@ lw %a6 %sp 8
 sw %a6 %a1 4
 addi %a6 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a7 0
 addi %a7 %zero 930
+lui %a7 0
 sw %a7 %a6 0
 lw %a7 %sp 16
 sw %a7 %a6 8
@@ -9895,36 +9895,36 @@ lw %a8 %sp 20
 sw %a8 %a6 4
 addi %a9 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a10 0
 addi %a10 %zero 1272
+lui %a10 0
 sw %a10 %a9 0
 lw %a10 %sp 4
 sw %a10 %a9 4
 addi %a11 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a4 0
 addi %a4 %zero 1666
+lui %a4 0
 sw %a4 %a11 0
 sw %a9 %a11 8
 lw %a4 %sp 0
 sw %a4 %a11 4
 addi %a9 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a3 0
 addi %a3 %zero 1692
+lui %a3 0
 sw %a3 %a9 0
 sw %a11 %a9 4
 addi %a3 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a11 0
 addi %a11 %zero 1756
+lui %a11 0
 sw %a11 %a3 0
 lw %a11 %sp 28
 sw %a11 %a3 4
 addi %a5 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 24
-lui %a2 0
 addi %a2 %zero 1781
+lui %a2 0
 sw %a2 %a5 0
 sw %a1 %a5 20
 sw %a6 %a5 16
@@ -9934,34 +9934,34 @@ lw %a1 %sp 36
 sw %a1 %a5 4
 addi %a2 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a3 0
 addi %a3 %zero 1828
+lui %a3 0
 sw %a3 %a2 0
 lw %a3 %sp 40
 sw %a3 %a2 4
 addi %a6 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a9 0
 addi %a9 %zero 1964
+lui %a9 0
 sw %a9 %a6 0
 sw %a2 %a6 4
 addi %a2 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a9 0
 addi %a9 %zero 2025
+lui %a9 0
 sw %a9 %a2 0
 sw %a3 %a2 4
 addi %a9 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
 sw %a5 %sp 140
-lui %a5 0
 addi %a5 %zero -1790
+lui %a5 0
 sw %a5 %a9 0
 sw %a3 %a9 4
 addi %a5 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 24
-lui %a8 0
 addi %a8 %zero -1664
+lui %a8 0
 sw %a8 %a5 0
 sw %a2 %a5 16
 sw %a9 %a5 12
@@ -9969,27 +9969,27 @@ sw %a6 %a5 8
 sw %a10 %a5 4
 addi %a2 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a6 0
 addi %a6 %zero -1582
+lui %a6 0
 sw %a6 %a2 0
 sw %a3 %a2 4
 addi %a6 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a8 0
 addi %a8 %zero -1320
+lui %a8 0
 sw %a8 %a6 0
 sw %a3 %a6 4
 addi %a8 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a9 0
 addi %a9 %zero -1286
+lui %a9 0
 sw %a9 %a8 0
 sw %a3 %a8 4
 addi %a9 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 24
 sw %a0 %sp 144
-lui %a0 0
 addi %a0 %zero -1166
+lui %a0 0
 sw %a0 %a9 0
 sw %a6 %a9 16
 sw %a8 %a9 12
@@ -9997,20 +9997,20 @@ sw %a2 %a9 8
 sw %a10 %a9 4
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a6 0
 addi %a6 %zero -1063
+lui %a6 0
 sw %a6 %a0 0
 sw %a3 %a0 4
 addi %a6 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a8 0
 addi %a8 %zero -1039
+lui %a8 0
 sw %a8 %a6 0
 sw %a3 %a6 4
 addi %a8 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 24
-lui %a1 0
 addi %a1 %zero -945
+lui %a1 0
 sw %a1 %a8 0
 sw %a0 %a8 16
 sw %a6 %a8 12
@@ -10018,27 +10018,27 @@ sw %a2 %a8 8
 sw %a10 %a8 4
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a1 0
 addi %a1 %zero -312
+lui %a1 0
 sw %a1 %a0 0
 sw %a10 %a0 4
 addi %a1 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a2 0
 addi %a2 %zero -233
+lui %a2 0
 sw %a2 %a1 0
 sw %a4 %a1 8
 sw %a0 %a1 4
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a2 0
 addi %a2 %zero -227
+lui %a2 0
 sw %a2 %a0 0
 sw %a10 %a0 4
 addi %a2 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a6 0
 addi %a6 %zero -107
+lui %a6 0
 sw %a6 %a2 0
 lw %a6 %sp 92
 sw %a6 %a2 12
@@ -10047,14 +10047,14 @@ sw %a4 %a2 4
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
 sw %a1 %sp 148
-lui %a1 4096
 addi %a1 %zero 155
+lui %a1 4096
 sw %a1 %a0 0
 sw %a10 %a0 4
 addi %a1 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 32
-lui %a4 4096
 addi %a4 %zero 193
+lui %a4 4096
 sw %a4 %a1 0
 sw %a9 %a1 28
 sw %a3 %a1 24
@@ -10069,15 +10069,15 @@ sw %a2 %sp 152
 addi %a2 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
 sw %a8 %sp 156
-lui %a8 4096
 addi %a8 %zero 313
+lui %a8 4096
 sw %a8 %a2 0
 sw %a1 %a2 8
 sw %a11 %a2 4
 addi %a1 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 24
-lui %a8 4096
 addi %a8 %zero 349
+lui %a8 4096
 sw %a8 %a1 0
 sw %a9 %a1 20
 sw %a3 %a1 16
@@ -10086,8 +10086,8 @@ sw %a4 %a1 8
 sw %a7 %a1 4
 addi %a2 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 40
-lui %a8 4096
 addi %a8 %zero 445
+lui %a8 4096
 sw %a8 %a2 0
 lw %a8 %sp 48
 sw %a8 %a2 36
@@ -10106,15 +10106,15 @@ sw %a0 %a2 4
 sw %a0 %sp 164
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a1 4096
 addi %a1 %zero 601
+lui %a1 4096
 sw %a1 %a0 0
 sw %a2 %a0 8
 sw %a11 %a0 4
 addi %a1 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 24
-lui %a2 4096
 addi %a2 %zero 634
+lui %a2 4096
 sw %a2 %a1 0
 sw %a8 %a1 20
 sw %a9 %a1 16
@@ -10123,8 +10123,8 @@ sw %a5 %a1 8
 sw %a0 %a1 4
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a2 4096
 addi %a2 %zero 710
+lui %a2 4096
 sw %a2 %a0 0
 sw %a1 %a0 12
 sw %a8 %a0 8
@@ -10132,8 +10132,8 @@ lw %a1 %sp 36
 sw %a1 %a0 4
 addi %a2 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 40
-lui %a5 4096
 addi %a5 %zero 754
+lui %a5 4096
 sw %a5 %a2 0
 sw %a8 %a2 36
 sw %a6 %a2 32
@@ -10150,15 +10150,15 @@ lw %a0 %sp 164
 sw %a0 %a2 4
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a10 4096
 addi %a10 %zero 918
+lui %a10 4096
 sw %a10 %a0 0
 sw %a2 %a0 8
 sw %a11 %a0 4
 addi %a2 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 24
-lui %a10 4096
 addi %a10 %zero 951
+lui %a10 4096
 sw %a10 %a2 0
 sw %a8 %a2 16
 sw %a5 %a2 12
@@ -10166,52 +10166,52 @@ sw %a3 %a2 8
 sw %a0 %a2 4
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a3 4096
 addi %a3 %zero 1025
+lui %a3 4096
 sw %a3 %a0 0
 sw %a2 %a0 12
 sw %a8 %a0 8
 sw %a1 %a0 4
 addi %a2 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a3 4096
 addi %a3 %zero 1069
+lui %a3 4096
 sw %a3 %a2 0
 lw %a3 %sp 60
 sw %a3 %a2 8
 sw %a4 %a2 4
 addi %a5 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a10 4096
 addi %a10 %zero 1105
+lui %a10 4096
 sw %a10 %a5 0
 sw %a3 %a5 4
 addi %a10 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a11 4096
 addi %a11 %zero 1149
+lui %a11 4096
 sw %a11 %a10 0
 sw %a3 %a10 8
 sw %a7 %a10 4
 addi %a11 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a7 4096
 addi %a7 %zero 1328
+lui %a7 4096
 sw %a7 %a11 0
 sw %a10 %a11 12
 sw %a2 %a11 8
 sw %a5 %a11 4
 addi %a2 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a5 4096
 addi %a5 %zero 1357
+lui %a5 4096
 sw %a5 %a2 0
 lw %a5 %sp 64
 sw %a5 %a2 4
 addi %a7 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a10 4096
 addi %a10 %zero 1913
+lui %a10 4096
 sw %a10 %a7 0
 sw %a5 %a7 8
 lw %a10 %sp 72
@@ -10219,8 +10219,8 @@ sw %a10 %a7 4
 sw %a11 %sp 172
 addi %a11 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 40
-lui %a10 4096
 addi %a10 %zero 1969
+lui %a10 4096
 sw %a10 %a11 0
 lw %a10 %sp 160
 sw %a10 %a11 32
@@ -10235,8 +10235,8 @@ sw %a7 %a11 4
 addi %a10 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 88
 sw %a0 %sp 176
-lui %a0 4096
 addi %a0 %zero -1988
+lui %a0 4096
 sw %a0 %a10 0
 sw %a2 %a10 80
 sw %a11 %a10 76
@@ -10270,8 +10270,8 @@ sw %a8 %a10 8
 sw %a7 %a10 4
 addi %a7 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 56
-lui %a8 4096
 addi %a8 %zero -1528
+lui %a8 4096
 sw %a8 %a7 0
 sw %a2 %a7 48
 sw %a5 %a7 44
@@ -10290,30 +10290,30 @@ lw %a0 %sp 68
 sw %a0 %a7 4
 addi %a1 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a2 4096
 addi %a2 %zero -1406
+lui %a2 4096
 sw %a2 %a1 0
 sw %a7 %a1 4
 addi %a2 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a3 4096
 addi %a3 %zero -1325
+lui %a3 4096
 sw %a3 %a2 0
 lw %a3 %sp 152
 sw %a3 %a2 8
 sw %a1 %a2 4
 addi %a1 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a3 4096
 addi %a3 %zero -1304
+lui %a3 4096
 sw %a3 %a1 0
 sw %a2 %a1 8
 lw %a3 %sp 116
 sw %a3 %a1 4
 addi %a4 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a5 4096
 addi %a5 %zero -1220
+lui %a5 4096
 sw %a5 %a4 0
 sw %a1 %a4 12
 lw %a1 %sp 72
@@ -10321,56 +10321,56 @@ sw %a1 %a4 8
 sw %a0 %a4 4
 addi %a5 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a6 4096
 addi %a6 %zero -1137
+lui %a6 4096
 sw %a6 %a5 0
 sw %a1 %a5 8
 sw %a0 %a5 4
 addi %a6 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a7 4096
 addi %a7 %zero -991
+lui %a7 4096
 sw %a7 %a6 0
 sw %a4 %a6 4
 addi %a4 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a7 4096
 addi %a7 %zero -944
+lui %a7 4096
 sw %a7 %a4 0
 lw %a7 %sp 76
 sw %a7 %a4 4
 addi %a8 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a9 4096
 addi %a9 %zero -824
+lui %a9 4096
 sw %a9 %a8 0
 sw %a6 %a8 8
 sw %a5 %a8 4
 addi %a5 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a9 4096
 addi %a9 %zero -745
+lui %a9 4096
 sw %a9 %a5 0
 sw %a7 %a5 4
 addi %a9 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
 sw %a5 %sp 180
-lui %a5 4096
 addi %a5 %zero -672
+lui %a5 4096
 sw %a5 %a9 0
 sw %a1 %a9 4
 addi %a5 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a11 4096
 addi %a11 %zero -636
+lui %a11 4096
 sw %a11 %a5 0
 sw %a2 %a5 12
 sw %a3 %a5 8
 sw %a0 %a5 4
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 40
-lui %a2 4096
 addi %a2 %zero -529
+lui %a2 4096
 sw %a2 %a0 0
 lw %a2 %sp 12
 sw %a2 %a0 36
@@ -10389,8 +10389,8 @@ lw %a5 %sp 80
 sw %a5 %a0 4
 addi %a10 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 32
-lui %a11 4096
 addi %a11 %zero -360
+lui %a11 4096
 sw %a11 %a10 0
 lw %a11 %sp 104
 sw %a11 %a10 24
@@ -10402,8 +10402,8 @@ sw %a7 %a10 8
 sw %a5 %a10 4
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 32
-lui %a11 4096
 addi %a11 %zero -310
+lui %a11 4096
 sw %a11 %a0 0
 sw %a9 %a0 24
 sw %a8 %a0 20
@@ -10413,84 +10413,84 @@ sw %a7 %a0 8
 sw %a6 %a0 4
 addi %a1 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a4 4096
 addi %a4 %zero -213
+lui %a4 4096
 sw %a4 %a1 0
 sw %a0 %a1 12
 sw %a10 %a1 8
 sw %a7 %a1 4
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a4 8192
 addi %a4 %zero 16
+lui %a4 8192
 sw %a4 %a0 0
 sw %a7 %a0 4
 addi %a4 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a6 8192
 addi %a6 %zero 87
+lui %a6 8192
 sw %a6 %a4 0
 sw %a3 %a4 4
 addi %a6 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a7 8192
 addi %a7 %zero 355
+lui %a7 8192
 sw %a7 %a6 0
 sw %a4 %a6 4
 addi %a4 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a7 8192
 addi %a7 %zero 457
+lui %a7 8192
 sw %a7 %a4 0
 sw %a6 %a4 4
 addi %a6 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a7 8192
 addi %a7 %zero 509
+lui %a7 8192
 sw %a7 %a6 0
 lw %a7 %sp 0
 sw %a7 %a6 4
 addi %a8 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a9 8192
 addi %a9 %zero 538
+lui %a9 8192
 sw %a9 %a8 0
 sw %a6 %a8 4
 addi %a9 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a11 8192
 addi %a11 %zero 562
+lui %a11 8192
 sw %a11 %a9 0
 sw %a3 %a9 12
 sw %a8 %a9 8
 sw %a6 %a9 4
 addi %a8 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 8
-lui %a11 8192
 addi %a11 %zero 610
+lui %a11 8192
 sw %a11 %a8 0
 lw %a11 %sp 148
 sw %a11 %a8 4
 sw %a0 %sp 184
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a5 8192
 addi %a5 %zero 634
+lui %a5 8192
 sw %a5 %a0 0
 sw %a8 %a0 8
 sw %a3 %a0 4
 addi %a3 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a5 8192
 addi %a5 %zero 659
+lui %a5 8192
 sw %a5 %a3 0
 sw %a0 %a3 12
 sw %a9 %a3 8
 sw %a4 %a3 4
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a4 8192
 addi %a4 %zero 687
+lui %a4 8192
 sw %a4 %a0 0
 sw %a11 %a0 12
 lw %a4 %sp 136
@@ -10498,8 +10498,8 @@ sw %a4 %a0 8
 sw %a6 %a0 4
 addi %a4 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a5 8192
 addi %a5 %zero 740
+lui %a5 8192
 sw %a5 %a4 0
 lw %a5 %sp 144
 sw %a5 %a4 12
@@ -10508,16 +10508,16 @@ sw %a6 %a4 8
 sw %a0 %a4 4
 addi %a8 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a9 8192
 addi %a9 %zero 857
+lui %a9 8192
 sw %a9 %a8 0
 sw %a5 %a8 12
 sw %a6 %a8 8
 sw %a0 %a8 4
 addi %a0 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 16
-lui %a5 8192
 addi %a5 %zero 974
+lui %a5 8192
 sw %a5 %a0 0
 sw %a8 %a0 12
 sw %a4 %a0 8
@@ -10525,8 +10525,8 @@ lw %a4 %sp 4
 sw %a4 %a0 4
 addi %a4 %min_caml_hp 0
 addi %min_caml_hp %min_caml_hp 56
-lui %a5 8192
 addi %a5 %zero 1035
+lui %a5 8192
 sw %a5 %a4 0
 lw %a5 %sp 180
 sw %a5 %a4 52

@@ -21,6 +21,7 @@ int main(int argc, char **argv){
     Emulator* emu;
     emu = (Emulator*)malloc(sizeof(Emulator));
     init_emulator(emu);
+
     // for command line option
     string file_path;
     for (int i=0; i<argc; i++){
@@ -71,20 +72,25 @@ int main(int argc, char **argv){
         cout << "error : no file input" << endl;
         return 1;
     }
-    if (!(emu->args.flg_R && !emu->args.flg_r && !emu->args.flg_a && !emu->args.flg_m) &&
-         !(!emu->args.flg_R && emu->args.flg_r && !emu->args.flg_a && !emu->args.flg_m) &&
-         !(!emu->args.flg_R && !emu->args.flg_r && emu->args.flg_a && !emu->args.flg_m) &&
-         !(!emu->args.flg_R && !emu->args.flg_r && !emu->args.flg_a && emu->args.flg_m) &&
-         !(!emu->args.flg_R && !emu->args.flg_r && !emu->args.flg_a && !emu->args.flg_m)) {
-        cout << (!emu->args.flg_R && !emu->args.flg_r && emu->args.flg_a && !emu->args.flg_m) << endl;
-        cout << "you can selece atmost one option of (-a, -r, -R, -m)" << endl;
-        return 1;
-    }
+    // if (!(emu->args.flg_R && !emu->args.flg_r && !emu->args.flg_a && !emu->args.flg_m) &&
+    //      !(!emu->args.flg_R && emu->args.flg_r && !emu->args.flg_a && !emu->args.flg_m) &&
+    //      !(!emu->args.flg_R && !emu->args.flg_r && emu->args.flg_a && !emu->args.flg_m) &&
+    //      !(!emu->args.flg_R && !emu->args.flg_r && !emu->args.flg_a && emu->args.flg_m) &&
+    //      !(!emu->args.flg_R && !emu->args.flg_r && !emu->args.flg_a && !emu->args.flg_m)) {
+    //     cout << (!emu->args.flg_R && !emu->args.flg_r && emu->args.flg_a && !emu->args.flg_m) << endl;
+    //     cout << "you can selece atmost one option of (-a, -r, -R, -m)" << endl;
+    //     return 1;
+    // }
 
     // load machine code to instruction-memory
     load_instructions(emu, file_path);
     if (DISASSEMBLE){
+        // write disassembled code into "~~~.txt"
+        ofstream ofstr("data/test_disassembled.txt");
+        streambuf* strbuf;
+        strbuf = cout.rdbuf(ofstr.rdbuf());
         disassemble_instructions(emu);
+        cout.rdbuf(strbuf);
         return 1;
     }
     double t_start = elapsed();
@@ -135,8 +141,6 @@ int main(int argc, char **argv){
         else if (flg && emu->args.flg_m) print_mem(emu, emu->args.mem_s);
         if (pc_pred == emu->pc) break;  
         if (iteration % 1000000000 == 0) cout << iteration / 1000000000 << endl;
-        in_max = (in_max < emu->reg[4]) ? emu->reg[4] : in_max;
-        in_min = (in_min > emu->reg[4]) ? emu->reg[4] : in_min;
     }
     double t_end = elapsed();
     if (PRINT_STAT){
@@ -146,9 +150,6 @@ int main(int argc, char **argv){
     }
     destroy_emulator(emu);
 
-    // output
-    cout << in_min << endl;
-    cout << in_max << endl;
     // for (int ind = 0; ind < 128*128; ind++){
     //     cout << emu->memory[40000 + ind] << endl;
     // }

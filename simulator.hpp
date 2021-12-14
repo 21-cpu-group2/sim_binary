@@ -8,7 +8,7 @@
 
 #define DEBUG 0
 #define PRINT_STAT 0
-#define DISASSEMBLE 0
+#define DISASSEMBLE 1
 //#define DEBUG2 0 // if 1 then showing specific registers
 #define RM 0b000 // Round Mode(float)
 

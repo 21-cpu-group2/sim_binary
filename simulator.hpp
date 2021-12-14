@@ -30,7 +30,7 @@ enum fRegister { ft0, ft1, ft2, ft3, ft4, ft5, ft6, ft7,
                 fs8, fs9, fs10, fs11, ft8, ft9, ft10, ft11};
 
 static char reg_name[REG_SIZE][16] = {
-    "%zero","%ra","%sp","%min_caml_hp",
+    "%zero","%ra","%sp","%mc_hp",
     "%in","%out","%a0","%a1",
     "%a2","%a3","%a4","%a5",
     "%a6","%a7","%a8","%a9",

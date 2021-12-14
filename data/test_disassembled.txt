@@ -3,18 +3,18 @@ jalr %ra %zero 0
 srli %a0 %a0 1
 jalr %ra %zero 0
 add %a2 %a0 %zero
-add %a0 %min_caml_hp %zero
+add %a0 %mc_hp %zero
 beq %a2 %zero 5
-sw %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 4
+sw %a1 %mc_hp 0
+addi %mc_hp %mc_hp 4
 addi %a2 %a2 -1
 beq %zero %zero -4
 jalr %ra %zero 0
 add %a2 %a0 %zero
-add %a0 %min_caml_hp %zero
+add %a0 %mc_hp %zero
 beq %a2 %zero 5
-sw %f0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 4
+sw %f0 %mc_hp 0
+addi %mc_hp %mc_hp 4
 addi %a2 %a2 -1
 beq %zero %zero -4
 jalr %ra %zero 0
@@ -1508,8 +1508,8 @@ addi %sp %sp 56
 jal %ra -1495
 addi %sp %sp -56
 lw %ra %sp 52
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 48
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 48
 sw %a0 %a1 40
 lw %a0 %sp 44
 sw %a0 %a1 36
@@ -8168,8 +8168,8 @@ addi %sp %sp 32
 jal %ra -130
 addi %sp %sp -32
 lw %ra %sp 28
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 32
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 32
 sw %a0 %a1 28
 lw %a0 %sp 24
 sw %a0 %a1 24
@@ -8720,8 +8720,8 @@ addi %sp %sp 16
 jal %ra -8715
 addi %sp %sp -16
 lw %ra %sp 12
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 8
 sw %a0 %a1 4
 lw %a0 %sp 4
 sw %a0 %a1 0
@@ -8915,8 +8915,8 @@ addi %sp %sp 64
 jalr %a10 %ra 0
 addi %sp %sp -64
 lw %ra %sp 60
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 16
 lw %f0 %sp 16
 sw %f0 %a0 8
 lw %a1 %sp 56
@@ -9389,8 +9389,8 @@ addi %in %zero -704
 lui %in 196608
 addi %out %zero 992
 lui %out 299008
-addi %min_caml_hp %zero -1408
-lui %min_caml_hp 397312
+addi %mc_hp %zero -1408
+lui %mc_hp 397312
 addi %a0 %zero 1
 addi %a1 %zero 0
 sw %ra %sp 4
@@ -9416,8 +9416,8 @@ addi %a3 %zero 0
 addi %a4 %zero 0
 addi %a5 %zero 0
 addi %a6 %zero 0
-addi %a7 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 48
+addi %a7 %mc_hp 0
+addi %mc_hp %mc_hp 48
 sw %a0 %a7 40
 sw %a0 %a7 36
 sw %a0 %a7 32
@@ -9752,8 +9752,8 @@ jal %ra -9746
 addi %sp %sp -120
 lw %ra %sp 116
 addi %a1 %zero 0
-addi %a2 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a2 %mc_hp 0
+addi %mc_hp %mc_hp 8
 sw %a0 %a2 4
 lw %a0 %sp 112
 sw %a0 %a2 0
@@ -9807,8 +9807,8 @@ addi %sp %sp 136
 jal %ra -9802
 addi %sp %sp -136
 lw %ra %sp 132
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 8
 sw %a0 %a1 4
 lw %a0 %sp 124
 sw %a0 %a1 0
@@ -9833,8 +9833,8 @@ addi %sp %sp 144
 jal %ra -9828
 addi %sp %sp -144
 lw %ra %sp 140
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 8
 sw %a0 %a1 4
 lw %a0 %sp 132
 sw %a0 %a1 0
@@ -9845,8 +9845,8 @@ addi %a3 %zero 0
 lui %a3 0
 slli %a3 %a3 2
 lw %f0 %a3 0
-addi %a3 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a3 %mc_hp 0
+addi %mc_hp %mc_hp 16
 sw %f0 %a3 8
 sw %a0 %a3 4
 sw %a2 %a3 0
@@ -9869,8 +9869,8 @@ addi %sp %sp 144
 jal %ra -9864
 addi %sp %sp -144
 lw %ra %sp 140
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 24
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 24
 addi %a2 %zero 767
 lui %a2 0
 sw %a2 %a1 0
@@ -9884,8 +9884,8 @@ lw %a5 %sp 96
 sw %a5 %a1 8
 lw %a6 %sp 8
 sw %a6 %a1 4
-addi %a6 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a6 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a7 %zero 930
 lui %a7 0
 sw %a7 %a6 0
@@ -9893,36 +9893,36 @@ lw %a7 %sp 16
 sw %a7 %a6 8
 lw %a8 %sp 20
 sw %a8 %a6 4
-addi %a9 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a9 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a10 %zero 1272
 lui %a10 0
 sw %a10 %a9 0
 lw %a10 %sp 4
 sw %a10 %a9 4
-addi %a11 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a11 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a4 %zero 1666
 lui %a4 0
 sw %a4 %a11 0
 sw %a9 %a11 8
 lw %a4 %sp 0
 sw %a4 %a11 4
-addi %a9 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a9 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a3 %zero 1692
 lui %a3 0
 sw %a3 %a9 0
 sw %a11 %a9 4
-addi %a3 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a3 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a11 %zero 1756
 lui %a11 0
 sw %a11 %a3 0
 lw %a11 %sp 28
 sw %a11 %a3 4
-addi %a5 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 24
+addi %a5 %mc_hp 0
+addi %mc_hp %mc_hp 24
 addi %a2 %zero 1781
 lui %a2 0
 sw %a2 %a5 0
@@ -9932,34 +9932,34 @@ sw %a3 %a5 12
 sw %a9 %a5 8
 lw %a1 %sp 36
 sw %a1 %a5 4
-addi %a2 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a2 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a3 %zero 1828
 lui %a3 0
 sw %a3 %a2 0
 lw %a3 %sp 40
 sw %a3 %a2 4
-addi %a6 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a6 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a9 %zero 1964
 lui %a9 0
 sw %a9 %a6 0
 sw %a2 %a6 4
-addi %a2 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a2 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a9 %zero 2025
 lui %a9 0
 sw %a9 %a2 0
 sw %a3 %a2 4
-addi %a9 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a9 %mc_hp 0
+addi %mc_hp %mc_hp 8
 sw %a5 %sp 140
 addi %a5 %zero -1790
 lui %a5 0
 sw %a5 %a9 0
 sw %a3 %a9 4
-addi %a5 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 24
+addi %a5 %mc_hp 0
+addi %mc_hp %mc_hp 24
 addi %a8 %zero -1664
 lui %a8 0
 sw %a8 %a5 0
@@ -9967,26 +9967,26 @@ sw %a2 %a5 16
 sw %a9 %a5 12
 sw %a6 %a5 8
 sw %a10 %a5 4
-addi %a2 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a2 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a6 %zero -1582
 lui %a6 0
 sw %a6 %a2 0
 sw %a3 %a2 4
-addi %a6 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a6 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a8 %zero -1320
 lui %a8 0
 sw %a8 %a6 0
 sw %a3 %a6 4
-addi %a8 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a8 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a9 %zero -1286
 lui %a9 0
 sw %a9 %a8 0
 sw %a3 %a8 4
-addi %a9 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 24
+addi %a9 %mc_hp 0
+addi %mc_hp %mc_hp 24
 sw %a0 %sp 144
 addi %a0 %zero -1166
 lui %a0 0
@@ -9995,20 +9995,20 @@ sw %a6 %a9 16
 sw %a8 %a9 12
 sw %a2 %a9 8
 sw %a10 %a9 4
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a6 %zero -1063
 lui %a6 0
 sw %a6 %a0 0
 sw %a3 %a0 4
-addi %a6 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a6 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a8 %zero -1039
 lui %a8 0
 sw %a8 %a6 0
 sw %a3 %a6 4
-addi %a8 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 24
+addi %a8 %mc_hp 0
+addi %mc_hp %mc_hp 24
 addi %a1 %zero -945
 lui %a1 0
 sw %a1 %a8 0
@@ -10016,27 +10016,27 @@ sw %a0 %a8 16
 sw %a6 %a8 12
 sw %a2 %a8 8
 sw %a10 %a8 4
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a1 %zero -312
 lui %a1 0
 sw %a1 %a0 0
 sw %a10 %a0 4
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a2 %zero -233
 lui %a2 0
 sw %a2 %a1 0
 sw %a4 %a1 8
 sw %a0 %a1 4
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a2 %zero -227
 lui %a2 0
 sw %a2 %a0 0
 sw %a10 %a0 4
-addi %a2 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a2 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a6 %zero -107
 lui %a6 0
 sw %a6 %a2 0
@@ -10044,15 +10044,15 @@ lw %a6 %sp 92
 sw %a6 %a2 12
 sw %a0 %a2 8
 sw %a4 %a2 4
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 8
 sw %a1 %sp 148
 addi %a1 %zero 155
 lui %a1 4096
 sw %a1 %a0 0
 sw %a10 %a0 4
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 32
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 32
 addi %a4 %zero 193
 lui %a4 4096
 sw %a4 %a1 0
@@ -10066,16 +10066,16 @@ lw %a7 %sp 52
 sw %a7 %a1 8
 sw %a0 %a1 4
 sw %a2 %sp 152
-addi %a2 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a2 %mc_hp 0
+addi %mc_hp %mc_hp 16
 sw %a8 %sp 156
 addi %a8 %zero 313
 lui %a8 4096
 sw %a8 %a2 0
 sw %a1 %a2 8
 sw %a11 %a2 4
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 24
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 24
 addi %a8 %zero 349
 lui %a8 4096
 sw %a8 %a1 0
@@ -10084,8 +10084,8 @@ sw %a3 %a1 16
 sw %a2 %a1 12
 sw %a4 %a1 8
 sw %a7 %a1 4
-addi %a2 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 40
+addi %a2 %mc_hp 0
+addi %mc_hp %mc_hp 40
 addi %a8 %zero 445
 lui %a8 4096
 sw %a8 %a2 0
@@ -10104,15 +10104,15 @@ lw %a1 %sp 56
 sw %a1 %a2 8
 sw %a0 %a2 4
 sw %a0 %sp 164
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a1 %zero 601
 lui %a1 4096
 sw %a1 %a0 0
 sw %a2 %a0 8
 sw %a11 %a0 4
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 24
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 24
 addi %a2 %zero 634
 lui %a2 4096
 sw %a2 %a1 0
@@ -10121,8 +10121,8 @@ sw %a9 %a1 16
 sw %a3 %a1 12
 sw %a5 %a1 8
 sw %a0 %a1 4
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a2 %zero 710
 lui %a2 4096
 sw %a2 %a0 0
@@ -10130,8 +10130,8 @@ sw %a1 %a0 12
 sw %a8 %a0 8
 lw %a1 %sp 36
 sw %a1 %a0 4
-addi %a2 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 40
+addi %a2 %mc_hp 0
+addi %mc_hp %mc_hp 40
 addi %a5 %zero 754
 lui %a5 4096
 sw %a5 %a2 0
@@ -10148,15 +10148,15 @@ sw %a6 %a2 8
 sw %a0 %sp 168
 lw %a0 %sp 164
 sw %a0 %a2 4
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a10 %zero 918
 lui %a10 4096
 sw %a10 %a0 0
 sw %a2 %a0 8
 sw %a11 %a0 4
-addi %a2 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 24
+addi %a2 %mc_hp 0
+addi %mc_hp %mc_hp 24
 addi %a10 %zero 951
 lui %a10 4096
 sw %a10 %a2 0
@@ -10164,52 +10164,52 @@ sw %a8 %a2 16
 sw %a5 %a2 12
 sw %a3 %a2 8
 sw %a0 %a2 4
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a3 %zero 1025
 lui %a3 4096
 sw %a3 %a0 0
 sw %a2 %a0 12
 sw %a8 %a0 8
 sw %a1 %a0 4
-addi %a2 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a2 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a3 %zero 1069
 lui %a3 4096
 sw %a3 %a2 0
 lw %a3 %sp 60
 sw %a3 %a2 8
 sw %a4 %a2 4
-addi %a5 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a5 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a10 %zero 1105
 lui %a10 4096
 sw %a10 %a5 0
 sw %a3 %a5 4
-addi %a10 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a10 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a11 %zero 1149
 lui %a11 4096
 sw %a11 %a10 0
 sw %a3 %a10 8
 sw %a7 %a10 4
-addi %a11 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a11 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a7 %zero 1328
 lui %a7 4096
 sw %a7 %a11 0
 sw %a10 %a11 12
 sw %a2 %a11 8
 sw %a5 %a11 4
-addi %a2 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a2 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a5 %zero 1357
 lui %a5 4096
 sw %a5 %a2 0
 lw %a5 %sp 64
 sw %a5 %a2 4
-addi %a7 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a7 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a10 %zero 1913
 lui %a10 4096
 sw %a10 %a7 0
@@ -10217,8 +10217,8 @@ sw %a5 %a7 8
 lw %a10 %sp 72
 sw %a10 %a7 4
 sw %a11 %sp 172
-addi %a11 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 40
+addi %a11 %mc_hp 0
+addi %mc_hp %mc_hp 40
 addi %a10 %zero 1969
 lui %a10 4096
 sw %a10 %a11 0
@@ -10232,8 +10232,8 @@ sw %a0 %a11 16
 sw %a4 %a11 12
 sw %a6 %a11 8
 sw %a7 %a11 4
-addi %a10 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 88
+addi %a10 %mc_hp 0
+addi %mc_hp %mc_hp 88
 sw %a0 %sp 176
 addi %a0 %zero -1988
 lui %a0 4096
@@ -10268,8 +10268,8 @@ sw %a8 %a10 12
 lw %a8 %sp 20
 sw %a8 %a10 8
 sw %a7 %a10 4
-addi %a7 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 56
+addi %a7 %mc_hp 0
+addi %mc_hp %mc_hp 56
 addi %a8 %zero -1528
 lui %a8 4096
 sw %a8 %a7 0
@@ -10288,30 +10288,30 @@ lw %a0 %sp 172
 sw %a0 %a7 8
 lw %a0 %sp 68
 sw %a0 %a7 4
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a2 %zero -1406
 lui %a2 4096
 sw %a2 %a1 0
 sw %a7 %a1 4
-addi %a2 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a2 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a3 %zero -1325
 lui %a3 4096
 sw %a3 %a2 0
 lw %a3 %sp 152
 sw %a3 %a2 8
 sw %a1 %a2 4
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a3 %zero -1304
 lui %a3 4096
 sw %a3 %a1 0
 sw %a2 %a1 8
 lw %a3 %sp 116
 sw %a3 %a1 4
-addi %a4 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a4 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a5 %zero -1220
 lui %a5 4096
 sw %a5 %a4 0
@@ -10319,56 +10319,56 @@ sw %a1 %a4 12
 lw %a1 %sp 72
 sw %a1 %a4 8
 sw %a0 %a4 4
-addi %a5 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a5 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a6 %zero -1137
 lui %a6 4096
 sw %a6 %a5 0
 sw %a1 %a5 8
 sw %a0 %a5 4
-addi %a6 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a6 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a7 %zero -991
 lui %a7 4096
 sw %a7 %a6 0
 sw %a4 %a6 4
-addi %a4 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a4 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a7 %zero -944
 lui %a7 4096
 sw %a7 %a4 0
 lw %a7 %sp 76
 sw %a7 %a4 4
-addi %a8 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a8 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a9 %zero -824
 lui %a9 4096
 sw %a9 %a8 0
 sw %a6 %a8 8
 sw %a5 %a8 4
-addi %a5 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a5 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a9 %zero -745
 lui %a9 4096
 sw %a9 %a5 0
 sw %a7 %a5 4
-addi %a9 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a9 %mc_hp 0
+addi %mc_hp %mc_hp 8
 sw %a5 %sp 180
 addi %a5 %zero -672
 lui %a5 4096
 sw %a5 %a9 0
 sw %a1 %a9 4
-addi %a5 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a5 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a11 %zero -636
 lui %a11 4096
 sw %a11 %a5 0
 sw %a2 %a5 12
 sw %a3 %a5 8
 sw %a0 %a5 4
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 40
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 40
 addi %a2 %zero -529
 lui %a2 4096
 sw %a2 %a0 0
@@ -10387,8 +10387,8 @@ sw %a10 %a0 12
 sw %a5 %a0 8
 lw %a5 %sp 80
 sw %a5 %a0 4
-addi %a10 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 32
+addi %a10 %mc_hp 0
+addi %mc_hp %mc_hp 32
 addi %a11 %zero -360
 lui %a11 4096
 sw %a11 %a10 0
@@ -10400,8 +10400,8 @@ sw %a2 %a10 16
 sw %a0 %a10 12
 sw %a7 %a10 8
 sw %a5 %a10 4
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 32
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 32
 addi %a11 %zero -310
 lui %a11 4096
 sw %a11 %a0 0
@@ -10411,84 +10411,84 @@ sw %a1 %a0 16
 sw %a4 %a0 12
 sw %a7 %a0 8
 sw %a6 %a0 4
-addi %a1 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a1 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a4 %zero -213
 lui %a4 4096
 sw %a4 %a1 0
 sw %a0 %a1 12
 sw %a10 %a1 8
 sw %a7 %a1 4
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a4 %zero 16
 lui %a4 8192
 sw %a4 %a0 0
 sw %a7 %a0 4
-addi %a4 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a4 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a6 %zero 87
 lui %a6 8192
 sw %a6 %a4 0
 sw %a3 %a4 4
-addi %a6 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a6 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a7 %zero 355
 lui %a7 8192
 sw %a7 %a6 0
 sw %a4 %a6 4
-addi %a4 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a4 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a7 %zero 457
 lui %a7 8192
 sw %a7 %a4 0
 sw %a6 %a4 4
-addi %a6 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a6 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a7 %zero 509
 lui %a7 8192
 sw %a7 %a6 0
 lw %a7 %sp 0
 sw %a7 %a6 4
-addi %a8 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a8 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a9 %zero 538
 lui %a9 8192
 sw %a9 %a8 0
 sw %a6 %a8 4
-addi %a9 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a9 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a11 %zero 562
 lui %a11 8192
 sw %a11 %a9 0
 sw %a3 %a9 12
 sw %a8 %a9 8
 sw %a6 %a9 4
-addi %a8 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 8
+addi %a8 %mc_hp 0
+addi %mc_hp %mc_hp 8
 addi %a11 %zero 610
 lui %a11 8192
 sw %a11 %a8 0
 lw %a11 %sp 148
 sw %a11 %a8 4
 sw %a0 %sp 184
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a5 %zero 634
 lui %a5 8192
 sw %a5 %a0 0
 sw %a8 %a0 8
 sw %a3 %a0 4
-addi %a3 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a3 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a5 %zero 659
 lui %a5 8192
 sw %a5 %a3 0
 sw %a0 %a3 12
 sw %a9 %a3 8
 sw %a4 %a3 4
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a4 %zero 687
 lui %a4 8192
 sw %a4 %a0 0
@@ -10496,8 +10496,8 @@ sw %a11 %a0 12
 lw %a4 %sp 136
 sw %a4 %a0 8
 sw %a6 %a0 4
-addi %a4 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a4 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a5 %zero 740
 lui %a5 8192
 sw %a5 %a4 0
@@ -10506,16 +10506,16 @@ sw %a5 %a4 12
 lw %a6 %sp 16
 sw %a6 %a4 8
 sw %a0 %a4 4
-addi %a8 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a8 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a9 %zero 857
 lui %a9 8192
 sw %a9 %a8 0
 sw %a5 %a8 12
 sw %a6 %a8 8
 sw %a0 %a8 4
-addi %a0 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 16
+addi %a0 %mc_hp 0
+addi %mc_hp %mc_hp 16
 addi %a5 %zero 974
 lui %a5 8192
 sw %a5 %a0 0
@@ -10523,8 +10523,8 @@ sw %a8 %a0 12
 sw %a4 %a0 8
 lw %a4 %sp 4
 sw %a4 %a0 4
-addi %a4 %min_caml_hp 0
-addi %min_caml_hp %min_caml_hp 56
+addi %a4 %mc_hp 0
+addi %mc_hp %mc_hp 56
 addi %a5 %zero 1035
 lui %a5 8192
 sw %a5 %a4 0

@@ -286,6 +286,10 @@ inline int AND(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
 */
 ///////////   LUI   ////////////
 inline int LUI(Emulator* emu, uint32_t rd_, int imm) {
+    // lui命令は必ずaddiが一つ前にくる。
+    // lui命令の前のaddiは、単に下位12bitに数値をぶち込みたいだけ。
+    // -> addiのimmが負だとrdに突っ込まれる値は0xFFFFF???になるが、0x00000???にしておきたい。
+    // luiでは、上位20bitをマスクしてから計算を進める。
     uint32_t rd = emu->reg[rd_] & 0x00000FFF;
     emu->reg[rd_] = (imm << 12) + rd;
     emu->pc++;

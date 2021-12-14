@@ -359,7 +359,7 @@ jal %ra -325
 addi %sp %sp -16
 lw %ra %sp 12
 addi %a12 %zero 0
-bne %a0 %a12 19
+bne %a0 %a12 15
 lw %f0 %sp 0
 sw %ra %sp 12
 addi %sp %sp 16
@@ -367,25 +367,19 @@ jal %ra -331
 addi %sp %sp -16
 lw %ra %sp 12
 addi %a12 %zero 0
-bne %a0 %a12 6
+bne %a0 %a12 4
 addi %a0 %zero 0
 lui %a0 -1082130432
-slli %a0 %a0 2
-lw %f0 %a0 0
 jalr %ra %zero 0
 addi %a0 %zero 0
 lui %a0 1065353216
-slli %a0 %a0 2
-lw %f0 %a0 0
 jalr %ra %zero 0
 addi %a0 %zero 0
 lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
 jalr %ra %zero 0
 addi %a12 %zero 0
 bne %a0 %a12 2
-jal %zero -359
+jal %zero -353
 jalr %ra %zero 0
 add %a0 %a0 %a1
 addi %a12 %zero 5
@@ -401,11 +395,9 @@ sw %f0 %a0 0
 sw %f0 %a0 4
 sw %f0 %a0 8
 jalr %ra %zero 0
-addi %a1 %zero 0
-lui %a1 0
-slli %a1 %a1 2
-lw %f0 %a1 0
-jal %zero -8
+addi %f0 %zero 0
+lui %f0 0
+jal %zero -6
 lw %f0 %a1 0
 sw %f0 %a0 0
 lw %f0 %a1 4
@@ -420,7 +412,7 @@ sw %a1 %sp 0
 sw %a0 %sp 4
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -400
+jal %ra -392
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a0 %sp 4
@@ -432,7 +424,7 @@ sw %f0 %sp 8
 fadd %f0 %f1 %fzero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -412
+jal %ra -404
 addi %sp %sp -24
 lw %ra %sp 20
 lw %f1 %sp 8
@@ -446,23 +438,21 @@ sw %f0 %sp 16
 fadd %f0 %f1 %fzero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -426
+jal %ra -418
 addi %sp %sp -32
 lw %ra %sp 28
 lw %f1 %sp 16
 fadd %f0 %f1 %f0
 jalr %ra %zero 0
-addi %a1 %zero 0
-lui %a1 1065353216
-slli %a1 %a1 2
-lw %f0 %a1 0
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %f1 %a0 0
 sw %f0 %sp 0
 sw %a0 %sp 8
 fadd %f0 %f1 %fzero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -442
+jal %ra -432
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a0 %sp 8
@@ -471,7 +461,7 @@ sw %f0 %sp 16
 fadd %f0 %f1 %fzero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -451
+jal %ra -441
 addi %sp %sp -32
 lw %ra %sp 28
 lw %f1 %sp 16
@@ -482,14 +472,14 @@ sw %f0 %sp 24
 fadd %f0 %f1 %fzero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -462
+jal %ra -452
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 24
 fadd %f0 %f1 %f0
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -467
+jal %ra -457
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 0
@@ -510,7 +500,7 @@ sw %a1 %sp 0
 sw %a0 %sp 4
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -490
+jal %ra -480
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a0 %sp 4
@@ -519,7 +509,7 @@ sw %f0 %sp 8
 fadd %f0 %f1 %fzero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -499
+jal %ra -489
 addi %sp %sp -24
 lw %ra %sp 20
 lw %f1 %sp 8
@@ -530,45 +520,39 @@ sw %f0 %sp 16
 fadd %f0 %f1 %fzero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -510
+jal %ra -500
 addi %sp %sp -32
 lw %ra %sp 28
 lw %f1 %sp 16
 fadd %f0 %f1 %f0
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -515
+jal %ra -505
 addi %sp %sp -32
 lw %ra %sp 28
 sw %f0 %sp 24
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -513
+jal %ra -503
 addi %sp %sp -40
 lw %ra %sp 36
 addi %a12 %zero 0
-bne %a0 %a12 18
+bne %a0 %a12 14
 lw %a0 %sp 0
 addi %a12 %zero 0
-bne %a0 %a12 8
-addi %a0 %zero 0
-lui %a0 1065353216
-slli %a0 %a0 2
-lw %f0 %a0 0
-lw %f1 %sp 24
-fdiv %f0 %f0 %f1
-jal %zero 7
-addi %a0 %zero 0
-lui %a0 -1082130432
-slli %a0 %a0 2
-lw %f0 %a0 0
+bne %a0 %a12 6
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %f1 %sp 24
 fdiv %f0 %f0 %f1
 jal %zero 5
-addi %a0 %zero 0
-lui %a0 1065353216
-slli %a0 %a0 2
-lw %f0 %a0 0
+addi %f0 %zero 0
+lui %f0 -1082130432
+lw %f1 %sp 24
+fdiv %f0 %f0 %f1
+jal %zero 3
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %a0 %sp 4
 lw %f1 %a0 0
 fmul %f1 %f1 %f0
@@ -758,10 +742,8 @@ lw %a0 %a0 4
 jalr %ra %zero 0
 lw %f0 %a0 8
 jalr %ra %zero 0
-addi %a0 %zero -1483
-lui %a0 1016000512
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -1483
+lui %f1 1016000512
 fmul %f0 %f0 %f1
 jalr %ra %zero 0
 lw %a0 %a11 20
@@ -776,39 +758,39 @@ sw %a1 %sp 12
 sw %a4 %sp 16
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -466
+jal %ra -448
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 16
 sw %f0 %a0 0
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -473
+jal %ra -455
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 16
 sw %f0 %a0 4
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -480
+jal %ra -462
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 16
 sw %f0 %a0 8
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -487
+jal %ra -469
 addi %sp %sp -24
 lw %ra %sp 20
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -44
+jal %ra -42
 addi %sp %sp -24
 lw %ra %sp 20
 sw %f0 %sp 24
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -649
+jal %ra -631
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 24
@@ -816,24 +798,24 @@ sw %f0 %sp 32
 fadd %f0 %f1 %fzero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -702
+jal %ra -684
 addi %sp %sp -48
 lw %ra %sp 44
 sw %f0 %sp 40
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -512
+jal %ra -494
 addi %sp %sp -56
 lw %ra %sp 52
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -69
+jal %ra -67
 addi %sp %sp -56
 lw %ra %sp 52
 sw %f0 %sp 48
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -674
+jal %ra -656
 addi %sp %sp -64
 lw %ra %sp 60
 lw %f1 %sp 48
@@ -841,44 +823,36 @@ sw %f0 %sp 56
 fadd %f0 %f1 %fzero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -727
+jal %ra -709
 addi %sp %sp -72
 lw %ra %sp 68
 lw %f1 %sp 32
 fmul %f2 %f1 %f0
-addi %a0 %zero 0
-lui %a0 1128792064
-slli %a0 %a0 2
-lw %f3 %a0 0
+addi %f3 %zero 0
+lui %f3 1128792064
 fmul %f2 %f2 %f3
 lw %a0 %sp 12
 sw %f2 %a0 0
-addi %a1 %zero 0
-lui %a1 -1018691584
-slli %a1 %a1 2
-lw %f2 %a1 0
+addi %f2 %zero 0
+lui %f2 -1018691584
 lw %f3 %sp 40
 fmul %f2 %f3 %f2
 sw %f2 %a0 4
 lw %f2 %sp 56
 fmul %f4 %f1 %f2
-addi %a1 %zero 0
-lui %a1 1128792064
-slli %a1 %a1 2
-lw %f5 %a1 0
+addi %f5 %zero 0
+lui %f5 1128792064
 fmul %f4 %f4 %f5
 sw %f4 %a0 8
 lw %a1 %sp 8
 sw %f2 %a1 0
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f4 %a2 0
+addi %f4 %zero 0
+lui %f4 0
 sw %f4 %a1 4
 sw %f0 %sp 64
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -852
+jal %ra -826
 addi %sp %sp -80
 lw %ra %sp 76
 lw %a0 %sp 8
@@ -886,7 +860,7 @@ sw %f0 %a0 8
 lw %f0 %sp 40
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -860
+jal %ra -834
 addi %sp %sp -80
 lw %ra %sp 76
 lw %f1 %sp 64
@@ -896,7 +870,7 @@ sw %f0 %a0 0
 lw %f0 %sp 32
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -870
+jal %ra -844
 addi %sp %sp -80
 lw %ra %sp 76
 lw %a0 %sp 4
@@ -904,7 +878,7 @@ sw %f0 %a0 4
 lw %f0 %sp 40
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -878
+jal %ra -852
 addi %sp %sp -80
 lw %ra %sp 76
 lw %f1 %sp 56
@@ -933,40 +907,40 @@ sw %a1 %sp 0
 sw %a0 %sp 4
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -626
+jal %ra -600
 addi %sp %sp -16
 lw %ra %sp 12
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -628
+jal %ra -602
 addi %sp %sp -16
 lw %ra %sp 12
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -185
+jal %ra -175
 addi %sp %sp -16
 lw %ra %sp 12
 sw %f0 %sp 8
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -835
+jal %ra -809
 addi %sp %sp -24
 lw %ra %sp 20
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -928
+jal %ra -902
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 4
 sw %f0 %a0 4
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -651
+jal %ra -625
 addi %sp %sp -24
 lw %ra %sp 20
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -208
+jal %ra -198
 addi %sp %sp -24
 lw %ra %sp 20
 lw %f1 %sp 8
@@ -974,7 +948,7 @@ sw %f0 %sp 16
 fadd %f0 %f1 %fzero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -815
+jal %ra -789
 addi %sp %sp -32
 lw %ra %sp 28
 lw %f1 %sp 16
@@ -982,7 +956,7 @@ sw %f0 %sp 24
 fadd %f0 %f1 %fzero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -868
+jal %ra -842
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 24
@@ -992,7 +966,7 @@ sw %f0 %a0 0
 lw %f0 %sp 16
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -833
+jal %ra -807
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 24
@@ -1001,7 +975,7 @@ lw %a0 %sp 4
 sw %f0 %a0 8
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -691
+jal %ra -665
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 0
@@ -1012,7 +986,7 @@ sw %a0 %sp 0
 sw %a1 %sp 4
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -853
+jal %ra -827
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a0 %sp 4
@@ -1021,7 +995,7 @@ sw %f0 %sp 8
 fadd %f0 %f1 %fzero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -907
+jal %ra -881
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 4
@@ -1030,7 +1004,7 @@ sw %f0 %sp 16
 fadd %f0 %f1 %fzero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -871
+jal %ra -845
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a0 %sp 4
@@ -1039,7 +1013,7 @@ sw %f0 %sp 24
 fadd %f0 %f1 %fzero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -925
+jal %ra -899
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 4
@@ -1048,7 +1022,7 @@ sw %f0 %sp 32
 fadd %f0 %f1 %fzero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -889
+jal %ra -863
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 4
@@ -1057,7 +1031,7 @@ sw %f0 %sp 40
 fadd %f0 %f1 %fzero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -943
+jal %ra -917
 addi %sp %sp -56
 lw %ra %sp 52
 lw %f1 %sp 40
@@ -1092,7 +1066,7 @@ sw %f3 %sp 88
 fadd %f0 %f4 %fzero
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -1066
+jal %ra -1040
 addi %sp %sp -104
 lw %ra %sp 100
 lw %f1 %sp 24
@@ -1114,7 +1088,7 @@ sw %f3 %sp 136
 fadd %f0 %f6 %fzero
 sw %ra %sp 148
 addi %sp %sp 152
-jal %ra -1094
+jal %ra -1068
 addi %sp %sp -152
 lw %ra %sp 148
 lw %f1 %sp 136
@@ -1124,7 +1098,7 @@ sw %f0 %sp 144
 fadd %f0 %f2 %fzero
 sw %ra %sp 156
 addi %sp %sp 160
-jal %ra -1104
+jal %ra -1078
 addi %sp %sp -160
 lw %ra %sp 156
 lw %f1 %sp 128
@@ -1136,7 +1110,7 @@ sw %f0 %sp 152
 fadd %f0 %f2 %fzero
 sw %ra %sp 164
 addi %sp %sp 168
-jal %ra -1116
+jal %ra -1090
 addi %sp %sp -168
 lw %ra %sp 164
 lw %f1 %sp 112
@@ -1148,7 +1122,7 @@ sw %f0 %a0 0
 lw %f0 %sp 72
 sw %ra %sp 164
 addi %sp %sp 168
-jal %ra -1128
+jal %ra -1102
 addi %sp %sp -168
 lw %ra %sp 164
 lw %f1 %sp 136
@@ -1158,7 +1132,7 @@ sw %f0 %sp 160
 fadd %f0 %f2 %fzero
 sw %ra %sp 172
 addi %sp %sp 176
-jal %ra -1138
+jal %ra -1112
 addi %sp %sp -176
 lw %ra %sp 172
 lw %f1 %sp 128
@@ -1170,7 +1144,7 @@ sw %f0 %sp 168
 fadd %f0 %f2 %fzero
 sw %ra %sp 180
 addi %sp %sp 184
-jal %ra -1150
+jal %ra -1124
 addi %sp %sp -184
 lw %ra %sp 180
 lw %f1 %sp 112
@@ -1182,7 +1156,7 @@ sw %f0 %a0 4
 lw %f0 %sp 56
 sw %ra %sp 180
 addi %sp %sp 184
-jal %ra -1162
+jal %ra -1136
 addi %sp %sp -184
 lw %ra %sp 180
 lw %f1 %sp 136
@@ -1192,7 +1166,7 @@ sw %f0 %sp 176
 fadd %f0 %f2 %fzero
 sw %ra %sp 188
 addi %sp %sp 192
-jal %ra -1172
+jal %ra -1146
 addi %sp %sp -192
 lw %ra %sp 188
 lw %f1 %sp 128
@@ -1204,7 +1178,7 @@ sw %f0 %sp 184
 fadd %f0 %f2 %fzero
 sw %ra %sp 196
 addi %sp %sp 200
-jal %ra -1184
+jal %ra -1158
 addi %sp %sp -200
 lw %ra %sp 196
 lw %f1 %sp 112
@@ -1213,10 +1187,8 @@ lw %f2 %sp 184
 fadd %f0 %f2 %f0
 lw %a0 %sp 0
 sw %f0 %a0 8
-addi %a0 %zero 0
-lui %a0 1073741824
-slli %a0 %a0 2
-lw %f0 %a0 0
+addi %f0 %zero 0
+lui %f0 1073741824
 lw %f2 %sp 72
 lw %f3 %sp 136
 fmul %f4 %f3 %f2
@@ -1236,10 +1208,8 @@ fadd %f4 %f4 %f10
 fmul %f0 %f0 %f4
 lw %a0 %sp 4
 sw %f0 %a0 0
-addi %a1 %zero 0
-lui %a1 1073741824
-slli %a1 %a1 2
-lw %f0 %a1 0
+addi %f0 %zero 0
+lui %f0 1073741824
 lw %f4 %sp 88
 fmul %f10 %f3 %f4
 fmul %f5 %f10 %f5
@@ -1253,10 +1223,8 @@ fmul %f9 %f9 %f11
 fadd %f5 %f5 %f9
 fmul %f0 %f0 %f5
 sw %f0 %a0 4
-addi %a1 %zero 0
-lui %a1 1073741824
-slli %a1 %a1 2
-lw %f0 %a1 0
+addi %f0 %zero 0
+lui %f0 1073741824
 fmul %f3 %f3 %f4
 fmul %f2 %f3 %f2
 fmul %f3 %f7 %f10
@@ -1274,7 +1242,7 @@ sw %a1 %sp 0
 sw %a0 %sp 4
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -967
+jal %ra -935
 addi %sp %sp -16
 lw %ra %sp 12
 addi %a1 %zero 1
@@ -1285,167 +1253,157 @@ jalr %ra %zero 0
 sw %a0 %sp 8
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -978
+jal %ra -946
 addi %sp %sp -16
 lw %ra %sp 12
 sw %a0 %sp 12
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -984
+jal %ra -952
 addi %sp %sp -24
 lw %ra %sp 20
 sw %a0 %sp 16
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -990
+jal %ra -958
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 20
 add %a0 %a1 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -1299
+jal %ra -1265
 addi %sp %sp -32
 lw %ra %sp 28
 sw %a0 %sp 24
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -1005
+jal %ra -971
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a0 %sp 24
 sw %f0 %a0 0
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -1012
+jal %ra -978
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a0 %sp 24
 sw %f0 %a0 4
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -1019
+jal %ra -985
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a0 %sp 24
 sw %f0 %a0 8
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 add %a0 %a1 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -1332
+jal %ra -1296
 addi %sp %sp -32
 lw %ra %sp 28
 sw %a0 %sp 28
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -1038
+jal %ra -1002
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 28
 sw %f0 %a0 0
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -1045
+jal %ra -1009
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 28
 sw %f0 %a0 4
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -1052
+jal %ra -1016
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 28
 sw %f0 %a0 8
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -1059
+jal %ra -1023
 addi %sp %sp -40
 lw %ra %sp 36
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -1340
+jal %ra -1304
 addi %sp %sp -40
 lw %ra %sp 36
 addi %a1 %zero 2
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 32
 add %a0 %a1 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -1376
+jal %ra -1338
 addi %sp %sp -40
 lw %ra %sp 36
 sw %a0 %sp 36
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -1082
+jal %ra -1044
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 36
 sw %f0 %a0 0
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -1089
+jal %ra -1051
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 36
 sw %f0 %a0 4
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 add %a0 %a1 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -1402
+jal %ra -1362
 addi %sp %sp -48
 lw %ra %sp 44
 sw %a0 %sp 40
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -1108
+jal %ra -1068
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 40
 sw %f0 %a0 0
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -1115
+jal %ra -1075
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 40
 sw %f0 %a0 4
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -1122
+jal %ra -1082
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 40
 sw %f0 %a0 8
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 add %a0 %a1 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -1435
+jal %ra -1393
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a1 %sp 20
@@ -1455,36 +1413,36 @@ jal %zero 38
 sw %a0 %sp 44
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -1145
+jal %ra -1103
 addi %sp %sp -56
 lw %ra %sp 52
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -702
+jal %ra -676
 addi %sp %sp -56
 lw %ra %sp 52
 lw %a0 %sp 44
 sw %f0 %a0 0
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -1157
+jal %ra -1115
 addi %sp %sp -56
 lw %ra %sp 52
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -714
+jal %ra -688
 addi %sp %sp -56
 lw %ra %sp 52
 lw %a0 %sp 44
 sw %f0 %a0 4
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -1169
+jal %ra -1127
 addi %sp %sp -56
 lw %ra %sp 52
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -726
+jal %ra -700
 addi %sp %sp -56
 lw %ra %sp 52
 lw %a0 %sp 44
@@ -1496,16 +1454,14 @@ addi %a2 %zero 1
 jal %zero 2
 lw %a2 %sp 32
 addi %a3 %zero 4
-addi %a4 %zero 0
-lui %a4 0
-slli %a4 %a4 2
-lw %f0 %a4 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a2 %sp 48
 sw %a0 %sp 44
 add %a0 %a3 %zero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -1495
+jal %ra -1451
 addi %sp %sp -56
 lw %ra %sp 52
 addi %a1 %mc_hp 0
@@ -1537,12 +1493,12 @@ lw %a6 %sp 0
 add %a12 %a6 %a5
 sw %a1 %a12 0
 addi %a12 %zero 3
-bne %a4 %a12 98
+bne %a4 %a12 92
 lw %f0 %a2 0
 sw %f0 %sp 56
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -1512
+jal %ra -1468
 addi %sp %sp -72
 lw %ra %sp 68
 addi %a12 %zero 0
@@ -1550,7 +1506,7 @@ bne %a0 %a12 18
 lw %f0 %sp 56
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -1198
+jal %ra -1154
 addi %sp %sp -72
 lw %ra %sp 68
 lw %f1 %sp 56
@@ -1558,23 +1514,21 @@ sw %f0 %sp 64
 fadd %f0 %f1 %fzero
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -1538
+jal %ra -1494
 addi %sp %sp -80
 lw %ra %sp 76
 lw %f1 %sp 64
 fdiv %f0 %f1 %f0
-jal %zero 5
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
+jal %zero 3
+addi %f0 %zero 0
+lui %f0 0
 lw %a0 %sp 24
 sw %f0 %a0 0
 lw %f0 %a0 4
 sw %f0 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -1544
+jal %ra -1498
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a12 %zero 0
@@ -1582,7 +1536,7 @@ bne %a0 %a12 18
 lw %f0 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -1230
+jal %ra -1184
 addi %sp %sp -88
 lw %ra %sp 84
 lw %f1 %sp 72
@@ -1590,23 +1544,21 @@ sw %f0 %sp 80
 fadd %f0 %f1 %fzero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -1570
+jal %ra -1524
 addi %sp %sp -96
 lw %ra %sp 92
 lw %f1 %sp 80
 fdiv %f0 %f1 %f0
-jal %zero 5
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
+jal %zero 3
+addi %f0 %zero 0
+lui %f0 0
 lw %a0 %sp 24
 sw %f0 %a0 4
 lw %f0 %a0 8
 sw %f0 %sp 88
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -1576
+jal %ra -1528
 addi %sp %sp -104
 lw %ra %sp 100
 addi %a12 %zero 0
@@ -1614,7 +1566,7 @@ bne %a0 %a12 18
 lw %f0 %sp 88
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -1262
+jal %ra -1214
 addi %sp %sp -104
 lw %ra %sp 100
 lw %f1 %sp 88
@@ -1622,16 +1574,14 @@ sw %f0 %sp 96
 fadd %f0 %f1 %fzero
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -1602
+jal %ra -1554
 addi %sp %sp -112
 lw %ra %sp 108
 lw %f1 %sp 96
 fdiv %f0 %f1 %f0
-jal %zero 5
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
+jal %zero 3
+addi %f0 %zero 0
+lui %f0 0
 lw %a0 %sp 24
 sw %f0 %a0 8
 jal %zero 16
@@ -1646,7 +1596,7 @@ jal %zero 1
 add %a0 %a2 %zero
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -1141
+jal %ra -1101
 addi %sp %sp -112
 lw %ra %sp 108
 jal %zero 1
@@ -1658,7 +1608,7 @@ lw %a0 %sp 24
 lw %a1 %sp 44
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -651
+jal %ra -627
 addi %sp %sp -112
 lw %ra %sp 108
 addi %a0 %zero 1
@@ -1696,7 +1646,7 @@ jalr %a10 %zero 0
 sw %a0 %sp 0
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -1389
+jal %ra -1339
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a1 %zero 1
@@ -1706,7 +1656,7 @@ lw %a0 %sp 0
 addi %a0 %a0 1
 addi %a1 %zero 1
 sub %a1 %zero %a1
-jal %zero -1704
+jal %zero -1654
 lw %a1 %sp 0
 addi %a2 %a1 1
 sw %a0 %sp 4
@@ -1737,7 +1687,7 @@ sub %a2 %zero %a2
 bne %a0 %a2 4
 lw %a0 %sp 0
 addi %a0 %a0 1
-jal %zero -1735
+jal %zero -1685
 lw %a0 %sp 0
 addi %a2 %a0 1
 sw %a1 %sp 4
@@ -1841,7 +1791,7 @@ sw %a0 %sp 56
 fadd %f0 %f3 %fzero
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -1811
+jal %ra -1761
 addi %sp %sp -64
 lw %ra %sp 60
 addi %a1 %zero 0
@@ -1851,7 +1801,7 @@ lw %a0 %sp 56
 sw %a1 %sp 60
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -1160
+jal %ra -1126
 addi %sp %sp -72
 lw %ra %sp 68
 lw %a1 %sp 56
@@ -1859,7 +1809,7 @@ sw %a0 %sp 64
 add %a0 %a1 %zero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -1181
+jal %ra -1147
 addi %sp %sp -72
 lw %ra %sp 68
 lw %a1 %sp 52
@@ -1870,14 +1820,14 @@ lw %f0 %a12 0
 sw %a0 %sp 68
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -1836
+jal %ra -1786
 addi %sp %sp -80
 lw %ra %sp 76
 add %a1 %a0 %zero
 lw %a0 %sp 68
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -1536
+jal %ra -1486
 addi %sp %sp -80
 lw %ra %sp 76
 lw %a1 %sp 52
@@ -1887,7 +1837,7 @@ add %a12 %a3 %a2
 lw %f0 %a12 0
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -1504
+jal %ra -1460
 addi %sp %sp -80
 lw %ra %sp 76
 lw %f1 %sp 40
@@ -1909,7 +1859,7 @@ sw %f0 %sp 72
 fadd %f0 %f1 %fzero
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -1885
+jal %ra -1835
 addi %sp %sp -88
 lw %ra %sp 84
 lw %a0 %sp 32
@@ -1919,7 +1869,7 @@ add %a12 %a1 %a0
 lw %f1 %a12 0
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -1891
+jal %ra -1841
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a12 %zero 0
@@ -1937,7 +1887,7 @@ lw %f2 %sp 8
 fadd %f0 %f0 %f2
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -1913
+jal %ra -1863
 addi %sp %sp -88
 lw %ra %sp 84
 lw %a0 %sp 16
@@ -1947,7 +1897,7 @@ add %a12 %a1 %a0
 lw %f1 %a12 0
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -1919
+jal %ra -1869
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a12 %zero 0
@@ -2030,7 +1980,7 @@ sw %f0 %sp 24
 sw %a1 %sp 32
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -1339
+jal %ra -1305
 addi %sp %sp -40
 lw %ra %sp 36
 add %a1 %a0 %zero
@@ -2038,13 +1988,13 @@ lw %a0 %sp 32
 sw %a1 %sp 36
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -1458
+jal %ra -1424
 addi %sp %sp -48
 lw %ra %sp 44
 sw %f0 %sp 40
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -2012
+jal %ra -1962
 addi %sp %sp -56
 lw %ra %sp 52
 addi %a1 %zero 0
@@ -2058,12 +2008,12 @@ lw %f2 %sp 8
 lw %a0 %sp 36
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -1466
+jal %ra -1432
 addi %sp %sp -56
 lw %ra %sp 52
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -2037
+jal %ra -1987
 addi %sp %sp -56
 lw %ra %sp 52
 lw %f1 %sp 40
@@ -2078,14 +2028,14 @@ sw %f1 %sp 16
 sw %a0 %sp 24
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -2058
+jal %ra -2008
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a0 %sp 24
 sw %f0 %sp 32
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -1403
+jal %ra -1369
 addi %sp %sp -48
 lw %ra %sp 44
 lw %f1 %sp 32
@@ -2095,14 +2045,14 @@ sw %f0 %sp 40
 fadd %f0 %f1 %fzero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -2075
+jal %ra -2025
 addi %sp %sp -56
 lw %ra %sp 52
 lw %a0 %sp 24
 sw %f0 %sp 48
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -1417
+jal %ra -1383
 addi %sp %sp -64
 lw %ra %sp 60
 lw %f1 %sp 48
@@ -2114,14 +2064,14 @@ sw %f0 %sp 56
 fadd %f0 %f1 %fzero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -2094
+jal %ra -2044
 addi %sp %sp -72
 lw %ra %sp 68
 lw %a0 %sp 24
 sw %f0 %sp 64
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -1433
+jal %ra -1399
 addi %sp %sp -80
 lw %ra %sp 76
 lw %f1 %sp 64
@@ -2132,7 +2082,7 @@ lw %a0 %sp 24
 sw %f0 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -1452
+jal %ra -1418
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a12 %zero 0
@@ -2146,7 +2096,7 @@ lw %a0 %sp 24
 sw %f2 %sp 80
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -1429
+jal %ra -1395
 addi %sp %sp -96
 lw %ra %sp 92
 lw %f1 %sp 80
@@ -2161,7 +2111,7 @@ sw %f0 %sp 88
 sw %f2 %sp 96
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -1441
+jal %ra -1407
 addi %sp %sp -112
 lw %ra %sp 108
 lw %f1 %sp 96
@@ -2176,7 +2126,7 @@ sw %f0 %sp 104
 sw %f1 %sp 112
 sw %ra %sp 124
 addi %sp %sp 128
-jal %ra -1453
+jal %ra -1419
 addi %sp %sp -128
 lw %ra %sp 124
 lw %f1 %sp 112
@@ -2195,7 +2145,7 @@ sw %f1 %sp 48
 sw %f6 %sp 56
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -1513
+jal %ra -1479
 addi %sp %sp -72
 lw %ra %sp 68
 lw %f1 %sp 56
@@ -2208,7 +2158,7 @@ sw %f0 %sp 64
 sw %f3 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -1523
+jal %ra -1489
 addi %sp %sp -88
 lw %ra %sp 84
 lw %f1 %sp 72
@@ -2223,7 +2173,7 @@ sw %f0 %sp 80
 sw %f3 %sp 88
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -1535
+jal %ra -1501
 addi %sp %sp -104
 lw %ra %sp 100
 lw %f1 %sp 88
@@ -2234,7 +2184,7 @@ lw %a0 %sp 32
 sw %f0 %sp 96
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -1554
+jal %ra -1520
 addi %sp %sp -112
 lw %ra %sp 108
 addi %a12 %zero 0
@@ -2252,7 +2202,7 @@ lw %a0 %sp 32
 sw %f2 %sp 104
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -1535
+jal %ra -1501
 addi %sp %sp -120
 lw %ra %sp 116
 lw %f1 %sp 104
@@ -2269,7 +2219,7 @@ sw %f0 %sp 112
 sw %f1 %sp 120
 sw %ra %sp 132
 addi %sp %sp 136
-jal %ra -1549
+jal %ra -1515
 addi %sp %sp -136
 lw %ra %sp 132
 lw %f1 %sp 120
@@ -2288,7 +2238,7 @@ sw %f0 %sp 128
 sw %f1 %sp 136
 sw %ra %sp 148
 addi %sp %sp 152
-jal %ra -1565
+jal %ra -1531
 addi %sp %sp -152
 lw %ra %sp 148
 lw %f1 %sp 136
@@ -2297,7 +2247,7 @@ lw %f1 %sp 128
 fadd %f0 %f1 %f0
 sw %ra %sp 148
 addi %sp %sp 152
-jal %ra -2279
+jal %ra -2229
 addi %sp %sp -152
 lw %ra %sp 148
 lw %f1 %sp 96
@@ -2324,12 +2274,12 @@ lw %ra %sp 44
 sw %f0 %sp 40
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -2294
+jal %ra -2244
 addi %sp %sp -56
 lw %ra %sp 52
 addi %a1 %zero 0
 addi %a12 %zero 0
-bne %a0 %a12 98
+bne %a0 %a12 96
 lw %a0 %sp 36
 lw %f0 %a0 0
 lw %f1 %a0 4
@@ -2361,15 +2311,13 @@ lw %a0 %sp 32
 sw %f0 %sp 64
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -1687
+jal %ra -1653
 addi %sp %sp -80
 lw %ra %sp 76
 addi %a12 %zero 3
-bne %a0 %a12 8
-addi %a0 %zero 0
-lui %a0 1065353216
-slli %a0 %a0 2
-lw %f0 %a0 0
+bne %a0 %a12 6
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %f1 %sp 64
 fsub %f0 %f1 %f0
 jal %zero 2
@@ -2379,7 +2327,7 @@ sw %f0 %sp 72
 fadd %f0 %f1 %fzero
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -2359
+jal %ra -2307
 addi %sp %sp -88
 lw %ra %sp 84
 lw %f1 %sp 72
@@ -2389,7 +2337,7 @@ fsub %f0 %f0 %f1
 sw %f0 %sp 80
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -2357
+jal %ra -2305
 addi %sp %sp -96
 lw %ra %sp 92
 addi %a12 %zero 0
@@ -2399,14 +2347,14 @@ jalr %ra %zero 0
 lw %f0 %sp 80
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -2377
+jal %ra -2325
 addi %sp %sp -96
 lw %ra %sp 92
 lw %a0 %sp 32
 sw %f0 %sp 88
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -1728
+jal %ra -1692
 addi %sp %sp -104
 lw %ra %sp 100
 addi %a12 %zero 0
@@ -2414,7 +2362,7 @@ bne %a0 %a12 8
 lw %f0 %sp 88
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -2388
+jal %ra -2336
 addi %sp %sp -104
 lw %ra %sp 100
 jal %zero 2
@@ -2446,7 +2394,7 @@ sw %a2 %sp 20
 sw %f0 %sp 24
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -1753
+jal %ra -1717
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 24
@@ -2459,7 +2407,7 @@ sw %f1 %sp 40
 add %a0 %a1 %zero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -1763
+jal %ra -1727
 addi %sp %sp -56
 lw %ra %sp 52
 lw %f1 %sp 40
@@ -2471,7 +2419,7 @@ sw %f0 %sp 48
 sw %f1 %sp 56
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -1772
+jal %ra -1736
 addi %sp %sp -72
 lw %ra %sp 68
 lw %f1 %sp 56
@@ -2480,7 +2428,7 @@ lw %a0 %sp 16
 sw %f0 %sp 64
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -1806
+jal %ra -1770
 addi %sp %sp -80
 lw %ra %sp 76
 addi %a12 %zero 1
@@ -2530,21 +2478,21 @@ sw %a0 %sp 52
 fadd %f0 %f4 %fzero
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -2506
+jal %ra -2454
 addi %sp %sp -64
 lw %ra %sp 60
 lw %a0 %sp 52
 sw %f0 %sp 56
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -1852
+jal %ra -1816
 addi %sp %sp -72
 lw %ra %sp 68
 fadd %f1 %f0 %fzero
 lw %f0 %sp 56
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -2516
+jal %ra -2464
 addi %sp %sp -72
 lw %ra %sp 68
 addi %a1 %zero 0
@@ -2561,21 +2509,21 @@ fadd %f0 %f0 %f2
 sw %a1 %sp 64
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -2537
+jal %ra -2485
 addi %sp %sp -72
 lw %ra %sp 68
 lw %a0 %sp 52
 sw %f0 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -1880
+jal %ra -1844
 addi %sp %sp -88
 lw %ra %sp 84
 fadd %f1 %f0 %fzero
 lw %f0 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -2547
+jal %ra -2495
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a12 %zero 0
@@ -2586,7 +2534,7 @@ lw %a0 %sp 24
 lw %f0 %a0 4
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -2556
+jal %ra -2504
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a12 %zero 0
@@ -2613,21 +2561,21 @@ sw %a1 %sp 88
 fadd %f0 %f2 %fzero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -2589
+jal %ra -2537
 addi %sp %sp -96
 lw %ra %sp 92
 lw %a0 %sp 52
 sw %f0 %sp 96
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -1938
+jal %ra -1902
 addi %sp %sp -112
 lw %ra %sp 108
 fadd %f1 %f0 %fzero
 lw %f0 %sp 96
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -2599
+jal %ra -2547
 addi %sp %sp -112
 lw %ra %sp 108
 addi %a12 %zero 0
@@ -2642,21 +2590,21 @@ lw %f2 %sp 32
 fadd %f0 %f0 %f2
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -2618
+jal %ra -2566
 addi %sp %sp -112
 lw %ra %sp 108
 lw %a0 %sp 52
 sw %f0 %sp 104
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -1961
+jal %ra -1925
 addi %sp %sp -120
 lw %ra %sp 116
 fadd %f1 %f0 %fzero
 lw %f0 %sp 104
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -2628
+jal %ra -2576
 addi %sp %sp -120
 lw %ra %sp 116
 addi %a12 %zero 0
@@ -2667,7 +2615,7 @@ lw %a0 %sp 24
 lw %f0 %a0 12
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -2637
+jal %ra -2585
 addi %sp %sp -120
 lw %ra %sp 116
 addi %a12 %zero 0
@@ -2692,21 +2640,21 @@ sw %f0 %sp 112
 fadd %f0 %f1 %fzero
 sw %ra %sp 124
 addi %sp %sp 128
-jal %ra -2668
+jal %ra -2616
 addi %sp %sp -128
 lw %ra %sp 124
 lw %a0 %sp 52
 sw %f0 %sp 120
 sw %ra %sp 132
 addi %sp %sp 136
-jal %ra -2017
+jal %ra -1981
 addi %sp %sp -136
 lw %ra %sp 132
 fadd %f1 %f0 %fzero
 lw %f0 %sp 120
 sw %ra %sp 132
 addi %sp %sp 136
-jal %ra -2678
+jal %ra -2626
 addi %sp %sp -136
 lw %ra %sp 132
 addi %a12 %zero 0
@@ -2721,21 +2669,21 @@ lw %f2 %sp 16
 fadd %f0 %f0 %f2
 sw %ra %sp 132
 addi %sp %sp 136
-jal %ra -2697
+jal %ra -2645
 addi %sp %sp -136
 lw %ra %sp 132
 lw %a0 %sp 52
 sw %f0 %sp 128
 sw %ra %sp 140
 addi %sp %sp 144
-jal %ra -2043
+jal %ra -2007
 addi %sp %sp -144
 lw %ra %sp 140
 fadd %f1 %f0 %fzero
 lw %f0 %sp 128
 sw %ra %sp 140
 addi %sp %sp 144
-jal %ra -2707
+jal %ra -2655
 addi %sp %sp -144
 lw %ra %sp 140
 addi %a12 %zero 0
@@ -2746,7 +2694,7 @@ lw %a0 %sp 24
 lw %f0 %a0 20
 sw %ra %sp 140
 addi %sp %sp 144
-jal %ra -2716
+jal %ra -2664
 addi %sp %sp -144
 lw %ra %sp 140
 addi %a12 %zero 0
@@ -2783,7 +2731,7 @@ sw %a1 %sp 32
 fadd %f0 %f3 %fzero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -2749
+jal %ra -2697
 addi %sp %sp -40
 lw %ra %sp 36
 addi %a1 %zero 0
@@ -2819,12 +2767,12 @@ sw %a1 %sp 48
 fadd %f0 %f3 %fzero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -2789
+jal %ra -2737
 addi %sp %sp -56
 lw %ra %sp 52
 addi %a1 %zero 0
 addi %a12 %zero 0
-bne %a0 %a12 101
+bne %a0 %a12 99
 lw %a0 %sp 48
 lw %f0 %a0 4
 lw %f1 %sp 40
@@ -2846,22 +2794,20 @@ fadd %f0 %f1 %fzero
 fadd %f1 %f3 %fzero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -774
+jal %ra -772
 addi %sp %sp -72
 lw %ra %sp 68
 lw %a0 %sp 16
 sw %f0 %sp 64
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -2179
+jal %ra -2143
 addi %sp %sp -80
 lw %ra %sp 76
 addi %a12 %zero 3
-bne %a0 %a12 8
-addi %a0 %zero 0
-lui %a0 1065353216
-slli %a0 %a0 2
-lw %f0 %a0 0
+bne %a0 %a12 6
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %f1 %sp 64
 fsub %f0 %f1 %f0
 jal %zero 2
@@ -2871,7 +2817,7 @@ sw %f0 %sp 72
 fadd %f0 %f1 %fzero
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -2851
+jal %ra -2797
 addi %sp %sp -88
 lw %ra %sp 84
 lw %f1 %sp 72
@@ -2881,7 +2827,7 @@ fsub %f0 %f0 %f1
 sw %f0 %sp 80
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -2849
+jal %ra -2795
 addi %sp %sp -96
 lw %ra %sp 92
 addi %a12 %zero 0
@@ -2891,7 +2837,7 @@ jalr %ra %zero 0
 lw %a0 %sp 16
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -2213
+jal %ra -2175
 addi %sp %sp -96
 lw %ra %sp 92
 addi %a12 %zero 0
@@ -2899,7 +2845,7 @@ bne %a0 %a12 15
 lw %f0 %sp 80
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -2877
+jal %ra -2823
 addi %sp %sp -96
 lw %ra %sp 92
 lw %f1 %sp 56
@@ -2913,7 +2859,7 @@ jal %zero 14
 lw %f0 %sp 80
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -2891
+jal %ra -2837
 addi %sp %sp -96
 lw %ra %sp 92
 lw %f1 %sp 56
@@ -2946,7 +2892,7 @@ sw %f0 %sp 32
 add %a0 %a6 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -2253
+jal %ra -2215
 addi %sp %sp -48
 lw %ra %sp 44
 lw %f1 %sp 32
@@ -2959,7 +2905,7 @@ sw %f1 %sp 48
 add %a0 %a1 %zero
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -2263
+jal %ra -2225
 addi %sp %sp -64
 lw %ra %sp 60
 lw %f1 %sp 48
@@ -2971,7 +2917,7 @@ sw %f0 %sp 56
 sw %f1 %sp 64
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -2272
+jal %ra -2234
 addi %sp %sp -80
 lw %ra %sp 76
 lw %f1 %sp 64
@@ -2980,7 +2926,7 @@ lw %a0 %sp 16
 sw %f0 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -2230
+jal %ra -2192
 addi %sp %sp -88
 lw %ra %sp 84
 lw %a1 %sp 12
@@ -2992,7 +2938,7 @@ sw %a0 %sp 80
 add %a0 %a1 %zero
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -2318
+jal %ra -2280
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a12 %zero 1
@@ -3000,7 +2946,7 @@ bne %a0 %a12 16
 lw %a0 %sp 16
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -2252
+jal %ra -2214
 addi %sp %sp -88
 lw %ra %sp 84
 add %a1 %a0 %zero
@@ -3037,7 +2983,7 @@ sw %a2 %sp 4
 sw %a1 %sp 8
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -3003
+jal %ra -2949
 addi %sp %sp -16
 lw %ra %sp 12
 addi %a1 %zero 0
@@ -3067,7 +3013,7 @@ sw %a1 %sp 48
 fadd %f0 %f3 %fzero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -3037
+jal %ra -2983
 addi %sp %sp -56
 lw %ra %sp 52
 addi %a1 %zero 0
@@ -3092,7 +3038,7 @@ sw %a1 %sp 64
 sw %f1 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -3072
+jal %ra -3018
 addi %sp %sp -88
 lw %ra %sp 84
 lw %f1 %sp 72
@@ -3102,7 +3048,7 @@ fsub %f0 %f0 %f1
 sw %f0 %sp 80
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -3070
+jal %ra -3016
 addi %sp %sp -96
 lw %ra %sp 92
 addi %a12 %zero 0
@@ -3112,7 +3058,7 @@ jalr %ra %zero 0
 lw %a0 %sp 4
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -2434
+jal %ra -2396
 addi %sp %sp -96
 lw %ra %sp 92
 addi %a12 %zero 0
@@ -3120,7 +3066,7 @@ bne %a0 %a12 15
 lw %f0 %sp 80
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -3098
+jal %ra -3044
 addi %sp %sp -96
 lw %ra %sp 92
 lw %f1 %sp 56
@@ -3134,7 +3080,7 @@ jal %zero 14
 lw %f0 %sp 80
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -3112
+jal %ra -3058
 addi %sp %sp -96
 lw %ra %sp 92
 lw %f1 %sp 56
@@ -3164,7 +3110,7 @@ sw %a1 %sp 20
 add %a0 %a5 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -2438
+jal %ra -2400
 addi %sp %sp -32
 lw %ra %sp 28
 lw %f0 %a0 0
@@ -3178,7 +3124,7 @@ sw %f0 %sp 48
 add %a0 %a1 %zero
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -2428
+jal %ra -2390
 addi %sp %sp -64
 lw %ra %sp 60
 lw %a1 %sp 16
@@ -3190,7 +3136,7 @@ sw %a0 %sp 56
 add %a0 %a1 %zero
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -2516
+jal %ra -2478
 addi %sp %sp -64
 lw %ra %sp 60
 addi %a12 %zero 1
@@ -3198,7 +3144,7 @@ bne %a0 %a12 16
 lw %a0 %sp 20
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -2450
+jal %ra -2412
 addi %sp %sp -64
 lw %ra %sp 60
 add %a1 %a0 %zero
@@ -3231,16 +3177,14 @@ lw %a11 %sp 0
 lw %a10 %a11 0
 jalr %a10 %zero 0
 addi %a2 %zero 6
-addi %a3 %zero 0
-lui %a3 0
-slli %a3 %a3 2
-lw %f0 %a3 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a1 %sp 0
 sw %a0 %sp 4
 add %a0 %a2 %zero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -3230
+jal %ra -3174
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a1 %sp 4
@@ -3248,15 +3192,15 @@ lw %f0 %a1 0
 sw %a0 %sp 8
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -3218
+jal %ra -3162
 addi %sp %sp -16
 lw %ra %sp 12
 addi %a12 %zero 0
-bne %a0 %a12 47
+bne %a0 %a12 45
 lw %a0 %sp 0
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -2578
+jal %ra -2538
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a1 %sp 4
@@ -3264,14 +3208,14 @@ lw %f0 %a1 0
 sw %a0 %sp 12
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -3230
+jal %ra -3174
 addi %sp %sp -24
 lw %ra %sp 20
 add %a1 %a0 %zero
 lw %a0 %sp 12
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -2930
+jal %ra -2874
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a1 %sp 0
@@ -3279,45 +3223,41 @@ sw %a0 %sp 16
 add %a0 %a1 %zero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -2597
+jal %ra -2557
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 16
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -2902
+jal %ra -2852
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 8
 sw %f0 %a0 0
-addi %a1 %zero 0
-lui %a1 1065353216
-slli %a1 %a1 2
-lw %f0 %a1 0
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %a1 %sp 4
 lw %f1 %a1 0
 fdiv %f0 %f0 %f1
 sw %f0 %a0 4
-jal %zero 7
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
+jal %zero 5
+addi %f0 %zero 0
+lui %f0 0
 lw %a0 %sp 8
 sw %f0 %a0 4
 lw %a1 %sp 4
 lw %f0 %a1 4
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -3279
+jal %ra -3219
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a12 %zero 0
-bne %a0 %a12 47
+bne %a0 %a12 45
 lw %a0 %sp 0
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -2639
+jal %ra -2595
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a1 %sp 4
@@ -3325,14 +3265,14 @@ lw %f0 %a1 4
 sw %a0 %sp 20
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -3291
+jal %ra -3231
 addi %sp %sp -32
 lw %ra %sp 28
 add %a1 %a0 %zero
 lw %a0 %sp 20
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -2991
+jal %ra -2931
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 0
@@ -3340,45 +3280,41 @@ sw %a0 %sp 24
 add %a0 %a1 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -2655
+jal %ra -2611
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a0 %sp 24
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -2963
+jal %ra -2909
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a0 %sp 8
 sw %f0 %a0 8
-addi %a1 %zero 0
-lui %a1 1065353216
-slli %a1 %a1 2
-lw %f0 %a1 0
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %a1 %sp 4
 lw %f1 %a1 4
 fdiv %f0 %f0 %f1
 sw %f0 %a0 12
-jal %zero 7
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
+jal %zero 5
+addi %f0 %zero 0
+lui %f0 0
 lw %a0 %sp 8
 sw %f0 %a0 12
 lw %a1 %sp 4
 lw %f0 %a1 8
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -3340
+jal %ra -3276
 addi %sp %sp -32
 lw %ra %sp 28
 addi %a12 %zero 0
-bne %a0 %a12 47
+bne %a0 %a12 45
 lw %a0 %sp 0
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -2700
+jal %ra -2652
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 4
@@ -3386,14 +3322,14 @@ lw %f0 %a1 8
 sw %a0 %sp 28
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -3352
+jal %ra -3288
 addi %sp %sp -40
 lw %ra %sp 36
 add %a1 %a0 %zero
 lw %a0 %sp 28
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -3052
+jal %ra -2988
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a1 %sp 0
@@ -3401,44 +3337,38 @@ sw %a0 %sp 32
 add %a0 %a1 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -2713
+jal %ra -2665
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 32
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -3024
+jal %ra -2966
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 8
 sw %f0 %a0 16
-addi %a1 %zero 0
-lui %a1 1065353216
-slli %a1 %a1 2
-lw %f0 %a1 0
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %a1 %sp 4
 lw %f1 %a1 8
 fdiv %f0 %f0 %f1
 sw %f0 %a0 20
-jal %zero 7
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
+jal %zero 5
+addi %f0 %zero 0
+lui %f0 0
 lw %a0 %sp 8
 sw %f0 %a0 20
 jalr %ra %zero 0
 addi %a2 %zero 4
-addi %a3 %zero 0
-lui %a3 0
-slli %a3 %a3 2
-lw %f0 %a3 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a1 %sp 0
 sw %a0 %sp 4
 add %a0 %a2 %zero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -3428
+jal %ra -3358
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a1 %sp 4
@@ -3449,7 +3379,7 @@ sw %f0 %sp 16
 add %a0 %a2 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -2767
+jal %ra -2713
 addi %sp %sp -32
 lw %ra %sp 28
 lw %f1 %sp 16
@@ -3462,7 +3392,7 @@ sw %f1 %sp 32
 add %a0 %a1 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -2777
+jal %ra -2723
 addi %sp %sp -48
 lw %ra %sp 44
 lw %f1 %sp 32
@@ -3476,7 +3406,7 @@ sw %f0 %sp 40
 sw %f1 %sp 48
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -2788
+jal %ra -2734
 addi %sp %sp -64
 lw %ra %sp 60
 lw %f1 %sp 48
@@ -3486,22 +3416,18 @@ fadd %f0 %f1 %f0
 sw %f0 %sp 56
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -3454
+jal %ra -3384
 addi %sp %sp -72
 lw %ra %sp 68
 addi %a12 %zero 0
-bne %a0 %a12 8
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
+bne %a0 %a12 6
+addi %f0 %zero 0
+lui %f0 0
 lw %a0 %sp 8
 sw %f0 %a0 0
-jal %zero 57
-addi %a0 %zero 0
-lui %a0 -1082130432
-slli %a0 %a0 2
-lw %f0 %a0 0
+jal %zero 55
+addi %f0 %zero 0
+lui %f0 -1082130432
 lw %f1 %sp 56
 fdiv %f0 %f0 %f1
 lw %a0 %sp 8
@@ -3510,14 +3436,14 @@ lw %a1 %sp 0
 add %a0 %a1 %zero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -2828
+jal %ra -2770
 addi %sp %sp -72
 lw %ra %sp 68
 lw %f1 %sp 56
 fdiv %f0 %f0 %f1
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -3491
+jal %ra -3417
 addi %sp %sp -72
 lw %ra %sp 68
 lw %a0 %sp 8
@@ -3526,14 +3452,14 @@ lw %a1 %sp 0
 add %a0 %a1 %zero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -2841
+jal %ra -2783
 addi %sp %sp -72
 lw %ra %sp 68
 lw %f1 %sp 56
 fdiv %f0 %f0 %f1
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -3507
+jal %ra -3433
 addi %sp %sp -72
 lw %ra %sp 68
 lw %a0 %sp 8
@@ -3542,30 +3468,28 @@ lw %a1 %sp 0
 add %a0 %a1 %zero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -2854
+jal %ra -2796
 addi %sp %sp -72
 lw %ra %sp 68
 lw %f1 %sp 56
 fdiv %f0 %f0 %f1
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -3523
+jal %ra -3449
 addi %sp %sp -72
 lw %ra %sp 68
 lw %a0 %sp 8
 sw %f0 %a0 12
 jalr %ra %zero 0
 addi %a2 %zero 5
-addi %a3 %zero 0
-lui %a3 0
-slli %a3 %a3 2
-lw %f0 %a3 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a1 %sp 0
 sw %a0 %sp 4
 add %a0 %a2 %zero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -3555
+jal %ra -3479
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a1 %sp 4
@@ -3577,7 +3501,7 @@ sw %a0 %sp 8
 add %a0 %a2 %zero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -1505
+jal %ra -1479
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a0 %sp 4
@@ -3588,14 +3512,14 @@ sw %f1 %sp 24
 add %a0 %a1 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -2906
+jal %ra -2846
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 24
 fmul %f0 %f1 %f0
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -3569
+jal %ra -3493
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 4
@@ -3606,14 +3530,14 @@ sw %f1 %sp 40
 add %a0 %a1 %zero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -2921
+jal %ra -2861
 addi %sp %sp -56
 lw %ra %sp 52
 lw %f1 %sp 40
 fmul %f0 %f1 %f0
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -3587
+jal %ra -3511
 addi %sp %sp -56
 lw %ra %sp 52
 lw %a0 %sp 4
@@ -3624,14 +3548,14 @@ sw %f1 %sp 56
 add %a0 %a1 %zero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -2936
+jal %ra -2876
 addi %sp %sp -72
 lw %ra %sp 68
 lw %f1 %sp 56
 fmul %f0 %f1 %f0
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -3605
+jal %ra -3529
 addi %sp %sp -72
 lw %ra %sp 68
 lw %a0 %sp 8
@@ -3642,7 +3566,7 @@ sw %f0 %sp 64
 add %a0 %a1 %zero
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -2962
+jal %ra -2902
 addi %sp %sp -80
 lw %ra %sp 76
 addi %a12 %zero 0
@@ -3662,7 +3586,7 @@ sw %f0 %sp 72
 add %a0 %a1 %zero
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -2942
+jal %ra -2882
 addi %sp %sp -88
 lw %ra %sp 84
 lw %f1 %sp 72
@@ -3675,7 +3599,7 @@ sw %f1 %sp 88
 add %a0 %a1 %zero
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -2952
+jal %ra -2892
 addi %sp %sp -104
 lw %ra %sp 100
 lw %f1 %sp 88
@@ -3684,7 +3608,7 @@ lw %f1 %sp 80
 fadd %f0 %f1 %f0
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -3666
+jal %ra -3590
 addi %sp %sp -104
 lw %ra %sp 100
 lw %f1 %sp 32
@@ -3698,7 +3622,7 @@ sw %f0 %sp 96
 add %a0 %a2 %zero
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -2981
+jal %ra -2921
 addi %sp %sp -112
 lw %ra %sp 108
 lw %f1 %sp 96
@@ -3711,7 +3635,7 @@ sw %f1 %sp 112
 add %a0 %a1 %zero
 sw %ra %sp 124
 addi %sp %sp 128
-jal %ra -2988
+jal %ra -2928
 addi %sp %sp -128
 lw %ra %sp 124
 lw %f1 %sp 112
@@ -3720,7 +3644,7 @@ lw %f1 %sp 104
 fadd %f0 %f1 %f0
 sw %ra %sp 124
 addi %sp %sp 128
-jal %ra -3702
+jal %ra -3626
 addi %sp %sp -128
 lw %ra %sp 124
 lw %f1 %sp 48
@@ -3734,7 +3658,7 @@ sw %f0 %sp 120
 add %a0 %a2 %zero
 sw %ra %sp 132
 addi %sp %sp 136
-jal %ra -3017
+jal %ra -2957
 addi %sp %sp -136
 lw %ra %sp 132
 lw %f1 %sp 120
@@ -3746,7 +3670,7 @@ sw %f0 %sp 128
 sw %f1 %sp 136
 sw %ra %sp 148
 addi %sp %sp 152
-jal %ra -3026
+jal %ra -2966
 addi %sp %sp -152
 lw %ra %sp 148
 lw %f1 %sp 136
@@ -3755,7 +3679,7 @@ lw %f1 %sp 128
 fadd %f0 %f1 %f0
 sw %ra %sp 148
 addi %sp %sp 152
-jal %ra -3737
+jal %ra -3661
 addi %sp %sp -152
 lw %ra %sp 148
 lw %f1 %sp 64
@@ -3765,15 +3689,13 @@ sw %f0 %a0 12
 lw %f0 %sp 16
 sw %ra %sp 148
 addi %sp %sp 152
-jal %ra -3735
+jal %ra -3659
 addi %sp %sp -152
 lw %ra %sp 148
 addi %a12 %zero 0
-bne %a0 %a12 10
-addi %a0 %zero 0
-lui %a0 1065353216
-slli %a0 %a0 2
-lw %f0 %a0 0
+bne %a0 %a12 8
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %f1 %sp 16
 fdiv %f0 %f0 %f1
 lw %a0 %sp 8
@@ -3793,7 +3715,7 @@ sw %a2 %sp 8
 sw %a0 %sp 12
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -3043
+jal %ra -2981
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a1 %sp 12
@@ -3801,7 +3723,7 @@ sw %a0 %sp 16
 add %a0 %a1 %zero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -3053
+jal %ra -2991
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a1 %sp 8
@@ -3809,7 +3731,7 @@ sw %a0 %sp 20
 add %a0 %a1 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -3135
+jal %ra -3073
 addi %sp %sp -32
 lw %ra %sp 28
 addi %a12 %zero 1
@@ -3818,7 +3740,7 @@ lw %a0 %sp 20
 lw %a1 %sp 8
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -588
+jal %ra -564
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 4
@@ -3833,7 +3755,7 @@ lw %a0 %sp 20
 lw %a1 %sp 8
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -405
+jal %ra -395
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 4
@@ -3846,7 +3768,7 @@ lw %a0 %sp 20
 lw %a1 %sp 8
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -291
+jal %ra -287
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 4
@@ -3868,7 +3790,7 @@ lw %a10 %a11 0
 jalr %a10 %zero 0
 lw %a2 %a11 4
 addi %a12 %zero 0
-blt %a1 %a12 117
+blt %a1 %a12 115
 slli %a3 %a1 2
 add %a12 %a2 %a3
 lw %a2 %a12 0
@@ -3879,7 +3801,7 @@ sw %a2 %sp 12
 add %a0 %a2 %zero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -3153
+jal %ra -3091
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a1 %sp 12
@@ -3887,7 +3809,7 @@ sw %a0 %sp 16
 add %a0 %a1 %zero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -3213
+jal %ra -3151
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a1 %sp 8
@@ -3898,7 +3820,7 @@ sw %f0 %sp 24
 add %a0 %a2 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -3205
+jal %ra -3143
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 24
@@ -3912,7 +3834,7 @@ sw %f0 %sp 32
 add %a0 %a2 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -3216
+jal %ra -3154
 addi %sp %sp -48
 lw %ra %sp 44
 lw %f1 %sp 32
@@ -3926,7 +3848,7 @@ sw %f0 %sp 40
 add %a0 %a2 %zero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -3227
+jal %ra -3165
 addi %sp %sp -56
 lw %ra %sp 52
 lw %f1 %sp 40
@@ -3940,7 +3862,7 @@ lw %a1 %sp 12
 add %a0 %a1 %zero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -3249
+jal %ra -3187
 addi %sp %sp -56
 lw %ra %sp 52
 lw %a1 %sp 16
@@ -3949,15 +3871,15 @@ lw %f1 %a1 4
 lw %f2 %a1 8
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -3357
+jal %ra -3295
 addi %sp %sp -56
 lw %ra %sp 52
 lw %a0 %sp 16
 sw %f0 %a0 12
-jal %zero 25
+jal %zero 23
 addi %a12 %zero 2
 blt %a12 %a1 2
-jal %zero 22
+jal %zero 20
 lw %f0 %a0 0
 lw %f1 %a0 4
 lw %f2 %a0 8
@@ -3965,16 +3887,14 @@ lw %a2 %sp 12
 add %a0 %a2 %zero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -1893
+jal %ra -1865
 addi %sp %sp -56
 lw %ra %sp 52
 lw %a0 %sp 20
 addi %a12 %zero 3
-bne %a0 %a12 7
-addi %a0 %zero 0
-lui %a0 1065353216
-slli %a0 %a0 2
-lw %f1 %a0 0
+bne %a0 %a12 5
+addi %f1 %zero 0
+lui %f1 1065353216
 fsub %f0 %f0 %f1
 jal %zero 1
 lw %a0 %sp 16
@@ -3997,7 +3917,7 @@ add %a1 %a0 %zero
 add %a0 %a10 %zero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -3591
+jal %ra -3519
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a0 %sp 8
@@ -4012,21 +3932,21 @@ sw %f1 %sp 8
 sw %a0 %sp 16
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -3988
+jal %ra -3908
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 16
 sw %f0 %sp 24
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -3337
+jal %ra -3273
 addi %sp %sp -40
 lw %ra %sp 36
 fadd %f1 %f0 %fzero
 lw %f0 %sp 24
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -3998
+jal %ra -3918
 addi %sp %sp -40
 lw %ra %sp 36
 addi %a1 %zero 0
@@ -4038,21 +3958,21 @@ lw %f0 %sp 8
 sw %a1 %sp 32
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -4014
+jal %ra -3934
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 16
 sw %f0 %sp 40
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -3360
+jal %ra -3296
 addi %sp %sp -56
 lw %ra %sp 52
 fadd %f1 %f0 %fzero
 lw %f0 %sp 40
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -4024
+jal %ra -3944
 addi %sp %sp -56
 lw %ra %sp 52
 addi %a12 %zero 0
@@ -4062,21 +3982,21 @@ jal %zero 21
 lw %f0 %sp 0
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -4038
+jal %ra -3958
 addi %sp %sp -56
 lw %ra %sp 52
 lw %a0 %sp 16
 sw %f0 %sp 48
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -3381
+jal %ra -3317
 addi %sp %sp -64
 lw %ra %sp 60
 fadd %f1 %f0 %fzero
 lw %f0 %sp 48
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -4048
+jal %ra -3968
 addi %sp %sp -64
 lw %ra %sp 60
 addi %a1 %zero 0
@@ -4086,7 +4006,7 @@ lw %a0 %sp 16
 sw %a1 %sp 56
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -3408
+jal %ra -3344
 addi %sp %sp -64
 lw %ra %sp 60
 addi %a12 %zero 0
@@ -4096,14 +4016,14 @@ jalr %ra %zero 0
 lw %a0 %sp 56
 jalr %ra %zero 0
 lw %a0 %sp 16
-jal %zero -3418
+jal %zero -3354
 sw %a0 %sp 0
 sw %f2 %sp 8
 sw %f1 %sp 16
 sw %f0 %sp 24
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -3412
+jal %ra -3348
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f0 %sp 24
@@ -4111,28 +4031,28 @@ lw %f1 %sp 16
 lw %f2 %sp 8
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -3519
+jal %ra -3455
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 0
 sw %f0 %sp 32
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -3440
+jal %ra -3376
 addi %sp %sp -48
 lw %ra %sp 44
 lw %f0 %sp 32
 sw %a0 %sp 40
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -4091
+jal %ra -4011
 addi %sp %sp -48
 lw %ra %sp 44
 add %a1 %a0 %zero
 lw %a0 %sp 40
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -3791
+jal %ra -3711
 addi %sp %sp -48
 lw %ra %sp 44
 addi %a1 %zero 0
@@ -4145,22 +4065,20 @@ jalr %ra %zero 0
 sw %a0 %sp 0
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -2073
+jal %ra -2043
 addi %sp %sp -8
 lw %ra %sp 4
 lw %a0 %sp 0
 sw %f0 %sp 8
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -3478
+jal %ra -3414
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a12 %zero 3
-bne %a0 %a12 8
-addi %a0 %zero 0
-lui %a0 1065353216
-slli %a0 %a0 2
-lw %f0 %a0 0
+bne %a0 %a12 6
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %f1 %sp 8
 fsub %f0 %f1 %f0
 jal %zero 2
@@ -4169,21 +4087,21 @@ lw %a0 %sp 0
 sw %f0 %sp 16
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -3491
+jal %ra -3425
 addi %sp %sp -32
 lw %ra %sp 28
 lw %f0 %sp 16
 sw %a0 %sp 24
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -4142
+jal %ra -4060
 addi %sp %sp -32
 lw %ra %sp 28
 add %a1 %a0 %zero
 lw %a0 %sp 24
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -3842
+jal %ra -3760
 addi %sp %sp -32
 lw %ra %sp 28
 addi %a1 %zero 0
@@ -4199,7 +4117,7 @@ sw %a0 %sp 16
 sw %f0 %sp 24
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -3506
+jal %ra -3440
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 24
@@ -4208,7 +4126,7 @@ lw %a0 %sp 16
 sw %f0 %sp 32
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -3512
+jal %ra -3446
 addi %sp %sp -48
 lw %ra %sp 44
 lw %f1 %sp 8
@@ -4217,7 +4135,7 @@ lw %a0 %sp 16
 sw %f0 %sp 40
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -3518
+jal %ra -3452
 addi %sp %sp -56
 lw %ra %sp 52
 lw %f1 %sp 0
@@ -4226,7 +4144,7 @@ lw %a0 %sp 16
 sw %f0 %sp 48
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -3552
+jal %ra -3486
 addi %sp %sp -64
 lw %ra %sp 60
 addi %a12 %zero 1
@@ -4235,19 +4153,19 @@ lw %f0 %sp 32
 lw %f1 %sp 40
 lw %f2 %sp 48
 lw %a0 %sp 16
-jal %zero -228
+jal %zero -226
 addi %a12 %zero 2
 bne %a0 %a12 6
 lw %f0 %sp 32
 lw %f1 %sp 40
 lw %f2 %sp 48
 lw %a0 %sp 16
-jal %zero -145
+jal %zero -143
 lw %f0 %sp 32
 lw %f1 %sp 40
 lw %f2 %sp 48
 lw %a0 %sp 16
-jal %zero -105
+jal %zero -103
 lw %a2 %a11 4
 slli %a3 %a0 2
 add %a12 %a1 %a3
@@ -4327,14 +4245,12 @@ sw %f0 %sp 40
 addi %a12 %zero 0
 bne %a0 %a12 3
 addi %a0 %a1 0
-jal %zero 10
-addi %a0 %zero -819
-lui %a0 -1102266368
-slli %a0 %a0 2
-lw %f1 %a0 0
+jal %zero 8
+addi %f1 %zero -819
+lui %f1 -1102266368
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -4306
+jal %ra -4222
 addi %sp %sp -56
 lw %ra %sp 52
 addi %a1 %zero 0
@@ -4348,7 +4264,7 @@ lw %a0 %a12 0
 sw %a1 %sp 48
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -3670
+jal %ra -3602
 addi %sp %sp -56
 lw %ra %sp 52
 addi %a12 %zero 0
@@ -4361,10 +4277,8 @@ lw %a1 %sp 12
 lw %a11 %sp 16
 lw %a10 %a11 0
 jalr %a10 %zero 0
-addi %a0 %zero 1802
-lui %a0 1008979968
-slli %a0 %a0 2
-lw %f0 %a0 0
+addi %f0 %zero 1802
+lui %f0 1008979968
 lw %f1 %sp 40
 fadd %f0 %f1 %f0
 lw %a0 %sp 8
@@ -4464,7 +4378,7 @@ sw %a0 %sp 16
 addi %a12 %zero 99
 bne %a8 %a12 3
 addi %a0 %zero 1
-jal %zero 47
+jal %zero 45
 sw %a3 %sp 20
 add %a1 %a5 %zero
 add %a0 %a8 %zero
@@ -4480,17 +4394,15 @@ addi %a1 %zero 0
 addi %a12 %zero 0
 bne %a0 %a12 3
 addi %a0 %a1 0
-jal %zero 31
+jal %zero 29
 lw %a0 %sp 20
 lw %f0 %a0 0
-addi %a0 %zero -819
-lui %a0 -1110654976
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -819
+lui %f1 -1110654976
 sw %a1 %sp 24
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -4462
+jal %ra -4374
 addi %sp %sp -32
 lw %ra %sp 28
 addi %a12 %zero 0
@@ -4587,7 +4499,7 @@ add %a12 %a1 %a0
 lw %a0 %a12 0
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -3909
+jal %ra -3837
 addi %sp %sp -56
 lw %ra %sp 52
 addi %a12 %zero 0
@@ -4602,36 +4514,32 @@ lw %a10 %a11 0
 jalr %a10 %zero 0
 lw %a2 %sp 24
 lw %f1 %a2 0
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 52
 sw %a1 %sp 56
 sw %f1 %sp 64
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -4583
+jal %ra -4493
 addi %sp %sp -80
 lw %ra %sp 76
 addi %a12 %zero 0
 bne %a0 %a12 2
-jal %zero 71
+jal %zero 69
 lw %a0 %sp 20
 lw %f1 %a0 0
 lw %f0 %sp 64
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -4594
+jal %ra -4504
 addi %sp %sp -80
 lw %ra %sp 76
 addi %a12 %zero 0
 bne %a0 %a12 2
-jal %zero 60
-addi %a0 %zero 1802
-lui %a0 1008979968
-slli %a0 %a0 2
-lw %f0 %a0 0
+jal %zero 58
+addi %f0 %zero 1802
+lui %f0 1008979968
 lw %f1 %sp 64
 fadd %f0 %f1 %f0
 lw %a0 %sp 28
@@ -4678,7 +4586,7 @@ lw %f2 %sp 72
 lw %a0 %sp 8
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -4285
+jal %ra -4199
 addi %sp %sp -112
 lw %ra %sp 108
 lw %a0 %sp 4
@@ -4780,7 +4688,7 @@ lw %a0 %sp 24
 lw %f1 %a0 0
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -4752
+jal %ra -4660
 addi %sp %sp -40
 lw %ra %sp 36
 addi %a12 %zero 0
@@ -4806,10 +4714,8 @@ jalr %a10 %zero 0
 lw %a1 %a11 12
 lw %a2 %a11 8
 lw %a3 %a11 4
-addi %a4 %zero -1240
-lui %a4 1315856384
-slli %a4 %a4 2
-lw %f0 %a4 0
+addi %f0 %zero -1240
+lui %f0 1315856384
 sw %f0 %a2 0
 addi %a4 %zero 0
 lw %a3 %a3 0
@@ -4826,14 +4732,12 @@ addi %sp %sp -8
 lw %ra %sp 4
 lw %a0 %sp 0
 lw %f1 %a0 0
-addi %a0 %zero -819
-lui %a0 -1110654976
-slli %a0 %a0 2
-lw %f0 %a0 0
+addi %f0 %zero -819
+lui %f0 -1110654976
 sw %f1 %sp 8
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -4805
+jal %ra -4709
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a1 %zero 0
@@ -4841,12 +4745,10 @@ addi %a12 %zero 0
 bne %a0 %a12 3
 addi %a0 %a1 0
 jalr %ra %zero 0
-addi %a0 %zero -992
-lui %a0 1287565312
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -992
+lui %f1 1287565312
 lw %f0 %sp 8
-jal %zero -4818
+jal %zero -4720
 lw %a3 %a11 36
 lw %a4 %a11 32
 lw %a5 %a11 28
@@ -4872,7 +4774,7 @@ sw %a0 %sp 48
 add %a0 %a2 %zero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -4124
+jal %ra -4042
 addi %sp %sp -56
 lw %ra %sp 52
 lw %a1 %sp 48
@@ -4906,7 +4808,7 @@ add %a12 %a1 %a0
 lw %a0 %a12 0
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -4228
+jal %ra -4146
 addi %sp %sp -64
 lw %ra %sp 60
 addi %a12 %zero 0
@@ -4921,36 +4823,32 @@ lw %a10 %a11 0
 jalr %a10 %zero 0
 lw %a2 %sp 24
 lw %f1 %a2 0
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 60
 sw %a1 %sp 64
 sw %f1 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -4902
+jal %ra -4802
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a12 %zero 0
 bne %a0 %a12 2
-jal %zero 69
+jal %zero 67
 lw %a0 %sp 20
 lw %f1 %a0 0
 lw %f0 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -4913
+jal %ra -4813
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a12 %zero 0
 bne %a0 %a12 2
-jal %zero 58
-addi %a0 %zero 1802
-lui %a0 1008979968
-slli %a0 %a0 2
-lw %f0 %a0 0
+jal %zero 56
+addi %f0 %zero 1802
+lui %f0 1008979968
 lw %f1 %sp 72
 fadd %f0 %f1 %f0
 lw %a0 %sp 52
@@ -4995,7 +4893,7 @@ lw %f2 %sp 80
 lw %a0 %sp 8
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -4602
+jal %ra -4506
 addi %sp %sp -120
 lw %ra %sp 116
 lw %a0 %sp 4
@@ -5095,7 +4993,7 @@ lw %a0 %sp 24
 lw %f1 %a0 0
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -5067
+jal %ra -4965
 addi %sp %sp -40
 lw %ra %sp 36
 addi %a12 %zero 0
@@ -5121,10 +5019,8 @@ jalr %a10 %zero 0
 lw %a1 %a11 12
 lw %a2 %a11 8
 lw %a3 %a11 4
-addi %a4 %zero -1240
-lui %a4 1315856384
-slli %a4 %a4 2
-lw %f0 %a4 0
+addi %f0 %zero -1240
+lui %f0 1315856384
 sw %f0 %a2 0
 addi %a4 %zero 0
 lw %a3 %a3 0
@@ -5141,14 +5037,12 @@ addi %sp %sp -8
 lw %ra %sp 4
 lw %a0 %sp 0
 lw %f1 %a0 0
-addi %a0 %zero -819
-lui %a0 -1110654976
-slli %a0 %a0 2
-lw %f0 %a0 0
+addi %f0 %zero -819
+lui %f0 -1110654976
 sw %f1 %sp 8
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -5120
+jal %ra -5014
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a1 %zero 0
@@ -5156,12 +5050,10 @@ addi %a12 %zero 0
 bne %a0 %a12 3
 addi %a0 %a1 0
 jalr %ra %zero 0
-addi %a0 %zero -992
-lui %a0 1287565312
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -992
+lui %f1 1287565312
 lw %f0 %sp 8
-jal %zero -5133
+jal %zero -5025
 lw %a1 %a11 8
 lw %a2 %a11 4
 lw %a2 %a2 0
@@ -5171,7 +5063,7 @@ sw %a2 %sp 8
 add %a0 %a1 %zero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -4770
+jal %ra -4668
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a0 %sp 8
@@ -5184,12 +5076,12 @@ lw %f0 %a12 0
 sw %a1 %sp 12
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -4832
+jal %ra -4724
 addi %sp %sp -24
 lw %ra %sp 20
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -5163
+jal %ra -5055
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 12
@@ -5203,12 +5095,12 @@ sw %a0 %sp 0
 sw %a1 %sp 4
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -4521
+jal %ra -4429
 addi %sp %sp -16
 lw %ra %sp 12
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -5182
+jal %ra -5074
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a0 %sp 4
@@ -5217,12 +5109,12 @@ lw %a1 %sp 0
 add %a0 %a1 %zero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -4532
+jal %ra -4440
 addi %sp %sp -16
 lw %ra %sp 12
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -5196
+jal %ra -5088
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a0 %sp 4
@@ -5231,12 +5123,12 @@ lw %a1 %sp 0
 add %a0 %a1 %zero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -4543
+jal %ra -4451
 addi %sp %sp -16
 lw %ra %sp 12
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -5210
+jal %ra -5102
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a0 %sp 4
@@ -5251,7 +5143,7 @@ sw %a2 %sp 8
 sw %f0 %sp 16
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -4558
+jal %ra -4466
 addi %sp %sp -32
 lw %ra %sp 28
 lw %f1 %sp 16
@@ -5264,7 +5156,7 @@ sw %f1 %sp 32
 add %a0 %a1 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -4568
+jal %ra -4476
 addi %sp %sp -48
 lw %ra %sp 44
 lw %f1 %sp 32
@@ -5276,7 +5168,7 @@ sw %f0 %sp 40
 sw %f1 %sp 48
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -4577
+jal %ra -4485
 addi %sp %sp -64
 lw %ra %sp 60
 lw %f1 %sp 48
@@ -5285,7 +5177,7 @@ lw %a0 %sp 4
 sw %f0 %sp 56
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -4603
+jal %ra -4511
 addi %sp %sp -72
 lw %ra %sp 68
 lw %f1 %sp 24
@@ -5294,7 +5186,7 @@ lw %a0 %sp 4
 sw %f0 %sp 64
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -4609
+jal %ra -4517
 addi %sp %sp -80
 lw %ra %sp 76
 lw %f1 %sp 40
@@ -5303,7 +5195,7 @@ lw %a0 %sp 4
 sw %f0 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -4615
+jal %ra -4523
 addi %sp %sp -88
 lw %ra %sp 84
 lw %f1 %sp 56
@@ -5312,7 +5204,7 @@ lw %a0 %sp 4
 sw %f0 %sp 80
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -4632
+jal %ra -4540
 addi %sp %sp -96
 lw %ra %sp 92
 addi %a12 %zero 0
@@ -5328,7 +5220,7 @@ jal %zero 87
 lw %a0 %sp 4
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -4605
+jal %ra -4513
 addi %sp %sp -96
 lw %ra %sp 92
 lw %f1 %sp 40
@@ -5337,7 +5229,7 @@ lw %a0 %sp 4
 sw %f0 %sp 88
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -4617
+jal %ra -4525
 addi %sp %sp -104
 lw %ra %sp 100
 lw %f1 %sp 56
@@ -5346,7 +5238,7 @@ lw %f2 %sp 88
 fadd %f0 %f2 %f0
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -5328
+jal %ra -5220
 addi %sp %sp -104
 lw %ra %sp 100
 lw %f1 %sp 64
@@ -5357,7 +5249,7 @@ lw %a1 %sp 4
 add %a0 %a1 %zero
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -4634
+jal %ra -4542
 addi %sp %sp -104
 lw %ra %sp 100
 lw %f1 %sp 24
@@ -5366,7 +5258,7 @@ lw %a0 %sp 4
 sw %f0 %sp 96
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -4649
+jal %ra -4557
 addi %sp %sp -112
 lw %ra %sp 108
 lw %f1 %sp 56
@@ -5375,7 +5267,7 @@ lw %f1 %sp 96
 fadd %f0 %f1 %f0
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -5357
+jal %ra -5249
 addi %sp %sp -112
 lw %ra %sp 108
 lw %f1 %sp 72
@@ -5386,7 +5278,7 @@ lw %a1 %sp 4
 add %a0 %a1 %zero
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -4666
+jal %ra -4574
 addi %sp %sp -112
 lw %ra %sp 108
 lw %f1 %sp 24
@@ -5395,7 +5287,7 @@ lw %a0 %sp 4
 sw %f0 %sp 104
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -4678
+jal %ra -4586
 addi %sp %sp -120
 lw %ra %sp 116
 lw %f1 %sp 40
@@ -5404,7 +5296,7 @@ lw %f1 %sp 104
 fadd %f0 %f1 %f0
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -5386
+jal %ra -5278
 addi %sp %sp -120
 lw %ra %sp 116
 lw %f1 %sp 80
@@ -5415,12 +5307,12 @@ lw %a1 %sp 4
 add %a0 %a1 %zero
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -4737
+jal %ra -4645
 addi %sp %sp -120
 lw %ra %sp 116
 add %a1 %a0 %zero
 lw %a0 %sp 0
-jal %zero -4915
+jal %zero -4817
 lw %a2 %a11 12
 lw %a3 %a11 8
 lw %a4 %a11 4
@@ -5431,7 +5323,7 @@ sw %a1 %sp 12
 sw %a3 %sp 16
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -4757
+jal %ra -4665
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a12 %zero 1
@@ -5456,7 +5348,7 @@ sw %a2 %sp 4
 sw %a0 %sp 8
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -4784
+jal %ra -4692
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a1 %sp 8
@@ -5464,7 +5356,7 @@ sw %a0 %sp 12
 add %a0 %a1 %zero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -4756
+jal %ra -4664
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 4
@@ -5473,7 +5365,7 @@ lw %a1 %sp 8
 add %a0 %a1 %zero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -4762
+jal %ra -4670
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 4
@@ -5482,14 +5374,14 @@ lw %a1 %sp 8
 add %a0 %a1 %zero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -4768
+jal %ra -4676
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a0 %sp 4
 sw %f0 %a0 8
 lw %a1 %sp 12
 addi %a12 %zero 1
-bne %a1 %a12 111
+bne %a1 %a12 91
 lw %a1 %sp 0
 lw %f0 %a1 0
 lw %a2 %sp 8
@@ -5497,37 +5389,31 @@ sw %f0 %sp 16
 add %a0 %a2 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -4804
+jal %ra -4712
 addi %sp %sp -32
 lw %ra %sp 28
 lw %f1 %sp 16
 fsub %f0 %f1 %f0
-addi %a0 %zero -819
-lui %a0 1028440064
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -819
+lui %f1 1028440064
 fmul %f1 %f0 %f1
 sw %f0 %sp 24
 fadd %f0 %f1 %fzero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -5475
+jal %ra -5365
 addi %sp %sp -40
 lw %ra %sp 36
-addi %a0 %zero 0
-lui %a0 1101004800
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1101004800
 fmul %f0 %f0 %f1
 lw %f1 %sp 24
 fsub %f0 %f1 %f0
-addi %a0 %zero 0
-lui %a0 1092616192
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1092616192
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -5499
+jal %ra -5385
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a1 %sp 0
@@ -5538,108 +5424,86 @@ sw %f0 %sp 40
 add %a0 %a1 %zero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -4839
+jal %ra -4741
 addi %sp %sp -56
 lw %ra %sp 52
 lw %f1 %sp 40
 fsub %f0 %f1 %f0
-addi %a0 %zero -819
-lui %a0 1028440064
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -819
+lui %f1 1028440064
 fmul %f1 %f0 %f1
 sw %f0 %sp 48
 fadd %f0 %f1 %fzero
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -5516
+jal %ra -5400
 addi %sp %sp -64
 lw %ra %sp 60
-addi %a0 %zero 0
-lui %a0 1101004800
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1101004800
 fmul %f0 %f0 %f1
 lw %f1 %sp 48
 fsub %f0 %f1 %f0
-addi %a0 %zero 0
-lui %a0 1092616192
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1092616192
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -5540
+jal %ra -5420
 addi %sp %sp -64
 lw %ra %sp 60
 lw %a1 %sp 32
 addi %a12 %zero 0
-bne %a1 %a12 13
+bne %a1 %a12 9
 addi %a12 %zero 0
-bne %a0 %a12 6
-addi %a0 %zero 0
-lui %a0 1132396544
-slli %a0 %a0 2
-lw %f0 %a0 0
-jal %zero 5
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
-jal %zero 12
+bne %a0 %a12 4
+addi %f0 %zero 0
+lui %f0 1132396544
+jal %zero 3
+addi %f0 %zero 0
+lui %f0 0
+jal %zero 8
 addi %a12 %zero 0
-bne %a0 %a12 6
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
-jal %zero 5
-addi %a0 %zero 0
-lui %a0 1132396544
-slli %a0 %a0 2
-lw %f0 %a0 0
+bne %a0 %a12 4
+addi %f0 %zero 0
+lui %f0 0
+jal %zero 3
+addi %f0 %zero 0
+lui %f0 1132396544
 lw %a0 %sp 4
 sw %f0 %a0 4
 jalr %ra %zero 0
 addi %a12 %zero 2
-bne %a1 %a12 37
+bne %a1 %a12 29
 lw %a1 %sp 0
 lw %f0 %a1 4
-addi %a1 %zero 0
-lui %a1 1048576000
-slli %a1 %a1 2
-lw %f1 %a1 0
+addi %f1 %zero 0
+lui %f1 1048576000
 fmul %f0 %f0 %f1
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -5497
+jal %ra -5367
 addi %sp %sp -64
 lw %ra %sp 60
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -5596
+jal %ra -5466
 addi %sp %sp -64
 lw %ra %sp 60
-addi %a0 %zero 0
-lui %a0 1132396544
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1132396544
 fmul %f1 %f1 %f0
 lw %a0 %sp 4
 sw %f1 %a0 0
-addi %a1 %zero 0
-lui %a1 1132396544
-slli %a1 %a1 2
-lw %f1 %a1 0
-addi %a1 %zero 0
-lui %a1 1065353216
-slli %a1 %a1 2
-lw %f2 %a1 0
+addi %f1 %zero 0
+lui %f1 1132396544
+addi %f2 %zero 0
+lui %f2 1065353216
 fsub %f0 %f2 %f0
 fmul %f0 %f1 %f0
 sw %f0 %a0 4
 jalr %ra %zero 0
 addi %a12 %zero 3
-bne %a1 %a12 95
+bne %a1 %a12 85
 lw %a1 %sp 0
 lw %f0 %a1 0
 lw %a2 %sp 8
@@ -5647,7 +5511,7 @@ sw %f0 %sp 56
 add %a0 %a2 %zero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -4954
+jal %ra -4834
 addi %sp %sp -72
 lw %ra %sp 68
 lw %f1 %sp 56
@@ -5659,7 +5523,7 @@ sw %f0 %sp 64
 sw %f1 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -4960
+jal %ra -4840
 addi %sp %sp -88
 lw %ra %sp 84
 lw %f1 %sp 72
@@ -5669,7 +5533,7 @@ sw %f0 %sp 80
 fadd %f0 %f1 %fzero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -5649
+jal %ra -5513
 addi %sp %sp -96
 lw %ra %sp 92
 lw %f1 %sp 80
@@ -5677,65 +5541,55 @@ sw %f0 %sp 88
 fadd %f0 %f1 %fzero
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -5657
+jal %ra -5521
 addi %sp %sp -104
 lw %ra %sp 100
 lw %f1 %sp 88
 fadd %f0 %f1 %f0
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -5662
+jal %ra -5526
 addi %sp %sp -104
 lw %ra %sp 100
-addi %a0 %zero 0
-lui %a0 1092616192
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1092616192
 fdiv %f0 %f0 %f1
 sw %f0 %sp 96
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -5659
+jal %ra -5521
 addi %sp %sp -112
 lw %ra %sp 108
 lw %f1 %sp 96
 fsub %f0 %f1 %f0
-addi %a0 %zero -37
-lui %a0 1078525952
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -37
+lui %f1 1078525952
 fmul %f0 %f0 %f1
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -5548
+jal %ra -5408
 addi %sp %sp -112
 lw %ra %sp 108
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -5692
+jal %ra -5552
 addi %sp %sp -112
 lw %ra %sp 108
-addi %a0 %zero 0
-lui %a0 1132396544
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1132396544
 fmul %f1 %f0 %f1
 lw %a0 %sp 4
 sw %f1 %a0 4
-addi %a1 %zero 0
-lui %a1 1065353216
-slli %a1 %a1 2
-lw %f1 %a1 0
+addi %f1 %zero 0
+lui %f1 1065353216
 fsub %f0 %f1 %f0
-addi %a1 %zero 0
-lui %a1 1132396544
-slli %a1 %a1 2
-lw %f1 %a1 0
+addi %f1 %zero 0
+lui %f1 1132396544
 fmul %f0 %f0 %f1
 sw %f0 %a0 8
 jalr %ra %zero 0
 addi %a12 %zero 4
-bne %a1 %a12 270
+bne %a1 %a12 242
 lw %a1 %sp 0
 lw %f0 %a1 0
 lw %a2 %sp 8
@@ -5743,7 +5597,7 @@ sw %f0 %sp 104
 add %a0 %a2 %zero
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -5050
+jal %ra -4920
 addi %sp %sp -120
 lw %ra %sp 116
 lw %f1 %sp 104
@@ -5752,12 +5606,12 @@ lw %a0 %sp 8
 sw %f0 %sp 112
 sw %ra %sp 124
 addi %sp %sp 128
-jal %ra -5070
+jal %ra -4940
 addi %sp %sp -128
 lw %ra %sp 124
 sw %ra %sp 124
 addi %sp %sp 128
-jal %ra -5735
+jal %ra -5589
 addi %sp %sp -128
 lw %ra %sp 124
 lw %f1 %sp 112
@@ -5770,7 +5624,7 @@ sw %f1 %sp 128
 add %a0 %a1 %zero
 sw %ra %sp 140
 addi %sp %sp 144
-jal %ra -5071
+jal %ra -4941
 addi %sp %sp -144
 lw %ra %sp 140
 lw %f1 %sp 128
@@ -5779,12 +5633,12 @@ lw %a0 %sp 8
 sw %f0 %sp 136
 sw %ra %sp 148
 addi %sp %sp 152
-jal %ra -5091
+jal %ra -4961
 addi %sp %sp -152
 lw %ra %sp 148
 sw %ra %sp 148
 addi %sp %sp 152
-jal %ra -5762
+jal %ra -5616
 addi %sp %sp -152
 lw %ra %sp 148
 lw %f1 %sp 136
@@ -5794,7 +5648,7 @@ sw %f0 %sp 144
 fadd %f0 %f1 %fzero
 sw %ra %sp 156
 addi %sp %sp 160
-jal %ra -5774
+jal %ra -5628
 addi %sp %sp -160
 lw %ra %sp 156
 lw %f1 %sp 144
@@ -5802,7 +5656,7 @@ sw %f0 %sp 152
 fadd %f0 %f1 %fzero
 sw %ra %sp 164
 addi %sp %sp 168
-jal %ra -5782
+jal %ra -5636
 addi %sp %sp -168
 lw %ra %sp 164
 lw %f1 %sp 152
@@ -5812,52 +5666,44 @@ sw %f0 %sp 160
 fadd %f0 %f1 %fzero
 sw %ra %sp 172
 addi %sp %sp 176
-jal %ra -5788
+jal %ra -5642
 addi %sp %sp -176
 lw %ra %sp 172
-addi %a0 %zero 1815
-lui %a0 953266176
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 1815
+lui %f1 953266176
 sw %ra %sp 172
 addi %sp %sp 176
-jal %ra -5793
+jal %ra -5645
 addi %sp %sp -176
 lw %ra %sp 172
 addi %a12 %zero 0
-bne %a0 %a12 25
+bne %a0 %a12 21
 lw %f0 %sp 120
 lw %f1 %sp 144
 fdiv %f0 %f1 %f0
 sw %ra %sp 172
 addi %sp %sp 176
-jal %ra -5807
+jal %ra -5659
 addi %sp %sp -176
 lw %ra %sp 172
 sw %ra %sp 172
 addi %sp %sp 176
-jal %ra -5581
+jal %ra -5433
 addi %sp %sp -176
 lw %ra %sp 172
-addi %a0 %zero 0
-lui %a0 1106247680
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1106247680
 fmul %f0 %f0 %f1
-addi %a0 %zero -37
-lui %a0 1078525952
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -37
+lui %f1 1078525952
 fdiv %f0 %f0 %f1
-jal %zero 5
-addi %a0 %zero 0
-lui %a0 1097859072
-slli %a0 %a0 2
-lw %f0 %a0 0
+jal %zero 3
+addi %f0 %zero 0
+lui %f0 1097859072
 sw %f0 %sp 168
 sw %ra %sp 180
 addi %sp %sp 184
-jal %ra -5821
+jal %ra -5667
 addi %sp %sp -184
 lw %ra %sp 180
 lw %f1 %sp 168
@@ -5869,7 +5715,7 @@ sw %f0 %sp 176
 sw %f1 %sp 184
 sw %ra %sp 196
 addi %sp %sp 200
-jal %ra -5173
+jal %ra -5035
 addi %sp %sp -200
 lw %ra %sp 196
 lw %f1 %sp 184
@@ -5878,12 +5724,12 @@ lw %a0 %sp 8
 sw %f0 %sp 192
 sw %ra %sp 204
 addi %sp %sp 208
-jal %ra -5193
+jal %ra -5055
 addi %sp %sp -208
 lw %ra %sp 204
 sw %ra %sp 204
 addi %sp %sp 208
-jal %ra -5861
+jal %ra -5707
 addi %sp %sp -208
 lw %ra %sp 204
 lw %f1 %sp 192
@@ -5893,64 +5739,52 @@ sw %f0 %sp 200
 fadd %f0 %f1 %fzero
 sw %ra %sp 212
 addi %sp %sp 216
-jal %ra -5869
+jal %ra -5715
 addi %sp %sp -216
 lw %ra %sp 212
-addi %a0 %zero 1815
-lui %a0 953266176
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 1815
+lui %f1 953266176
 sw %ra %sp 212
 addi %sp %sp 216
-jal %ra -5874
+jal %ra -5718
 addi %sp %sp -216
 lw %ra %sp 212
 addi %a12 %zero 0
-bne %a0 %a12 25
+bne %a0 %a12 21
 lw %f0 %sp 160
 lw %f1 %sp 200
 fdiv %f0 %f1 %f0
 sw %ra %sp 212
 addi %sp %sp 216
-jal %ra -5888
+jal %ra -5732
 addi %sp %sp -216
 lw %ra %sp 212
 sw %ra %sp 212
 addi %sp %sp 216
-jal %ra -5662
+jal %ra -5506
 addi %sp %sp -216
 lw %ra %sp 212
-addi %a0 %zero 0
-lui %a0 1106247680
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1106247680
 fmul %f0 %f0 %f1
-addi %a0 %zero -37
-lui %a0 1078525952
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -37
+lui %f1 1078525952
 fdiv %f0 %f0 %f1
-jal %zero 5
-addi %a0 %zero 0
-lui %a0 1097859072
-slli %a0 %a0 2
-lw %f0 %a0 0
+jal %zero 3
+addi %f0 %zero 0
+lui %f0 1097859072
 sw %f0 %sp 208
 sw %ra %sp 220
 addi %sp %sp 224
-jal %ra -5902
+jal %ra -5740
 addi %sp %sp -224
 lw %ra %sp 220
 lw %f1 %sp 208
 fsub %f0 %f1 %f0
-addi %a0 %zero -1638
-lui %a0 1041862656
-slli %a0 %a0 2
-lw %f1 %a0 0
-addi %a0 %zero 0
-lui %a0 1056964608
-slli %a0 %a0 2
-lw %f2 %a0 0
+addi %f1 %zero -1638
+lui %f1 1041862656
+addi %f2 %zero 0
+lui %f2 1056964608
 lw %f3 %sp 176
 fsub %f2 %f2 %f3
 sw %f0 %sp 216
@@ -5958,22 +5792,20 @@ sw %f1 %sp 224
 fadd %f0 %f2 %fzero
 sw %ra %sp 236
 addi %sp %sp 240
-jal %ra -5938
+jal %ra -5772
 addi %sp %sp -240
 lw %ra %sp 236
 lw %f1 %sp 224
 fsub %f0 %f1 %f0
-addi %a0 %zero 0
-lui %a0 1056964608
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1056964608
 lw %f2 %sp 216
 fsub %f1 %f1 %f2
 sw %f0 %sp 232
 fadd %f0 %f1 %fzero
 sw %ra %sp 244
 addi %sp %sp 248
-jal %ra -5953
+jal %ra -5785
 addi %sp %sp -248
 lw %ra %sp 244
 lw %f1 %sp 232
@@ -5981,26 +5813,20 @@ fsub %f0 %f1 %f0
 sw %f0 %sp 240
 sw %ra %sp 252
 addi %sp %sp 256
-jal %ra -5947
+jal %ra -5779
 addi %sp %sp -256
 lw %ra %sp 252
 addi %a12 %zero 0
 bne %a0 %a12 3
 lw %f0 %sp 240
-jal %zero 5
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
-addi %a0 %zero 0
-lui %a0 1132396544
-slli %a0 %a0 2
-lw %f1 %a0 0
+jal %zero 3
+addi %f0 %zero 0
+lui %f0 0
+addi %f1 %zero 0
+lui %f1 1132396544
 fmul %f0 %f1 %f0
-addi %a0 %zero -1638
-lui %a0 1050251264
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -1638
+lui %f1 1050251264
 fdiv %f0 %f0 %f1
 lw %a0 %sp 4
 sw %f0 %a0 8
@@ -6015,7 +5841,7 @@ sw %a0 %sp 24
 sw %a1 %sp 28
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -5983
+jal %ra -5809
 addi %sp %sp -40
 lw %ra %sp 36
 addi %a12 %zero 0
@@ -6026,13 +5852,13 @@ lw %a0 %sp 28
 lw %a1 %sp 24
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -5425
+jal %ra -5267
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f0 %sp 8
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -6000
+jal %ra -5826
 addi %sp %sp -40
 lw %ra %sp 36
 addi %a12 %zero 0
@@ -6041,12 +5867,12 @@ jalr %ra %zero 0
 lw %f0 %sp 8
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -6021
+jal %ra -5847
 addi %sp %sp -40
 lw %ra %sp 36
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -6026
+jal %ra -5852
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 0
@@ -6093,7 +5919,7 @@ sw %a6 %sp 60
 add %a0 %a3 %zero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -5339
+jal %ra -5181
 addi %sp %sp -72
 lw %ra %sp 68
 lw %a11 %sp 60
@@ -6112,7 +5938,7 @@ lw %a0 %a0 0
 addi %a1 %zero 4
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -6114
+jal %ra -5940
 addi %sp %sp -72
 lw %ra %sp 68
 lw %a1 %sp 52
@@ -6123,7 +5949,7 @@ sw %a0 %sp 68
 add %a0 %a1 %zero
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -5371
+jal %ra -5213
 addi %sp %sp -80
 lw %ra %sp 76
 lw %a1 %sp 68
@@ -6143,21 +5969,21 @@ bne %a0 %a12 52
 lw %a0 %sp 64
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -5395
+jal %ra -5237
 addi %sp %sp -80
 lw %ra %sp 76
 add %a1 %a0 %zero
 lw %a0 %sp 32
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -5570
+jal %ra -5412
 addi %sp %sp -80
 lw %ra %sp 76
 lw %a0 %sp 48
 sw %f0 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -5401
+jal %ra -5243
 addi %sp %sp -88
 lw %ra %sp 84
 lw %f1 %sp 24
@@ -6169,14 +5995,14 @@ sw %f2 %sp 80
 sw %f0 %sp 88
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -5421
+jal %ra -5263
 addi %sp %sp -104
 lw %ra %sp 100
 add %a1 %a0 %zero
 lw %a0 %sp 20
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -5596
+jal %ra -5438
 addi %sp %sp -104
 lw %ra %sp 100
 lw %f1 %sp 88
@@ -6236,7 +6062,7 @@ lw %a11 %a11 4
 sw %a11 %sp 48
 addi %a11 %zero 4
 addi %a12 %zero 4
-blt %a12 %a0 424
+blt %a12 %a0 412
 sw %f1 %sp 56
 sw %a2 %sp 64
 sw %a11 %sp 68
@@ -6254,7 +6080,7 @@ sw %a5 %sp 116
 add %a0 %a2 %zero
 sw %ra %sp 124
 addi %sp %sp 128
-jal %ra -5522
+jal %ra -5364
 addi %sp %sp -128
 lw %ra %sp 124
 lw %a1 %sp 112
@@ -6284,18 +6110,18 @@ lw %a0 %sp 112
 lw %a1 %sp 104
 sw %ra %sp 124
 addi %sp %sp 128
-jal %ra -5704
+jal %ra -5546
 addi %sp %sp -128
 lw %ra %sp 124
 sw %ra %sp 124
 addi %sp %sp 128
-jal %ra -6263
+jal %ra -6089
 addi %sp %sp -128
 lw %ra %sp 124
 sw %f0 %sp 128
 sw %ra %sp 140
 addi %sp %sp 144
-jal %ra -6263
+jal %ra -6089
 addi %sp %sp -144
 lw %ra %sp 140
 addi %a12 %zero 0
@@ -6304,7 +6130,7 @@ jalr %ra %zero 0
 lw %f0 %sp 128
 sw %ra %sp 140
 addi %sp %sp 144
-jal %ra -6284
+jal %ra -6110
 addi %sp %sp -144
 lw %ra %sp 140
 lw %f1 %sp 128
@@ -6337,7 +6163,7 @@ sw %a2 %sp 144
 add %a0 %a2 %zero
 sw %ra %sp 148
 addi %sp %sp 152
-jal %ra -5661
+jal %ra -5503
 addi %sp %sp -152
 lw %ra %sp 148
 lw %a1 %sp 144
@@ -6345,7 +6171,7 @@ sw %a0 %sp 148
 add %a0 %a1 %zero
 sw %ra %sp 156
 addi %sp %sp 160
-jal %ra -5643
+jal %ra -5485
 addi %sp %sp -160
 lw %ra %sp 156
 lw %f1 %sp 96
@@ -6364,7 +6190,7 @@ lw %a0 %sp 72
 lw %a1 %sp 40
 sw %ra %sp 164
 addi %sp %sp 168
-jal %ra -5958
+jal %ra -5792
 addi %sp %sp -168
 lw %ra %sp 164
 lw %a0 %sp 144
@@ -6380,7 +6206,7 @@ lw %a0 %sp 140
 lw %a1 %sp 68
 sw %ra %sp 164
 addi %sp %sp 168
-jal %ra -6382
+jal %ra -6208
 addi %sp %sp -168
 lw %ra %sp 164
 lw %a1 %sp 32
@@ -6394,7 +6220,7 @@ sw %a0 %a12 0
 lw %a0 %sp 64
 sw %ra %sp 164
 addi %sp %sp 168
-jal %ra -5664
+jal %ra -5506
 addi %sp %sp -168
 lw %ra %sp 164
 lw %a1 %sp 108
@@ -6405,13 +6231,13 @@ lw %a2 %sp 40
 add %a1 %a2 %zero
 sw %ra %sp 164
 addi %sp %sp 168
-jal %ra -5999
+jal %ra -5833
 addi %sp %sp -168
 lw %ra %sp 164
 lw %a0 %sp 64
 sw %ra %sp 164
 addi %sp %sp 168
-jal %ra -5677
+jal %ra -5519
 addi %sp %sp -168
 lw %ra %sp 164
 lw %a1 %sp 144
@@ -6419,20 +6245,18 @@ sw %a0 %sp 160
 add %a0 %a1 %zero
 sw %ra %sp 164
 addi %sp %sp 168
-jal %ra -5717
+jal %ra -5559
 addi %sp %sp -168
 lw %ra %sp 164
-addi %a0 %zero 0
-lui %a0 1056964608
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1056964608
 sw %ra %sp 164
 addi %sp %sp 168
-jal %ra -6400
+jal %ra -6224
 addi %sp %sp -168
 lw %ra %sp 164
 addi %a12 %zero 0
-bne %a0 %a12 66
+bne %a0 %a12 62
 addi %a0 %zero 1
 lw %a1 %sp 108
 slli %a2 %a1 2
@@ -6442,7 +6266,7 @@ sw %a0 %a12 0
 lw %a0 %sp 64
 sw %ra %sp 164
 addi %sp %sp 168
-jal %ra -5706
+jal %ra -5546
 addi %sp %sp -168
 lw %ra %sp 164
 lw %a1 %sp 108
@@ -6455,7 +6279,7 @@ add %a1 %a3 %zero
 add %a0 %a2 %zero
 sw %ra %sp 172
 addi %sp %sp 176
-jal %ra -6049
+jal %ra -5881
 addi %sp %sp -176
 lw %ra %sp 172
 lw %a0 %sp 108
@@ -6463,27 +6287,23 @@ slli %a1 %a0 2
 lw %a2 %sp 164
 add %a12 %a2 %a1
 lw %a1 %a12 0
-addi %a2 %zero 0
-lui %a2 1065353216
-slli %a2 %a2 2
-lw %f0 %a2 0
-addi %a2 %zero 0
-lui %a2 1132462080
-slli %a2 %a2 2
-lw %f1 %a2 0
+addi %f0 %zero 0
+lui %f0 1065353216
+addi %f1 %zero 0
+lui %f1 1132462080
 fdiv %f0 %f0 %f1
 lw %f1 %sp 152
 fmul %f0 %f0 %f1
 add %a0 %a1 %zero
 sw %ra %sp 172
 addi %sp %sp 176
-jal %ra -5834
+jal %ra -5670
 addi %sp %sp -176
 lw %ra %sp 172
 lw %a0 %sp 64
 sw %ra %sp 172
 addi %sp %sp 176
-jal %ra -5737
+jal %ra -5573
 addi %sp %sp -176
 lw %ra %sp 172
 lw %a1 %sp 108
@@ -6494,7 +6314,7 @@ lw %a2 %sp 24
 add %a1 %a2 %zero
 sw %ra %sp 172
 addi %sp %sp 176
-jal %ra -6088
+jal %ra -5916
 addi %sp %sp -176
 lw %ra %sp 172
 jal %zero 7
@@ -6504,16 +6324,14 @@ lw %a2 %sp 160
 lw %a3 %sp 136
 add %a12 %a2 %a1
 sw %a3 %a12 0
-addi %a0 %zero 0
-lui %a0 -1073741824
-slli %a0 %a0 2
-lw %f0 %a0 0
+addi %f0 %zero 0
+lui %f0 -1073741824
 lw %a0 %sp 112
 lw %a1 %sp 24
 sw %f0 %sp 168
 sw %ra %sp 180
 addi %sp %sp 184
-jal %ra -5933
+jal %ra -5767
 addi %sp %sp -184
 lw %ra %sp 180
 lw %f1 %sp 168
@@ -6522,13 +6340,13 @@ lw %a0 %sp 112
 lw %a1 %sp 24
 sw %ra %sp 180
 addi %sp %sp 184
-jal %ra -5921
+jal %ra -5755
 addi %sp %sp -184
 lw %ra %sp 180
 lw %a0 %sp 144
 sw %ra %sp 180
 addi %sp %sp 184
-jal %ra -5823
+jal %ra -5657
 addi %sp %sp -184
 lw %ra %sp 180
 lw %f1 %sp 96
@@ -6550,12 +6368,12 @@ lw %a0 %sp 24
 lw %a1 %sp 104
 sw %ra %sp 188
 addi %sp %sp 192
-jal %ra -5970
+jal %ra -5804
 addi %sp %sp -192
 lw %ra %sp 188
 sw %ra %sp 188
 addi %sp %sp 192
-jal %ra -6529
+jal %ra -6347
 addi %sp %sp -192
 lw %ra %sp 188
 lw %f1 %sp 152
@@ -6565,12 +6383,12 @@ lw %a1 %sp 104
 sw %f0 %sp 184
 sw %ra %sp 196
 addi %sp %sp 200
-jal %ra -5985
+jal %ra -5819
 addi %sp %sp -200
 lw %ra %sp 196
 sw %ra %sp 196
 addi %sp %sp 200
-jal %ra -6544
+jal %ra -6362
 addi %sp %sp -200
 lw %ra %sp 196
 fadd %f1 %f0 %fzero
@@ -6605,14 +6423,12 @@ addi %sp %sp 200
 jalr %a10 %ra 0
 addi %sp %sp -200
 lw %ra %sp 196
-addi %a0 %zero -819
-lui %a0 1036828672
-slli %a0 %a0 2
-lw %f0 %a0 0
+addi %f0 %zero -819
+lui %f0 1036828672
 lw %f1 %sp 96
 sw %ra %sp 196
 addi %sp %sp 200
-jal %ra -6584
+jal %ra -6400
 addi %sp %sp -200
 lw %ra %sp 196
 addi %a12 %zero 0
@@ -6631,17 +6447,15 @@ add %a12 %a3 %a1
 sw %a2 %a12 0
 lw %a1 %sp 148
 addi %a12 %zero 2
-bne %a1 %a12 28
-addi %a1 %zero 0
-lui %a1 1065353216
-slli %a1 %a1 2
-lw %f0 %a1 0
+bne %a1 %a12 26
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %a1 %sp 144
 sw %f0 %sp 192
 add %a0 %a1 %zero
 sw %ra %sp 204
 addi %sp %sp 208
-jal %ra -5939
+jal %ra -5769
 addi %sp %sp -208
 lw %ra %sp 204
 lw %f1 %sp 192
@@ -6709,7 +6523,7 @@ sw %a0 %sp 60
 add %a0 %a2 %zero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -5961
+jal %ra -5791
 addi %sp %sp -72
 lw %ra %sp 68
 add %a1 %a0 %zero
@@ -6741,31 +6555,29 @@ jalr %a10 %ra 0
 addi %sp %sp -72
 lw %ra %sp 68
 addi %a12 %zero 0
-bne %a0 %a12 41
+bne %a0 %a12 39
 lw %a0 %sp 20
 lw %a1 %sp 16
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -6166
+jal %ra -5996
 addi %sp %sp -72
 lw %ra %sp 68
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -6725
+jal %ra -6539
 addi %sp %sp -72
 lw %ra %sp 68
 sw %f0 %sp 64
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -6725
+jal %ra -6539
 addi %sp %sp -80
 lw %ra %sp 76
 addi %a12 %zero 0
-bne %a0 %a12 6
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
+bne %a0 %a12 4
+addi %f0 %zero 0
+lui %f0 0
 jal %zero 2
 lw %f0 %sp 64
 lw %f1 %sp 8
@@ -6774,18 +6586,18 @@ lw %a0 %sp 60
 sw %f0 %sp 72
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -6072
+jal %ra -5900
 addi %sp %sp -88
 lw %ra %sp 84
 lw %f1 %sp 72
 fmul %f0 %f1 %f0
 lw %a0 %sp 4
 lw %a1 %sp 0
-jal %zero -6180
+jal %zero -6008
 jalr %ra %zero 0
 lw %a4 %a11 4
 addi %a12 %zero 0
-blt %a3 %a12 78
+blt %a3 %a12 74
 slli %a5 %a3 2
 add %a12 %a0 %a5
 lw %a5 %a12 0
@@ -6798,32 +6610,30 @@ sw %a1 %sp 20
 add %a0 %a5 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -6050
+jal %ra -5878
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 20
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -6224
+jal %ra -6052
 addi %sp %sp -32
 lw %ra %sp 28
 sw %f0 %sp 24
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -6776
+jal %ra -6588
 addi %sp %sp -40
 lw %ra %sp 36
 addi %a12 %zero 0
-bne %a0 %a12 21
+bne %a0 %a12 19
 lw %a0 %sp 16
 slli %a1 %a0 2
 lw %a2 %sp 12
 add %a12 %a2 %a1
 lw %a1 %a12 0
-addi %a3 %zero 0
-lui %a3 1125515264
-slli %a3 %a3 2
-lw %f0 %a3 0
+addi %f0 %zero 0
+lui %f0 1125515264
 lw %f1 %sp 24
 fdiv %f0 %f1 %f0
 lw %a11 %sp 8
@@ -6834,17 +6644,15 @@ addi %sp %sp 40
 jalr %a10 %ra 0
 addi %sp %sp -40
 lw %ra %sp 36
-jal %zero 21
+jal %zero 19
 lw %a0 %sp 16
 addi %a1 %a0 1
 slli %a1 %a1 2
 lw %a2 %sp 12
 add %a12 %a2 %a1
 lw %a1 %a12 0
-addi %a3 %zero 0
-lui %a3 -1021968384
-slli %a3 %a3 2
-lw %f0 %a3 0
+addi %f0 %zero 0
+lui %f0 -1021968384
 lw %f1 %sp 24
 fdiv %f0 %f1 %f0
 lw %a11 %sp 8
@@ -6979,7 +6787,7 @@ sw %a1 %sp 12
 sw %a0 %sp 16
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -6241
+jal %ra -6065
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a1 %sp 16
@@ -6987,7 +6795,7 @@ sw %a0 %sp 20
 add %a0 %a1 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -6241
+jal %ra -6065
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 16
@@ -6995,7 +6803,7 @@ sw %a0 %sp 24
 add %a0 %a1 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -6265
+jal %ra -6089
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 16
@@ -7003,7 +6811,7 @@ sw %a0 %sp 28
 add %a0 %a1 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -6267
+jal %ra -6091
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a1 %sp 12
@@ -7017,13 +6825,13 @@ add %a1 %a2 %zero
 add %a0 %a3 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -6611
+jal %ra -6427
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 16
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -6283
+jal %ra -6107
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a1 %sp 12
@@ -7051,7 +6859,7 @@ add %a12 %a1 %a0
 lw %a1 %a12 0
 lw %a0 %sp 0
 lw %a2 %sp 8
-jal %zero -6398
+jal %zero -6222
 lw %a5 %a11 8
 lw %a6 %a11 4
 slli %a7 %a0 2
@@ -7066,7 +6874,7 @@ sw %a0 %sp 20
 add %a0 %a1 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -6328
+jal %ra -6152
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 20
@@ -7079,7 +6887,7 @@ sw %a0 %sp 24
 add %a0 %a2 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -6341
+jal %ra -6165
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 20
@@ -7091,7 +6899,7 @@ sw %a0 %sp 28
 add %a0 %a2 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -6353
+jal %ra -6177
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a1 %sp 20
@@ -7104,7 +6912,7 @@ sw %a0 %sp 32
 add %a0 %a2 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -6366
+jal %ra -6190
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a1 %sp 20
@@ -7116,7 +6924,7 @@ sw %a0 %sp 36
 add %a0 %a2 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -6378
+jal %ra -6202
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a1 %sp 8
@@ -7130,7 +6938,7 @@ add %a1 %a2 %zero
 add %a0 %a3 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -6724
+jal %ra -6540
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 8
@@ -7142,7 +6950,7 @@ lw %a2 %sp 4
 add %a0 %a2 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -6525
+jal %ra -6349
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 8
@@ -7154,7 +6962,7 @@ lw %a2 %sp 4
 add %a0 %a2 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -6537
+jal %ra -6361
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 8
@@ -7166,7 +6974,7 @@ lw %a2 %sp 4
 add %a0 %a2 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -6549
+jal %ra -6373
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 8
@@ -7178,7 +6986,7 @@ lw %a2 %sp 4
 add %a0 %a2 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -6561
+jal %ra -6385
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 20
@@ -7188,7 +6996,7 @@ add %a12 %a1 %a0
 lw %a0 %a12 0
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -6452
+jal %ra -6276
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a1 %sp 8
@@ -7197,7 +7005,7 @@ add %a12 %a0 %a1
 lw %a1 %a12 0
 lw %a0 %sp 0
 lw %a2 %sp 4
-jal %zero -6544
+jal %zero -6368
 lw %a2 %a11 4
 addi %a12 %zero 4
 blt %a12 %a1 44
@@ -7207,7 +7015,7 @@ sw %a0 %sp 8
 sw %a1 %sp 12
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -6475
+jal %ra -6299
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a1 %sp 12
@@ -7219,7 +7027,7 @@ blt %a0 %a12 28
 lw %a0 %sp 8
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -6485
+jal %ra -6309
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a1 %sp 12
@@ -7270,7 +7078,7 @@ jalr %ra %zero 0
 sw %a1 %sp 0
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -6538
+jal %ra -6362
 addi %sp %sp -8
 lw %ra %sp 4
 lw %a1 %sp 0
@@ -7411,7 +7219,7 @@ jalr %a10 %zero 0
 lw %a0 %sp 12
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -6677
+jal %ra -6501
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a4 %sp 20
@@ -7450,20 +7258,20 @@ sw %a0 %sp 0
 add %a0 %a1 %zero
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -7134
+jal %ra -6942
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a0 %zero 48
 addi %a0 %a0 3
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -7141
+jal %ra -6949
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a0 %zero 10
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -7147
+jal %ra -6955
 addi %sp %sp -8
 lw %ra %sp 4
 lw %a0 %sp 0
@@ -7471,39 +7279,39 @@ lw %a1 %a0 0
 add %a0 %a1 %zero
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -7158
+jal %ra -6966
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a0 %zero 32
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -7161
+jal %ra -6969
 addi %sp %sp -8
 lw %ra %sp 4
 lw %a0 %sp 0
 lw %a0 %a0 4
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -7171
+jal %ra -6979
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a0 %zero 32
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -7174
+jal %ra -6982
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a0 %zero 255
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -7183
+jal %ra -6991
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a0 %zero 10
-jal %zero -7184
+jal %zero -6992
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -7465
+jal %ra -7273
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a1 %zero 255
@@ -7516,7 +7324,7 @@ jal %zero 2
 addi %a0 %a1 0
 jal %zero 2
 addi %a0 %a1 0
-jal %zero -7203
+jal %zero -7011
 lw %a0 %a11 4
 lw %f0 %a0 0
 sw %a0 %sp 0
@@ -7528,7 +7336,7 @@ lw %ra %sp 4
 addi %a0 %zero 32
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -7212
+jal %ra -7020
 addi %sp %sp -8
 lw %ra %sp 4
 lw %a0 %sp 0
@@ -7541,7 +7349,7 @@ lw %ra %sp 4
 addi %a0 %zero 32
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -7225
+jal %ra -7033
 addi %sp %sp -8
 lw %ra %sp 4
 lw %a0 %sp 0
@@ -7552,7 +7360,7 @@ jal %ra -47
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a0 %zero 10
-jal %zero -7236
+jal %zero -7044
 lw %a2 %a11 12
 lw %a3 %a11 8
 lw %a4 %a11 4
@@ -7574,7 +7382,7 @@ blt %a0 %a12 88
 lw %a0 %sp 20
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -6840
+jal %ra -6664
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 16
@@ -7587,7 +7395,7 @@ jal %zero 69
 lw %a0 %sp 20
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -6847
+jal %ra -6671
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 12
@@ -7595,13 +7403,13 @@ sw %a0 %sp 24
 add %a0 %a1 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -7194
+jal %ra -7008
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a0 %sp 20
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -6855
+jal %ra -6679
 addi %sp %sp -32
 lw %ra %sp 28
 lw %a1 %sp 20
@@ -7609,7 +7417,7 @@ sw %a0 %sp 28
 add %a0 %a1 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -6879
+jal %ra -6703
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a1 %sp 24
@@ -7638,7 +7446,7 @@ lw %ra %sp 36
 lw %a0 %sp 20
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -6900
+jal %ra -6724
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a1 %sp 16
@@ -7649,7 +7457,7 @@ lw %a2 %sp 12
 add %a1 %a2 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -7243
+jal %ra -7059
 addi %sp %sp -40
 lw %ra %sp 36
 lw %a0 %sp 16
@@ -7673,7 +7481,7 @@ lw %a11 %a11 4
 sw %a10 %sp 4
 addi %a10 %zero 0
 addi %a12 %zero 0
-blt %a1 %a12 155
+blt %a1 %a12 151
 lw %f3 %a7 0
 lw %a7 %a11 0
 sub %a7 %a1 %a7
@@ -7694,7 +7502,7 @@ sw %f3 %sp 80
 add %a0 %a7 %zero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -7654
+jal %ra -7462
 addi %sp %sp -96
 lw %ra %sp 92
 lw %f1 %sp 80
@@ -7722,35 +7530,31 @@ add %a1 %a0 %zero
 add %a0 %a10 %zero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -7217
+jal %ra -7035
 addi %sp %sp -96
 lw %ra %sp 92
 lw %a0 %sp 32
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -7327
+jal %ra -7141
 addi %sp %sp -96
 lw %ra %sp 92
 lw %a0 %sp 28
 lw %a1 %sp 24
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -7329
+jal %ra -7145
 addi %sp %sp -96
 lw %ra %sp 92
-addi %a0 %zero 0
-lui %a0 1065353216
-slli %a0 %a0 2
-lw %f0 %a0 0
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %a0 %sp 20
 slli %a1 %a0 2
 lw %a2 %sp 16
 add %a12 %a2 %a1
 lw %a1 %a12 0
-addi %a3 %zero 0
-lui %a3 0
-slli %a3 %a3 2
-lw %f1 %a3 0
+addi %f1 %zero 0
+lui %f1 0
 lw %a3 %sp 36
 lw %a4 %sp 56
 lw %a11 %sp 12
@@ -7771,13 +7575,13 @@ lw %a1 %a12 0
 add %a0 %a1 %zero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -7043
+jal %ra -6863
 addi %sp %sp -96
 lw %ra %sp 92
 lw %a1 %sp 32
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -7371
+jal %ra -7183
 addi %sp %sp -96
 lw %ra %sp 92
 lw %a0 %sp 20
@@ -7790,7 +7594,7 @@ add %a0 %a1 %zero
 add %a1 %a3 %zero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -7047
+jal %ra -6867
 addi %sp %sp -96
 lw %ra %sp 92
 lw %a0 %sp 20
@@ -7816,7 +7620,7 @@ sw %a0 %sp 88
 add %a0 %a2 %zero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -7429
+jal %ra -7239
 addi %sp %sp -96
 lw %ra %sp 92
 add %a2 %a0 %zero
@@ -7848,7 +7652,7 @@ sw %f0 %sp 24
 add %a0 %a1 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -7808
+jal %ra -7612
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 24
@@ -7905,14 +7709,14 @@ sw %a7 %sp 40
 add %a0 %a9 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -7177
+jal %ra -6997
 addi %sp %sp -48
 lw %ra %sp 44
 add %a1 %a0 %zero
 lw %a0 %sp 40
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -7506
+jal %ra -7318
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 32
@@ -8024,7 +7828,7 @@ sw %a0 %sp 28
 add %a0 %a2 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -7637
+jal %ra -7447
 addi %sp %sp -40
 lw %ra %sp 36
 add %a4 %a0 %zero
@@ -8036,68 +7840,58 @@ lw %a11 %sp 0
 lw %a10 %a11 0
 jalr %a10 %zero 0
 addi %a0 %zero 3
-addi %a1 %zero 0
-lui %a1 0
-slli %a1 %a1 2
-lw %f0 %a1 0
+addi %f0 %zero 0
+lui %f0 0
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -8032
+jal %ra -7834
 addi %sp %sp -8
 lw %ra %sp 4
 add %a1 %a0 %zero
 addi %a0 %zero 5
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -8047
+jal %ra -7849
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 0
 add %a0 %a1 %zero
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -8051
+jal %ra -7851
 addi %sp %sp -8
 lw %ra %sp 4
 lw %a1 %sp 0
 sw %a0 %a1 4
 addi %a0 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -8063
+jal %ra -7861
 addi %sp %sp -8
 lw %ra %sp 4
 lw %a1 %sp 0
 sw %a0 %a1 8
 addi %a0 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -8075
+jal %ra -7871
 addi %sp %sp -8
 lw %ra %sp 4
 lw %a1 %sp 0
 sw %a0 %a1 12
 addi %a0 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -8087
+jal %ra -7881
 addi %sp %sp -8
 lw %ra %sp 4
 lw %a1 %sp 0
@@ -8105,19 +7899,17 @@ sw %a0 %a1 16
 addi %a0 %a1 0
 jalr %ra %zero 0
 addi %a0 %zero 3
-addi %a1 %zero 0
-lui %a1 0
-slli %a1 %a1 2
-lw %f0 %a1 0
+addi %f0 %zero 0
+lui %f0 0
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -8101
+jal %ra -7893
 addi %sp %sp -8
 lw %ra %sp 4
 sw %a0 %sp 0
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -82
+jal %ra -70
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a1 %zero 5
@@ -8127,7 +7919,7 @@ add %a0 %a1 %zero
 add %a1 %a2 %zero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -8125
+jal %ra -7917
 addi %sp %sp -16
 lw %ra %sp 12
 addi %a1 %zero 5
@@ -8137,19 +7929,19 @@ add %a0 %a1 %zero
 add %a1 %a2 %zero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -8135
+jal %ra -7927
 addi %sp %sp -16
 lw %ra %sp 12
 sw %a0 %sp 12
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -108
+jal %ra -96
 addi %sp %sp -24
 lw %ra %sp 20
 sw %a0 %sp 16
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -114
+jal %ra -102
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a1 %zero 1
@@ -8159,13 +7951,13 @@ add %a0 %a1 %zero
 add %a1 %a2 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -8157
+jal %ra -7949
 addi %sp %sp -32
 lw %ra %sp 28
 sw %a0 %sp 24
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -130
+jal %ra -118
 addi %sp %sp -32
 lw %ra %sp 28
 addi %a1 %mc_hp 0
@@ -8193,7 +7985,7 @@ sw %a0 %sp 0
 sw %a1 %sp 4
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -89
+jal %ra -87
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a1 %sp 4
@@ -8211,14 +8003,14 @@ sw %a0 %sp 0
 sw %a1 %sp 4
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -107
+jal %ra -105
 addi %sp %sp -16
 lw %ra %sp 12
 add %a1 %a0 %zero
 lw %a0 %sp 4
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -8216
+jal %ra -8008
 addi %sp %sp -16
 lw %ra %sp 12
 lw %a1 %sp 0
@@ -8228,7 +8020,7 @@ jal %zero -37
 sw %f0 %sp 0
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -8114
+jal %ra -7906
 addi %sp %sp -16
 lw %ra %sp 12
 lw %f1 %sp 0
@@ -8236,41 +8028,37 @@ sw %f0 %sp 8
 fadd %f0 %f1 %fzero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -8077
+jal %ra -7869
 addi %sp %sp -24
 lw %ra %sp 20
 lw %f1 %sp 8
 fdiv %f0 %f1 %f0
 jalr %ra %zero 0
 fmul %f0 %f0 %f0
-addi %a0 %zero -819
-lui %a0 1036828672
-slli %a0 %a0 2
-lw %f2 %a0 0
+addi %f2 %zero -819
+lui %f2 1036828672
 fadd %f0 %f0 %f2
 sw %f1 %sp 0
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -8229
+jal %ra -8019
 addi %sp %sp -16
 lw %ra %sp 12
-addi %a0 %zero 0
-lui %a0 1065353216
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1065353216
 fdiv %f1 %f1 %f0
 sw %f0 %sp 8
 fadd %f0 %f1 %fzero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -8008
+jal %ra -7796
 addi %sp %sp -24
 lw %ra %sp 20
 lw %f1 %sp 0
 fmul %f0 %f0 %f1
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -45
+jal %ra -41
 addi %sp %sp -24
 lw %ra %sp 20
 lw %f1 %sp 8
@@ -8278,7 +8066,7 @@ fmul %f0 %f0 %f1
 jalr %ra %zero 0
 lw %a3 %a11 4
 addi %a12 %zero 5
-blt %a0 %a12 233
+blt %a0 %a12 229
 sw %a2 %sp 0
 sw %a3 %sp 4
 sw %a1 %sp 8
@@ -8286,7 +8074,7 @@ sw %f0 %sp 16
 sw %f1 %sp 24
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -8266
+jal %ra -8054
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 24
@@ -8294,29 +8082,25 @@ sw %f0 %sp 32
 fadd %f0 %f1 %fzero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -8274
+jal %ra -8062
 addi %sp %sp -48
 lw %ra %sp 44
 lw %f1 %sp 32
 fadd %f0 %f1 %f0
-addi %a0 %zero 0
-lui %a0 1065353216
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1065353216
 fadd %f0 %f0 %f1
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -8284
+jal %ra -8070
 addi %sp %sp -48
 lw %ra %sp 44
 lw %f1 %sp 16
 fdiv %f1 %f1 %f0
 lw %f2 %sp 24
 fdiv %f2 %f2 %f0
-addi %a0 %zero 0
-lui %a0 1065353216
-slli %a0 %a0 2
-lw %f3 %a0 0
+addi %f3 %zero 0
+lui %f3 1065353216
 fdiv %f0 %f3 %f0
 lw %a0 %sp 8
 slli %a0 %a0 2
@@ -8334,7 +8118,7 @@ sw %f1 %sp 64
 add %a0 %a2 %zero
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -7586
+jal %ra -7386
 addi %sp %sp -80
 lw %ra %sp 76
 lw %f0 %sp 64
@@ -8342,7 +8126,7 @@ lw %f1 %sp 56
 lw %f2 %sp 48
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -7949
+jal %ra -7739
 addi %sp %sp -80
 lw %ra %sp 76
 lw %a0 %sp 0
@@ -8354,14 +8138,14 @@ lw %a1 %a12 0
 add %a0 %a1 %zero
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -7606
+jal %ra -7406
 addi %sp %sp -80
 lw %ra %sp 76
 lw %f0 %sp 56
 sw %a0 %sp 72
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -8335
+jal %ra -8119
 addi %sp %sp -80
 lw %ra %sp 76
 fadd %f2 %f0 %fzero
@@ -8370,7 +8154,7 @@ lw %f1 %sp 48
 lw %a0 %sp 72
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -7977
+jal %ra -7767
 addi %sp %sp -80
 lw %ra %sp 76
 lw %a0 %sp 0
@@ -8382,14 +8166,14 @@ lw %a1 %a12 0
 add %a0 %a1 %zero
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -7634
+jal %ra -7434
 addi %sp %sp -80
 lw %ra %sp 76
 lw %f0 %sp 64
 sw %a0 %sp 76
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -8363
+jal %ra -8147
 addi %sp %sp -88
 lw %ra %sp 84
 lw %f1 %sp 56
@@ -8397,7 +8181,7 @@ sw %f0 %sp 80
 fadd %f0 %f1 %fzero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -8371
+jal %ra -8155
 addi %sp %sp -96
 lw %ra %sp 92
 fadd %f2 %f0 %fzero
@@ -8406,7 +8190,7 @@ lw %f1 %sp 80
 lw %a0 %sp 76
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -8013
+jal %ra -7803
 addi %sp %sp -96
 lw %ra %sp 92
 lw %a0 %sp 0
@@ -8418,14 +8202,14 @@ lw %a1 %a12 0
 add %a0 %a1 %zero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -7670
+jal %ra -7470
 addi %sp %sp -96
 lw %ra %sp 92
 lw %f0 %sp 64
 sw %a0 %sp 88
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -8399
+jal %ra -8183
 addi %sp %sp -96
 lw %ra %sp 92
 lw %f1 %sp 56
@@ -8433,7 +8217,7 @@ sw %f0 %sp 96
 fadd %f0 %f1 %fzero
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -8407
+jal %ra -8191
 addi %sp %sp -112
 lw %ra %sp 108
 lw %f1 %sp 48
@@ -8441,7 +8225,7 @@ sw %f0 %sp 104
 fadd %f0 %f1 %fzero
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -8415
+jal %ra -8199
 addi %sp %sp -120
 lw %ra %sp 116
 fadd %f2 %f0 %fzero
@@ -8450,7 +8234,7 @@ lw %f1 %sp 104
 lw %a0 %sp 88
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -8057
+jal %ra -7847
 addi %sp %sp -120
 lw %ra %sp 116
 lw %a0 %sp 0
@@ -8462,14 +8246,14 @@ lw %a1 %a12 0
 add %a0 %a1 %zero
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -7714
+jal %ra -7514
 addi %sp %sp -120
 lw %ra %sp 116
 lw %f0 %sp 64
 sw %a0 %sp 112
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -8443
+jal %ra -8227
 addi %sp %sp -120
 lw %ra %sp 116
 lw %f1 %sp 48
@@ -8477,7 +8261,7 @@ sw %f0 %sp 120
 fadd %f0 %f1 %fzero
 sw %ra %sp 132
 addi %sp %sp 136
-jal %ra -8451
+jal %ra -8235
 addi %sp %sp -136
 lw %ra %sp 132
 fadd %f1 %f0 %fzero
@@ -8486,7 +8270,7 @@ lw %f2 %sp 56
 lw %a0 %sp 112
 sw %ra %sp 132
 addi %sp %sp 136
-jal %ra -8093
+jal %ra -7883
 addi %sp %sp -136
 lw %ra %sp 132
 lw %a0 %sp 0
@@ -8497,20 +8281,20 @@ add %a12 %a1 %a0
 lw %a0 %a12 0
 sw %ra %sp 132
 addi %sp %sp 136
-jal %ra -7749
+jal %ra -7549
 addi %sp %sp -136
 lw %ra %sp 132
 lw %f0 %sp 48
 sw %a0 %sp 128
 sw %ra %sp 132
 addi %sp %sp 136
-jal %ra -8478
+jal %ra -8262
 addi %sp %sp -136
 lw %ra %sp 132
 lw %f1 %sp 64
 lw %f2 %sp 56
 lw %a0 %sp 128
-jal %zero -8117
+jal %zero -7907
 sw %f2 %sp 136
 sw %a2 %sp 0
 sw %a1 %sp 8
@@ -8521,7 +8305,7 @@ fadd %f0 %f1 %fzero
 fadd %f1 %f2 %fzero
 sw %ra %sp 164
 addi %sp %sp 168
-jal %ra -279
+jal %ra -271
 addi %sp %sp -168
 lw %ra %sp 164
 lw %a0 %sp 160
@@ -8531,7 +8315,7 @@ sw %f0 %sp 168
 sw %a0 %sp 176
 sw %ra %sp 180
 addi %sp %sp 184
-jal %ra -289
+jal %ra -281
 addi %sp %sp -184
 lw %ra %sp 180
 fadd %f1 %f0 %fzero
@@ -8547,7 +8331,7 @@ jalr %a10 %zero 0
 lw %a3 %a11 4
 addi %a4 %zero 0
 addi %a12 %zero 0
-blt %a0 %a12 98
+blt %a0 %a12 82
 sw %a11 %sp 0
 sw %a0 %sp 4
 sw %f0 %sp 8
@@ -8557,27 +8341,19 @@ sw %a4 %sp 24
 sw %a3 %sp 28
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -8517
+jal %ra -8301
 addi %sp %sp -40
 lw %ra %sp 36
-addi %a0 %zero -819
-lui %a0 1045217280
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -819
+lui %f1 1045217280
 fmul %f0 %f0 %f1
-addi %a0 %zero 1638
-lui %a0 1063673856
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 1638
+lui %f1 1063673856
 fsub %f2 %f0 %f1
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f0 %zero 0
+lui %f0 0
+addi %f1 %zero 0
+lui %f1 0
 lw %f3 %sp 8
 lw %a0 %sp 24
 lw %a1 %sp 20
@@ -8592,27 +8368,19 @@ lw %ra %sp 36
 lw %a0 %sp 4
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -8552
+jal %ra -8328
 addi %sp %sp -40
 lw %ra %sp 36
-addi %a0 %zero -819
-lui %a0 1045217280
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -819
+lui %f1 1045217280
 fmul %f0 %f0 %f1
-addi %a0 %zero -819
-lui %a0 1036828672
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -819
+lui %f1 1036828672
 fadd %f2 %f0 %f1
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f0 %a0 0
-addi %a0 %zero 0
-lui %a0 0
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f0 %zero 0
+lui %f0 0
+addi %f1 %zero 0
+lui %f1 0
 lw %a0 %sp 16
 addi %a2 %a0 2
 lw %f3 %sp 8
@@ -8635,7 +8403,7 @@ sw %a0 %sp 32
 add %a0 %a2 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -8248
+jal %ra -8022
 addi %sp %sp -40
 lw %ra %sp 36
 add %a1 %a0 %zero
@@ -8648,7 +8416,7 @@ jalr %a10 %zero 0
 jalr %ra %zero 0
 lw %a3 %a11 4
 addi %a12 %zero 0
-blt %a0 %a12 49
+blt %a0 %a12 45
 sw %a11 %sp 0
 sw %a0 %sp 4
 sw %a2 %sp 8
@@ -8656,18 +8424,14 @@ sw %a1 %sp 12
 sw %a3 %sp 16
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -8616
+jal %ra -8384
 addi %sp %sp -24
 lw %ra %sp 20
-addi %a0 %zero -819
-lui %a0 1045217280
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero -819
+lui %f1 1045217280
 fmul %f0 %f0 %f1
-addi %a0 %zero 1638
-lui %a0 1063673856
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 1638
+lui %f1 1063673856
 fsub %f0 %f0 %f1
 addi %a0 %zero 4
 lw %a1 %sp 12
@@ -8687,7 +8451,7 @@ sw %a0 %sp 20
 add %a0 %a2 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -8300
+jal %ra -8070
 addi %sp %sp -32
 lw %ra %sp 28
 add %a1 %a0 %zero
@@ -8700,15 +8464,13 @@ jalr %a10 %zero 0
 jalr %ra %zero 0
 lw %a0 %a11 4
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 0
 add %a0 %a1 %zero
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -8698
+jal %ra -8460
 addi %sp %sp -8
 lw %ra %sp 4
 add %a1 %a0 %zero
@@ -8717,7 +8479,7 @@ lw %a0 %a0 0
 sw %a1 %sp 4
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -8715
+jal %ra -8477
 addi %sp %sp -16
 lw %ra %sp 12
 addi %a1 %mc_hp 0
@@ -8773,7 +8535,7 @@ add %a1 %a0 %zero
 lw %a0 %sp 16
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -8771
+jal %ra -8533
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a1 %sp 12
@@ -8896,7 +8658,7 @@ lw %ra %sp 60
 sw %a0 %sp 56
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -8148
+jal %ra -7926
 addi %sp %sp -64
 lw %ra %sp 60
 lw %f0 %sp 48
@@ -8904,7 +8666,7 @@ lw %f1 %sp 40
 lw %f2 %sp 32
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -8511
+jal %ra -8279
 addi %sp %sp -64
 lw %ra %sp 60
 lw %a0 %sp 56
@@ -8940,15 +8702,13 @@ sw %a2 %sp 12
 add %a1 %a5 %zero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -8942
+jal %ra -8704
 addi %sp %sp -24
 lw %ra %sp 20
 lw %a1 %sp 12
 lw %a2 %a1 0
-addi %a3 %zero 0
-lui %a3 1065353216
-slli %a3 %a3 2
-lw %f0 %a3 0
+addi %f0 %zero 0
+lui %f0 1065353216
 lw %a3 %sp 8
 sw %a2 %sp 16
 sw %a0 %sp 20
@@ -8956,7 +8716,7 @@ sw %f0 %sp 24
 add %a0 %a3 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -8254
+jal %ra -8030
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 24
@@ -8967,7 +8727,7 @@ sw %f0 %sp 32
 fadd %f0 %f1 %fzero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -8941
+jal %ra -8701
 addi %sp %sp -48
 lw %ra %sp 44
 lw %a0 %sp 4
@@ -8976,7 +8736,7 @@ sw %f0 %sp 40
 fadd %f0 %f1 %fzero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -8950
+jal %ra -8710
 addi %sp %sp -56
 lw %ra %sp 52
 lw %a0 %sp 4
@@ -8985,7 +8745,7 @@ sw %f0 %sp 48
 fadd %f0 %f1 %fzero
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -8959
+jal %ra -8719
 addi %sp %sp -64
 lw %ra %sp 60
 fadd %f3 %f0 %fzero
@@ -9054,10 +8814,8 @@ add %a5 %a5 %a0
 add %a0 %a5 %a0
 addi %a0 %a0 1
 lw %a5 %a2 0
-addi %a6 %zero 0
-lui %a6 1065353216
-slli %a6 %a6 2
-lw %f0 %a6 0
+addi %f0 %zero 0
+lui %f0 1065353216
 sw %a2 %sp 0
 sw %a0 %sp 4
 sw %a5 %sp 8
@@ -9068,7 +8826,7 @@ sw %f0 %sp 24
 add %a0 %a1 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -8366
+jal %ra -8140
 addi %sp %sp -40
 lw %ra %sp 36
 lw %f1 %sp 24
@@ -9077,26 +8835,24 @@ lw %a0 %sp 20
 sw %f0 %sp 32
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -8386
+jal %ra -8160
 addi %sp %sp -48
 lw %ra %sp 44
 add %a1 %a0 %zero
 lw %a0 %sp 16
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -8504
+jal %ra -8278
 addi %sp %sp -48
 lw %ra %sp 44
-addi %a0 %zero 0
-lui %a0 1073741824
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1073741824
 lw %a0 %sp 20
 sw %f0 %sp 40
 sw %f1 %sp 48
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -8414
+jal %ra -8186
 addi %sp %sp -64
 lw %ra %sp 60
 lw %f1 %sp 48
@@ -9106,17 +8862,15 @@ fmul %f0 %f0 %f1
 lw %a0 %sp 16
 lw %f2 %a0 0
 fsub %f0 %f0 %f2
-addi %a1 %zero 0
-lui %a1 1073741824
-slli %a1 %a1 2
-lw %f2 %a1 0
+addi %f2 %zero 0
+lui %f2 1073741824
 lw %a1 %sp 20
 sw %f0 %sp 56
 sw %f2 %sp 64
 add %a0 %a1 %zero
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -8431
+jal %ra -8201
 addi %sp %sp -80
 lw %ra %sp 76
 lw %f1 %sp 64
@@ -9126,17 +8880,15 @@ fmul %f0 %f0 %f1
 lw %a0 %sp 16
 lw %f2 %a0 4
 fsub %f0 %f0 %f2
-addi %a1 %zero 0
-lui %a1 1073741824
-slli %a1 %a1 2
-lw %f2 %a1 0
+addi %f2 %zero 0
+lui %f2 1073741824
 lw %a1 %sp 20
 sw %f0 %sp 72
 sw %f2 %sp 80
 add %a0 %a1 %zero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -8448
+jal %ra -8216
 addi %sp %sp -96
 lw %ra %sp 92
 lw %f1 %sp 80
@@ -9167,7 +8919,7 @@ lw %a1 %a11 12
 lw %a2 %a11 8
 lw %a3 %a11 4
 addi %a12 %zero 0
-blt %a0 %a12 56
+blt %a0 %a12 54
 slli %a4 %a0 2
 add %a12 %a3 %a4
 lw %a3 %a12 0
@@ -9178,24 +8930,22 @@ sw %a3 %sp 12
 add %a0 %a3 %zero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -8502
+jal %ra -8270
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a12 %zero 2
-bne %a0 %a12 40
+bne %a0 %a12 38
 lw %a0 %sp 12
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -8484
+jal %ra -8252
 addi %sp %sp -24
 lw %ra %sp 20
-addi %a0 %zero 0
-lui %a0 1065353216
-slli %a0 %a0 2
-lw %f1 %a0 0
+addi %f1 %zero 0
+lui %f1 1065353216
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -9167
+jal %ra -8917
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a12 %zero 0
@@ -9204,7 +8954,7 @@ jalr %ra %zero 0
 lw %a0 %sp 12
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -8530
+jal %ra -8296
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a12 %zero 1
@@ -9256,7 +9006,7 @@ sw %a3 %sp 56
 add %a1 %a9 %zero
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -9256
+jal %ra -9006
 addi %sp %sp -64
 lw %ra %sp 60
 lw %a1 %sp 56
@@ -9267,7 +9017,7 @@ add %a1 %a0 %zero
 add %a0 %a2 %zero
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -9267
+jal %ra -9017
 addi %sp %sp -64
 lw %ra %sp 60
 lw %a1 %sp 56
@@ -9276,14 +9026,12 @@ lw %a0 %sp 48
 sw %a0 %a1 0
 lw %a2 %sp 52
 sw %a2 %a1 4
-addi %a1 %zero 0
-lui %a1 1124073472
-slli %a1 %a1 2
-lw %f0 %a1 0
+addi %f0 %zero 0
+lui %f0 1124073472
 sw %f0 %sp 64
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -9243
+jal %ra -8991
 addi %sp %sp -80
 lw %ra %sp 76
 lw %f1 %sp 64
@@ -9338,13 +9086,13 @@ lw %ra %sp 84
 lw %a0 %sp 24
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -8590
+jal %ra -8354
 addi %sp %sp -88
 lw %ra %sp 84
 lw %a1 %sp 20
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -8938
+jal %ra -8694
 addi %sp %sp -88
 lw %ra %sp 84
 lw %a0 %sp 24
@@ -9395,19 +9143,17 @@ addi %a0 %zero 1
 addi %a1 %zero 0
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -9393
+jal %ra -9141
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a1 %zero 0
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 0
 add %a0 %a1 %zero
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -9397
+jal %ra -9143
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a1 %zero 60
@@ -9435,55 +9181,47 @@ add %a1 %a0 %zero
 add %a0 %a10 %zero
 sw %ra %sp 4
 addi %sp %sp 8
-jal %ra -9433
+jal %ra -9179
 addi %sp %sp -8
 lw %ra %sp 4
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 4
 add %a0 %a1 %zero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -9437
+jal %ra -9181
 addi %sp %sp -16
 lw %ra %sp 12
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 8
 add %a0 %a1 %zero
 sw %ra %sp 12
 addi %sp %sp 16
-jal %ra -9449
+jal %ra -9191
 addi %sp %sp -16
 lw %ra %sp 12
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 12
 add %a0 %a1 %zero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -9461
+jal %ra -9201
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a1 %zero 1
-addi %a2 %zero 0
-lui %a2 1132396544
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 1132396544
 sw %a0 %sp 16
 add %a0 %a1 %zero
 sw %ra %sp 20
 addi %sp %sp 24
-jal %ra -9473
+jal %ra -9211
 addi %sp %sp -24
 lw %ra %sp 20
 addi %a1 %zero 50
@@ -9495,14 +9233,14 @@ add %a1 %a3 %zero
 add %a0 %a2 %zero
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -9493
+jal %ra -9231
 addi %sp %sp -32
 lw %ra %sp 28
 add %a1 %a0 %zero
 lw %a0 %sp 24
 sw %ra %sp 28
 addi %sp %sp 32
-jal %ra -9500
+jal %ra -9238
 addi %sp %sp -32
 lw %ra %sp 28
 addi %a1 %zero 1
@@ -9513,26 +9251,24 @@ add %a0 %a1 %zero
 add %a1 %a2 %zero
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -9511
+jal %ra -9249
 addi %sp %sp -40
 lw %ra %sp 36
 add %a1 %a0 %zero
 lw %a0 %sp 32
 sw %ra %sp 36
 addi %sp %sp 40
-jal %ra -9518
+jal %ra -9256
 addi %sp %sp -40
 lw %ra %sp 36
 addi %a1 %zero 1
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 36
 add %a0 %a1 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -9522
+jal %ra -9258
 addi %sp %sp -48
 lw %ra %sp 44
 addi %a1 %zero 1
@@ -9542,31 +9278,27 @@ add %a0 %a1 %zero
 add %a1 %a2 %zero
 sw %ra %sp 44
 addi %sp %sp 48
-jal %ra -9540
+jal %ra -9276
 addi %sp %sp -48
 lw %ra %sp 44
 addi %a1 %zero 1
-addi %a2 %zero -1240
-lui %a2 1315856384
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero -1240
+lui %f0 1315856384
 sw %a0 %sp 44
 add %a0 %a1 %zero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -9544
+jal %ra -9278
 addi %sp %sp -56
 lw %ra %sp 52
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 48
 add %a0 %a1 %zero
 sw %ra %sp 52
 addi %sp %sp 56
-jal %ra -9556
+jal %ra -9288
 addi %sp %sp -56
 lw %ra %sp 52
 addi %a1 %zero 1
@@ -9576,55 +9308,47 @@ add %a0 %a1 %zero
 add %a1 %a2 %zero
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -9574
+jal %ra -9306
 addi %sp %sp -64
 lw %ra %sp 60
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 56
 add %a0 %a1 %zero
 sw %ra %sp 60
 addi %sp %sp 64
-jal %ra -9578
+jal %ra -9308
 addi %sp %sp -64
 lw %ra %sp 60
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 60
 add %a0 %a1 %zero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -9590
+jal %ra -9318
 addi %sp %sp -72
 lw %ra %sp 68
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 64
 add %a0 %a1 %zero
 sw %ra %sp 68
 addi %sp %sp 72
-jal %ra -9602
+jal %ra -9328
 addi %sp %sp -72
 lw %ra %sp 68
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 68
 add %a0 %a1 %zero
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -9614
+jal %ra -9338
 addi %sp %sp -80
 lw %ra %sp 76
 addi %a1 %zero 2
@@ -9634,7 +9358,7 @@ add %a0 %a1 %zero
 add %a1 %a2 %zero
 sw %ra %sp 76
 addi %sp %sp 80
-jal %ra -9632
+jal %ra -9356
 addi %sp %sp -80
 lw %ra %sp 76
 addi %a1 %zero 2
@@ -9644,103 +9368,87 @@ add %a0 %a1 %zero
 add %a1 %a2 %zero
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -9642
+jal %ra -9366
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a1 %zero 1
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 80
 add %a0 %a1 %zero
 sw %ra %sp 84
 addi %sp %sp 88
-jal %ra -9646
+jal %ra -9368
 addi %sp %sp -88
 lw %ra %sp 84
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 84
 add %a0 %a1 %zero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -9658
+jal %ra -9378
 addi %sp %sp -96
 lw %ra %sp 92
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 88
 add %a0 %a1 %zero
 sw %ra %sp 92
 addi %sp %sp 96
-jal %ra -9670
+jal %ra -9388
 addi %sp %sp -96
 lw %ra %sp 92
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 92
 add %a0 %a1 %zero
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -9682
+jal %ra -9398
 addi %sp %sp -104
 lw %ra %sp 100
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 96
 add %a0 %a1 %zero
 sw %ra %sp 100
 addi %sp %sp 104
-jal %ra -9694
+jal %ra -9408
 addi %sp %sp -104
 lw %ra %sp 100
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 100
 add %a0 %a1 %zero
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -9706
+jal %ra -9418
 addi %sp %sp -112
 lw %ra %sp 108
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 104
 add %a0 %a1 %zero
 sw %ra %sp 108
 addi %sp %sp 112
-jal %ra -9718
+jal %ra -9428
 addi %sp %sp -112
 lw %ra %sp 108
 addi %a1 %zero 0
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 108
 add %a0 %a1 %zero
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -9730
+jal %ra -9438
 addi %sp %sp -120
 lw %ra %sp 116
 add %a1 %a0 %zero
@@ -9748,7 +9456,7 @@ addi %a0 %zero 0
 sw %a1 %sp 112
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -9746
+jal %ra -9454
 addi %sp %sp -120
 lw %ra %sp 116
 addi %a1 %zero 0
@@ -9763,38 +9471,34 @@ add %a1 %a0 %zero
 add %a0 %a10 %zero
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -9761
+jal %ra -9469
 addi %sp %sp -120
 lw %ra %sp 116
 add %a1 %a0 %zero
 addi %a0 %zero 5
 sw %ra %sp 116
 addi %sp %sp 120
-jal %ra -9768
+jal %ra -9476
 addi %sp %sp -120
 lw %ra %sp 116
 addi %a1 %zero 0
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 116
 add %a0 %a1 %zero
 sw %ra %sp 124
 addi %sp %sp 128
-jal %ra -9772
+jal %ra -9478
 addi %sp %sp -128
 lw %ra %sp 124
 addi %a1 %zero 3
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 120
 add %a0 %a1 %zero
 sw %ra %sp 124
 addi %sp %sp 128
-jal %ra -9784
+jal %ra -9488
 addi %sp %sp -128
 lw %ra %sp 124
 addi %a1 %zero 60
@@ -9804,7 +9508,7 @@ add %a0 %a1 %zero
 add %a1 %a2 %zero
 sw %ra %sp 132
 addi %sp %sp 136
-jal %ra -9802
+jal %ra -9506
 addi %sp %sp -136
 lw %ra %sp 132
 addi %a1 %mc_hp 0
@@ -9814,15 +9518,13 @@ lw %a0 %sp 124
 sw %a0 %a1 0
 addi %a0 %a1 0
 addi %a1 %zero 0
-addi %a2 %zero 0
-lui %a2 0
-slli %a2 %a2 2
-lw %f0 %a2 0
+addi %f0 %zero 0
+lui %f0 0
 sw %a0 %sp 128
 add %a0 %a1 %zero
 sw %ra %sp 132
 addi %sp %sp 136
-jal %ra -9812
+jal %ra -9514
 addi %sp %sp -136
 lw %ra %sp 132
 add %a1 %a0 %zero
@@ -9830,7 +9532,7 @@ addi %a0 %zero 0
 sw %a1 %sp 132
 sw %ra %sp 140
 addi %sp %sp 144
-jal %ra -9828
+jal %ra -9530
 addi %sp %sp -144
 lw %ra %sp 140
 addi %a1 %mc_hp 0
@@ -9841,10 +9543,8 @@ sw %a0 %a1 0
 addi %a0 %a1 0
 addi %a1 %zero 180
 addi %a2 %zero 0
-addi %a3 %zero 0
-lui %a3 0
-slli %a3 %a3 2
-lw %f0 %a3 0
+addi %f0 %zero 0
+lui %f0 0
 addi %a3 %mc_hp 0
 addi %mc_hp %mc_hp 16
 sw %f0 %a3 8
@@ -9856,7 +9556,7 @@ add %a1 %a0 %zero
 add %a0 %a10 %zero
 sw %ra %sp 140
 addi %sp %sp 144
-jal %ra -9854
+jal %ra -9554
 addi %sp %sp -144
 lw %ra %sp 140
 addi %a1 %zero 1
@@ -9866,12 +9566,12 @@ add %a0 %a1 %zero
 add %a1 %a2 %zero
 sw %ra %sp 140
 addi %sp %sp 144
-jal %ra -9864
+jal %ra -9564
 addi %sp %sp -144
 lw %ra %sp 140
 addi %a1 %mc_hp 0
 addi %mc_hp %mc_hp 24
-addi %a2 %zero 767
+addi %a2 %zero 749
 lui %a2 0
 sw %a2 %a1 0
 lw %a2 %sp 12
@@ -9886,7 +9586,7 @@ lw %a6 %sp 8
 sw %a6 %a1 4
 addi %a6 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a7 %zero 930
+addi %a7 %zero 904
 lui %a7 0
 sw %a7 %a6 0
 lw %a7 %sp 16
@@ -9895,14 +9595,14 @@ lw %a8 %sp 20
 sw %a8 %a6 4
 addi %a9 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a10 %zero 1272
+addi %a10 %zero 1240
 lui %a10 0
 sw %a10 %a9 0
 lw %a10 %sp 4
 sw %a10 %a9 4
 addi %a11 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a4 %zero 1666
+addi %a4 %zero 1616
 lui %a4 0
 sw %a4 %a11 0
 sw %a9 %a11 8
@@ -9910,20 +9610,20 @@ lw %a4 %sp 0
 sw %a4 %a11 4
 addi %a9 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a3 %zero 1692
+addi %a3 %zero 1642
 lui %a3 0
 sw %a3 %a9 0
 sw %a11 %a9 4
 addi %a3 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a11 %zero 1756
+addi %a11 %zero 1706
 lui %a11 0
 sw %a11 %a3 0
 lw %a11 %sp 28
 sw %a11 %a3 4
 addi %a5 %mc_hp 0
 addi %mc_hp %mc_hp 24
-addi %a2 %zero 1781
+addi %a2 %zero 1731
 lui %a2 0
 sw %a2 %a5 0
 sw %a1 %a5 20
@@ -9934,33 +9634,33 @@ lw %a1 %sp 36
 sw %a1 %a5 4
 addi %a2 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a3 %zero 1828
+addi %a3 %zero 1778
 lui %a3 0
 sw %a3 %a2 0
 lw %a3 %sp 40
 sw %a3 %a2 4
 addi %a6 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a9 %zero 1964
+addi %a9 %zero 1914
 lui %a9 0
 sw %a9 %a6 0
 sw %a2 %a6 4
 addi %a2 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a9 %zero 2025
+addi %a9 %zero 1975
 lui %a9 0
 sw %a9 %a2 0
 sw %a3 %a2 4
 addi %a9 %mc_hp 0
 addi %mc_hp %mc_hp 8
 sw %a5 %sp 140
-addi %a5 %zero -1790
+addi %a5 %zero -1840
 lui %a5 0
 sw %a5 %a9 0
 sw %a3 %a9 4
 addi %a5 %mc_hp 0
 addi %mc_hp %mc_hp 24
-addi %a8 %zero -1664
+addi %a8 %zero -1716
 lui %a8 0
 sw %a8 %a5 0
 sw %a2 %a5 16
@@ -9969,26 +9669,26 @@ sw %a6 %a5 8
 sw %a10 %a5 4
 addi %a2 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a6 %zero -1582
+addi %a6 %zero -1634
 lui %a6 0
 sw %a6 %a2 0
 sw %a3 %a2 4
 addi %a6 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a8 %zero -1320
+addi %a8 %zero -1372
 lui %a8 0
 sw %a8 %a6 0
 sw %a3 %a6 4
 addi %a8 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a9 %zero -1286
+addi %a9 %zero -1338
 lui %a9 0
 sw %a9 %a8 0
 sw %a3 %a8 4
 addi %a9 %mc_hp 0
 addi %mc_hp %mc_hp 24
 sw %a0 %sp 144
-addi %a0 %zero -1166
+addi %a0 %zero -1220
 lui %a0 0
 sw %a0 %a9 0
 sw %a6 %a9 16
@@ -9997,19 +9697,19 @@ sw %a2 %a9 8
 sw %a10 %a9 4
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a6 %zero -1063
+addi %a6 %zero -1117
 lui %a6 0
 sw %a6 %a0 0
 sw %a3 %a0 4
 addi %a6 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a8 %zero -1039
+addi %a8 %zero -1093
 lui %a8 0
 sw %a8 %a6 0
 sw %a3 %a6 4
 addi %a8 %mc_hp 0
 addi %mc_hp %mc_hp 24
-addi %a1 %zero -945
+addi %a1 %zero -999
 lui %a1 0
 sw %a1 %a8 0
 sw %a0 %a8 16
@@ -10018,26 +9718,26 @@ sw %a2 %a8 8
 sw %a10 %a8 4
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a1 %zero -312
+addi %a1 %zero -390
 lui %a1 0
 sw %a1 %a0 0
 sw %a10 %a0 4
 addi %a1 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a2 %zero -233
+addi %a2 %zero -311
 lui %a2 0
 sw %a2 %a1 0
 sw %a4 %a1 8
 sw %a0 %a1 4
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a2 %zero -227
+addi %a2 %zero -305
 lui %a2 0
 sw %a2 %a0 0
 sw %a10 %a0 4
 addi %a2 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a6 %zero -107
+addi %a6 %zero -187
 lui %a6 0
 sw %a6 %a2 0
 lw %a6 %sp 92
@@ -10047,13 +9747,13 @@ sw %a4 %a2 4
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 8
 sw %a1 %sp 148
-addi %a1 %zero 155
+addi %a1 %zero 73
 lui %a1 4096
 sw %a1 %a0 0
 sw %a10 %a0 4
 addi %a1 %mc_hp 0
 addi %mc_hp %mc_hp 32
-addi %a4 %zero 193
+addi %a4 %zero 111
 lui %a4 4096
 sw %a4 %a1 0
 sw %a9 %a1 28
@@ -10069,14 +9769,14 @@ sw %a2 %sp 152
 addi %a2 %mc_hp 0
 addi %mc_hp %mc_hp 16
 sw %a8 %sp 156
-addi %a8 %zero 313
+addi %a8 %zero 227
 lui %a8 4096
 sw %a8 %a2 0
 sw %a1 %a2 8
 sw %a11 %a2 4
 addi %a1 %mc_hp 0
 addi %mc_hp %mc_hp 24
-addi %a8 %zero 349
+addi %a8 %zero 263
 lui %a8 4096
 sw %a8 %a1 0
 sw %a9 %a1 20
@@ -10086,7 +9786,7 @@ sw %a4 %a1 8
 sw %a7 %a1 4
 addi %a2 %mc_hp 0
 addi %mc_hp %mc_hp 40
-addi %a8 %zero 445
+addi %a8 %zero 357
 lui %a8 4096
 sw %a8 %a2 0
 lw %a8 %sp 48
@@ -10106,14 +9806,14 @@ sw %a0 %a2 4
 sw %a0 %sp 164
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a1 %zero 601
+addi %a1 %zero 509
 lui %a1 4096
 sw %a1 %a0 0
 sw %a2 %a0 8
 sw %a11 %a0 4
 addi %a1 %mc_hp 0
 addi %mc_hp %mc_hp 24
-addi %a2 %zero 634
+addi %a2 %zero 542
 lui %a2 4096
 sw %a2 %a1 0
 sw %a8 %a1 20
@@ -10123,7 +9823,7 @@ sw %a5 %a1 8
 sw %a0 %a1 4
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a2 %zero 710
+addi %a2 %zero 618
 lui %a2 4096
 sw %a2 %a0 0
 sw %a1 %a0 12
@@ -10132,7 +9832,7 @@ lw %a1 %sp 36
 sw %a1 %a0 4
 addi %a2 %mc_hp 0
 addi %mc_hp %mc_hp 40
-addi %a5 %zero 754
+addi %a5 %zero 656
 lui %a5 4096
 sw %a5 %a2 0
 sw %a8 %a2 36
@@ -10150,14 +9850,14 @@ lw %a0 %sp 164
 sw %a0 %a2 4
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a10 %zero 918
+addi %a10 %zero 816
 lui %a10 4096
 sw %a10 %a0 0
 sw %a2 %a0 8
 sw %a11 %a0 4
 addi %a2 %mc_hp 0
 addi %mc_hp %mc_hp 24
-addi %a10 %zero 951
+addi %a10 %zero 849
 lui %a10 4096
 sw %a10 %a2 0
 sw %a8 %a2 16
@@ -10166,7 +9866,7 @@ sw %a3 %a2 8
 sw %a0 %a2 4
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a3 %zero 1025
+addi %a3 %zero 923
 lui %a3 4096
 sw %a3 %a0 0
 sw %a2 %a0 12
@@ -10174,7 +9874,7 @@ sw %a8 %a0 8
 sw %a1 %a0 4
 addi %a2 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a3 %zero 1069
+addi %a3 %zero 961
 lui %a3 4096
 sw %a3 %a2 0
 lw %a3 %sp 60
@@ -10182,20 +9882,20 @@ sw %a3 %a2 8
 sw %a4 %a2 4
 addi %a5 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a10 %zero 1105
+addi %a10 %zero 997
 lui %a10 4096
 sw %a10 %a5 0
 sw %a3 %a5 4
 addi %a10 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a11 %zero 1149
+addi %a11 %zero 1041
 lui %a11 4096
 sw %a11 %a10 0
 sw %a3 %a10 8
 sw %a7 %a10 4
 addi %a11 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a7 %zero 1328
+addi %a7 %zero 1220
 lui %a7 4096
 sw %a7 %a11 0
 sw %a10 %a11 12
@@ -10203,14 +9903,14 @@ sw %a2 %a11 8
 sw %a5 %a11 4
 addi %a2 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a5 %zero 1357
+addi %a5 %zero 1249
 lui %a5 4096
 sw %a5 %a2 0
 lw %a5 %sp 64
 sw %a5 %a2 4
 addi %a7 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a10 %zero 1913
+addi %a10 %zero 1739
 lui %a10 4096
 sw %a10 %a7 0
 sw %a5 %a7 8
@@ -10219,7 +9919,7 @@ sw %a10 %a7 4
 sw %a11 %sp 172
 addi %a11 %mc_hp 0
 addi %mc_hp %mc_hp 40
-addi %a10 %zero 1969
+addi %a10 %zero 1795
 lui %a10 4096
 sw %a10 %a11 0
 lw %a10 %sp 160
@@ -10235,7 +9935,7 @@ sw %a7 %a11 4
 addi %a10 %mc_hp 0
 addi %mc_hp %mc_hp 88
 sw %a0 %sp 176
-addi %a0 %zero -1988
+addi %a0 %zero 1934
 lui %a0 4096
 sw %a0 %a10 0
 sw %a2 %a10 80
@@ -10270,7 +9970,7 @@ sw %a8 %a10 8
 sw %a7 %a10 4
 addi %a7 %mc_hp 0
 addi %mc_hp %mc_hp 56
-addi %a8 %zero -1528
+addi %a8 %zero -1714
 lui %a8 4096
 sw %a8 %a7 0
 sw %a2 %a7 48
@@ -10290,13 +9990,13 @@ lw %a0 %sp 68
 sw %a0 %a7 4
 addi %a1 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a2 %zero -1406
+addi %a2 %zero -1594
 lui %a2 4096
 sw %a2 %a1 0
 sw %a7 %a1 4
 addi %a2 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a3 %zero -1325
+addi %a3 %zero -1517
 lui %a3 4096
 sw %a3 %a2 0
 lw %a3 %sp 152
@@ -10304,7 +10004,7 @@ sw %a3 %a2 8
 sw %a1 %a2 4
 addi %a1 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a3 %zero -1304
+addi %a3 %zero -1496
 lui %a3 4096
 sw %a3 %a1 0
 sw %a2 %a1 8
@@ -10312,7 +10012,7 @@ lw %a3 %sp 116
 sw %a3 %a1 4
 addi %a4 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a5 %zero -1220
+addi %a5 %zero -1412
 lui %a5 4096
 sw %a5 %a4 0
 sw %a1 %a4 12
@@ -10321,47 +10021,47 @@ sw %a1 %a4 8
 sw %a0 %a4 4
 addi %a5 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a6 %zero -1137
+addi %a6 %zero -1329
 lui %a6 4096
 sw %a6 %a5 0
 sw %a1 %a5 8
 sw %a0 %a5 4
 addi %a6 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a7 %zero -991
+addi %a7 %zero -1183
 lui %a7 4096
 sw %a7 %a6 0
 sw %a4 %a6 4
 addi %a4 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a7 %zero -944
+addi %a7 %zero -1136
 lui %a7 4096
 sw %a7 %a4 0
 lw %a7 %sp 76
 sw %a7 %a4 4
 addi %a8 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a9 %zero -824
+addi %a9 %zero -1016
 lui %a9 4096
 sw %a9 %a8 0
 sw %a6 %a8 8
 sw %a5 %a8 4
 addi %a5 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a9 %zero -745
+addi %a9 %zero -937
 lui %a9 4096
 sw %a9 %a5 0
 sw %a7 %a5 4
 addi %a9 %mc_hp 0
 addi %mc_hp %mc_hp 8
 sw %a5 %sp 180
-addi %a5 %zero -672
+addi %a5 %zero -864
 lui %a5 4096
 sw %a5 %a9 0
 sw %a1 %a9 4
 addi %a5 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a11 %zero -636
+addi %a11 %zero -828
 lui %a11 4096
 sw %a11 %a5 0
 sw %a2 %a5 12
@@ -10369,7 +10069,7 @@ sw %a3 %a5 8
 sw %a0 %a5 4
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 40
-addi %a2 %zero -529
+addi %a2 %zero -721
 lui %a2 4096
 sw %a2 %a0 0
 lw %a2 %sp 12
@@ -10389,7 +10089,7 @@ lw %a5 %sp 80
 sw %a5 %a0 4
 addi %a10 %mc_hp 0
 addi %mc_hp %mc_hp 32
-addi %a11 %zero -360
+addi %a11 %zero -556
 lui %a11 4096
 sw %a11 %a10 0
 lw %a11 %sp 104
@@ -10402,7 +10102,7 @@ sw %a7 %a10 8
 sw %a5 %a10 4
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 32
-addi %a11 %zero -310
+addi %a11 %zero -506
 lui %a11 4096
 sw %a11 %a0 0
 sw %a9 %a0 24
@@ -10413,7 +10113,7 @@ sw %a7 %a0 8
 sw %a6 %a0 4
 addi %a1 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a4 %zero -213
+addi %a4 %zero -409
 lui %a4 4096
 sw %a4 %a1 0
 sw %a0 %a1 12
@@ -10421,44 +10121,44 @@ sw %a10 %a1 8
 sw %a7 %a1 4
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a4 %zero 16
-lui %a4 8192
+addi %a4 %zero -192
+lui %a4 4096
 sw %a4 %a0 0
 sw %a7 %a0 4
 addi %a4 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a6 %zero 87
-lui %a6 8192
+addi %a6 %zero -125
+lui %a6 4096
 sw %a6 %a4 0
 sw %a3 %a4 4
 addi %a6 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a7 %zero 355
+addi %a7 %zero 139
 lui %a7 8192
 sw %a7 %a6 0
 sw %a4 %a6 4
 addi %a4 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a7 %zero 457
+addi %a7 %zero 225
 lui %a7 8192
 sw %a7 %a4 0
 sw %a6 %a4 4
 addi %a6 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a7 %zero 509
+addi %a7 %zero 273
 lui %a7 8192
 sw %a7 %a6 0
 lw %a7 %sp 0
 sw %a7 %a6 4
 addi %a8 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a9 %zero 538
+addi %a9 %zero 300
 lui %a9 8192
 sw %a9 %a8 0
 sw %a6 %a8 4
 addi %a9 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a11 %zero 562
+addi %a11 %zero 324
 lui %a11 8192
 sw %a11 %a9 0
 sw %a3 %a9 12
@@ -10466,7 +10166,7 @@ sw %a8 %a9 8
 sw %a6 %a9 4
 addi %a8 %mc_hp 0
 addi %mc_hp %mc_hp 8
-addi %a11 %zero 610
+addi %a11 %zero 372
 lui %a11 8192
 sw %a11 %a8 0
 lw %a11 %sp 148
@@ -10474,14 +10174,14 @@ sw %a11 %a8 4
 sw %a0 %sp 184
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a5 %zero 634
+addi %a5 %zero 396
 lui %a5 8192
 sw %a5 %a0 0
 sw %a8 %a0 8
 sw %a3 %a0 4
 addi %a3 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a5 %zero 659
+addi %a5 %zero 421
 lui %a5 8192
 sw %a5 %a3 0
 sw %a0 %a3 12
@@ -10489,7 +10189,7 @@ sw %a9 %a3 8
 sw %a4 %a3 4
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a4 %zero 687
+addi %a4 %zero 449
 lui %a4 8192
 sw %a4 %a0 0
 sw %a11 %a0 12
@@ -10498,7 +10198,7 @@ sw %a4 %a0 8
 sw %a6 %a0 4
 addi %a4 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a5 %zero 740
+addi %a5 %zero 502
 lui %a5 8192
 sw %a5 %a4 0
 lw %a5 %sp 144
@@ -10508,7 +10208,7 @@ sw %a6 %a4 8
 sw %a0 %a4 4
 addi %a8 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a9 %zero 857
+addi %a9 %zero 617
 lui %a9 8192
 sw %a9 %a8 0
 sw %a5 %a8 12
@@ -10516,7 +10216,7 @@ sw %a6 %a8 8
 sw %a0 %a8 4
 addi %a0 %mc_hp 0
 addi %mc_hp %mc_hp 16
-addi %a5 %zero 974
+addi %a5 %zero 726
 lui %a5 8192
 sw %a5 %a0 0
 sw %a8 %a0 12
@@ -10525,7 +10225,7 @@ lw %a4 %sp 4
 sw %a4 %a0 4
 addi %a4 %mc_hp 0
 addi %mc_hp %mc_hp 56
-addi %a5 %zero 1035
+addi %a5 %zero 785
 lui %a5 8192
 sw %a5 %a4 0
 lw %a5 %sp 180

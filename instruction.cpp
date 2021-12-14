@@ -380,7 +380,7 @@ int inst_jalr(Emulator* emu, uint32_t instruction) {
         case 0b000 :
             JALR(emu, rs1, rd, imm);
             if (emu->args.print_asm) {
-                cout << "jalr " << reg_name[rs1] << " " << reg_name[rd] << " " << imm << endl;
+                cout << "jalr " << reg_name[rd] << " " << reg_name[rs1] << " " << imm << endl;
             }
             break;
         default :
@@ -906,7 +906,7 @@ int disassemble_one_instruction(Emulator* emu, uint32_t instruction){
         uint32_t rd = (instruction & 0x00000F80) >> 7;
         switch (funct3) {
             case 0b000 :
-                cout << "jalr " << reg_name[rs1] << " " << reg_name[rd] << " " << imm << endl;
+                cout << "jalr " << reg_name[rd] << " " << reg_name[rs1] << " " << imm << endl;
                 break;
             default :
                 cout << "no function matched" << endl;

@@ -20,5 +20,6 @@ sed -i -e "s/true/false/g" ./main.ml
 # finish assembling
 cd ../emu_binary
 g++ -o make_pc_label make_pc_label.cpp
-./make_pc_label data/label_pc.txt >> data/pc_label.txt
+./make_pc_label data/label_pc.txt > data/pc_label.txt
+rm -f make_pc_label
 make

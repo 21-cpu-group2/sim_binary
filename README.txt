@@ -4,12 +4,12 @@ how to debug
 '''
 .
 ├── assembler
-├── emu_binary
+├── sim_binary
 '''
 
-2. let "test.asm", "contest.txt" file be in emu_binary/data directory like below
+2. let "test.asm", "contest.txt" file be in sim_binary/data directory like below
 '''
-emu_binary
+sim_binary
 |
 ...
 ├── data
@@ -23,9 +23,9 @@ emu_binary
 ...
 '''
 
-3. please press "./ready.sh" in emu_binary directory
+3. please press "./ready.sh" in sim_binary directory
 
-4. then 4 files added to emu_binary/data directory
+4. then 4 files added to sim_binary/data directory
     ・test.bin 
         first line       -> initial pc
         from second line -> machine code

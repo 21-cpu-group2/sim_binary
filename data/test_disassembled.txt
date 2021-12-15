@@ -1,3 +1,4 @@
+
 slli %a0 %a0 2
 jalr %zero %ra 0
 srli %a0 %a0 1

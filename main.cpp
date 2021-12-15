@@ -84,14 +84,7 @@ int main(int argc, char **argv){
 
     // load machine code to instruction-memory
     load_instructions(emu, file_path);
-    if (DISASSEMBLE){
-        // write disassembled code into "~~~.txt"
-        ofstream ofstr("data/test_disassembled.txt");
-        streambuf* strbuf;
-        strbuf = cout.rdbuf(ofstr.rdbuf());
-        disassemble_instructions(emu);
-        cout.rdbuf(strbuf);
-    }
+    
     double t_start = elapsed();
     int iteration = 1;
     

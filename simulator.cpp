@@ -43,17 +43,17 @@ void init_emulator(Emulator* emu){
     emu->pc = 0x00000000;
 
     //メモリを動的に確保
-    emu->memory = (uint32_t*)malloc(MEMORY_SIZE);
-    emu->instruction_memory = (uint32_t*)malloc(INSTRUCTION_MEMORY_SIZE);
-    emu->cache = (cache_line*)malloc(sizeof(cache_line)/sizeof(uint32_t) * BLOCK_NUM);
+    emu->memory = (uint32_t*)malloc(sizeof(uint32_t) * MEMORY_SIZE);
+    emu->instruction_memory = (uint32_t*)malloc(sizeof(uint32_t) * INSTRUCTION_MEMORY_SIZE);
+    emu->cache = (cache_line*)malloc(sizeof(cache_line) * BLOCK_NUM);
 
     if (emu->memory == NULL || emu->instruction_memory == NULL){
         printf("error : cannot allocate memory\n");
         exit(1);
     }
-    memset(emu->memory, 0, MEMORY_SIZE);
-    memset(emu->instruction_memory, 0, INSTRUCTION_MEMORY_SIZE);
-    memset(emu->cache, 0, sizeof(cache_line)/sizeof(uint32_t) * BLOCK_NUM);
+    memset(emu->memory, 0, sizeof(uint32_t) * MEMORY_SIZE);
+    memset(emu->instruction_memory, 0, sizeof(uint32_t) * INSTRUCTION_MEMORY_SIZE);
+    memset(emu->cache, 0, sizeof(cache_line) * BLOCK_NUM);
 
     emu->instruction_size = 0x00000000;
     emu->args.flg_p = false;

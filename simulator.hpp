@@ -1,13 +1,13 @@
 #ifndef _SIMULATOR
 #define _SIMULATOR
 
-#define MEMORY_SIZE  (1024*1024*32) // 2^25(1024*1024*32)だけ欲しい
+#define MEMORY_SIZE  (33554432) // 2^25(1024*1024*32)だけ欲しい
 #define INSTRUCTION_MEMORY_SIZE (1024*1024) //どのくらい必要?
 #define REG_SIZE 32
 #define FREG_SIZE 32
 
 #define DEBUG 0
-#define PRINT_STAT 0
+#define PRINT_STAT 1
 //#define DEBUG2 0 // if 1 then showing specific registers
 #define RM 0b000 // Round Mode(float)
 

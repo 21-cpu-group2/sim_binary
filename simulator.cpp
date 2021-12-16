@@ -112,7 +112,7 @@ int load_instructions(Emulator* emu, string file_path){
     bool fst = true;
     while (getline(ifs, str)){
         if (fst) {
-            uint32_t pc_init = (uint32_t)stoi(str, nullptr, 10) - 1;
+            uint32_t pc_init = (uint32_t)stoi(str, nullptr, 10);
             emu->pc = pc_init;
             fst = false;
             continue;

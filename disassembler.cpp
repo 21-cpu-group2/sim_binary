@@ -71,19 +71,19 @@ int disassemble_one_instruction(uint32_t instruction){
         uint32_t rs1 = (instruction & 0x000F8000) >> 15;
         switch (funct3) {
             case 0b000 :
-                cout << "beq " << reg_name[rs1] << " " << reg_name[rs2] << " " << imm << endl;
+                cout << "beq " << reg_name[rs1] << " " << reg_name[rs2] << " " << imm;
                 break;
             case 0b100 : // in risc-v 0'b001
-                cout << "bne " << reg_name[rs1] << " " << reg_name[rs2] << " " << imm << endl;
+                cout << "bne " << reg_name[rs1] << " " << reg_name[rs2] << " " << imm;
                 break;
             case 0b001 : // in risc-v 0'b100
-                cout << "blt " << reg_name[rs1] << " " << reg_name[rs2] << " " << imm << endl;
+                cout << "blt " << reg_name[rs1] << " " << reg_name[rs2] << " " << imm;
                 break;
             case 0b101 :
-                cout << "bge " << reg_name[rs1] << " " << reg_name[rs2] << " " << imm << endl;
+                cout << "bge " << reg_name[rs1] << " " << reg_name[rs2] << " " << imm;
                 break;
             default :
-                cout << "no function matched" << endl;
+                cout << "no function matched";
                 return 1;
         }
     }
@@ -98,10 +98,10 @@ int disassemble_one_instruction(uint32_t instruction){
         uint32_t rd = (instruction & 0x00000F80) >> 7;
         switch (funct3) {
             case 0b010 :
-                cout << "lw " << reg_name[rd] << " " << reg_name[rs1] << " " << imm << endl;
+                cout << "lw " << reg_name[rd] << " " << reg_name[rs1] << " " << imm;
                 break;
             default :
-                cout << "no function matched" << endl;
+                cout << "no function matched";
                 return 1;
         }
     }
@@ -118,10 +118,10 @@ int disassemble_one_instruction(uint32_t instruction){
         uint32_t rs1 = (instruction & 0x000F8000) >> 15;
         switch (funct3) {
             case 0b010 :
-                cout << "sw " << reg_name[rs2] << " " << reg_name[rs1] << " " << imm << endl;
+                cout << "sw " << reg_name[rs2] << " " << reg_name[rs1] << " " << imm;
                 break;
             default :
-                cout << "no function matched" << endl;
+                cout << "no function matched";
                 return 1;
         }
     }
@@ -137,16 +137,16 @@ int disassemble_one_instruction(uint32_t instruction){
         uint32_t rd = (instruction & 0x00000F80) >> 7;
         switch (funct3) {
             case 0b000 :
-                cout << "addi " << reg_name[rd] << " " << reg_name[rs1] << " " << imm << endl;
+                cout << "addi " << reg_name[rd] << " " << reg_name[rs1] << " " << imm;
                 break;
             case 0b001 :
-                cout << "slli " << reg_name[rd] << " " << reg_name[rs1] << " " << imm << endl;
+                cout << "slli " << reg_name[rd] << " " << reg_name[rs1] << " " << imm;
                 break;
             case 0b101 :
-                cout << "srli " << reg_name[rd] << " " << reg_name[rs1] << " " << imm << endl;
+                cout << "srli " << reg_name[rd] << " " << reg_name[rs1] << " " << imm;
                 break;
             default :
-                cout << "no function matched" << endl;
+                cout << "no function matched";
                 return 1;
         }
     }
@@ -160,23 +160,23 @@ int disassemble_one_instruction(uint32_t instruction){
         switch (funct) {
             // 下位10bit(7bit->funct7, 3bit->funct3)
             case 0b0000000000 :
-                cout << "add " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2] << endl;
+                cout << "add " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2];
                 break;
             case 0b0100000000 :
-                cout << "sub " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2] << endl;
+                cout << "sub " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2];
                 break;
             case 0b0000000001 :
-                cout << "sll " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2] << endl;
+                cout << "sll " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2];
                 break;
             default :
-                cout << "no function matched" << endl;
+                cout << "no function matched";
                 return 1;
         }
     }
     else if (opcode == _LUI){
         int imm = instruction & 0xFFFFF000;
         uint32_t rd = (instruction & 0x00000F80) >> 7;
-        cout << "lui " << reg_name[rd] << " " << imm << endl;
+        cout << "lui " << reg_name[rd] << " " << imm;
     }
     else if (opcode == _JAL){
         int imm = (instruction & 0xFFFFF000) >> 12;
@@ -185,7 +185,7 @@ int disassemble_one_instruction(uint32_t instruction){
             imm = (imm | 0xFFF00000);
         }
         uint32_t rd = (instruction & 0x00000F80) >> 7;
-        cout << "jal " << reg_name[rd] << " " << imm << endl;
+        cout << "jal " << reg_name[rd] << " " << imm;
     }
     else if (opcode == _JALR){
         uint32_t funct3 = (instruction & 0x00007000) >> 12;
@@ -198,10 +198,10 @@ int disassemble_one_instruction(uint32_t instruction){
         uint32_t rd = (instruction & 0x00000F80) >> 7;
         switch (funct3) {
             case 0b000 :
-                cout << "jalr " << reg_name[rd] << " " << reg_name[rs1] << " " << imm << endl;
+                cout << "jalr " << reg_name[rd] << " " << reg_name[rs1] << " " << imm;
                 break;
             default :
-                cout << "no function matched" << endl;
+                cout << "no function matched";
                 return 1;
         }
     }
@@ -215,102 +215,102 @@ int disassemble_one_instruction(uint32_t instruction){
         switch (funct) {
             // 上位7bit->funct7, 下位3bit->funct3
             case 0b0000000000 :
-                cout << "fadd " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2] << endl;
+                cout << "fadd " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2];
                 break;
             case 0b0000100000 :
-                cout << "fsub " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2] << endl;
+                cout << "fsub " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2];
                 break;
             case 0b0001000000 :
-                cout << "fmul " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2] << endl;
+                cout << "fmul " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2];
                 break;
             case 0b0001100000 :
-                cout << "fdiv " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2] << endl;
+                cout << "fdiv " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2];
                 break;
             case 0b0001000001:
                 if (rs2 != 0){
-                    cout << "no function matched" << endl;
+                    cout << "no function matched";
                     return 1;
                 }
-                cout << "fhalf " << reg_name[rd] << " " << reg_name[rs1] << endl;
+                cout << "fhalf " << reg_name[rd] << " " << reg_name[rs1];
                 break;
             case 0b0101100000:
                 if (rs2 != 0){
-                    cout << "no function matched" << endl;
+                    cout << "no function matched";
                     return 1;
                 }
-                cout << "sqrt " << reg_name[rd] << " " << reg_name[rs1] << endl;
+                cout << "sqrt " << reg_name[rd] << " " << reg_name[rs1];
                 break;
             case 0b0010000010:
                 if (rs2 != 0){
-                    cout << "no function matched" << endl;
+                    cout << "no function matched";
                     return 1;
                 }
-                cout << "fabs " << reg_name[rd] << " " << reg_name[rs1] << endl;
+                cout << "fabs " << reg_name[rd] << " " << reg_name[rs1];
                 break;
             case 0b0010000001:
                 if (rs2 != 0){
-                    cout << "no function matched" << endl;
+                    cout << "no function matched";
                     return 1;
                 }
-                cout << "fneg " << reg_name[rd] << " " << reg_name[rs1] << endl;
+                cout << "fneg " << reg_name[rd] << " " << reg_name[rs1];
                 break;
             case 0b1010000010 :
                 if (rs2 != 0b00000){
-                    cout << "no function matched" << endl;
+                    cout << "no function matched";
                     return 1;
                 }
-                cout << "fiszero " << reg_name[rd] << " " << reg_name[rs1] << " " << endl;
+                cout << "fiszero " << reg_name[rd] << " " << reg_name[rs1] << " ";
                 break;
             case 0b1010000101 :
                 if (rs2 != 0b00000){
-                    cout << "no function matched" << endl;
+                    cout << "no function matched";
                     return 1;
                 }
-                cout << "fisneg " << reg_name[rd] << " " << reg_name[rs1] << " " << endl;
+                cout << "fisneg " << reg_name[rd] << " " << reg_name[rs1] << " ";
                 break;
             case 0b1010000011 :
                 if (rs2 != 0b00000){
-                    cout << "no function matched" << endl;
+                    cout << "no function matched";
                     return 1;
                 }
-                cout << "fispos " << reg_name[rd] << " " << reg_name[rs1] << " " << endl;
+                cout << "fispos " << reg_name[rd] << " " << reg_name[rs1] << " ";
                 break;
             case 0b1010000001 :
-                cout << "fless " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2] << endl;
+                cout << "fless " << reg_name[rd] << " " << reg_name[rs1] << " " << reg_name[rs2];
                 break;
             case 0b1100000001 :
                 if (rs2 != 0b00000){
-                    cout << "no function matched" << endl;
+                    cout << "no function matched";
                     return 1;
                 }
-                cout << "floor " << reg_name[rd] << " " << reg_name[rs1] << " " << endl;
+                cout << "floor " << reg_name[rd] << " " << reg_name[rs1] << " ";
                 break;
             case 0b1100000000 :
                 if (rs2 != 0b00000){
-                    cout << "no function matched" << endl;
+                    cout << "no function matched";
                     return 1;
                 }
-                cout << "ftoi " << reg_name[rd] << " " << reg_name[rs1] << " " << endl;
+                cout << "ftoi " << reg_name[rd] << " " << reg_name[rs1] << " ";
                 break;
             case 0b1101000000 :
                 if (rs2 != 0b00000){
-                    cout << "no function matched" << endl;
+                    cout << "no function matched";
                     return 1;
                 }
-                cout << "itof " << reg_name[rd] << " " << reg_name[rs1] << " " << endl;
+                cout << "itof " << reg_name[rd] << " " << reg_name[rs1] << " ";
                 break;
             default :
-                cout << "no function matched" << endl;
+                cout << "no function matched";
                 return 1;
         }
     }
     else if (opcode == _NOP){
         if (instruction & 0xFFFFFFFF) {
-            cout << "nop " << endl;
+            cout << "nop ";
         }
     }
     else {
-        cout << "no function matched" << endl;
+        cout << "no function matched";
         return 1;
     }
     return 0;
@@ -323,6 +323,7 @@ int disassemble_instructions(string file_path) {
     }
     string str;
     bool fst = true;
+    int pc = 0;
     while (getline(ifs, str)){
         if (fst) {
             fst = false;
@@ -331,6 +332,8 @@ int disassemble_instructions(string file_path) {
         }
         uint32_t inst = bin2int(str);
         disassemble_one_instruction(inst);
+        cout << "   # pc = " << pc << endl;
+        pc++;
     }
     return 0;
 }

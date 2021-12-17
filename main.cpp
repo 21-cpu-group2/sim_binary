@@ -21,7 +21,9 @@ int main(int argc, char **argv){
     Emulator* emu;
     emu = (Emulator*)malloc(sizeof(Emulator));
     init_emulator(emu);
-
+    // for (int i=0; i<100; i++){
+    //     cout << emu->memory[40000 +i] << endl;
+    // }
     // for command line option
     string file_path;
     for (int i=0; i<argc; i++){
@@ -86,7 +88,7 @@ int main(int argc, char **argv){
     load_instructions(emu, file_path);
 
     double t_start = elapsed();
-    int iteration = 1;
+    long long int iteration = 1;
     
     // showing like vivado simulator
     if (emu->args.flg_R){ 
@@ -110,7 +112,6 @@ int main(int argc, char **argv){
         cout << dec << "   pc   " << endl;
     }
     bool flg;
-    int in_min = 25000, in_max = 25000;
     while (1){
         uint32_t pc_pred = emu->pc;
         uint32_t inst = emu->instruction_memory[emu->pc];
@@ -125,6 +126,7 @@ int main(int argc, char **argv){
             else cout << iteration << "th instruction";
             cout << "  (pc : " << emu->pc << ")"<< endl;
         }
+        // print assembly code ?
         emu->args.print_asm = (flg && emu->args.flg_a) ? true : false;
         exec_one_instruction(emu, inst);
         iteration++;

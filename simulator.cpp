@@ -72,7 +72,7 @@ void init_emulator(Emulator* emu){
     }
 
     // memory <- input_data
-    int input_start = 25000; // 100000 / 4
+    int input_start = 50000; // 200000 / 4
     ifstream ifs("data/contest.txt");
     if (ifs.fail()){
         cout << "cannot open the file \"contest.txt\"" << endl;

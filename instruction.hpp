@@ -320,8 +320,8 @@ inline int JALR(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
     //     rd_ = 1; // x1 register
     // }
     uint32_t rs1 = emu->reg[rs1_];
+    emu->reg[rd_] = emu->pc + 1;
     emu->pc = rs1 + imm;
-    emu->reg[rd_] = rs1 + 1;
     return 0;
 }
 

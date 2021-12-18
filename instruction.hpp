@@ -570,9 +570,10 @@ inline int FLESS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
 
 inline int FLOOR(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
-    union fi frs1;
+    union fi frs1, frd;
     frs1.i = rs1;
-    emu->reg[rd_] = (float)((int)frs1.f);
+    frd.f = floor(frs1.f);
+    emu->reg[rd_] = frd.i;
     emu->pc++;
     return 0;
 }
@@ -590,7 +591,7 @@ inline int FTOI(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
     union fi frs1;
     frs1.i = rs1;
-    emu->reg[rd_] = (int)frs1.f;
+    emu->reg[rd_] = (uint32_t)frs1.f;
     emu->pc++;
     return 0;
 }

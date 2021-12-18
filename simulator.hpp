@@ -84,8 +84,8 @@ typedef struct {
     bool flg_R;
     bool flg_m;
     bool print_asm;
-    int start;
-    int goal;
+    long long int start;
+    long long int goal;
     int mem_s; // if print memory, show from memory address "mem_s"
     bool reg_for_print[64];
 } cmdline_args;
@@ -110,5 +110,6 @@ int load_instructions(Emulator* emu, string file_path);
 void print_reg(Emulator* emu);
 void print_reg_for_debug(Emulator* emu);
 void print_mem(Emulator* emu, int start);
+void output_image(Emulator* emu);
 bool cache_hit(Emulator* emu, uint32_t mem_address);
 #endif

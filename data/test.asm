@@ -40,24 +40,24 @@ min_caml_srl:
     jalr %zero %ra 0
 
 min_caml_create_array:
-    add %a2 %a0 %zero #%a0にarray length %a1に初期値が入っている
-    add %a0 %min_caml_hp %zero # 返り値にarrayのアドレスをセット
+    add %a2 %a0 %zero #%a0???array length %a1???????????ゃ????ャ?ｃ????????
+    add %a0 %min_caml_hp %zero # 菴??????ゃ??array?????≪???????鴻????祉?????
 create_array_loop:
-    beq %a2 %zero create_array_exit # array lengthが0だったら終了
-    sw %a1 %min_caml_hp 0                 # %a1をメモリに格納
-    addi %min_caml_hp %min_caml_hp 4       # hpを増やす
-    addi %a2 %a2 -1                      # array lengthを1減らす
-    beq %zero %zero create_array_loop    # create_array_loopにジャンプ
+    beq %a2 %zero create_array_exit # array length???0?????ｃ?????腟?篋?
+    sw %a1 %min_caml_hp 0                 # %a1?????＜?≪???????主??
+    addi %min_caml_hp %min_caml_hp 4       # hp???紜???????
+    addi %a2 %a2 -1                      # array length???1羝???????
+    beq %zero %zero create_array_loop    # create_array_loop?????吾?ｃ?潟??
 create_array_exit:
-    jalr %zero %ra 0 # 返り値には既にarrayのアドレスが入っているのでなにもせず終了
+    jalr %zero %ra 0 # 菴??????ゃ???????≪??array?????≪???????鴻????ャ?ｃ?????????????с??????????????腟?篋?
 
-min_caml_create_float_array: # min_caml_create_arrayとの違いは初期値が%f0に入っていることだけ
-    add %a2 %a0 %zero #%a0にarray length %f0に初期値が入っている
-    add %a0 %min_caml_hp %zero # 返り値にarrayのアドレスをセット
+min_caml_create_float_array: # min_caml_create_array???????????????????????ゃ??%f0?????ャ?ｃ????????????????????
+    add %a2 %a0 %zero #%a0???array length %f0???????????ゃ????ャ?ｃ????????
+    add %a0 %min_caml_hp %zero # 菴??????ゃ??array?????≪???????鴻????祉?????
 create_float_array_loop:
     beq %a2 %zero create_float_array_exit
-    sw %f0 %min_caml_hp 0                 # %f0をメモリに格納
-    addi %min_caml_hp %min_caml_hp 4       # hpを増やす
+    sw %f0 %min_caml_hp 0                 # %f0?????＜?≪???????主??
+    addi %min_caml_hp %min_caml_hp 4       # hp???紜???????
     addi %a2 %a2 -1
     beq %zero %zero create_float_array_loop
 create_float_array_exit:
@@ -112,8 +112,8 @@ min_caml_float_of_int:
     jalr %zero %ra 0
 
 reduction_2pi:
-    li %f1 l.1 # PIの値をセット PCの値をセット
-    li %f2 l.2 # 2.0をセット
+    li %f1 l.1 # PI?????ゃ????祉????? PC?????ゃ????祉?????
+    li %f2 l.2 # 2.0?????祉?????
     fmul %f3 %f1 %f2 # P = PI * 2.0
 reduction_continue:
     fless %a0 %f0 %f3   # if A < P
@@ -131,12 +131,12 @@ reduction_break3:
     fhalf %f3 %f3     # P = P / 2
     beq %zero %zero reduction_break
 reduction_break2:
-    jalr %zero %ra 0  # Aはf0に入っているのでそのまま終了
+    jalr %zero %ra 0  # A???f0?????ャ?ｃ?????????????с???????障?丞??篋?
 
 kernel_sin:
-    li %f1 l.3 # S3の値をセット PCの値をセット
-    li %f4 l.4 # S5の値をセット PCの値をセット
-    li %f6 l.5 # S7の値をセット PCの値をセット
+    li %f1 l.3 # S3?????ゃ????祉????? PC?????ゃ????祉?????
+    li %f4 l.4 # S5?????ゃ????祉????? PC?????ゃ????祉?????
+    li %f6 l.5 # S7?????ゃ????祉????? PC?????ゃ????祉?????
     fmul %f2 %f0 %f0 # A^2
     fmul %f3 %f3 %f0 # A^3
     fmul %f1 %f1 %f3 # S3*A^3
@@ -147,12 +147,12 @@ kernel_sin:
     fsub %f0 %f0 %f1 # A - S3*S7
     fadd %f0 %f0 %f4 # A - S3*S7 + S5*A^5
     fsub %f0 %f0 %f6 # A - S3*S7 + S5*A^5 - S7 * A^7
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 
 kernel_cos:
-    li %f1 l.6 # C1 (1.0) の値をセット PCの値をセット
-    li %f4 l.7 # C4 (1.0) の値をセット PCの値をセット
-    li %f6 l.8 # C6 (1.0) の値をセット PCの値をセット
+    li %f1 l.6 # C1 (1.0) ?????ゃ????祉????? PC?????ゃ????祉?????
+    li %f4 l.7 # C4 (1.0) ?????ゃ????祉????? PC?????ゃ????祉?????
+    li %f6 l.8 # C6 (1.0) ?????ゃ????祉????? PC?????ゃ????祉?????
     fmul %f2 %f0 %f0 # A^2
     fmul %f3 %f2 %f2 # A^4
     fmul %f5 %f2 %f3 # A^6
@@ -162,25 +162,25 @@ kernel_cos:
     fsub %f0 %f1 %f2 # 1.0 - 0.5*A^2
     fadd %f0 %f0 %f4 # 1.0 - 0.5*A^2 + C4*A^4
     fsub %f0 %f0 %f6 # 1.0 - 0.5*A^2 + C4*A^4 - C6*A^6
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 
 reverse:
     beq %a0 %zero a_beq_zero # if %a0 == 0 jump to a_beq_zero
     add %a0 %zero %zero # return 0
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 a_beq_zero:
     addi %a0 %zero 1 # return 1
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 
 min_caml_sin:
-    fispos %a1 %f0 # %a1 = flag(%f0), %a0はreduction_2piで使うのでここでは%a1を使う
+    fispos %a1 %f0 # %a1 = flag(%f0), %a0???reduction_2pi??т戎????????с???????с??%a1???篏帥??
     fabs %f0 %f0 # A = abs(A)
     sw %ra %sp 4
     addi %sp %sp 8
     jal %ra reduction_2pi # %f0 = reduction_2pi(%f0)
     addi %sp %sp -8 # return from reduction_2pi
     lw %ra %sp 4
-    li %f1 l.1 # PI の値をセット PCの値をセット
+    li %f1 l.1 # PI ?????ゃ????祉????? PC?????ゃ????祉?????
     fless %a0 %f0 %f1 # if A < PI
     blt %zero %a0 a_less_than_pi # if 0 < %a0 jump to a_less_than_pi
     fsub %f0 %f0 %f1 # A = A - PI
@@ -207,7 +207,7 @@ a_less_than_pi_2:
     lw %ra %sp 4
     blt %zero %a1 fsin_end # if 0 < FLAG jump to fsin_end
     fneg %f0 %f0 # A = - A
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 pi_4_less_than_a:
     fsub %f0 %f2 %f0    # A = PI/2 - A
     sw %ra %sp 4
@@ -218,7 +218,7 @@ pi_4_less_than_a:
     blt %zero %a1 fsin_end # if 0 < FLAG jump to fsin_end
     fneg %f0 %f0 # A = - A
 fsin_end:
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 
 min_caml_cos:
     addi %a1 %zero 1 # FLAG = 1
@@ -228,7 +228,7 @@ min_caml_cos:
     jal %ra reduction_2pi # A = reduction_2pi(A)
     addi %sp %sp -8 # return from reduction_2pi
     lw %ra %sp 4
-    li %f1 l.1 # PI の値をセット PCの値をセット
+    li %f1 l.1 # PI ?????ゃ????祉????? PC?????ゃ????祉?????
     fless %a0 %f0 %f1 # if A < PI
     blt %zero %a0 a_less_than_pi_cos
     fsub %f0 %f0 %f1 # A = A - PI
@@ -262,7 +262,7 @@ a_less_than_pi_2_cos:
     lw %ra %sp 4
     blt %zero %a1 fcos_end # if 0 < FLAG jump to fcos_end
     fneg %f0 %f0 # A = - A
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 pi_4_less_than_a_cos:
     fsub %f0 %f2 %f0    # A = PI/2 - A
     sw %ra %sp 4
@@ -273,41 +273,41 @@ pi_4_less_than_a_cos:
     blt %zero %a1 fcos_end # if FLAG = 1
     fneg %f0 %f0 # A = - A
 fcos_end:
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 
 kernel_atan:
-    li %f1 l.9 # A3の値をセット PCの値をセット
-    li %f2 l.10 # A5の値をセット PCの値をセット
-    li %f3 l.11 # A7の値をセット PCの値をセット
-    li %f4 l.12 # A9の値をセット PCの値をセット
-    li %f5 l.13 # A11の値をセット PCの値をセット
-    li %f6 l.14 # A13の値をセット PCの値をセット
+    li %f1 l.9 # A3?????ゃ????祉????? PC?????ゃ????祉?????
+    li %f2 l.10 # A5?????ゃ????祉????? PC?????ゃ????祉?????
+    li %f3 l.11 # A7?????ゃ????祉????? PC?????ゃ????祉?????
+    li %f4 l.12 # A9?????ゃ????祉????? PC?????ゃ????祉?????
+    li %f5 l.13 # A11?????ゃ????祉????? PC?????ゃ????祉?????
+    li %f6 l.14 # A13?????ゃ????祉????? PC?????ゃ????祉?????
     fmul %f7 %f0 %f0 # A^2
     fmul %f8 %f0 %f7 # A^3
     fmul %f9 %f7 %f8 # A^5
     fmul %f10 %f7 %f9 # A^7
     fmul %f11 %f7 %f10 # A^9
-    fmul %f12 %f7 %f11 # A^11
-    fmul %f13 %f7 %f12 # A^13
     fmul %f1 %f1 %f8 # A3 * A^3
     fmul %f2 %f2 %f9 # A5 * A^5
     fmul %f3 %f3 %f10 # A7 * A^7
     fmul %f4 %f4 %f11 # A9 * A^9
-    fmul %f5 %f5 %f12 # A11 * A^11
-    fmul %f6 %f6 %f13 # A13 * A^13
+    fmul %f8 %f7 %f11 # A^11
+    fmul %f9 %f7 %f8 # A^13
+    fmul %f5 %f5 %f8 # A11 * A^11
+    fmul %f6 %f6 %f9 # A13 * A^13
     fsub %f0 %f0 %f1 # A - A3*A^3
     fadd %f0 %f0 %f2 # A - A3*A^3 + A5*A^5
     fsub %f0 %f0 %f3 # A - A3*A^3 + A5*A^5 - A7*A^7
     fadd %f0 %f0 %f4 # A - A3*A^3 + A5*A^5 - A7*A^7 + A9*A^9
     fsub %f0 %f0 %f5 # A - A3*A^3 + A5*A^5 - A7*A^7 + A9*A^9 - A11*A^11
     fadd %f0 %f0 %f6 # A - A3*A^3 + A5*A^5 - A7*A^7 + A9*A^9 - A11*A^11 + A13*A^13
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 
 min_caml_atan:
     fabs %f1 %f0 # |A|
-    li %f2 l.15 # 0.4375 PCの値をセット
-    li %f3 l.16 # 2.4375 PCの値をセット
-    li %f4 l.6 # 1.0 PCの値をセット
+    li %f2 l.15 # 0.4375 PC?????ゃ????祉?????
+    li %f3 l.16 # 2.4375 PC?????ゃ????祉?????
+    li %f4 l.6 # 1.0 PC?????ゃ????祉?????
     fless %a0 %f1 %f2 # |A| < 0.4375
     blt %zero %a0 atan_break1 # if 0 < %a0
     fless %a0 %f1 %f3 # |A| < 2.4375
@@ -318,17 +318,17 @@ min_caml_atan:
     jal %ra kernel_atan # kernel_atan(1/|A|)
     addi %sp %sp -8 # return from kernel_atan
     lw %ra %sp 4
-    li %f5 l.1 # PI PCの値をセット
+    li %f5 l.1 # PI PC?????ゃ????祉?????
     fhalf %f5 %f5 # PI/2
     fsub %f0 %f5 %f0 # PI/2 - kernel_atan(1/|A|)
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 atan_break1:
     sw %ra %sp 4 # call kernel_atan
     addi %sp %sp 8
     jal %ra kernel_atan # kernel_atan(A)
     addi %sp %sp -8 # return from kernel_atan
     lw %ra %sp 4
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 atan_break2:
     fsub %f5 %f1 %f4 # |A| - 1.0
     fadd %f6 %f1 %f4 # |A| + 1.0
@@ -338,114 +338,114 @@ atan_break2:
     jal %ra kernel_atan # kernel_atan (|A| - 1.0)/(|A| + 1.0)
     addi %sp %sp -8 # return from kernel_atan
     lw %ra %sp 4
-    li %f5 l.1 # PI PCの値をセット
+    li %f5 l.1 # PI PC?????ゃ????祉?????
     fhalf %f5 %f5 # PI/2
     fhalf %f5 %f5 # PI/4
     fadd %f0 %f5 %f0 # PI/4 kernel_atan((|A| - 1.0)/(|A| + 1.0))
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 
 min_caml_read_int:
     lw %a0 %in 0
     addi %in %in 4
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 
 min_caml_read_float:
     lw %f0 %in 0
     addi %in %in 4
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 
 min_caml_print_int:
     sw %a0 %out 0
     addi %out %out 4
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 
 min_caml_print_char:
     addi %a1 %zero 80 # P
     beq %a0 %a1 break_print_char
     addi %a2 %zero 51 # 3
     beq %a0 %a2 break_print_charP3
-    addi %a3 %zero 32 # 空白文字
-    slli %a3 %a3 8 # 空白文字を1byteずらす
+    addi %a3 %zero 32 # 腥榊?醇??絖?
+    slli %a3 %a3 8 # 腥榊?醇??絖????1byte?????????
     add %a0 %a0 %a3 # 00 00 32 %a0
-    slli %a3 %a3 8 # さらに1byteずらす
+    slli %a3 %a3 8 # ?????????1byte?????????
     add %a0 %a0 %a3 # 00 32 32 %a0
-    slli %a3 %a3 8 # さらに1byteずらす
+    slli %a3 %a3 8 # ?????????1byte?????????
     add %a0 %a0 %a3 # 32 32 32 %a0
     sw %a0 %out 0
     addi %out %out 4
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 break_print_char:
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 break_print_charP3:
-    slli %a2 %a2 8 # 51を1byteずらす
-    add %a0 %a0 %a2 # 00 00 51 80
-    addi %a3 %zero 32 # 空白文字
-    slli %a3 %a3 16 # 空白文字を2byteずらす
+    slli %a2 %a2 8 # 51???1byte?????????
+    add %a0 %a1 %a2 # 00 00 51 80
+    addi %a3 %zero 32 # 腥榊?醇??絖?
+    slli %a3 %a3 16 # 腥榊?醇??絖????2byte?????????
     add %a0 %a0 %a3 # 00 32 51 80
-    slli %a3 %a3 8 # さらに1byteずらす
+    slli %a3 %a3 8 # ?????????1byte?????????
     add %a0 %a0 %a3 # 32 32 51 80
     sw %a0 %out 0
     addi %out %out 4
-    jalr %zero %ra 0  # 終了
+    jalr %zero %ra 0  # 腟?篋?
 
 
-l.6265:	# 128.000000
+l.6291:	# 128.000000
 	1124073472
-l.6216:	# 0.900000
+l.6242:	# 0.900000
 	1063675494
-l.6214:	# 0.200000
+l.6240:	# 0.200000
 	1045220557
-l.6108:	# 150.000000
+l.6134:	# 150.000000
 	1125515264
-l.6105:	# -150.000000
+l.6131:	# -150.000000
 	-1021968384
-l.6086:	# 0.100000
+l.6112:	# 0.100000
 	1036831949
-l.6082:	# -2.000000
+l.6108:	# -2.000000
 	-1073741824
-l.6079:	# 0.003906
-	998244352
-l.6047:	# 20.000000
+l.6105:	# 256.000000
+	1132462080
+l.6072:	# 20.000000
 	1101004800
-l.6045:	# 0.050000
+l.6070:	# 0.050000
 	1028443341
-l.6037:	# 0.250000
+l.6062:	# 0.250000
 	1048576000
-l.6028:	# 10.000000
+l.6053:	# 10.000000
 	1092616192
-l.6023:	# 0.300000
+l.6048:	# 0.300000
 	1050253722
-l.6021:	# 255.000000
+l.6046:	# 255.000000
 	1132396544
-l.6017:	# 0.500000
+l.6042:	# 0.500000
 	1056964608
-l.6015:	# 0.150000
+l.6040:	# 0.150000
 	1041865114
-l.6008:	# 3.141593
+l.6033:	# 3.141593
 	1078530011
-l.6006:	# 30.000000
+l.6031:	# 30.000000
 	1106247680
-l.6004:	# 15.000000
+l.6029:	# 15.000000
 	1097859072
-l.6002:	# 0.000100
+l.6027:	# 0.000100
 	953267991
-l.5953:	# 100000000.000000
+l.5978:	# 100000000.000000
 	1287568416
-l.5947:	# 1000000000.000000
+l.5972:	# 1000000000.000000
 	1315859240
-l.5924:	# -0.100000
+l.5949:	# -0.100000
 	-1110651699
-l.5910:	# 0.010000
+l.5935:	# 0.010000
 	1008981770
-l.5908:	# -0.200000
+l.5933:	# -0.200000
 	-1102263091
-l.5690:	# 2.000000
+l.5715:	# 2.000000
 	1073741824
-l.5653:	# -200.000000
+l.5678:	# -200.000000
 	-1018691584
-l.5650:	# 200.000000
+l.5675:	# 200.000000
 	1128792064
-l.5645:	# 0.017453
+l.5670:	# 0.017453
 	1016003125
 l.5557:	# -1.000000
 	-1082130432
@@ -454,17 +454,18 @@ l.5555:	# 1.000000
 l.5553:	# 0.000000
 	0
 xor.2233:
+	addi %a2 %zero 0 #101
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8398
+	bne %a0 %a12 beq_else.8449
 	addi %a0 %a1 0 #101
 	jalr %zero %ra 0 #101
-beq_else.8398:
+beq_else.8449:
 	addi %a12 %zero 0
-	bne %a1 %a12 beq_else.8399
+	bne %a1 %a12 beq_else.8450
 	addi %a0 %zero 1 #101
 	jalr %zero %ra 0 #101
-beq_else.8399:
-	addi %a0 %zero 0 #101
+beq_else.8450:
+	addi %a0 %a2 0 #101
 	jalr %zero %ra 0 #101
 sgn.2236:
 	sw %f0 %sp 0 #107
@@ -474,7 +475,7 @@ sgn.2236:
 	addi %sp %sp -16 #107
 	lw %ra %sp 12 #107
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8400
+	bne %a0 %a12 beq_else.8451
 	lw %f0 %sp 0 #108
 	sw %ra %sp 12 #108 call dir
 	addi %sp %sp 16 #108	
@@ -482,28 +483,28 @@ sgn.2236:
 	addi %sp %sp -16 #108
 	lw %ra %sp 12 #108
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8401
+	bne %a0 %a12 beq_else.8452
 	li %a0 l.5557 #109
 	jalr %zero %ra 0 #109
-beq_else.8401:
+beq_else.8452:
 	li %a0 l.5555 #108
 	jalr %zero %ra 0 #108
-beq_else.8400:
+beq_else.8451:
 	li %a0 l.5553 #107
 	jalr %zero %ra 0 #107
 fneg_cond.2238:
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8402
+	bne %a0 %a12 beq_else.8453
 	jal	%zero min_caml_fneg
-beq_else.8402:
+beq_else.8453:
 	jalr %zero %ra 0 #555
 add_mod5.2241:
 	add %a0 %a0 %a1 #119
 	addi %a12 %zero 5
-	blt %a0 %a12 bge_else.8403
+	blt %a0 %a12 bge_else.8454
 	addi %a0 %a0 -5 #120
 	jalr %zero %ra 0 #120
-bge_else.8403:
+bge_else.8454:
 	jalr %zero %ra 0 #120
 vecset.2244:
 	sw %f0 %a0 0 #129
@@ -526,6 +527,97 @@ veccpy.2254:
 	lw %f0 %a1 8 #148
 	sw %f0 %a0 8 #150
 	jalr %zero %ra 0 #150
+vecdist2.2257:
+	lw %f0 %a0 0 #155
+	lw %f1 %a1 0 #155
+	fsub %f0 %f0 %f1 #155
+	sw %a1 %sp 0 #155
+	sw %a0 %sp 4 #155
+	sw %ra %sp 12 #155 call dir
+	addi %sp %sp 16 #155	
+	jal %ra min_caml_fsqr #155
+	addi %sp %sp -16 #155
+	lw %ra %sp 12 #155
+	lw %a0 %sp 4 #155
+	lw %f1 %a0 4 #155
+	lw %a1 %sp 0 #155
+	lw %f2 %a1 4 #155
+	fsub %f1 %f1 %f2 #155
+	sw %f0 %sp 8 #155
+	fadd %f0 %f1 %fzero
+	sw %ra %sp 20 #155 call dir
+	addi %sp %sp 24 #155	
+	jal %ra min_caml_fsqr #155
+	addi %sp %sp -24 #155
+	lw %ra %sp 20 #155
+	lw %f1 %sp 8 #155
+	fadd %f0 %f1 %f0 #155
+	lw %a0 %sp 4 #155
+	lw %f1 %a0 8 #155
+	lw %a0 %sp 0 #155
+	lw %f2 %a0 8 #155
+	fsub %f1 %f1 %f2 #155
+	sw %f0 %sp 16 #155
+	fadd %f0 %f1 %fzero
+	sw %ra %sp 28 #155 call dir
+	addi %sp %sp 32 #155	
+	jal %ra min_caml_fsqr #155
+	addi %sp %sp -32 #155
+	lw %ra %sp 28 #155
+	lw %f1 %sp 16 #155
+	fadd %f0 %f1 %f0 #155
+	jalr %zero %ra 0 #155
+vecunit.2260:
+	li %f0 l.5555 #160
+	lw %f1 %a0 0 #160
+	sw %f0 %sp 0 #160
+	sw %a0 %sp 8 #160
+	fadd %f0 %f1 %fzero
+	sw %ra %sp 12 #160 call dir
+	addi %sp %sp 16 #160	
+	jal %ra min_caml_fsqr #160
+	addi %sp %sp -16 #160
+	lw %ra %sp 12 #160
+	lw %a0 %sp 8 #160
+	lw %f1 %a0 4 #160
+	sw %f0 %sp 16 #160
+	fadd %f0 %f1 %fzero
+	sw %ra %sp 28 #160 call dir
+	addi %sp %sp 32 #160	
+	jal %ra min_caml_fsqr #160
+	addi %sp %sp -32 #160
+	lw %ra %sp 28 #160
+	lw %f1 %sp 16 #160
+	fadd %f0 %f1 %f0 #160
+	lw %a0 %sp 8 #160
+	lw %f1 %a0 8 #160
+	sw %f0 %sp 24 #160
+	fadd %f0 %f1 %fzero
+	sw %ra %sp 36 #160 call dir
+	addi %sp %sp 40 #160	
+	jal %ra min_caml_fsqr #160
+	addi %sp %sp -40 #160
+	lw %ra %sp 36 #160
+	lw %f1 %sp 24 #160
+	fadd %f0 %f1 %f0 #160
+	sw %ra %sp 36 #160 call dir
+	addi %sp %sp 40 #160	
+	jal %ra min_caml_sqrt #160
+	addi %sp %sp -40 #160
+	lw %ra %sp 36 #160
+	lw %f1 %sp 0 #160
+	fdiv %f0 %f1 %f0 #160
+	lw %a0 %sp 8 #160
+	lw %f1 %a0 0 #160
+	fmul %f1 %f1 %f0 #161
+	sw %f1 %a0 0 #161
+	lw %f1 %a0 4 #160
+	fmul %f1 %f1 %f0 #162
+	sw %f1 %a0 4 #162
+	lw %f1 %a0 8 #160
+	fmul %f0 %f1 %f0 #163
+	sw %f0 %a0 8 #163
+	jalr %zero %ra 0 #163
 vecunit_sgn.2262:
 	lw %f0 %a0 0 #168
 	sw %a1 %sp 0 #168
@@ -569,23 +661,23 @@ vecunit_sgn.2262:
 	addi %sp %sp -40 #169
 	lw %ra %sp 36 #169
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8407 # nontail if
+	bne %a0 %a12 beq_else.8460 # nontail if
 	lw %a0 %sp 0 #169
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8409 # nontail if
+	bne %a0 %a12 beq_else.8462 # nontail if
 	li %f0 l.5555 #169
 	lw %f1 %sp 24 #169
 	fdiv %f0 %f0 %f1 #169
-	jal %zero beq_cont.8410 # then sentence ends
-beq_else.8409:
+	jal %zero beq_cont.8463 # then sentence ends
+beq_else.8462:
 	li %f0 l.5557 #169
 	lw %f1 %sp 24 #169
 	fdiv %f0 %f0 %f1 #169
-beq_cont.8410:
-	jal %zero beq_cont.8408 # then sentence ends
-beq_else.8407:
+beq_cont.8463:
+	jal %zero beq_cont.8461 # then sentence ends
+beq_else.8460:
 	li %f0 l.5555 #169
-beq_cont.8408:
+beq_cont.8461:
 	lw %a0 %sp 4 #168
 	lw %f1 %a0 0 #168
 	fmul %f1 %f1 %f0 #170
@@ -651,6 +743,20 @@ vecadd.2277:
 	fadd %f0 %f0 %f1 #196
 	sw %f0 %a0 8 #196
 	jalr %zero %ra 0 #196
+vecmul.2280:
+	lw %f0 %a0 0 #201
+	lw %f1 %a1 0 #201
+	fmul %f0 %f0 %f1 #201
+	sw %f0 %a0 0 #201
+	lw %f0 %a0 4 #201
+	lw %f1 %a1 4 #201
+	fmul %f0 %f0 %f1 #202
+	sw %f0 %a0 4 #202
+	lw %f0 %a0 8 #201
+	lw %f1 %a1 8 #201
+	fmul %f0 %f0 %f1 #203
+	sw %f0 %a0 8 #203
+	jalr %zero %ra 0 #203
 vecscale.2283:
 	lw %f1 %a0 0 #208
 	fmul %f1 %f1 %f0 #208
@@ -804,7 +910,7 @@ r_bright.2359:
 	lw %f0 %a0 8 #529
 	jalr %zero %ra 0 #94
 rad.2361:
-	li %f1 l.5645 #537
+	li %f1 l.5670 #537
 	fmul %f0 %f0 %f1 #537
 	jalr %zero %ra 0 #537
 read_screen_settings.2363:
@@ -890,17 +996,17 @@ read_screen_settings.2363:
 	lw %ra %sp 68 #553
 	lw %f1 %sp 32 #555
 	fmul %f2 %f1 %f0 #555
-	li %f3 l.5650 #555
+	li %f3 l.5675 #555
 	fmul %f2 %f2 %f3 #555
 	lw %a0 %sp 12 #555
 	sw %f2 %a0 0 #555
-	li %f2 l.5653 #556
+	li %f2 l.5678 #556
 	lw %f3 %sp 40 #556
 	fmul %f2 %f3 %f2 #556
 	sw %f2 %a0 4 #556
 	lw %f2 %sp 56 #557
 	fmul %f4 %f1 %f2 #557
-	li %f5 l.5650 #557
+	li %f5 l.5675 #557
 	fmul %f4 %f4 %f5 #557
 	sw %f4 %a0 8 #557
 	lw %a1 %sp 8 #559
@@ -1247,7 +1353,7 @@ rotate_quadratic_matrix.2367:
 	fadd %f0 %f2 %f0 #627
 	lw %a0 %sp 0 #627
 	sw %f0 %a0 8 #627
-	li %f0 l.5690 #630
+	li %f0 l.5715 #630
 	lw %f2 %sp 72 #630
 	lw %f3 %sp 136 #630
 	fmul %f4 %f3 %f2 #630
@@ -1267,7 +1373,7 @@ rotate_quadratic_matrix.2367:
 	fmul %f0 %f0 %f4 #630
 	lw %a0 %sp 4 #630
 	sw %f0 %a0 0 #630
-	li %f0 l.5690 #631
+	li %f0 l.5715 #631
 	lw %f4 %sp 88 #631
 	fmul %f10 %f3 %f4 #631
 	fmul %f5 %f10 %f5 #631
@@ -1281,7 +1387,7 @@ rotate_quadratic_matrix.2367:
 	fadd %f5 %f5 %f9 #631
 	fmul %f0 %f0 %f5 #631
 	sw %f0 %a0 4 #631
-	li %f0 l.5690 #632
+	li %f0 l.5715 #632
 	fmul %f3 %f3 %f4 #632
 	fmul %f2 %f3 %f2 #632
 	fmul %f3 %f7 %f10 #632
@@ -1303,11 +1409,12 @@ read_nth_object.2370:
 	jal %ra min_caml_read_int #639
 	addi %sp %sp -16 #639
 	lw %ra %sp 12 #639
-	addi %a12 %zero -1
-	bne %a0 %a12 beq_else.8421
+	addi %a1 %zero 1 #640
+	sub %a1 %zero %a1 #640
+	bne %a0 %a1 beq_else.8475
 	addi %a0 %zero 0 #716
 	jalr %zero %ra 0 #716
-beq_else.8421:
+beq_else.8475:
 	sw %a0 %sp 8 #642
 	sw %ra %sp 12 #642 call dir
 	addi %sp %sp 16 #642	
@@ -1461,9 +1568,9 @@ beq_else.8421:
 	lw %ra %sp 44 #667
 	lw %a1 %sp 20 #640
 	addi %a12 %zero 0
-	bne %a1 %a12 beq_else.8422 # nontail if
-	jal %zero beq_cont.8423 # then sentence ends
-beq_else.8422:
+	bne %a1 %a12 beq_else.8476 # nontail if
+	jal %zero beq_cont.8477 # then sentence ends
+beq_else.8476:
 	sw %a0 %sp 44 #670
 	sw %ra %sp 52 #670 call dir
 	addi %sp %sp 56 #670	
@@ -1501,15 +1608,15 @@ beq_else.8422:
 	lw %ra %sp 52 #672
 	lw %a0 %sp 44 #672
 	sw %f0 %a0 8 #672
-beq_cont.8423:
+beq_cont.8477:
 	lw %a1 %sp 12 #640
 	addi %a12 %zero 2
-	bne %a1 %a12 beq_else.8424 # nontail if
+	bne %a1 %a12 beq_else.8478 # nontail if
 	addi %a2 %zero 1 #679
-	jal %zero beq_cont.8425 # then sentence ends
-beq_else.8424:
+	jal %zero beq_cont.8479 # then sentence ends
+beq_else.8478:
 	lw %a2 %sp 32 #679
-beq_cont.8425:
+beq_cont.8479:
 	addi %a3 %zero 4 #680
 	li %f0 l.5553 #680
 	sw %a2 %sp 48 #680
@@ -1549,7 +1656,7 @@ beq_cont.8425:
 	add %a12 %a6 %a5 #691
 	sw %a1 %a12 0 #691
 	addi %a12 %zero 3
-	bne %a4 %a12 beq_else.8426 # nontail if
+	bne %a4 %a12 beq_else.8480 # nontail if
 	lw %f0 %a2 0 #646
 	sw %f0 %sp 56 #697
 	sw %ra %sp 68 #697 call dir
@@ -1558,7 +1665,7 @@ beq_cont.8425:
 	addi %sp %sp -72 #697
 	lw %ra %sp 68 #697
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8429 # nontail if
+	bne %a0 %a12 beq_else.8483 # nontail if
 	lw %f0 %sp 56 #697
 	sw %ra %sp 68 #697 call dir
 	addi %sp %sp 72 #697	
@@ -1575,10 +1682,10 @@ beq_cont.8425:
 	lw %ra %sp 76 #697
 	lw %f1 %sp 64 #697
 	fdiv %f0 %f1 %f0 #697
-	jal %zero beq_cont.8430 # then sentence ends
-beq_else.8429:
+	jal %zero beq_cont.8484 # then sentence ends
+beq_else.8483:
 	li %f0 l.5553 #697
-beq_cont.8430:
+beq_cont.8484:
 	lw %a0 %sp 24 #697
 	sw %f0 %a0 0 #697
 	lw %f0 %a0 4 #646
@@ -1589,7 +1696,7 @@ beq_cont.8430:
 	addi %sp %sp -88 #699
 	lw %ra %sp 84 #699
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8431 # nontail if
+	bne %a0 %a12 beq_else.8485 # nontail if
 	lw %f0 %sp 72 #699
 	sw %ra %sp 84 #699 call dir
 	addi %sp %sp 88 #699	
@@ -1606,10 +1713,10 @@ beq_cont.8430:
 	lw %ra %sp 92 #699
 	lw %f1 %sp 80 #699
 	fdiv %f0 %f1 %f0 #699
-	jal %zero beq_cont.8432 # then sentence ends
-beq_else.8431:
+	jal %zero beq_cont.8486 # then sentence ends
+beq_else.8485:
 	li %f0 l.5553 #699
-beq_cont.8432:
+beq_cont.8486:
 	lw %a0 %sp 24 #699
 	sw %f0 %a0 4 #699
 	lw %f0 %a0 8 #646
@@ -1620,7 +1727,7 @@ beq_cont.8432:
 	addi %sp %sp -104 #701
 	lw %ra %sp 100 #701
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8433 # nontail if
+	bne %a0 %a12 beq_else.8487 # nontail if
 	lw %f0 %sp 88 #701
 	sw %ra %sp 100 #701 call dir
 	addi %sp %sp 104 #701	
@@ -1637,39 +1744,39 @@ beq_cont.8432:
 	lw %ra %sp 108 #701
 	lw %f1 %sp 96 #701
 	fdiv %f0 %f1 %f0 #701
-	jal %zero beq_cont.8434 # then sentence ends
-beq_else.8433:
+	jal %zero beq_cont.8488 # then sentence ends
+beq_else.8487:
 	li %f0 l.5553 #701
-beq_cont.8434:
+beq_cont.8488:
 	lw %a0 %sp 24 #701
 	sw %f0 %a0 8 #701
-	jal %zero beq_cont.8427 # then sentence ends
-beq_else.8426:
+	jal %zero beq_cont.8481 # then sentence ends
+beq_else.8480:
 	addi %a12 %zero 2
-	bne %a4 %a12 beq_else.8435 # nontail if
-	lw %a1 %sp 32 #679
-	addi %a12 %zero 0
-	bne %a1 %a12 beq_else.8437 # nontail if
-	addi %a1 %zero 1 #705
-	jal %zero beq_cont.8438 # then sentence ends
-beq_else.8437:
+	bne %a4 %a12 beq_else.8489 # nontail if
 	addi %a1 %zero 0 #705
-beq_cont.8438:
+	lw %a4 %sp 32 #679
+	addi %a12 %zero 0
+	bne %a4 %a12 beq_else.8491 # nontail if
+	addi %a1 %zero 1 #705
+	jal %zero beq_cont.8492 # then sentence ends
+beq_else.8491:
+beq_cont.8492:
 	add %a0 %a2 %zero
 	sw %ra %sp 108 #705 call dir
 	addi %sp %sp 112 #705	
 	jal %ra vecunit_sgn.2262 #705
 	addi %sp %sp -112 #705
 	lw %ra %sp 108 #705
-	jal %zero beq_cont.8436 # then sentence ends
-beq_else.8435:
-beq_cont.8436:
-beq_cont.8427:
+	jal %zero beq_cont.8490 # then sentence ends
+beq_else.8489:
+beq_cont.8490:
+beq_cont.8481:
 	lw %a0 %sp 20 #640
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8439 # nontail if
-	jal %zero beq_cont.8440 # then sentence ends
-beq_else.8439:
+	bne %a0 %a12 beq_else.8493 # nontail if
+	jal %zero beq_cont.8494 # then sentence ends
+beq_else.8493:
 	lw %a0 %sp 24 #710
 	lw %a1 %sp 44 #710
 	sw %ra %sp 108 #710 call dir
@@ -1677,16 +1784,16 @@ beq_else.8439:
 	jal %ra rotate_quadratic_matrix.2367 #710
 	addi %sp %sp -112 #710
 	lw %ra %sp 108 #710
-beq_cont.8440:
+beq_cont.8494:
 	addi %a0 %zero 1 #713
 	jalr %zero %ra 0 #713
 read_object.2372:
 	lw %a1 %a11 8 #720
 	lw %a2 %a11 4 #720
 	addi %a12 %zero 60
-	blt %a0 %a12 bge_else.8441
+	blt %a0 %a12 bge_else.8495
 	jalr %zero %ra 0 #726
-bge_else.8441:
+bge_else.8495:
 	sw %a11 %sp 0 #722
 	sw %a2 %sp 4 #722
 	sw %a0 %sp 8 #722
@@ -1698,12 +1805,12 @@ bge_else.8441:
 	addi %sp %sp -16 #722
 	lw %ra %sp 12 #722
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8443
+	bne %a0 %a12 beq_else.8497
 	lw %a0 %sp 4 #725
 	lw %a1 %sp 8 #725
 	sw %a1 %a0 0 #725
 	jalr %zero %ra 0 #725
-beq_else.8443:
+beq_else.8497:
 	lw %a0 %sp 8 #723
 	addi %a0 %a0 1 #723
 	lw %a11 %sp 0 #723
@@ -1721,13 +1828,15 @@ read_net_item.2376:
 	jal %ra min_caml_read_int #737
 	addi %sp %sp -8 #737
 	lw %ra %sp 4 #737
-	addi %a12 %zero -1
-	bne %a0 %a12 beq_else.8445
+	addi %a1 %zero 1 #738
+	sub %a1 %zero %a1 #738
+	bne %a0 %a1 beq_else.8499
 	lw %a0 %sp 0 #738
 	addi %a0 %a0 1 #738
-	addi %a1 %zero -1 #738
+	addi %a1 %zero 1 #738
+	sub %a1 %zero %a1 #738
 	jal	%zero min_caml_create_array
-beq_else.8445:
+beq_else.8499:
 	lw %a1 %sp 0 #740
 	addi %a2 %a1 1 #740
 	sw %a0 %sp 4 #740
@@ -1754,12 +1863,13 @@ read_or_network.2378:
 	lw %ra %sp 4 #745
 	add %a1 %a0 %zero #745
 	lw %a0 %a1 0 #741
-	addi %a12 %zero -1
-	bne %a0 %a12 beq_else.8446
+	addi %a2 %zero 1 #746
+	sub %a2 %zero %a2 #746
+	bne %a0 %a2 beq_else.8500
 	lw %a0 %sp 0 #747
 	addi %a0 %a0 1 #747
 	jal	%zero min_caml_create_array
-beq_else.8446:
+beq_else.8500:
 	lw %a0 %sp 0 #749
 	addi %a2 %a0 1 #749
 	sw %a1 %sp 4 #749
@@ -1788,10 +1898,11 @@ read_and_network.2380:
 	addi %sp %sp -16 #754
 	lw %ra %sp 12 #754
 	lw %a1 %a0 0 #741
-	addi %a12 %zero -1
-	bne %a1 %a12 beq_else.8447
+	addi %a2 %zero 1 #755
+	sub %a2 %zero %a2 #755
+	bne %a1 %a2 beq_else.8501
 	jalr %zero %ra 0 #755
-beq_else.8447:
+beq_else.8501:
 	lw %a1 %sp 8 #757
 	slli %a2 %a1 2 #757
 	lw %a3 %sp 4 #757
@@ -1869,16 +1980,18 @@ solver_rect_surface.2384:
 	jal %ra min_caml_fiszero #779
 	addi %sp %sp -64 #779
 	lw %ra %sp 60 #779
+	addi %a1 %zero 0 #779
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8453
+	bne %a0 %a12 beq_else.8507
 	lw %a0 %sp 56 #780
-	sw %ra %sp 60 #780 call dir
-	addi %sp %sp 64 #780	
+	sw %a1 %sp 60 #780
+	sw %ra %sp 68 #780 call dir
+	addi %sp %sp 72 #780	
 	jal %ra o_param_abc.2306 #780
-	addi %sp %sp -64 #780
-	lw %ra %sp 60 #780
+	addi %sp %sp -72 #780
+	lw %ra %sp 68 #780
 	lw %a1 %sp 56 #781
-	sw %a0 %sp 60 #781
+	sw %a0 %sp 64 #781
 	add %a0 %a1 %zero
 	sw %ra %sp 68 #781 call dir
 	addi %sp %sp 72 #781	
@@ -1890,29 +2003,29 @@ solver_rect_surface.2384:
 	lw %a3 %sp 48 #779
 	add %a12 %a3 %a2 #779
 	lw %f0 %a12 0 #779
-	sw %a0 %sp 64 #781
-	sw %ra %sp 68 #781 call dir
-	addi %sp %sp 72 #781	
+	sw %a0 %sp 68 #781
+	sw %ra %sp 76 #781 call dir
+	addi %sp %sp 80 #781	
 	jal %ra min_caml_fisneg #781
-	addi %sp %sp -72 #781
-	lw %ra %sp 68 #781
+	addi %sp %sp -80 #781
+	lw %ra %sp 76 #781
 	add %a1 %a0 %zero #781
-	lw %a0 %sp 64 #781
-	sw %ra %sp 68 #781 call dir
-	addi %sp %sp 72 #781	
+	lw %a0 %sp 68 #781
+	sw %ra %sp 76 #781 call dir
+	addi %sp %sp 80 #781	
 	jal %ra xor.2233 #781
-	addi %sp %sp -72 #781
-	lw %ra %sp 68 #781
+	addi %sp %sp -80 #781
+	lw %ra %sp 76 #781
 	lw %a1 %sp 52 #781
 	slli %a2 %a1 2 #781
-	lw %a3 %sp 60 #781
+	lw %a3 %sp 64 #781
 	add %a12 %a3 %a2 #781
 	lw %f0 %a12 0 #781
-	sw %ra %sp 68 #781 call dir
-	addi %sp %sp 72 #781	
+	sw %ra %sp 76 #781 call dir
+	addi %sp %sp 80 #781	
 	jal %ra fneg_cond.2238 #781
-	addi %sp %sp -72 #781
-	lw %ra %sp 68 #781
+	addi %sp %sp -80 #781
+	lw %ra %sp 76 #781
 	lw %f1 %sp 40 #783
 	fsub %f0 %f0 %f1 #783
 	lw %a0 %sp 52 #779
@@ -1937,7 +2050,7 @@ solver_rect_surface.2384:
 	lw %ra %sp 84 #784
 	lw %a0 %sp 32 #781
 	slli %a0 %a0 2 #781
-	lw %a1 %sp 60 #781
+	lw %a1 %sp 64 #781
 	add %a12 %a1 %a0 #781
 	lw %f1 %a12 0 #781
 	sw %ra %sp 84 #784 call dir
@@ -1946,10 +2059,10 @@ solver_rect_surface.2384:
 	addi %sp %sp -88 #784
 	lw %ra %sp 84 #784
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8455
-	addi %a0 %zero 0 #779
+	bne %a0 %a12 beq_else.8508
+	lw %a0 %sp 60 #779
 	jalr %zero %ra 0 #779
-beq_else.8455:
+beq_else.8508:
 	lw %a0 %sp 16 #779
 	slli %a1 %a0 2 #779
 	lw %a2 %sp 48 #779
@@ -1966,7 +2079,7 @@ beq_else.8455:
 	lw %ra %sp 84 #785
 	lw %a0 %sp 16 #781
 	slli %a0 %a0 2 #781
-	lw %a1 %sp 60 #781
+	lw %a1 %sp 64 #781
 	add %a12 %a1 %a0 #781
 	lw %f1 %a12 0 #781
 	sw %ra %sp 84 #785 call dir
@@ -1975,17 +2088,17 @@ beq_else.8455:
 	addi %sp %sp -88 #785
 	lw %ra %sp 84 #785
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8456
-	addi %a0 %zero 0 #779
+	bne %a0 %a12 beq_else.8509
+	lw %a0 %sp 60 #779
 	jalr %zero %ra 0 #779
-beq_else.8456:
+beq_else.8509:
 	lw %a0 %sp 0 #786
 	lw %f0 %sp 72 #786
 	sw %f0 %a0 0 #786
 	addi %a0 %zero 1 #786
 	jalr %zero %ra 0 #786
-beq_else.8453:
-	addi %a0 %zero 0 #779
+beq_else.8507:
+	addi %a0 %a1 0 #779
 	jalr %zero %ra 0 #779
 solver_rect.2393:
 	lw %a11 %a11 4 #793
@@ -2006,7 +2119,7 @@ solver_rect.2393:
 	lw %ra %sp 36 #794
 	addi %a4 %zero 0 #794
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8457
+	bne %a0 %a12 beq_else.8510
 	addi %a2 %zero 1 #795
 	addi %a3 %zero 2 #795
 	lw %f0 %sp 16 #795
@@ -2023,7 +2136,7 @@ solver_rect.2393:
 	addi %sp %sp -48 #795
 	lw %ra %sp 44 #795
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8458
+	bne %a0 %a12 beq_else.8511
 	addi %a2 %zero 2 #796
 	addi %a4 %zero 1 #796
 	lw %f0 %sp 8 #796
@@ -2040,16 +2153,16 @@ solver_rect.2393:
 	addi %sp %sp -48 #796
 	lw %ra %sp 44 #796
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8459
-	addi %a0 %zero 0 #794
+	bne %a0 %a12 beq_else.8512
+	lw %a0 %sp 36 #794
 	jalr %zero %ra 0 #794
-beq_else.8459:
+beq_else.8512:
 	addi %a0 %zero 3 #796
 	jalr %zero %ra 0 #796
-beq_else.8458:
+beq_else.8511:
 	addi %a0 %zero 2 #795
 	jalr %zero %ra 0 #795
-beq_else.8457:
+beq_else.8510:
 	addi %a0 %zero 1 #794
 	jalr %zero %ra 0 #794
 solver_surface.2399:
@@ -2078,11 +2191,12 @@ solver_surface.2399:
 	jal %ra min_caml_fispos #807
 	addi %sp %sp -56 #807
 	lw %ra %sp 52 #807
+	addi %a1 %zero 0 #807
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8461
-	addi %a0 %zero 0 #807
+	bne %a0 %a12 beq_else.8514
+	addi %a0 %a1 0 #807
 	jalr %zero %ra 0 #807
-beq_else.8461:
+beq_else.8514:
 	lw %f0 %sp 24 #808
 	lw %f1 %sp 16 #808
 	lw %f2 %sp 8 #808
@@ -2168,10 +2282,10 @@ quadratic.2405:
 	addi %sp %sp -88 #820
 	lw %ra %sp 84 #820
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8463
+	bne %a0 %a12 beq_else.8516
 	lw %f0 %sp 72 #818
 	jalr %zero %ra 0 #818
-beq_else.8463:
+beq_else.8516:
 	lw %f0 %sp 8 #824
 	lw %f1 %sp 16 #824
 	fmul %f2 %f1 %f0 #824
@@ -2272,10 +2386,10 @@ bilinear.2410:
 	addi %sp %sp -112 #837
 	lw %ra %sp 108 #837
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8465
+	bne %a0 %a12 beq_else.8518
 	lw %f0 %sp 96 #833
 	jalr %zero %ra 0 #833
-beq_else.8465:
+beq_else.8518:
 	lw %f0 %sp 40 #841
 	lw %f1 %sp 24 #841
 	fmul %f2 %f1 %f0 #841
@@ -2363,8 +2477,9 @@ solver_second.2418:
 	jal %ra min_caml_fiszero #856
 	addi %sp %sp -56 #856
 	lw %ra %sp 52 #856
+	addi %a1 %zero 0 #856
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8467
+	bne %a0 %a12 beq_else.8520
 	lw %a0 %sp 36 #854
 	lw %f0 %a0 0 #854
 	lw %f1 %a0 4 #854
@@ -2373,6 +2488,7 @@ solver_second.2418:
 	lw %f4 %sp 16 #861
 	lw %f5 %sp 8 #861
 	lw %a0 %sp 32 #861
+	sw %a1 %sp 48 #861
 	sw %ra %sp 52 #861 call dir
 	addi %sp %sp 56 #861	
 	jal %ra bilinear.2410 #861
@@ -2382,80 +2498,80 @@ solver_second.2418:
 	lw %f2 %sp 16 #863
 	lw %f3 %sp 8 #863
 	lw %a0 %sp 32 #863
-	sw %f0 %sp 48 #863
+	sw %f0 %sp 56 #863
 	fadd %f0 %f1 %fzero
 	fadd %f1 %f2 %fzero
 	fadd %f2 %f3 %fzero
-	sw %ra %sp 60 #863 call dir
-	addi %sp %sp 64 #863	
+	sw %ra %sp 68 #863 call dir
+	addi %sp %sp 72 #863	
 	jal %ra quadratic.2405 #863
-	addi %sp %sp -64 #863
-	lw %ra %sp 60 #863
+	addi %sp %sp -72 #863
+	lw %ra %sp 68 #863
 	lw %a0 %sp 32 #864
-	sw %f0 %sp 56 #864
-	sw %ra %sp 68 #864 call dir
-	addi %sp %sp 72 #864	
+	sw %f0 %sp 64 #864
+	sw %ra %sp 76 #864 call dir
+	addi %sp %sp 80 #864	
 	jal %ra o_form.2292 #864
-	addi %sp %sp -72 #864
-	lw %ra %sp 68 #864
+	addi %sp %sp -80 #864
+	lw %ra %sp 76 #864
 	addi %a12 %zero 3
-	bne %a0 %a12 beq_else.8468 # nontail if
+	bne %a0 %a12 beq_else.8522 # nontail if
 	li %f0 l.5555 #864
-	lw %f1 %sp 56 #864
+	lw %f1 %sp 64 #864
 	fsub %f0 %f1 %f0 #864
-	jal %zero beq_cont.8469 # then sentence ends
-beq_else.8468:
-	lw %f0 %sp 56 #818
-beq_cont.8469:
-	lw %f1 %sp 48 #866
-	sw %f0 %sp 64 #866
+	jal %zero beq_cont.8523 # then sentence ends
+beq_else.8522:
+	lw %f0 %sp 64 #818
+beq_cont.8523:
+	lw %f1 %sp 56 #866
+	sw %f0 %sp 72 #866
 	fadd %f0 %f1 %fzero
-	sw %ra %sp 76 #866 call dir
-	addi %sp %sp 80 #866	
+	sw %ra %sp 84 #866 call dir
+	addi %sp %sp 88 #866	
 	jal %ra min_caml_fsqr #866
-	addi %sp %sp -80 #866
-	lw %ra %sp 76 #866
-	lw %f1 %sp 64 #866
+	addi %sp %sp -88 #866
+	lw %ra %sp 84 #866
+	lw %f1 %sp 72 #866
 	lw %f2 %sp 40 #866
 	fmul %f1 %f2 %f1 #866
 	fsub %f0 %f0 %f1 #866
-	sw %f0 %sp 72 #868
-	sw %ra %sp 84 #868 call dir
-	addi %sp %sp 88 #868	
+	sw %f0 %sp 80 #868
+	sw %ra %sp 92 #868 call dir
+	addi %sp %sp 96 #868	
 	jal %ra min_caml_fispos #868
-	addi %sp %sp -88 #868
-	lw %ra %sp 84 #868
+	addi %sp %sp -96 #868
+	lw %ra %sp 92 #868
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8470
-	addi %a0 %zero 0 #856
+	bne %a0 %a12 beq_else.8524
+	lw %a0 %sp 48 #856
 	jalr %zero %ra 0 #856
-beq_else.8470:
-	lw %f0 %sp 72 #869
-	sw %ra %sp 84 #869 call dir
-	addi %sp %sp 88 #869	
+beq_else.8524:
+	lw %f0 %sp 80 #869
+	sw %ra %sp 92 #869 call dir
+	addi %sp %sp 96 #869	
 	jal %ra min_caml_sqrt #869
-	addi %sp %sp -88 #869
-	lw %ra %sp 84 #869
+	addi %sp %sp -96 #869
+	lw %ra %sp 92 #869
 	lw %a0 %sp 32 #870
-	sw %f0 %sp 80 #870
-	sw %ra %sp 92 #870 call dir
-	addi %sp %sp 96 #870	
+	sw %f0 %sp 88 #870
+	sw %ra %sp 100 #870 call dir
+	addi %sp %sp 104 #870	
 	jal %ra o_isinvert.2296 #870
-	addi %sp %sp -96 #870
-	lw %ra %sp 92 #870
+	addi %sp %sp -104 #870
+	lw %ra %sp 100 #870
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8471 # nontail if
-	lw %f0 %sp 80 #870
-	sw %ra %sp 92 #870 call dir
-	addi %sp %sp 96 #870	
+	bne %a0 %a12 beq_else.8525 # nontail if
+	lw %f0 %sp 88 #870
+	sw %ra %sp 100 #870 call dir
+	addi %sp %sp 104 #870	
 	jal %ra min_caml_fneg #870
-	addi %sp %sp -96 #870
-	lw %ra %sp 92 #870
-	jal %zero beq_cont.8472 # then sentence ends
-beq_else.8471:
-	lw %f0 %sp 80 #160
-beq_cont.8472:
-	lw %f1 %sp 48 #871
+	addi %sp %sp -104 #870
+	lw %ra %sp 100 #870
+	jal %zero beq_cont.8526 # then sentence ends
+beq_else.8525:
+	lw %f0 %sp 88 #160
+beq_cont.8526:
+	lw %f1 %sp 56 #871
 	fsub %f0 %f0 %f1 #871
 	lw %f1 %sp 40 #871
 	fdiv %f0 %f0 %f1 #871
@@ -2463,8 +2579,8 @@ beq_cont.8472:
 	sw %f0 %a0 0 #871
 	addi %a0 %zero 1 #871
 	jalr %zero %ra 0 #871
-beq_else.8467:
-	addi %a0 %zero 0 #856
+beq_else.8520:
+	addi %a0 %a1 0 #856
 	jalr %zero %ra 0 #856
 solver.2424:
 	lw %a3 %a11 16 #879
@@ -2522,7 +2638,7 @@ solver.2424:
 	addi %sp %sp -80 #885
 	lw %ra %sp 76 #885
 	addi %a12 %zero 1
-	bne %a0 %a12 beq_else.8473
+	bne %a0 %a12 beq_else.8527
 	lw %f0 %sp 32 #887
 	lw %f1 %sp 48 #887
 	lw %f2 %sp 64 #887
@@ -2531,9 +2647,9 @@ solver.2424:
 	lw %a11 %sp 12 #887
 	lw %a10 %a11 0 #887
 	jalr %zero %a10 0 #887
-beq_else.8473:
+beq_else.8527:
 	addi %a12 %zero 2
-	bne %a0 %a12 beq_else.8474
+	bne %a0 %a12 beq_else.8528
 	lw %f0 %sp 32 #888
 	lw %f1 %sp 48 #888
 	lw %f2 %sp 64 #888
@@ -2542,7 +2658,7 @@ beq_else.8473:
 	lw %a11 %sp 4 #888
 	lw %a10 %a11 0 #888
 	jalr %zero %a10 0 #888
-beq_else.8474:
+beq_else.8528:
 	lw %f0 %sp 32 #889
 	lw %f1 %sp 48 #889
 	lw %f2 %sp 64 #889
@@ -2588,144 +2704,148 @@ solver_rect_fast.2428:
 	jal %ra min_caml_fless #899
 	addi %sp %sp -72 #899
 	lw %ra %sp 68 #899
+	addi %a1 %zero 0 #899
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8477 # nontail if
-	addi %a0 %zero 0 #899
-	jal %zero beq_cont.8478 # then sentence ends
-beq_else.8477:
+	bne %a0 %a12 beq_else.8531 # nontail if
+	addi %a0 %a1 0 #899
+	jal %zero beq_cont.8532 # then sentence ends
+beq_else.8531:
 	lw %a0 %sp 48 #899
 	lw %f0 %a0 8 #899
 	lw %f1 %sp 40 #900
 	fmul %f0 %f1 %f0 #900
 	lw %f2 %sp 32 #900
 	fadd %f0 %f0 %f2 #900
+	sw %a1 %sp 64 #900
 	sw %ra %sp 68 #900 call dir
 	addi %sp %sp 72 #900	
 	jal %ra min_caml_fabs #900
 	addi %sp %sp -72 #900
 	lw %ra %sp 68 #900
 	lw %a0 %sp 52 #900
-	sw %f0 %sp 64 #900
-	sw %ra %sp 76 #900 call dir
-	addi %sp %sp 80 #900	
+	sw %f0 %sp 72 #900
+	sw %ra %sp 84 #900 call dir
+	addi %sp %sp 88 #900	
 	jal %ra o_param_c.2304 #900
-	addi %sp %sp -80 #900
-	lw %ra %sp 76 #900
+	addi %sp %sp -88 #900
+	lw %ra %sp 84 #900
 	fadd %f1 %f0 %fzero #900
-	lw %f0 %sp 64 #900
-	sw %ra %sp 76 #900 call dir
-	addi %sp %sp 80 #900	
+	lw %f0 %sp 72 #900
+	sw %ra %sp 84 #900 call dir
+	addi %sp %sp 88 #900	
 	jal %ra min_caml_fless #900
-	addi %sp %sp -80 #900
-	lw %ra %sp 76 #900
+	addi %sp %sp -88 #900
+	lw %ra %sp 84 #900
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8479 # nontail if
-	addi %a0 %zero 0 #899
-	jal %zero beq_cont.8480 # then sentence ends
-beq_else.8479:
+	bne %a0 %a12 beq_else.8534 # nontail if
+	lw %a0 %sp 64 #899
+	jal %zero beq_cont.8535 # then sentence ends
+beq_else.8534:
 	lw %a0 %sp 24 #897
 	lw %f0 %a0 4 #897
-	sw %ra %sp 76 #901 call dir
-	addi %sp %sp 80 #901	
+	sw %ra %sp 84 #901 call dir
+	addi %sp %sp 88 #901	
 	jal %ra min_caml_fiszero #901
-	addi %sp %sp -80 #901
-	lw %ra %sp 76 #901
+	addi %sp %sp -88 #901
+	lw %ra %sp 84 #901
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8481 # nontail if
+	bne %a0 %a12 beq_else.8536 # nontail if
 	addi %a0 %zero 1 #901
-	jal %zero beq_cont.8482 # then sentence ends
-beq_else.8481:
-	addi %a0 %zero 0 #899
-beq_cont.8482:
-beq_cont.8480:
-beq_cont.8478:
+	jal %zero beq_cont.8537 # then sentence ends
+beq_else.8536:
+	lw %a0 %sp 64 #899
+beq_cont.8537:
+beq_cont.8535:
+beq_cont.8532:
+	addi %a1 %zero 0 #898
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8483
+	bne %a0 %a12 beq_else.8538
 	lw %a0 %sp 24 #897
 	lw %f0 %a0 8 #897
 	lw %f1 %sp 16 #906
 	fsub %f0 %f0 %f1 #906
 	lw %f2 %a0 12 #897
 	fmul %f0 %f0 %f2 #906
-	lw %a1 %sp 48 #899
-	lw %f2 %a1 0 #899
+	lw %a2 %sp 48 #899
+	lw %f2 %a2 0 #899
 	fmul %f2 %f0 %f2 #908
 	lw %f3 %sp 8 #908
 	fadd %f2 %f2 %f3 #908
-	sw %f0 %sp 72 #908
-	fadd %f0 %f2 %fzero
-	sw %ra %sp 84 #908 call dir
-	addi %sp %sp 88 #908	
-	jal %ra min_caml_fabs #908
-	addi %sp %sp -88 #908
-	lw %ra %sp 84 #908
-	lw %a0 %sp 52 #908
 	sw %f0 %sp 80 #908
+	sw %a1 %sp 88 #908
+	fadd %f0 %f2 %fzero
 	sw %ra %sp 92 #908 call dir
 	addi %sp %sp 96 #908	
+	jal %ra min_caml_fabs #908
+	addi %sp %sp -96 #908
+	lw %ra %sp 92 #908
+	lw %a0 %sp 52 #908
+	sw %f0 %sp 96 #908
+	sw %ra %sp 108 #908 call dir
+	addi %sp %sp 112 #908	
 	jal %ra o_param_a.2300 #908
-	addi %sp %sp -96 #908
-	lw %ra %sp 92 #908
+	addi %sp %sp -112 #908
+	lw %ra %sp 108 #908
 	fadd %f1 %f0 %fzero #908
-	lw %f0 %sp 80 #908
-	sw %ra %sp 92 #908 call dir
-	addi %sp %sp 96 #908	
+	lw %f0 %sp 96 #908
+	sw %ra %sp 108 #908 call dir
+	addi %sp %sp 112 #908	
 	jal %ra min_caml_fless #908
-	addi %sp %sp -96 #908
-	lw %ra %sp 92 #908
+	addi %sp %sp -112 #908
+	lw %ra %sp 108 #908
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8484 # nontail if
-	addi %a0 %zero 0 #898
-	jal %zero beq_cont.8485 # then sentence ends
-beq_else.8484:
+	bne %a0 %a12 beq_else.8540 # nontail if
+	lw %a0 %sp 88 #898
+	jal %zero beq_cont.8541 # then sentence ends
+beq_else.8540:
 	lw %a0 %sp 48 #899
 	lw %f0 %a0 8 #899
-	lw %f1 %sp 72 #909
+	lw %f1 %sp 80 #909
 	fmul %f0 %f1 %f0 #909
 	lw %f2 %sp 32 #909
 	fadd %f0 %f0 %f2 #909
-	sw %ra %sp 92 #909 call dir
-	addi %sp %sp 96 #909	
+	sw %ra %sp 108 #909 call dir
+	addi %sp %sp 112 #909	
 	jal %ra min_caml_fabs #909
-	addi %sp %sp -96 #909
-	lw %ra %sp 92 #909
+	addi %sp %sp -112 #909
+	lw %ra %sp 108 #909
 	lw %a0 %sp 52 #909
-	sw %f0 %sp 88 #909
-	sw %ra %sp 100 #909 call dir
-	addi %sp %sp 104 #909	
+	sw %f0 %sp 104 #909
+	sw %ra %sp 116 #909 call dir
+	addi %sp %sp 120 #909	
 	jal %ra o_param_c.2304 #909
-	addi %sp %sp -104 #909
-	lw %ra %sp 100 #909
+	addi %sp %sp -120 #909
+	lw %ra %sp 116 #909
 	fadd %f1 %f0 %fzero #909
-	lw %f0 %sp 88 #909
-	sw %ra %sp 100 #909 call dir
-	addi %sp %sp 104 #909	
+	lw %f0 %sp 104 #909
+	sw %ra %sp 116 #909 call dir
+	addi %sp %sp 120 #909	
 	jal %ra min_caml_fless #909
-	addi %sp %sp -104 #909
-	lw %ra %sp 100 #909
+	addi %sp %sp -120 #909
+	lw %ra %sp 116 #909
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8486 # nontail if
-	addi %a0 %zero 0 #898
-	jal %zero beq_cont.8487 # then sentence ends
-beq_else.8486:
+	bne %a0 %a12 beq_else.8542 # nontail if
+	lw %a0 %sp 88 #898
+	jal %zero beq_cont.8543 # then sentence ends
+beq_else.8542:
 	lw %a0 %sp 24 #897
 	lw %f0 %a0 12 #897
-	sw %ra %sp 100 #910 call dir
-	addi %sp %sp 104 #910	
+	sw %ra %sp 116 #910 call dir
+	addi %sp %sp 120 #910	
 	jal %ra min_caml_fiszero #910
-	addi %sp %sp -104 #910
-	lw %ra %sp 100 #910
+	addi %sp %sp -120 #910
+	lw %ra %sp 116 #910
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8488 # nontail if
+	bne %a0 %a12 beq_else.8544 # nontail if
 	addi %a0 %zero 1 #910
-	jal %zero beq_cont.8489 # then sentence ends
-beq_else.8488:
-	addi %a0 %zero 0 #898
-beq_cont.8489:
-beq_cont.8487:
-beq_cont.8485:
+	jal %zero beq_cont.8545 # then sentence ends
+beq_else.8544:
+	lw %a0 %sp 88 #898
+beq_cont.8545:
+beq_cont.8543:
+beq_cont.8541:
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8490
+	bne %a0 %a12 beq_else.8546
 	lw %a0 %sp 24 #897
 	lw %f0 %a0 16 #897
 	lw %f1 %sp 32 #915
@@ -2737,95 +2857,95 @@ beq_cont.8485:
 	fmul %f1 %f0 %f1 #917
 	lw %f2 %sp 8 #917
 	fadd %f1 %f1 %f2 #917
-	sw %f0 %sp 96 #917
+	sw %f0 %sp 112 #917
 	fadd %f0 %f1 %fzero
-	sw %ra %sp 108 #917 call dir
-	addi %sp %sp 112 #917	
+	sw %ra %sp 124 #917 call dir
+	addi %sp %sp 128 #917	
 	jal %ra min_caml_fabs #917
-	addi %sp %sp -112 #917
-	lw %ra %sp 108 #917
+	addi %sp %sp -128 #917
+	lw %ra %sp 124 #917
 	lw %a0 %sp 52 #917
-	sw %f0 %sp 104 #917
-	sw %ra %sp 116 #917 call dir
-	addi %sp %sp 120 #917	
+	sw %f0 %sp 120 #917
+	sw %ra %sp 132 #917 call dir
+	addi %sp %sp 136 #917	
 	jal %ra o_param_a.2300 #917
-	addi %sp %sp -120 #917
-	lw %ra %sp 116 #917
+	addi %sp %sp -136 #917
+	lw %ra %sp 132 #917
 	fadd %f1 %f0 %fzero #917
-	lw %f0 %sp 104 #917
-	sw %ra %sp 116 #917 call dir
-	addi %sp %sp 120 #917	
+	lw %f0 %sp 120 #917
+	sw %ra %sp 132 #917 call dir
+	addi %sp %sp 136 #917	
 	jal %ra min_caml_fless #917
-	addi %sp %sp -120 #917
-	lw %ra %sp 116 #917
+	addi %sp %sp -136 #917
+	lw %ra %sp 132 #917
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8491 # nontail if
-	addi %a0 %zero 0 #898
-	jal %zero beq_cont.8492 # then sentence ends
-beq_else.8491:
+	bne %a0 %a12 beq_else.8547 # nontail if
+	lw %a0 %sp 88 #898
+	jal %zero beq_cont.8548 # then sentence ends
+beq_else.8547:
 	lw %a0 %sp 48 #899
 	lw %f0 %a0 4 #899
-	lw %f1 %sp 96 #918
+	lw %f1 %sp 112 #918
 	fmul %f0 %f1 %f0 #918
 	lw %f2 %sp 16 #918
 	fadd %f0 %f0 %f2 #918
-	sw %ra %sp 116 #918 call dir
-	addi %sp %sp 120 #918	
+	sw %ra %sp 132 #918 call dir
+	addi %sp %sp 136 #918	
 	jal %ra min_caml_fabs #918
-	addi %sp %sp -120 #918
-	lw %ra %sp 116 #918
+	addi %sp %sp -136 #918
+	lw %ra %sp 132 #918
 	lw %a0 %sp 52 #918
-	sw %f0 %sp 112 #918
-	sw %ra %sp 124 #918 call dir
-	addi %sp %sp 128 #918	
+	sw %f0 %sp 128 #918
+	sw %ra %sp 140 #918 call dir
+	addi %sp %sp 144 #918	
 	jal %ra o_param_b.2302 #918
-	addi %sp %sp -128 #918
-	lw %ra %sp 124 #918
+	addi %sp %sp -144 #918
+	lw %ra %sp 140 #918
 	fadd %f1 %f0 %fzero #918
-	lw %f0 %sp 112 #918
-	sw %ra %sp 124 #918 call dir
-	addi %sp %sp 128 #918	
+	lw %f0 %sp 128 #918
+	sw %ra %sp 140 #918 call dir
+	addi %sp %sp 144 #918	
 	jal %ra min_caml_fless #918
-	addi %sp %sp -128 #918
-	lw %ra %sp 124 #918
+	addi %sp %sp -144 #918
+	lw %ra %sp 140 #918
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8493 # nontail if
-	addi %a0 %zero 0 #898
-	jal %zero beq_cont.8494 # then sentence ends
-beq_else.8493:
+	bne %a0 %a12 beq_else.8549 # nontail if
+	lw %a0 %sp 88 #898
+	jal %zero beq_cont.8550 # then sentence ends
+beq_else.8549:
 	lw %a0 %sp 24 #897
 	lw %f0 %a0 20 #897
-	sw %ra %sp 124 #919 call dir
-	addi %sp %sp 128 #919	
+	sw %ra %sp 140 #919 call dir
+	addi %sp %sp 144 #919	
 	jal %ra min_caml_fiszero #919
-	addi %sp %sp -128 #919
-	lw %ra %sp 124 #919
+	addi %sp %sp -144 #919
+	lw %ra %sp 140 #919
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8495 # nontail if
+	bne %a0 %a12 beq_else.8551 # nontail if
 	addi %a0 %zero 1 #919
-	jal %zero beq_cont.8496 # then sentence ends
-beq_else.8495:
-	addi %a0 %zero 0 #898
-beq_cont.8496:
-beq_cont.8494:
-beq_cont.8492:
+	jal %zero beq_cont.8552 # then sentence ends
+beq_else.8551:
+	lw %a0 %sp 88 #898
+beq_cont.8552:
+beq_cont.8550:
+beq_cont.8548:
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8497
-	addi %a0 %zero 0 #898
+	bne %a0 %a12 beq_else.8553
+	lw %a0 %sp 88 #898
 	jalr %zero %ra 0 #898
-beq_else.8497:
+beq_else.8553:
 	lw %a0 %sp 0 #923
-	lw %f0 %sp 96 #923
+	lw %f0 %sp 112 #923
 	sw %f0 %a0 0 #923
 	addi %a0 %zero 3 #923
 	jalr %zero %ra 0 #923
-beq_else.8490:
+beq_else.8546:
 	lw %a0 %sp 0 #914
-	lw %f0 %sp 72 #914
+	lw %f0 %sp 80 #914
 	sw %f0 %a0 0 #914
 	addi %a0 %zero 2 #914
 	jalr %zero %ra 0 #914
-beq_else.8483:
+beq_else.8538:
 	lw %a0 %sp 0 #905
 	lw %f0 %sp 40 #905
 	sw %f0 %a0 0 #905
@@ -2845,11 +2965,12 @@ solver_surface_fast.2435:
 	jal %ra min_caml_fisneg #930
 	addi %sp %sp -40 #930
 	lw %ra %sp 36 #930
+	addi %a1 %zero 0 #930
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8499
-	addi %a0 %zero 0 #930
+	bne %a0 %a12 beq_else.8555
+	addi %a0 %a1 0 #930
 	jalr %zero %ra 0 #930
-beq_else.8499:
+beq_else.8555:
 	lw %a0 %sp 32 #930
 	lw %f0 %a0 4 #930
 	lw %f1 %sp 24 #932
@@ -2882,8 +3003,9 @@ solver_second_fast.2441:
 	jal %ra min_caml_fiszero #941
 	addi %sp %sp -56 #941
 	lw %ra %sp 52 #941
+	addi %a1 %zero 0 #941
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8502
+	bne %a0 %a12 beq_else.8558
 	lw %a0 %sp 48 #940
 	lw %f0 %a0 4 #940
 	lw %f1 %sp 40 #944
@@ -2896,9 +3018,10 @@ solver_second_fast.2441:
 	lw %f4 %sp 24 #944
 	fmul %f2 %f2 %f4 #944
 	fadd %f0 %f0 %f2 #944
-	lw %a1 %sp 16 #945
+	lw %a2 %sp 16 #945
+	sw %a1 %sp 52 #945
 	sw %f0 %sp 56 #945
-	add %a0 %a1 %zero
+	add %a0 %a2 %zero
 	fadd %f2 %f4 %fzero
 	fadd %f0 %f1 %fzero
 	fadd %f1 %f3 %fzero
@@ -2915,14 +3038,14 @@ solver_second_fast.2441:
 	addi %sp %sp -80 #946
 	lw %ra %sp 76 #946
 	addi %a12 %zero 3
-	bne %a0 %a12 beq_else.8504 # nontail if
+	bne %a0 %a12 beq_else.8559 # nontail if
 	li %f0 l.5555 #946
 	lw %f1 %sp 64 #946
 	fsub %f0 %f1 %f0 #946
-	jal %zero beq_cont.8505 # then sentence ends
-beq_else.8504:
+	jal %zero beq_cont.8560 # then sentence ends
+beq_else.8559:
 	lw %f0 %sp 64 #818
-beq_cont.8505:
+beq_cont.8560:
 	lw %f1 %sp 56 #947
 	sw %f0 %sp 72 #947
 	fadd %f0 %f1 %fzero
@@ -2942,10 +3065,10 @@ beq_cont.8505:
 	addi %sp %sp -96 #948
 	lw %ra %sp 92 #948
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8506
-	addi %a0 %zero 0 #941
+	bne %a0 %a12 beq_else.8561
+	lw %a0 %sp 52 #941
 	jalr %zero %ra 0 #941
-beq_else.8506:
+beq_else.8561:
 	lw %a0 %sp 16 #949
 	sw %ra %sp 92 #949 call dir
 	addi %sp %sp 96 #949	
@@ -2953,7 +3076,7 @@ beq_else.8506:
 	addi %sp %sp -96 #949
 	lw %ra %sp 92 #949
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8507 # nontail if
+	bne %a0 %a12 beq_else.8562 # nontail if
 	lw %f0 %sp 80 #952
 	sw %ra %sp 92 #952 call dir
 	addi %sp %sp 96 #952	
@@ -2967,8 +3090,8 @@ beq_else.8506:
 	fmul %f0 %f0 %f1 #952
 	lw %a0 %sp 0 #952
 	sw %f0 %a0 0 #952
-	jal %zero beq_cont.8508 # then sentence ends
-beq_else.8507:
+	jal %zero beq_cont.8563 # then sentence ends
+beq_else.8562:
 	lw %f0 %sp 80 #950
 	sw %ra %sp 92 #950 call dir
 	addi %sp %sp 96 #950	
@@ -2982,11 +3105,11 @@ beq_else.8507:
 	fmul %f0 %f0 %f1 #950
 	lw %a0 %sp 0 #950
 	sw %f0 %a0 0 #950
-beq_cont.8508:
+beq_cont.8563:
 	addi %a0 %zero 1 #953
 	jalr %zero %ra 0 #953
-beq_else.8502:
-	addi %a0 %zero 0 #941
+beq_else.8558:
+	addi %a0 %a1 0 #941
 	jalr %zero %ra 0 #941
 solver_fast.2447:
 	lw %a3 %a11 16 #958
@@ -3058,7 +3181,7 @@ solver_fast.2447:
 	addi %sp %sp -88 #965
 	lw %ra %sp 84 #965
 	addi %a12 %zero 1
-	bne %a0 %a12 beq_else.8510
+	bne %a0 %a12 beq_else.8565
 	lw %a0 %sp 16 #967
 	sw %ra %sp 84 #967 call dir
 	addi %sp %sp 88 #967	
@@ -3074,9 +3197,9 @@ solver_fast.2447:
 	lw %a11 %sp 8 #967
 	lw %a10 %a11 0 #967
 	jalr %zero %a10 0 #967
-beq_else.8510:
+beq_else.8565:
 	addi %a12 %zero 2
-	bne %a0 %a12 beq_else.8511
+	bne %a0 %a12 beq_else.8566
 	lw %f0 %sp 40 #969
 	lw %f1 %sp 56 #969
 	lw %f2 %sp 72 #969
@@ -3085,7 +3208,7 @@ beq_else.8510:
 	lw %a11 %sp 4 #969
 	lw %a10 %a11 0 #969
 	jalr %zero %a10 0 #969
-beq_else.8511:
+beq_else.8566:
 	lw %f0 %sp 40 #971
 	lw %f1 %sp 56 #971
 	lw %f2 %sp 72 #971
@@ -3105,11 +3228,12 @@ solver_surface_fast2.2451:
 	jal %ra min_caml_fisneg #979
 	addi %sp %sp -16 #979
 	lw %ra %sp 12 #979
+	addi %a1 %zero 0 #979
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8512
-	addi %a0 %zero 0 #979
+	bne %a0 %a12 beq_else.8567
+	addi %a0 %a1 0 #979
 	jalr %zero %ra 0 #979
-beq_else.8512:
+beq_else.8567:
 	lw %a0 %sp 8 #979
 	lw %f0 %a0 0 #979
 	lw %a0 %sp 4 #980
@@ -3136,8 +3260,9 @@ solver_second_fast2.2458:
 	jal %ra min_caml_fiszero #989
 	addi %sp %sp -56 #989
 	lw %ra %sp 52 #989
+	addi %a1 %zero 0 #989
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8514
+	bne %a0 %a12 beq_else.8569
 	lw %a0 %sp 48 #988
 	lw %f0 %a0 4 #988
 	lw %f1 %sp 40 #992
@@ -3150,44 +3275,45 @@ solver_second_fast2.2458:
 	lw %f2 %sp 24 #992
 	fmul %f1 %f1 %f2 #992
 	fadd %f0 %f0 %f1 #992
-	lw %a1 %sp 16 #993
-	lw %f1 %a1 12 #993
+	lw %a2 %sp 16 #993
+	lw %f1 %a2 12 #993
 	sw %f0 %sp 56 #994
-	sw %f1 %sp 64 #994
-	sw %ra %sp 76 #994 call dir
-	addi %sp %sp 80 #994	
+	sw %a1 %sp 64 #994
+	sw %f1 %sp 72 #994
+	sw %ra %sp 84 #994 call dir
+	addi %sp %sp 88 #994	
 	jal %ra min_caml_fsqr #994
-	addi %sp %sp -80 #994
-	lw %ra %sp 76 #994
-	lw %f1 %sp 64 #994
+	addi %sp %sp -88 #994
+	lw %ra %sp 84 #994
+	lw %f1 %sp 72 #994
 	lw %f2 %sp 8 #994
 	fmul %f1 %f2 %f1 #994
 	fsub %f0 %f0 %f1 #994
-	sw %f0 %sp 72 #995
-	sw %ra %sp 84 #995 call dir
-	addi %sp %sp 88 #995	
+	sw %f0 %sp 80 #995
+	sw %ra %sp 92 #995 call dir
+	addi %sp %sp 96 #995	
 	jal %ra min_caml_fispos #995
-	addi %sp %sp -88 #995
-	lw %ra %sp 84 #995
+	addi %sp %sp -96 #995
+	lw %ra %sp 92 #995
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8516
-	addi %a0 %zero 0 #989
+	bne %a0 %a12 beq_else.8572
+	lw %a0 %sp 64 #989
 	jalr %zero %ra 0 #989
-beq_else.8516:
+beq_else.8572:
 	lw %a0 %sp 4 #996
-	sw %ra %sp 84 #996 call dir
-	addi %sp %sp 88 #996	
+	sw %ra %sp 92 #996 call dir
+	addi %sp %sp 96 #996	
 	jal %ra o_isinvert.2296 #996
-	addi %sp %sp -88 #996
-	lw %ra %sp 84 #996
+	addi %sp %sp -96 #996
+	lw %ra %sp 92 #996
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8517 # nontail if
-	lw %f0 %sp 72 #999
-	sw %ra %sp 84 #999 call dir
-	addi %sp %sp 88 #999	
+	bne %a0 %a12 beq_else.8573 # nontail if
+	lw %f0 %sp 80 #999
+	sw %ra %sp 92 #999 call dir
+	addi %sp %sp 96 #999	
 	jal %ra min_caml_sqrt #999
-	addi %sp %sp -88 #999
-	lw %ra %sp 84 #999
+	addi %sp %sp -96 #999
+	lw %ra %sp 92 #999
 	lw %f1 %sp 56 #999
 	fsub %f0 %f1 %f0 #999
 	lw %a0 %sp 48 #988
@@ -3195,14 +3321,14 @@ beq_else.8516:
 	fmul %f0 %f0 %f1 #999
 	lw %a0 %sp 0 #999
 	sw %f0 %a0 0 #999
-	jal %zero beq_cont.8518 # then sentence ends
-beq_else.8517:
-	lw %f0 %sp 72 #997
-	sw %ra %sp 84 #997 call dir
-	addi %sp %sp 88 #997	
+	jal %zero beq_cont.8574 # then sentence ends
+beq_else.8573:
+	lw %f0 %sp 80 #997
+	sw %ra %sp 92 #997 call dir
+	addi %sp %sp 96 #997	
 	jal %ra min_caml_sqrt #997
-	addi %sp %sp -88 #997
-	lw %ra %sp 84 #997
+	addi %sp %sp -96 #997
+	lw %ra %sp 92 #997
 	lw %f1 %sp 56 #997
 	fadd %f0 %f1 %f0 #997
 	lw %a0 %sp 48 #988
@@ -3210,11 +3336,11 @@ beq_else.8517:
 	fmul %f0 %f0 %f1 #997
 	lw %a0 %sp 0 #997
 	sw %f0 %a0 0 #997
-beq_cont.8518:
+beq_cont.8574:
 	addi %a0 %zero 1 #1000
 	jalr %zero %ra 0 #1000
-beq_else.8514:
-	addi %a0 %zero 0 #989
+beq_else.8569:
+	addi %a0 %a1 0 #989
 	jalr %zero %ra 0 #989
 solver_fast2.2465:
 	lw %a2 %a11 16 #1005
@@ -3263,7 +3389,7 @@ solver_fast2.2465:
 	addi %sp %sp -64 #1013
 	lw %ra %sp 60 #1013
 	addi %a12 %zero 1
-	bne %a0 %a12 beq_else.8520
+	bne %a0 %a12 beq_else.8576
 	lw %a0 %sp 20 #1015
 	sw %ra %sp 60 #1015 call dir
 	addi %sp %sp 64 #1015	
@@ -3279,9 +3405,9 @@ solver_fast2.2465:
 	lw %a11 %sp 8 #1015
 	lw %a10 %a11 0 #1015
 	jalr %zero %a10 0 #1015
-beq_else.8520:
+beq_else.8576:
 	addi %a12 %zero 2
-	bne %a0 %a12 beq_else.8521
+	bne %a0 %a12 beq_else.8577
 	lw %f0 %sp 48 #1017
 	lw %f1 %sp 40 #1017
 	lw %f2 %sp 32 #1017
@@ -3291,7 +3417,7 @@ beq_else.8520:
 	lw %a11 %sp 4 #1017
 	lw %a10 %a11 0 #1017
 	jalr %zero %a10 0 #1017
-beq_else.8521:
+beq_else.8577:
 	lw %f0 %sp 48 #1019
 	lw %f1 %sp 40 #1019
 	lw %f2 %sp 32 #1019
@@ -3321,7 +3447,7 @@ setup_rect_table.2468:
 	addi %sp %sp -16 #1028
 	lw %ra %sp 12 #1028
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8522 # nontail if
+	bne %a0 %a12 beq_else.8578 # nontail if
 	lw %a0 %sp 0 #1032
 	sw %ra %sp 12 #1032 call dir
 	addi %sp %sp 16 #1032	
@@ -3364,12 +3490,12 @@ setup_rect_table.2468:
 	lw %f1 %a1 0 #1028
 	fdiv %f0 %f0 %f1 #1034
 	sw %f0 %a0 4 #1034
-	jal %zero beq_cont.8523 # then sentence ends
-beq_else.8522:
+	jal %zero beq_cont.8579 # then sentence ends
+beq_else.8578:
 	li %f0 l.5553 #1029
 	lw %a0 %sp 8 #1029
 	sw %f0 %a0 4 #1029
-beq_cont.8523:
+beq_cont.8579:
 	lw %a1 %sp 4 #1028
 	lw %f0 %a1 4 #1028
 	sw %ra %sp 20 #1036 call dir
@@ -3378,7 +3504,7 @@ beq_cont.8523:
 	addi %sp %sp -24 #1036
 	lw %ra %sp 20 #1036
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8524 # nontail if
+	bne %a0 %a12 beq_else.8580 # nontail if
 	lw %a0 %sp 0 #1039
 	sw %ra %sp 20 #1039 call dir
 	addi %sp %sp 24 #1039	
@@ -3421,12 +3547,12 @@ beq_cont.8523:
 	lw %f1 %a1 4 #1028
 	fdiv %f0 %f0 %f1 #1040
 	sw %f0 %a0 12 #1040
-	jal %zero beq_cont.8525 # then sentence ends
-beq_else.8524:
+	jal %zero beq_cont.8581 # then sentence ends
+beq_else.8580:
 	li %f0 l.5553 #1037
 	lw %a0 %sp 8 #1037
 	sw %f0 %a0 12 #1037
-beq_cont.8525:
+beq_cont.8581:
 	lw %a1 %sp 4 #1028
 	lw %f0 %a1 8 #1028
 	sw %ra %sp 28 #1042 call dir
@@ -3435,7 +3561,7 @@ beq_cont.8525:
 	addi %sp %sp -32 #1042
 	lw %ra %sp 28 #1042
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8526 # nontail if
+	bne %a0 %a12 beq_else.8582 # nontail if
 	lw %a0 %sp 0 #1045
 	sw %ra %sp 28 #1045 call dir
 	addi %sp %sp 32 #1045	
@@ -3478,12 +3604,12 @@ beq_cont.8525:
 	lw %f1 %a1 8 #1028
 	fdiv %f0 %f0 %f1 #1046
 	sw %f0 %a0 20 #1046
-	jal %zero beq_cont.8527 # then sentence ends
-beq_else.8526:
+	jal %zero beq_cont.8583 # then sentence ends
+beq_else.8582:
 	li %f0 l.5553 #1043
 	lw %a0 %sp 8 #1043
 	sw %f0 %a0 20 #1043
-beq_cont.8527:
+beq_cont.8583:
 	jalr %zero %ra 0 #1048
 setup_surface_table.2471:
 	addi %a2 %zero 4 #1053
@@ -3545,12 +3671,12 @@ setup_surface_table.2471:
 	addi %sp %sp -72 #1057
 	lw %ra %sp 68 #1057
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8529 # nontail if
+	bne %a0 %a12 beq_else.8585 # nontail if
 	li %f0 l.5553 #1065
 	lw %a0 %sp 8 #1065
 	sw %f0 %a0 0 #1065
-	jal %zero beq_cont.8530 # then sentence ends
-beq_else.8529:
+	jal %zero beq_cont.8586 # then sentence ends
+beq_else.8585:
 	li %f0 l.5557 #1059
 	lw %f1 %sp 56 #1059
 	fdiv %f0 %f0 %f1 #1059
@@ -3604,7 +3730,7 @@ beq_else.8529:
 	lw %ra %sp 68 #1063
 	lw %a0 %sp 8 #1063
 	sw %f0 %a0 12 #1063
-beq_cont.8530:
+beq_cont.8586:
 	jalr %zero %ra 0 #1066
 setup_second_table.2474:
 	addi %a2 %zero 5 #1072
@@ -3695,7 +3821,7 @@ setup_second_table.2474:
 	addi %sp %sp -80 #1082
 	lw %ra %sp 76 #1082
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8532 # nontail if
+	bne %a0 %a12 beq_else.8588 # nontail if
 	lw %a0 %sp 8 #1087
 	lw %f0 %sp 32 #1087
 	sw %f0 %a0 4 #1087
@@ -3703,8 +3829,8 @@ setup_second_table.2474:
 	sw %f0 %a0 8 #1088
 	lw %f0 %sp 64 #1089
 	sw %f0 %a0 12 #1089
-	jal %zero beq_cont.8533 # then sentence ends
-beq_else.8532:
+	jal %zero beq_cont.8589 # then sentence ends
+beq_else.8588:
 	lw %a0 %sp 4 #1074
 	lw %f0 %a0 8 #1074
 	lw %a1 %sp 0 #1083
@@ -3812,7 +3938,7 @@ beq_else.8532:
 	fsub %f0 %f1 %f0 #1085
 	lw %a0 %sp 8 #1085
 	sw %f0 %a0 12 #1085
-beq_cont.8533:
+beq_cont.8589:
 	lw %f0 %sp 16 #1091
 	sw %ra %sp 148 #1091 call dir
 	addi %sp %sp 152 #1091	
@@ -3820,21 +3946,21 @@ beq_cont.8533:
 	addi %sp %sp -152 #1091
 	lw %ra %sp 148 #1091
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8534 # nontail if
+	bne %a0 %a12 beq_else.8590 # nontail if
 	li %f0 l.5555 #1092
 	lw %f1 %sp 16 #1092
 	fdiv %f0 %f0 %f1 #1092
 	lw %a0 %sp 8 #1092
 	sw %f0 %a0 16 #1092
-	jal %zero beq_cont.8535 # then sentence ends
-beq_else.8534:
-beq_cont.8535:
+	jal %zero beq_cont.8591 # then sentence ends
+beq_else.8590:
+beq_cont.8591:
 	lw %a0 %sp 8 #1094
 	jalr %zero %ra 0 #1094
 iter_setup_dirvec_constants.2477:
 	lw %a2 %a11 4 #1099
 	addi %a12 %zero 0
-	blt %a1 %a12 bge_else.8536
+	blt %a1 %a12 bge_else.8592
 	slli %a3 %a1 2 #19
 	add %a12 %a2 %a3 #19
 	lw %a2 %a12 0 #19
@@ -3864,7 +3990,7 @@ iter_setup_dirvec_constants.2477:
 	addi %sp %sp -32 #1104
 	lw %ra %sp 28 #1104
 	addi %a12 %zero 1
-	bne %a0 %a12 beq_else.8537 # nontail if
+	bne %a0 %a12 beq_else.8593 # nontail if
 	lw %a0 %sp 20 #1106
 	lw %a1 %sp 8 #1106
 	sw %ra %sp 28 #1106 call dir
@@ -3877,10 +4003,10 @@ iter_setup_dirvec_constants.2477:
 	lw %a3 %sp 16 #1106
 	add %a12 %a3 %a2 #1106
 	sw %a0 %a12 0 #1106
-	jal %zero beq_cont.8538 # then sentence ends
-beq_else.8537:
+	jal %zero beq_cont.8594 # then sentence ends
+beq_else.8593:
 	addi %a12 %zero 2
-	bne %a0 %a12 beq_else.8539 # nontail if
+	bne %a0 %a12 beq_else.8595 # nontail if
 	lw %a0 %sp 20 #1108
 	lw %a1 %sp 8 #1108
 	sw %ra %sp 28 #1108 call dir
@@ -3893,8 +4019,8 @@ beq_else.8537:
 	lw %a3 %sp 16 #1108
 	add %a12 %a3 %a2 #1108
 	sw %a0 %a12 0 #1108
-	jal %zero beq_cont.8540 # then sentence ends
-beq_else.8539:
+	jal %zero beq_cont.8596 # then sentence ends
+beq_else.8595:
 	lw %a0 %sp 20 #1110
 	lw %a1 %sp 8 #1110
 	sw %ra %sp 28 #1110 call dir
@@ -3907,14 +4033,14 @@ beq_else.8539:
 	lw %a3 %sp 16 #1110
 	add %a12 %a3 %a2 #1110
 	sw %a0 %a12 0 #1110
-beq_cont.8540:
-beq_cont.8538:
+beq_cont.8596:
+beq_cont.8594:
 	addi %a1 %a1 -1 #1112
 	lw %a0 %sp 12 #1112
 	lw %a11 %sp 0 #1112
 	lw %a10 %a11 0 #1112
 	jalr %zero %a10 0 #1112
-bge_else.8536:
+bge_else.8592:
 	jalr %zero %ra 0 #1113
 setup_dirvec_constants.2480:
 	lw %a1 %a11 8 #1116
@@ -3926,7 +4052,7 @@ setup_dirvec_constants.2480:
 setup_startp_constants.2482:
 	lw %a2 %a11 4 #1122
 	addi %a12 %zero 0
-	blt %a1 %a12 bge_else.8542
+	blt %a1 %a12 bge_else.8598
 	slli %a3 %a1 2 #19
 	add %a12 %a2 %a3 #19
 	lw %a2 %a12 0 #19
@@ -3993,7 +4119,7 @@ setup_startp_constants.2482:
 	sw %f0 %a0 8 #1129
 	lw %a1 %sp 20 #864
 	addi %a12 %zero 2
-	bne %a1 %a12 beq_else.8543 # nontail if
+	bne %a1 %a12 beq_else.8599 # nontail if
 	lw %a1 %sp 12 #1132
 	add %a0 %a1 %zero
 	sw %ra %sp 52 #1132 call dir
@@ -4012,12 +4138,12 @@ setup_startp_constants.2482:
 	lw %ra %sp 52 #1132
 	lw %a0 %sp 16 #1131
 	sw %f0 %a0 12 #1131
-	jal %zero beq_cont.8544 # then sentence ends
-beq_else.8543:
+	jal %zero beq_cont.8600 # then sentence ends
+beq_else.8599:
 	addi %a12 %zero 2
-	blt %a12 %a1 bge_else.8545 # nontail if
-	jal %zero bge_cont.8546 # then sentence ends
-bge_else.8545:
+	blt %a12 %a1 bge_else.8601 # nontail if
+	jal %zero bge_cont.8602 # then sentence ends
+bge_else.8601:
 	lw %f0 %a0 0 #18
 	lw %f1 %a0 4 #18
 	lw %f2 %a0 8 #18
@@ -4030,23 +4156,23 @@ bge_else.8545:
 	lw %ra %sp 52 #1134
 	lw %a0 %sp 20 #864
 	addi %a12 %zero 3
-	bne %a0 %a12 beq_else.8547 # nontail if
+	bne %a0 %a12 beq_else.8603 # nontail if
 	li %f1 l.5555 #1135
 	fsub %f0 %f0 %f1 #1135
-	jal %zero beq_cont.8548 # then sentence ends
-beq_else.8547:
-beq_cont.8548:
+	jal %zero beq_cont.8604 # then sentence ends
+beq_else.8603:
+beq_cont.8604:
 	lw %a0 %sp 16 #1135
 	sw %f0 %a0 12 #1135
-bge_cont.8546:
-beq_cont.8544:
+bge_cont.8602:
+beq_cont.8600:
 	lw %a0 %sp 4 #1137
 	addi %a1 %a0 -1 #1137
 	lw %a0 %sp 8 #1137
 	lw %a11 %sp 0 #1137
 	lw %a10 %a11 0 #1137
 	jalr %zero %a10 0 #1137
-bge_else.8542:
+bge_else.8598:
 	jalr %zero %ra 0 #1138
 setup_startp.2485:
 	lw %a1 %a11 12 #1141
@@ -4093,74 +4219,78 @@ is_rect_outside.2487:
 	jal %ra min_caml_fless #1153
 	addi %sp %sp -40 #1153
 	lw %ra %sp 36 #1153
+	addi %a1 %zero 0 #1153
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8551 # nontail if
-	addi %a0 %zero 0 #1153
-	jal %zero beq_cont.8552 # then sentence ends
-beq_else.8551:
+	bne %a0 %a12 beq_else.8607 # nontail if
+	addi %a0 %a1 0 #1153
+	jal %zero beq_cont.8608 # then sentence ends
+beq_else.8607:
 	lw %f0 %sp 8 #1154
+	sw %a1 %sp 32 #1154
 	sw %ra %sp 36 #1154 call dir
 	addi %sp %sp 40 #1154	
 	jal %ra min_caml_fabs #1154
 	addi %sp %sp -40 #1154
 	lw %ra %sp 36 #1154
 	lw %a0 %sp 16 #1154
-	sw %f0 %sp 32 #1154
-	sw %ra %sp 44 #1154 call dir
-	addi %sp %sp 48 #1154	
+	sw %f0 %sp 40 #1154
+	sw %ra %sp 52 #1154 call dir
+	addi %sp %sp 56 #1154	
 	jal %ra o_param_b.2302 #1154
-	addi %sp %sp -48 #1154
-	lw %ra %sp 44 #1154
+	addi %sp %sp -56 #1154
+	lw %ra %sp 52 #1154
 	fadd %f1 %f0 %fzero #1154
-	lw %f0 %sp 32 #1154
-	sw %ra %sp 44 #1154 call dir
-	addi %sp %sp 48 #1154	
+	lw %f0 %sp 40 #1154
+	sw %ra %sp 52 #1154 call dir
+	addi %sp %sp 56 #1154	
 	jal %ra min_caml_fless #1154
-	addi %sp %sp -48 #1154
-	lw %ra %sp 44 #1154
+	addi %sp %sp -56 #1154
+	lw %ra %sp 52 #1154
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8553 # nontail if
-	addi %a0 %zero 0 #1153
-	jal %zero beq_cont.8554 # then sentence ends
-beq_else.8553:
+	bne %a0 %a12 beq_else.8610 # nontail if
+	lw %a0 %sp 32 #1153
+	jal %zero beq_cont.8611 # then sentence ends
+beq_else.8610:
 	lw %f0 %sp 0 #1155
-	sw %ra %sp 44 #1155 call dir
-	addi %sp %sp 48 #1155	
+	sw %ra %sp 52 #1155 call dir
+	addi %sp %sp 56 #1155	
 	jal %ra min_caml_fabs #1155
-	addi %sp %sp -48 #1155
-	lw %ra %sp 44 #1155
+	addi %sp %sp -56 #1155
+	lw %ra %sp 52 #1155
 	lw %a0 %sp 16 #1155
-	sw %f0 %sp 40 #1155
-	sw %ra %sp 52 #1155 call dir
-	addi %sp %sp 56 #1155	
+	sw %f0 %sp 48 #1155
+	sw %ra %sp 60 #1155 call dir
+	addi %sp %sp 64 #1155	
 	jal %ra o_param_c.2304 #1155
-	addi %sp %sp -56 #1155
-	lw %ra %sp 52 #1155
+	addi %sp %sp -64 #1155
+	lw %ra %sp 60 #1155
 	fadd %f1 %f0 %fzero #1155
-	lw %f0 %sp 40 #1155
-	sw %ra %sp 52 #1155 call dir
-	addi %sp %sp 56 #1155	
+	lw %f0 %sp 48 #1155
+	sw %ra %sp 60 #1155 call dir
+	addi %sp %sp 64 #1155	
 	jal %ra min_caml_fless #1155
-	addi %sp %sp -56 #1155
-	lw %ra %sp 52 #1155
-beq_cont.8554:
-beq_cont.8552:
+	addi %sp %sp -64 #1155
+	lw %ra %sp 60 #1155
+beq_cont.8611:
+beq_cont.8608:
+	addi %a1 %zero 0 #1152
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8555
+	bne %a0 %a12 beq_else.8612
 	lw %a0 %sp 16 #1158
-	sw %ra %sp 52 #1158 call dir
-	addi %sp %sp 56 #1158	
+	sw %a1 %sp 56 #1158
+	sw %ra %sp 60 #1158 call dir
+	addi %sp %sp 64 #1158	
 	jal %ra o_isinvert.2296 #1158
-	addi %sp %sp -56 #1158
-	lw %ra %sp 52 #1158
+	addi %sp %sp -64 #1158
+	lw %ra %sp 60 #1158
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8556
+	bne %a0 %a12 beq_else.8613
 	addi %a0 %zero 1 #1158
 	jalr %zero %ra 0 #1158
-beq_else.8556:
-	addi %a0 %zero 0 #1152
+beq_else.8613:
+	lw %a0 %sp 56 #1152
 	jalr %zero %ra 0 #1152
-beq_else.8555:
+beq_else.8612:
 	lw %a0 %sp 16 #1158
 	jal	%zero o_isinvert.2296
 is_plane_outside.2492:
@@ -4202,12 +4332,13 @@ is_plane_outside.2492:
 	jal %ra xor.2233 #1164
 	addi %sp %sp -48 #1164
 	lw %ra %sp 44 #1164
+	addi %a1 %zero 0 #1164
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8558
+	bne %a0 %a12 beq_else.8615
 	addi %a0 %zero 1 #1164
 	jalr %zero %ra 0 #1164
-beq_else.8558:
-	addi %a0 %zero 0 #1164
+beq_else.8615:
+	addi %a0 %a1 0 #1164
 	jalr %zero %ra 0 #1164
 is_second_outside.2497:
 	sw %a0 %sp 0 #1169
@@ -4224,14 +4355,14 @@ is_second_outside.2497:
 	addi %sp %sp -24 #1170
 	lw %ra %sp 20 #1170
 	addi %a12 %zero 3
-	bne %a0 %a12 beq_else.8560 # nontail if
+	bne %a0 %a12 beq_else.8617 # nontail if
 	li %f0 l.5555 #1170
 	lw %f1 %sp 8 #1170
 	fsub %f0 %f1 %f0 #1170
-	jal %zero beq_cont.8561 # then sentence ends
-beq_else.8560:
+	jal %zero beq_cont.8618 # then sentence ends
+beq_else.8617:
 	lw %f0 %sp 8 #818
-beq_cont.8561:
+beq_cont.8618:
 	lw %a0 %sp 0 #1171
 	sw %f0 %sp 16 #1171
 	sw %ra %sp 28 #1171 call dir
@@ -4253,12 +4384,13 @@ beq_cont.8561:
 	jal %ra xor.2233 #1171
 	addi %sp %sp -32 #1171
 	lw %ra %sp 28 #1171
+	addi %a1 %zero 0 #1171
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8562
+	bne %a0 %a12 beq_else.8619
 	addi %a0 %zero 1 #1171
 	jalr %zero %ra 0 #1171
-beq_else.8562:
-	addi %a0 %zero 0 #1171
+beq_else.8619:
+	addi %a0 %a1 0 #1171
 	jalr %zero %ra 0 #1171
 is_outside.2502:
 	sw %f2 %sp 0 #1176
@@ -4298,21 +4430,21 @@ is_outside.2502:
 	addi %sp %sp -64 #1179
 	lw %ra %sp 60 #1179
 	addi %a12 %zero 1
-	bne %a0 %a12 beq_else.8564
+	bne %a0 %a12 beq_else.8621
 	lw %f0 %sp 32 #1181
 	lw %f1 %sp 40 #1181
 	lw %f2 %sp 48 #1181
 	lw %a0 %sp 16 #1181
 	jal	%zero is_rect_outside.2487
-beq_else.8564:
+beq_else.8621:
 	addi %a12 %zero 2
-	bne %a0 %a12 beq_else.8565
+	bne %a0 %a12 beq_else.8622
 	lw %f0 %sp 32 #1183
 	lw %f1 %sp 40 #1183
 	lw %f2 %sp 48 #1183
 	lw %a0 %sp 16 #1183
 	jal	%zero is_plane_outside.2492
-beq_else.8565:
+beq_else.8622:
 	lw %f0 %sp 32 #1185
 	lw %f1 %sp 40 #1185
 	lw %f2 %sp 48 #1185
@@ -4323,11 +4455,12 @@ check_all_inside.2507:
 	slli %a3 %a0 2 #1190
 	add %a12 %a1 %a3 #1190
 	lw %a3 %a12 0 #1190
-	addi %a12 %zero -1
-	bne %a3 %a12 beq_else.8566
+	addi %a4 %zero 1 #1191
+	sub %a4 %zero %a4 #1191
+	bne %a3 %a4 beq_else.8623
 	addi %a0 %zero 1 #1192
 	jalr %zero %ra 0 #1192
-beq_else.8566:
+beq_else.8623:
 	slli %a3 %a3 2 #19
 	add %a12 %a2 %a3 #19
 	lw %a2 %a12 0 #19
@@ -4343,8 +4476,9 @@ beq_else.8566:
 	jal %ra is_outside.2502 #1194
 	addi %sp %sp -40 #1194
 	lw %ra %sp 36 #1194
+	addi %a1 %zero 0 #1194
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8567
+	bne %a0 %a12 beq_else.8624
 	lw %a0 %sp 32 #1197
 	addi %a0 %a0 1 #1197
 	lw %f0 %sp 16 #1197
@@ -4354,8 +4488,8 @@ beq_else.8566:
 	lw %a11 %sp 28 #1197
 	lw %a10 %a11 0 #1197
 	jalr %zero %a10 0 #1197
-beq_else.8567:
-	addi %a0 %zero 0 #1194
+beq_else.8624:
+	addi %a0 %a1 0 #1194
 	jalr %zero %ra 0 #1194
 shadow_check_and_group.2513:
 	lw %a2 %a11 28 #1207
@@ -4368,11 +4502,12 @@ shadow_check_and_group.2513:
 	slli %a9 %a0 2 #1208
 	add %a12 %a1 %a9 #1208
 	lw %a9 %a12 0 #1208
-	addi %a12 %zero -1
-	bne %a9 %a12 beq_else.8568
+	addi %a10 %zero 1 #1208
+	sub %a10 %zero %a10 #1208
+	bne %a9 %a10 beq_else.8625
 	addi %a0 %zero 0 #1209
 	jalr %zero %ra 0 #1209
-beq_else.8568:
+beq_else.8625:
 	sw %a8 %sp 0 #1212
 	sw %a7 %sp 4 #1212
 	sw %a6 %sp 8 #1212
@@ -4394,45 +4529,47 @@ beq_else.8568:
 	lw %ra %sp 36 #1212
 	lw %a1 %sp 32 #36
 	lw %f0 %a1 0 #36
+	addi %a1 %zero 0 #1214
 	sw %f0 %sp 40 #905
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8570 # nontail if
-	addi %a0 %zero 0 #1214
-	jal %zero beq_cont.8571 # then sentence ends
-beq_else.8570:
-	li %f1 l.5908 #1214
+	bne %a0 %a12 beq_else.8627 # nontail if
+	addi %a0 %a1 0 #1214
+	jal %zero beq_cont.8628 # then sentence ends
+beq_else.8627:
+	li %f1 l.5933 #1214
 	sw %ra %sp 52 #1214 call dir
 	addi %sp %sp 56 #1214	
 	jal %ra min_caml_fless #1214
 	addi %sp %sp -56 #1214
 	lw %ra %sp 52 #1214
-beq_cont.8571:
+beq_cont.8628:
 	addi %a1 %zero 0 #1214
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8572
+	bne %a0 %a12 beq_else.8629
 	lw %a0 %sp 28 #19
 	slli %a0 %a0 2 #19
-	lw %a1 %sp 24 #19
-	add %a12 %a1 %a0 #19
+	lw %a2 %sp 24 #19
+	add %a12 %a2 %a0 #19
 	lw %a0 %a12 0 #19
+	sw %a1 %sp 48 #1230
 	sw %ra %sp 52 #1230 call dir
 	addi %sp %sp 56 #1230	
 	jal %ra o_isinvert.2296 #1230
 	addi %sp %sp -56 #1230
 	lw %ra %sp 52 #1230
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8573
-	addi %a0 %zero 0 #1214
+	bne %a0 %a12 beq_else.8630
+	lw %a0 %sp 48 #1214
 	jalr %zero %ra 0 #1214
-beq_else.8573:
+beq_else.8630:
 	lw %a0 %sp 20 #1231
 	addi %a0 %a0 1 #1231
 	lw %a1 %sp 12 #1231
 	lw %a11 %sp 16 #1231
 	lw %a10 %a11 0 #1231
 	jalr %zero %a10 0 #1231
-beq_else.8572:
-	li %f0 l.5910 #1217
+beq_else.8629:
+	li %f0 l.5935 #1217
 	lw %f1 %sp 40 #1217
 	fadd %f0 %f1 %f0 #1217
 	lw %a0 %sp 8 #26
@@ -4465,14 +4602,14 @@ beq_else.8572:
 	addi %sp %sp -56 #1221
 	lw %ra %sp 52 #1221
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8574
+	bne %a0 %a12 beq_else.8631
 	lw %a0 %sp 20 #1224
 	addi %a0 %a0 1 #1224
 	lw %a1 %sp 12 #1224
 	lw %a11 %sp 16 #1224
 	lw %a10 %a11 0 #1224
 	jalr %zero %a10 0 #1224
-beq_else.8574:
+beq_else.8631:
 	addi %a0 %zero 1 #1222
 	jalr %zero %ra 0 #1222
 shadow_check_one_or_group.2516:
@@ -4481,11 +4618,12 @@ shadow_check_one_or_group.2516:
 	slli %a4 %a0 2 #1238
 	add %a12 %a1 %a4 #1238
 	lw %a4 %a12 0 #1238
-	addi %a12 %zero -1
-	bne %a4 %a12 beq_else.8575
+	addi %a5 %zero 1 #1239
+	sub %a5 %zero %a5 #1239
+	bne %a4 %a5 beq_else.8632
 	addi %a0 %zero 0 #1240
 	jalr %zero %ra 0 #1240
-beq_else.8575:
+beq_else.8632:
 	slli %a4 %a4 2 #30
 	add %a12 %a3 %a4 #30
 	lw %a3 %a12 0 #30
@@ -4503,14 +4641,14 @@ beq_else.8575:
 	addi %sp %sp -16 #1243
 	lw %ra %sp 12 #1243
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8576
+	bne %a0 %a12 beq_else.8633
 	lw %a0 %sp 8 #1247
 	addi %a0 %a0 1 #1247
 	lw %a1 %sp 0 #1247
 	lw %a11 %sp 4 #1247
 	lw %a10 %a11 0 #1247
 	jalr %zero %a10 0 #1247
-beq_else.8576:
+beq_else.8633:
 	addi %a0 %zero 1 #1245
 	jalr %zero %ra 0 #1245
 shadow_check_one_or_matrix.2519:
@@ -4523,21 +4661,22 @@ shadow_check_one_or_matrix.2519:
 	add %a12 %a1 %a7 #1253
 	lw %a7 %a12 0 #1253
 	lw %a8 %a7 0 #1254
-	addi %a12 %zero -1
-	bne %a8 %a12 beq_else.8577
+	addi %a9 %zero 1 #1255
+	sub %a9 %zero %a9 #1255
+	bne %a8 %a9 beq_else.8634
 	addi %a0 %zero 0 #1256
 	jalr %zero %ra 0 #1256
-beq_else.8577:
+beq_else.8634:
 	sw %a7 %sp 0 #1255
 	sw %a4 %sp 4 #1255
 	sw %a1 %sp 8 #1255
 	sw %a11 %sp 12 #1255
 	sw %a0 %sp 16 #1255
 	addi %a12 %zero 99
-	bne %a8 %a12 beq_else.8578 # nontail if
+	bne %a8 %a12 beq_else.8635 # nontail if
 	addi %a0 %zero 1 #1260
-	jal %zero beq_cont.8579 # then sentence ends
-beq_else.8578:
+	jal %zero beq_cont.8636 # then sentence ends
+beq_else.8635:
 	sw %a3 %sp 20 #1262
 	add %a1 %a5 %zero
 	add %a0 %a8 %zero
@@ -4549,24 +4688,26 @@ beq_else.8578:
 	jalr %ra %a10 0 #1262
 	addi %sp %sp -32 #1262
 	lw %ra %sp 28 #1262
+	addi %a1 %zero 0 #1265
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8580 # nontail if
-	addi %a0 %zero 0 #1265
-	jal %zero beq_cont.8581 # then sentence ends
-beq_else.8580:
+	bne %a0 %a12 beq_else.8637 # nontail if
+	addi %a0 %a1 0 #1265
+	jal %zero beq_cont.8638 # then sentence ends
+beq_else.8637:
 	lw %a0 %sp 20 #36
 	lw %f0 %a0 0 #36
-	li %f1 l.5924 #1266
+	li %f1 l.5949 #1266
+	sw %a1 %sp 24 #1266
 	sw %ra %sp 28 #1266 call dir
 	addi %sp %sp 32 #1266	
 	jal %ra min_caml_fless #1266
 	addi %sp %sp -32 #1266
 	lw %ra %sp 28 #1266
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8582 # nontail if
-	addi %a0 %zero 0 #1265
-	jal %zero beq_cont.8583 # then sentence ends
-beq_else.8582:
+	bne %a0 %a12 beq_else.8639 # nontail if
+	lw %a0 %sp 24 #1265
+	jal %zero beq_cont.8640 # then sentence ends
+beq_else.8639:
 	addi %a0 %zero 1 #1267
 	lw %a1 %sp 0 #1267
 	lw %a11 %sp 4 #1267
@@ -4577,24 +4718,24 @@ beq_else.8582:
 	addi %sp %sp -32 #1267
 	lw %ra %sp 28 #1267
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8584 # nontail if
-	addi %a0 %zero 0 #1265
-	jal %zero beq_cont.8585 # then sentence ends
-beq_else.8584:
+	bne %a0 %a12 beq_else.8641 # nontail if
+	lw %a0 %sp 24 #1265
+	jal %zero beq_cont.8642 # then sentence ends
+beq_else.8641:
 	addi %a0 %zero 1 #1268
-beq_cont.8585:
-beq_cont.8583:
-beq_cont.8581:
-beq_cont.8579:
+beq_cont.8642:
+beq_cont.8640:
+beq_cont.8638:
+beq_cont.8636:
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8586
+	bne %a0 %a12 beq_else.8643
 	lw %a0 %sp 16 #1278
 	addi %a0 %a0 1 #1278
 	lw %a1 %sp 8 #1278
 	lw %a11 %sp 12 #1278
 	lw %a10 %a11 0 #1278
 	jalr %zero %a10 0 #1278
-beq_else.8586:
+beq_else.8643:
 	addi %a0 %zero 1 #1273
 	lw %a1 %sp 0 #1273
 	lw %a11 %sp 4 #1273
@@ -4605,14 +4746,14 @@ beq_else.8586:
 	addi %sp %sp -32 #1273
 	lw %ra %sp 28 #1273
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8587
+	bne %a0 %a12 beq_else.8644
 	lw %a0 %sp 16 #1276
 	addi %a0 %a0 1 #1276
 	lw %a1 %sp 8 #1276
 	lw %a11 %sp 12 #1276
 	lw %a10 %a11 0 #1276
 	jalr %zero %a10 0 #1276
-beq_else.8587:
+beq_else.8644:
 	addi %a0 %zero 1 #1274
 	jalr %zero %ra 0 #1274
 solve_each_element.2522:
@@ -4630,11 +4771,12 @@ solve_each_element.2522:
 	slli %a10 %a0 2 #1287
 	add %a12 %a1 %a10 #1287
 	lw %a10 %a12 0 #1287
-	addi %a12 %zero -1
-	bne %a10 %a12 beq_else.8588
+	sw %a9 %sp 8 #1288
+	addi %a9 %zero 1 #1288
+	sub %a9 %zero %a9 #1288
+	bne %a10 %a9 beq_else.8645
 	jalr %zero %ra 0 #1288
-beq_else.8588:
-	sw %a9 %sp 8 #1290
+beq_else.8645:
 	sw %a8 %sp 12 #1290
 	sw %a4 %sp 16 #1290
 	sw %a3 %sp 20 #1290
@@ -4657,7 +4799,7 @@ beq_else.8588:
 	lw %ra %sp 52 #1290
 	addi %a1 %zero 0 #1291
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8590
+	bne %a0 %a12 beq_else.8647
 	lw %a0 %sp 48 #19
 	slli %a0 %a0 2 #19
 	lw %a1 %sp 44 #19
@@ -4669,9 +4811,9 @@ beq_else.8588:
 	addi %sp %sp -56 #1319
 	lw %ra %sp 52 #1319
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8591
+	bne %a0 %a12 beq_else.8648
 	jalr %zero %ra 0 #1321
-beq_else.8591:
+beq_else.8648:
 	lw %a0 %sp 40 #1320
 	addi %a0 %a0 1 #1320
 	lw %a1 %sp 32 #1320
@@ -4679,7 +4821,7 @@ beq_else.8591:
 	lw %a11 %sp 36 #1320
 	lw %a10 %a11 0 #1320
 	jalr %zero %a10 0 #1320
-beq_else.8590:
+beq_else.8647:
 	lw %a2 %sp 24 #36
 	lw %f1 %a2 0 #36
 	li %f0 l.5553 #1297
@@ -4692,9 +4834,9 @@ beq_else.8590:
 	addi %sp %sp -80 #1297
 	lw %ra %sp 76 #1297
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8594 # nontail if
-	jal %zero beq_cont.8595 # then sentence ends
-beq_else.8594:
+	bne %a0 %a12 beq_else.8651 # nontail if
+	jal %zero beq_cont.8652 # then sentence ends
+beq_else.8651:
 	lw %a0 %sp 20 #40
 	lw %f1 %a0 0 #40
 	lw %f0 %sp 64 #1298
@@ -4704,10 +4846,10 @@ beq_else.8594:
 	addi %sp %sp -80 #1298
 	lw %ra %sp 76 #1298
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8596 # nontail if
-	jal %zero beq_cont.8597 # then sentence ends
-beq_else.8596:
-	li %f0 l.5910 #1300
+	bne %a0 %a12 beq_else.8653 # nontail if
+	jal %zero beq_cont.8654 # then sentence ends
+beq_else.8653:
+	li %f0 l.5935 #1300
 	lw %f1 %sp 64 #1300
 	fadd %f0 %f1 %f0 #1300
 	lw %a0 %sp 28 #779
@@ -4743,9 +4885,9 @@ beq_else.8596:
 	addi %sp %sp -112 #1304
 	lw %ra %sp 108 #1304
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8598 # nontail if
-	jal %zero beq_cont.8599 # then sentence ends
-beq_else.8598:
+	bne %a0 %a12 beq_else.8655 # nontail if
+	jal %zero beq_cont.8656 # then sentence ends
+beq_else.8655:
 	lw %a0 %sp 20 #1306
 	lw %f0 %sp 96 #1306
 	sw %f0 %a0 0 #1306
@@ -4764,9 +4906,9 @@ beq_else.8598:
 	lw %a0 %sp 0 #1309
 	lw %a1 %sp 52 #1309
 	sw %a1 %a0 0 #1309
-beq_cont.8599:
-beq_cont.8597:
-beq_cont.8595:
+beq_cont.8656:
+beq_cont.8654:
+beq_cont.8652:
 	lw %a0 %sp 40 #1315
 	addi %a0 %a0 1 #1315
 	lw %a1 %sp 32 #1315
@@ -4780,10 +4922,11 @@ solve_one_or_network.2526:
 	slli %a5 %a0 2 #1328
 	add %a12 %a1 %a5 #1328
 	lw %a5 %a12 0 #1328
-	addi %a12 %zero -1
-	bne %a5 %a12 beq_else.8600
+	addi %a6 %zero 1 #1329
+	sub %a6 %zero %a6 #1329
+	bne %a5 %a6 beq_else.8657
 	jalr %zero %ra 0 #1332
-beq_else.8600:
+beq_else.8657:
 	slli %a5 %a5 2 #30
 	add %a12 %a4 %a5 #30
 	lw %a4 %a12 0 #30
@@ -4818,16 +4961,17 @@ trace_or_matrix.2530:
 	add %a12 %a1 %a8 #1337
 	lw %a8 %a12 0 #1337
 	lw %a9 %a8 0 #1338
-	addi %a12 %zero -1
-	bne %a9 %a12 beq_else.8602
+	addi %a10 %zero 1 #1339
+	sub %a10 %zero %a10 #1339
+	bne %a9 %a10 beq_else.8659
 	jalr %zero %ra 0 #1340
-beq_else.8602:
+beq_else.8659:
 	sw %a2 %sp 0 #1339
 	sw %a1 %sp 4 #1339
 	sw %a11 %sp 8 #1339
 	sw %a0 %sp 12 #1339
 	addi %a12 %zero 99
-	bne %a9 %a12 beq_else.8604 # nontail if
+	bne %a9 %a12 beq_else.8661 # nontail if
 	addi %a3 %zero 1 #1343
 	add %a1 %a8 %zero
 	add %a0 %a3 %zero
@@ -4838,8 +4982,8 @@ beq_else.8602:
 	jalr %ra %a10 0 #1343
 	addi %sp %sp -24 #1343
 	lw %ra %sp 20 #1343
-	jal %zero beq_cont.8605 # then sentence ends
-beq_else.8604:
+	jal %zero beq_cont.8662 # then sentence ends
+beq_else.8661:
 	sw %a8 %sp 16 #1347
 	sw %a7 %sp 20 #1347
 	sw %a3 %sp 24 #1347
@@ -4855,9 +4999,9 @@ beq_else.8604:
 	addi %sp %sp -40 #1347
 	lw %ra %sp 36 #1347
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8606 # nontail if
-	jal %zero beq_cont.8607 # then sentence ends
-beq_else.8606:
+	bne %a0 %a12 beq_else.8663 # nontail if
+	jal %zero beq_cont.8664 # then sentence ends
+beq_else.8663:
 	lw %a0 %sp 28 #36
 	lw %f0 %a0 0 #36
 	lw %a0 %sp 24 #40
@@ -4868,9 +5012,9 @@ beq_else.8606:
 	addi %sp %sp -40 #1350
 	lw %ra %sp 36 #1350
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8608 # nontail if
-	jal %zero beq_cont.8609 # then sentence ends
-beq_else.8608:
+	bne %a0 %a12 beq_else.8665 # nontail if
+	jal %zero beq_cont.8666 # then sentence ends
+beq_else.8665:
 	addi %a0 %zero 1 #1351
 	lw %a1 %sp 16 #1351
 	lw %a2 %sp 0 #1351
@@ -4881,9 +5025,9 @@ beq_else.8608:
 	jalr %ra %a10 0 #1351
 	addi %sp %sp -40 #1351
 	lw %ra %sp 36 #1351
-beq_cont.8609:
-beq_cont.8607:
-beq_cont.8605:
+beq_cont.8666:
+beq_cont.8664:
+beq_cont.8662:
 	lw %a0 %sp 12 #1355
 	addi %a0 %a0 1 #1355
 	lw %a1 %sp 4 #1355
@@ -4895,7 +5039,7 @@ judge_intersection.2534:
 	lw %a1 %a11 12 #1363
 	lw %a2 %a11 8 #1363
 	lw %a3 %a11 4 #1363
-	li %f0 l.5947 #1364
+	li %f0 l.5972 #1364
 	sw %f0 %a2 0 #1364
 	addi %a4 %zero 0 #1365
 	lw %a3 %a3 0 #32
@@ -4912,19 +5056,20 @@ judge_intersection.2534:
 	lw %ra %sp 4 #1365
 	lw %a0 %sp 0 #40
 	lw %f1 %a0 0 #40
-	li %f0 l.5924 #1368
+	li %f0 l.5949 #1368
 	sw %f1 %sp 8 #1368
 	sw %ra %sp 20 #1368 call dir
 	addi %sp %sp 24 #1368	
 	jal %ra min_caml_fless #1368
 	addi %sp %sp -24 #1368
 	lw %ra %sp 20 #1368
+	addi %a1 %zero 0 #1368
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8611
-	addi %a0 %zero 0 #1368
+	bne %a0 %a12 beq_else.8668
+	addi %a0 %a1 0 #1368
 	jalr %zero %ra 0 #1368
-beq_else.8611:
-	li %f1 l.5953 #1369
+beq_else.8668:
+	li %f1 l.5978 #1369
 	lw %f0 %sp 8 #1369
 	jal	%zero min_caml_fless
 solve_each_element_fast.2536:
@@ -4961,10 +5106,11 @@ solve_each_element_fast.2536:
 	lw %a3 %sp 44 #1378
 	add %a12 %a3 %a2 #1378
 	lw %a2 %a12 0 #1378
-	addi %a12 %zero -1
-	bne %a2 %a12 beq_else.8612
+	addi %a4 %zero 1 #1379
+	sub %a4 %zero %a4 #1379
+	bne %a2 %a4 beq_else.8669
 	jalr %zero %ra 0 #1379
-beq_else.8612:
+beq_else.8669:
 	lw %a4 %sp 36 #1381
 	lw %a11 %sp 40 #1381
 	sw %a0 %sp 52 #1381
@@ -4979,7 +5125,7 @@ beq_else.8612:
 	lw %ra %sp 60 #1381
 	addi %a1 %zero 0 #1382
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8614
+	bne %a0 %a12 beq_else.8671
 	lw %a0 %sp 56 #19
 	slli %a0 %a0 2 #19
 	lw %a1 %sp 32 #19
@@ -4991,9 +5137,9 @@ beq_else.8612:
 	addi %sp %sp -64 #1410
 	lw %ra %sp 60 #1410
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8615
+	bne %a0 %a12 beq_else.8672
 	jalr %zero %ra 0 #1412
-beq_else.8615:
+beq_else.8672:
 	lw %a0 %sp 48 #1411
 	addi %a0 %a0 1 #1411
 	lw %a1 %sp 44 #1411
@@ -5001,7 +5147,7 @@ beq_else.8615:
 	lw %a11 %sp 28 #1411
 	lw %a10 %a11 0 #1411
 	jalr %zero %a10 0 #1411
-beq_else.8614:
+beq_else.8671:
 	lw %a2 %sp 24 #36
 	lw %f1 %a2 0 #36
 	li %f0 l.5553 #1388
@@ -5014,9 +5160,9 @@ beq_else.8614:
 	addi %sp %sp -88 #1388
 	lw %ra %sp 84 #1388
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8618 # nontail if
-	jal %zero beq_cont.8619 # then sentence ends
-beq_else.8618:
+	bne %a0 %a12 beq_else.8675 # nontail if
+	jal %zero beq_cont.8676 # then sentence ends
+beq_else.8675:
 	lw %a0 %sp 20 #40
 	lw %f1 %a0 0 #40
 	lw %f0 %sp 72 #1389
@@ -5026,10 +5172,10 @@ beq_else.8618:
 	addi %sp %sp -88 #1389
 	lw %ra %sp 84 #1389
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8620 # nontail if
-	jal %zero beq_cont.8621 # then sentence ends
-beq_else.8620:
-	li %f0 l.5910 #1391
+	bne %a0 %a12 beq_else.8677 # nontail if
+	jal %zero beq_cont.8678 # then sentence ends
+beq_else.8677:
+	li %f0 l.5935 #1391
 	lw %f1 %sp 72 #1391
 	fadd %f0 %f1 %f0 #1391
 	lw %a0 %sp 52 #899
@@ -5063,9 +5209,9 @@ beq_else.8620:
 	addi %sp %sp -120 #1395
 	lw %ra %sp 116 #1395
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8622 # nontail if
-	jal %zero beq_cont.8623 # then sentence ends
-beq_else.8622:
+	bne %a0 %a12 beq_else.8679 # nontail if
+	jal %zero beq_cont.8680 # then sentence ends
+beq_else.8679:
 	lw %a0 %sp 20 #1397
 	lw %f0 %sp 104 #1397
 	sw %f0 %a0 0 #1397
@@ -5084,9 +5230,9 @@ beq_else.8622:
 	lw %a0 %sp 0 #1400
 	lw %a1 %sp 60 #1400
 	sw %a1 %a0 0 #1400
-beq_cont.8623:
-beq_cont.8621:
-beq_cont.8619:
+beq_cont.8680:
+beq_cont.8678:
+beq_cont.8676:
 	lw %a0 %sp 48 #1406
 	addi %a0 %a0 1 #1406
 	lw %a1 %sp 44 #1406
@@ -5100,10 +5246,11 @@ solve_one_or_network_fast.2540:
 	slli %a5 %a0 2 #1418
 	add %a12 %a1 %a5 #1418
 	lw %a5 %a12 0 #1418
-	addi %a12 %zero -1
-	bne %a5 %a12 beq_else.8624
+	addi %a6 %zero 1 #1419
+	sub %a6 %zero %a6 #1419
+	bne %a5 %a6 beq_else.8681
 	jalr %zero %ra 0 #1423
-beq_else.8624:
+beq_else.8681:
 	slli %a5 %a5 2 #30
 	add %a12 %a4 %a5 #30
 	lw %a4 %a12 0 #30
@@ -5137,16 +5284,17 @@ trace_or_matrix_fast.2544:
 	add %a12 %a1 %a7 #1428
 	lw %a7 %a12 0 #1428
 	lw %a8 %a7 0 #1429
-	addi %a12 %zero -1
-	bne %a8 %a12 beq_else.8626
+	addi %a9 %zero 1 #1430
+	sub %a9 %zero %a9 #1430
+	bne %a8 %a9 beq_else.8683
 	jalr %zero %ra 0 #1431
-beq_else.8626:
+beq_else.8683:
 	sw %a2 %sp 0 #1430
 	sw %a1 %sp 4 #1430
 	sw %a11 %sp 8 #1430
 	sw %a0 %sp 12 #1430
 	addi %a12 %zero 99
-	bne %a8 %a12 beq_else.8628 # nontail if
+	bne %a8 %a12 beq_else.8685 # nontail if
 	addi %a3 %zero 1 #1434
 	add %a1 %a7 %zero
 	add %a0 %a3 %zero
@@ -5157,8 +5305,8 @@ beq_else.8626:
 	jalr %ra %a10 0 #1434
 	addi %sp %sp -24 #1434
 	lw %ra %sp 20 #1434
-	jal %zero beq_cont.8629 # then sentence ends
-beq_else.8628:
+	jal %zero beq_cont.8686 # then sentence ends
+beq_else.8685:
 	sw %a7 %sp 16 #1438
 	sw %a6 %sp 20 #1438
 	sw %a3 %sp 24 #1438
@@ -5173,9 +5321,9 @@ beq_else.8628:
 	addi %sp %sp -40 #1438
 	lw %ra %sp 36 #1438
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8630 # nontail if
-	jal %zero beq_cont.8631 # then sentence ends
-beq_else.8630:
+	bne %a0 %a12 beq_else.8687 # nontail if
+	jal %zero beq_cont.8688 # then sentence ends
+beq_else.8687:
 	lw %a0 %sp 28 #36
 	lw %f0 %a0 0 #36
 	lw %a0 %sp 24 #40
@@ -5186,9 +5334,9 @@ beq_else.8630:
 	addi %sp %sp -40 #1441
 	lw %ra %sp 36 #1441
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8632 # nontail if
-	jal %zero beq_cont.8633 # then sentence ends
-beq_else.8632:
+	bne %a0 %a12 beq_else.8689 # nontail if
+	jal %zero beq_cont.8690 # then sentence ends
+beq_else.8689:
 	addi %a0 %zero 1 #1442
 	lw %a1 %sp 16 #1442
 	lw %a2 %sp 0 #1442
@@ -5199,9 +5347,9 @@ beq_else.8632:
 	jalr %ra %a10 0 #1442
 	addi %sp %sp -40 #1442
 	lw %ra %sp 36 #1442
-beq_cont.8633:
-beq_cont.8631:
-beq_cont.8629:
+beq_cont.8690:
+beq_cont.8688:
+beq_cont.8686:
 	lw %a0 %sp 12 #1446
 	addi %a0 %a0 1 #1446
 	lw %a1 %sp 4 #1446
@@ -5213,7 +5361,7 @@ judge_intersection_fast.2548:
 	lw %a1 %a11 12 #1451
 	lw %a2 %a11 8 #1451
 	lw %a3 %a11 4 #1451
-	li %f0 l.5947 #1453
+	li %f0 l.5972 #1453
 	sw %f0 %a2 0 #1453
 	addi %a4 %zero 0 #1454
 	lw %a3 %a3 0 #32
@@ -5230,19 +5378,20 @@ judge_intersection_fast.2548:
 	lw %ra %sp 4 #1454
 	lw %a0 %sp 0 #40
 	lw %f1 %a0 0 #40
-	li %f0 l.5924 #1457
+	li %f0 l.5949 #1457
 	sw %f1 %sp 8 #1457
 	sw %ra %sp 20 #1457 call dir
 	addi %sp %sp 24 #1457	
 	jal %ra min_caml_fless #1457
 	addi %sp %sp -24 #1457
 	lw %ra %sp 20 #1457
+	addi %a1 %zero 0 #1457
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8635
-	addi %a0 %zero 0 #1457
+	bne %a0 %a12 beq_else.8692
+	addi %a0 %a1 0 #1457
 	jalr %zero %ra 0 #1457
-beq_else.8635:
-	li %f1 l.5953 #1458
+beq_else.8692:
+	li %f1 l.5978 #1458
 	lw %f0 %sp 8 #1458
 	jal	%zero min_caml_fless
 get_nvector_rect.2550:
@@ -5402,7 +5551,7 @@ get_nvector_second.2554:
 	addi %sp %sp -96 #1495
 	lw %ra %sp 92 #1495
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8639 # nontail if
+	bne %a0 %a12 beq_else.8696 # nontail if
 	lw %a0 %sp 0 #1496
 	lw %f0 %sp 64 #1496
 	sw %f0 %a0 0 #1496
@@ -5410,8 +5559,8 @@ get_nvector_second.2554:
 	sw %f0 %a0 4 #1497
 	lw %f0 %sp 80 #1498
 	sw %f0 %a0 8 #1498
-	jal %zero beq_cont.8640 # then sentence ends
-beq_else.8639:
+	jal %zero beq_cont.8697 # then sentence ends
+beq_else.8696:
 	lw %a0 %sp 4 #1500
 	sw %ra %sp 92 #1500 call dir
 	addi %sp %sp 96 #1500	
@@ -5498,7 +5647,7 @@ beq_else.8639:
 	fadd %f0 %f1 %f0 #1502
 	lw %a0 %sp 0 #1502
 	sw %f0 %a0 8 #1502
-beq_cont.8640:
+beq_cont.8697:
 	lw %a1 %sp 4 #1504
 	add %a0 %a1 %zero
 	sw %ra %sp 116 #1504 call dir
@@ -5524,19 +5673,19 @@ get_nvector.2556:
 	addi %sp %sp -24 #1509
 	lw %ra %sp 20 #1509
 	addi %a12 %zero 1
-	bne %a0 %a12 beq_else.8641
+	bne %a0 %a12 beq_else.8698
 	lw %a0 %sp 12 #1511
 	lw %a11 %sp 16 #1511
 	lw %a10 %a11 0 #1511
 	jalr %zero %a10 0 #1511
-beq_else.8641:
+beq_else.8698:
 	addi %a12 %zero 2
-	bne %a0 %a12 beq_else.8642
+	bne %a0 %a12 beq_else.8699
 	lw %a0 %sp 4 #1513
 	lw %a11 %sp 8 #1513
 	lw %a10 %a11 0 #1513
 	jalr %zero %a10 0 #1513
-beq_else.8642:
+beq_else.8699:
 	lw %a0 %sp 4 #1515
 	lw %a11 %sp 0 #1515
 	lw %a10 %a11 0 #1515
@@ -5581,7 +5730,7 @@ utexture.2559:
 	sw %f0 %a0 8 #1527
 	lw %a1 %sp 12 #1528
 	addi %a12 %zero 1
-	bne %a1 %a12 beq_else.8643
+	bne %a1 %a12 beq_else.8700
 	lw %a1 %sp 0 #1531
 	lw %f0 %a1 0 #1531
 	lw %a2 %sp 8 #1531
@@ -5594,7 +5743,7 @@ utexture.2559:
 	lw %ra %sp 28 #1531
 	lw %f1 %sp 16 #1531
 	fsub %f0 %f1 %f0 #1531
-	li %f1 l.6045 #1533
+	li %f1 l.6070 #1533
 	fmul %f1 %f0 %f1 #1533
 	sw %f0 %sp 24 #1533
 	fadd %f0 %f1 %fzero
@@ -5603,11 +5752,11 @@ utexture.2559:
 	jal %ra min_caml_floor #1533
 	addi %sp %sp -40 #1533
 	lw %ra %sp 36 #1533
-	li %f1 l.6047 #1533
+	li %f1 l.6072 #1533
 	fmul %f0 %f0 %f1 #1533
 	lw %f1 %sp 24 #1534
 	fsub %f0 %f1 %f0 #1534
-	li %f1 l.6028 #1534
+	li %f1 l.6053 #1534
 	sw %ra %sp 36 #1534 call dir
 	addi %sp %sp 40 #1534	
 	jal %ra min_caml_fless #1534
@@ -5626,7 +5775,7 @@ utexture.2559:
 	lw %ra %sp 52 #1536
 	lw %f1 %sp 40 #1536
 	fsub %f0 %f1 %f0 #1536
-	li %f1 l.6045 #1538
+	li %f1 l.6070 #1538
 	fmul %f1 %f0 %f1 #1538
 	sw %f0 %sp 48 #1538
 	fadd %f0 %f1 %fzero
@@ -5635,11 +5784,11 @@ utexture.2559:
 	jal %ra min_caml_floor #1538
 	addi %sp %sp -64 #1538
 	lw %ra %sp 60 #1538
-	li %f1 l.6047 #1538
+	li %f1 l.6072 #1538
 	fmul %f0 %f0 %f1 #1538
 	lw %f1 %sp 48 #1539
 	fsub %f0 %f1 %f0 #1539
-	li %f1 l.6028 #1539
+	li %f1 l.6053 #1539
 	sw %ra %sp 60 #1539 call dir
 	addi %sp %sp 64 #1539	
 	jal %ra min_caml_fless #1539
@@ -5647,33 +5796,33 @@ utexture.2559:
 	lw %ra %sp 60 #1539
 	lw %a1 %sp 32 #784
 	addi %a12 %zero 0
-	bne %a1 %a12 beq_else.8645 # nontail if
+	bne %a1 %a12 beq_else.8702 # nontail if
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8647 # nontail if
-	li %f0 l.6021 #1544
-	jal %zero beq_cont.8648 # then sentence ends
-beq_else.8647:
+	bne %a0 %a12 beq_else.8704 # nontail if
+	li %f0 l.6046 #1544
+	jal %zero beq_cont.8705 # then sentence ends
+beq_else.8704:
 	li %f0 l.5553 #1544
-beq_cont.8648:
-	jal %zero beq_cont.8646 # then sentence ends
-beq_else.8645:
+beq_cont.8705:
+	jal %zero beq_cont.8703 # then sentence ends
+beq_else.8702:
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8649 # nontail if
+	bne %a0 %a12 beq_else.8706 # nontail if
 	li %f0 l.5553 #1543
-	jal %zero beq_cont.8650 # then sentence ends
-beq_else.8649:
-	li %f0 l.6021 #1543
-beq_cont.8650:
-beq_cont.8646:
+	jal %zero beq_cont.8707 # then sentence ends
+beq_else.8706:
+	li %f0 l.6046 #1543
+beq_cont.8707:
+beq_cont.8703:
 	lw %a0 %sp 4 #1541
 	sw %f0 %a0 4 #1541
 	jalr %zero %ra 0 #1541
-beq_else.8643:
+beq_else.8700:
 	addi %a12 %zero 2
-	bne %a1 %a12 beq_else.8652
+	bne %a1 %a12 beq_else.8709
 	lw %a1 %sp 0 #1531
 	lw %f0 %a1 4 #1531
-	li %f1 l.6037 #1549
+	li %f1 l.6062 #1549
 	fmul %f0 %f0 %f1 #1549
 	sw %ra %sp 60 #1549 call dir
 	addi %sp %sp 64 #1549	
@@ -5685,19 +5834,19 @@ beq_else.8643:
 	jal %ra min_caml_fsqr #1549
 	addi %sp %sp -64 #1549
 	lw %ra %sp 60 #1549
-	li %f1 l.6021 #1550
+	li %f1 l.6046 #1550
 	fmul %f1 %f1 %f0 #1550
 	lw %a0 %sp 4 #1550
 	sw %f1 %a0 0 #1550
-	li %f1 l.6021 #1551
+	li %f1 l.6046 #1551
 	li %f2 l.5555 #1551
 	fsub %f0 %f2 %f0 #1551
 	fmul %f0 %f1 %f0 #1551
 	sw %f0 %a0 4 #1551
 	jalr %zero %ra 0 #1551
-beq_else.8652:
+beq_else.8709:
 	addi %a12 %zero 3
-	bne %a1 %a12 beq_else.8654
+	bne %a1 %a12 beq_else.8711
 	lw %a1 %sp 0 #1531
 	lw %f0 %a1 0 #1531
 	lw %a2 %sp 8 #1556
@@ -5745,7 +5894,7 @@ beq_else.8652:
 	jal %ra min_caml_sqrt #1558
 	addi %sp %sp -104 #1558
 	lw %ra %sp 100 #1558
-	li %f1 l.6028 #1558
+	li %f1 l.6053 #1558
 	fdiv %f0 %f0 %f1 #1558
 	sw %f0 %sp 96 #1559
 	sw %ra %sp 108 #1559 call dir
@@ -5755,7 +5904,7 @@ beq_else.8652:
 	lw %ra %sp 108 #1559
 	lw %f1 %sp 96 #1559
 	fsub %f0 %f1 %f0 #1559
-	li %f1 l.6008 #1559
+	li %f1 l.6033 #1559
 	fmul %f0 %f0 %f1 #1559
 	sw %ra %sp 108 #1560 call dir
 	addi %sp %sp 112 #1560	
@@ -5767,19 +5916,19 @@ beq_else.8652:
 	jal %ra min_caml_fsqr #1560
 	addi %sp %sp -112 #1560
 	lw %ra %sp 108 #1560
-	li %f1 l.6021 #1561
+	li %f1 l.6046 #1561
 	fmul %f1 %f0 %f1 #1561
 	lw %a0 %sp 4 #1561
 	sw %f1 %a0 4 #1561
 	li %f1 l.5555 #1562
 	fsub %f0 %f1 %f0 #1562
-	li %f1 l.6021 #1562
+	li %f1 l.6046 #1562
 	fmul %f0 %f0 %f1 #1562
 	sw %f0 %a0 8 #1562
 	jalr %zero %ra 0 #1562
-beq_else.8654:
+beq_else.8711:
 	addi %a12 %zero 4
-	bne %a1 %a12 beq_else.8656
+	bne %a1 %a12 beq_else.8713
 	lw %a1 %sp 0 #1531
 	lw %f0 %a1 0 #1531
 	lw %a2 %sp 8 #1566
@@ -5859,14 +6008,14 @@ beq_else.8654:
 	jal %ra min_caml_fabs #1570
 	addi %sp %sp -176 #1570
 	lw %ra %sp 172 #1570
-	li %f1 l.6002 #1570
+	li %f1 l.6027 #1570
 	sw %ra %sp 172 #1570 call dir
 	addi %sp %sp 176 #1570	
 	jal %ra min_caml_fless #1570
 	addi %sp %sp -176 #1570
 	lw %ra %sp 172 #1570
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8657 # nontail if
+	bne %a0 %a12 beq_else.8714 # nontail if
 	lw %f0 %sp 120 #1573
 	lw %f1 %sp 144 #1573
 	fdiv %f0 %f1 %f0 #1573
@@ -5880,14 +6029,14 @@ beq_else.8654:
 	jal %ra min_caml_atan #1575
 	addi %sp %sp -176 #1575
 	lw %ra %sp 172 #1575
-	li %f1 l.6006 #1575
+	li %f1 l.6031 #1575
 	fmul %f0 %f0 %f1 #1575
-	li %f1 l.6008 #1575
+	li %f1 l.6033 #1575
 	fdiv %f0 %f0 %f1 #1575
-	jal %zero beq_cont.8658 # then sentence ends
-beq_else.8657:
-	li %f0 l.6004 #1571
-beq_cont.8658:
+	jal %zero beq_cont.8715 # then sentence ends
+beq_else.8714:
+	li %f0 l.6029 #1571
+beq_cont.8715:
 	sw %f0 %sp 168 #1577
 	sw %ra %sp 180 #1577 call dir
 	addi %sp %sp 184 #1577	
@@ -5930,14 +6079,14 @@ beq_cont.8658:
 	jal %ra min_caml_fabs #1581
 	addi %sp %sp -216 #1581
 	lw %ra %sp 212 #1581
-	li %f1 l.6002 #1581
+	li %f1 l.6027 #1581
 	sw %ra %sp 212 #1581 call dir
 	addi %sp %sp 216 #1581	
 	jal %ra min_caml_fless #1581
 	addi %sp %sp -216 #1581
 	lw %ra %sp 212 #1581
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8659 # nontail if
+	bne %a0 %a12 beq_else.8716 # nontail if
 	lw %f0 %sp 160 #1584
 	lw %f1 %sp 200 #1584
 	fdiv %f0 %f1 %f0 #1584
@@ -5951,14 +6100,14 @@ beq_cont.8658:
 	jal %ra min_caml_atan #1585
 	addi %sp %sp -216 #1585
 	lw %ra %sp 212 #1585
-	li %f1 l.6006 #1585
+	li %f1 l.6031 #1585
 	fmul %f0 %f0 %f1 #1585
-	li %f1 l.6008 #1585
+	li %f1 l.6033 #1585
 	fdiv %f0 %f0 %f1 #1585
-	jal %zero beq_cont.8660 # then sentence ends
-beq_else.8659:
-	li %f0 l.6004 #1582
-beq_cont.8660:
+	jal %zero beq_cont.8717 # then sentence ends
+beq_else.8716:
+	li %f0 l.6029 #1582
+beq_cont.8717:
 	sw %f0 %sp 208 #1587
 	sw %ra %sp 220 #1587 call dir
 	addi %sp %sp 224 #1587	
@@ -5967,8 +6116,8 @@ beq_cont.8660:
 	lw %ra %sp 220 #1587
 	lw %f1 %sp 208 #1587
 	fsub %f0 %f1 %f0 #1587
-	li %f1 l.6015 #1588
-	li %f2 l.6017 #1588
+	li %f1 l.6040 #1588
+	li %f2 l.6042 #1588
 	lw %f3 %sp 176 #1588
 	fsub %f2 %f2 %f3 #1588
 	sw %f0 %sp 216 #1588
@@ -5981,7 +6130,7 @@ beq_cont.8660:
 	lw %ra %sp 236 #1588
 	lw %f1 %sp 224 #1588
 	fsub %f0 %f1 %f0 #1588
-	li %f1 l.6017 #1588
+	li %f1 l.6042 #1588
 	lw %f2 %sp 216 #1588
 	fsub %f1 %f1 %f2 #1588
 	sw %f0 %sp 232 #1588
@@ -6000,20 +6149,20 @@ beq_cont.8660:
 	addi %sp %sp -256 #1589
 	lw %ra %sp 252 #1589
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8661 # nontail if
+	bne %a0 %a12 beq_else.8718 # nontail if
 	lw %f0 %sp 240 #1588
-	jal %zero beq_cont.8662 # then sentence ends
-beq_else.8661:
+	jal %zero beq_cont.8719 # then sentence ends
+beq_else.8718:
 	li %f0 l.5553 #1589
-beq_cont.8662:
-	li %f1 l.6021 #1590
+beq_cont.8719:
+	li %f1 l.6046 #1590
 	fmul %f0 %f1 %f0 #1590
-	li %f1 l.6023 #1590
+	li %f1 l.6048 #1590
 	fdiv %f0 %f0 %f1 #1590
 	lw %a0 %sp 4 #1590
 	sw %f0 %a0 8 #1590
 	jalr %zero %ra 0 #1590
-beq_else.8656:
+beq_else.8713:
 	jalr %zero %ra 0 #1592
 add_light.2562:
 	lw %a0 %a11 8 #1598
@@ -6029,9 +6178,9 @@ add_light.2562:
 	addi %sp %sp -40 #1601
 	lw %ra %sp 36 #1601
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8665 # nontail if
-	jal %zero beq_cont.8666 # then sentence ends
-beq_else.8665:
+	bne %a0 %a12 beq_else.8722 # nontail if
+	jal %zero beq_cont.8723 # then sentence ends
+beq_else.8722:
 	lw %f0 %sp 16 #1602
 	lw %a0 %sp 28 #1602
 	lw %a1 %sp 24 #1602
@@ -6040,7 +6189,7 @@ beq_else.8665:
 	jal %ra vecaccum.2273 #1602
 	addi %sp %sp -40 #1602
 	lw %ra %sp 36 #1602
-beq_cont.8666:
+beq_cont.8723:
 	lw %f0 %sp 8 #1606
 	sw %ra %sp 36 #1606 call dir
 	addi %sp %sp 40 #1606	
@@ -6048,9 +6197,9 @@ beq_cont.8666:
 	addi %sp %sp -40 #1606
 	lw %ra %sp 36 #1606
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8667
+	bne %a0 %a12 beq_else.8724
 	jalr %zero %ra 0 #1611
-beq_else.8667:
+beq_else.8724:
 	lw %f0 %sp 8 #1607
 	sw %ra %sp 36 #1607 call dir
 	addi %sp %sp 40 #1607	
@@ -6086,7 +6235,7 @@ trace_reflections.2566:
 	lw %a9 %a11 4 #1615
 	addi %a10 %zero 0 #1617
 	addi %a12 %zero 0
-	blt %a0 %a12 bge_else.8670
+	blt %a0 %a12 bge_else.8727
 	sw %a11 %sp 0 #94
 	slli %a11 %a0 2 #94
 	add %a12 %a3 %a11 #94
@@ -6119,9 +6268,9 @@ trace_reflections.2566:
 	addi %sp %sp -72 #1622
 	lw %ra %sp 68 #1622
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8671 # nontail if
-	jal %zero beq_cont.8672 # then sentence ends
-beq_else.8671:
+	bne %a0 %a12 beq_else.8728 # nontail if
+	jal %zero beq_cont.8729 # then sentence ends
+beq_else.8728:
 	lw %a0 %sp 56 #44
 	lw %a0 %a0 0 #44
 	addi %a1 %zero 4 #1623
@@ -6142,7 +6291,7 @@ beq_else.8671:
 	addi %sp %sp -80 #1625
 	lw %ra %sp 76 #1625
 	lw %a1 %sp 68 #1623
-	bne %a1 %a0 beq_else.8673 # nontail if
+	bne %a1 %a0 beq_else.8730 # nontail if
 	lw %a0 %sp 44 #32
 	lw %a1 %a0 0 #32
 	lw %a0 %sp 36 #1627
@@ -6154,7 +6303,7 @@ beq_else.8671:
 	addi %sp %sp -80 #1627
 	lw %ra %sp 76 #1627
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8675 # nontail if
+	bne %a0 %a12 beq_else.8732 # nontail if
 	lw %a0 %sp 64 #1629
 	sw %ra %sp 76 #1629 call dir
 	addi %sp %sp 80 #1629	
@@ -6205,13 +6354,13 @@ beq_else.8671:
 	jalr %ra %a10 0 #1633
 	addi %sp %sp -104 #1633
 	lw %ra %sp 100 #1633
-	jal %zero beq_cont.8676 # then sentence ends
-beq_else.8675:
-beq_cont.8676:
-	jal %zero beq_cont.8674 # then sentence ends
-beq_else.8673:
-beq_cont.8674:
-beq_cont.8672:
+	jal %zero beq_cont.8733 # then sentence ends
+beq_else.8732:
+beq_cont.8733:
+	jal %zero beq_cont.8731 # then sentence ends
+beq_else.8730:
+beq_cont.8731:
+beq_cont.8729:
 	lw %a0 %sp 4 #1637
 	addi %a0 %a0 -1 #1637
 	lw %f0 %sp 24 #1637
@@ -6220,7 +6369,7 @@ beq_cont.8672:
 	lw %a11 %sp 0 #1637
 	lw %a10 %a11 0 #1637
 	jalr %zero %a10 0 #1637
-bge_else.8670:
+bge_else.8727:
 	jalr %zero %ra 0 #1638
 trace_ray.2571:
 	lw %a3 %a11 80 #1643
@@ -6258,7 +6407,7 @@ trace_ray.2571:
 	sw %a11 %sp 48 #1644
 	addi %a11 %zero 4 #1644
 	addi %a12 %zero 4
-	blt %a12 %a0 bge_else.8678
+	blt %a12 %a0 bge_else.8735
 	sw %f1 %sp 56 #1645
 	sw %a2 %sp 64 #1645
 	sw %a11 %sp 68 #1645
@@ -6291,17 +6440,18 @@ trace_ray.2571:
 	lw %ra %sp 124 #1646
 	addi %a1 %zero 0 #1646
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8680
-	addi %a0 %zero -1 #1710
+	bne %a0 %a12 beq_else.8737
+	addi %a0 %zero 1 #1710
+	sub %a0 %zero %a0 #1710
 	lw %a1 %sp 108 #1710
 	slli %a2 %a1 2 #1710
 	lw %a3 %sp 120 #1710
 	add %a12 %a3 %a2 #1710
 	sw %a0 %a12 0 #1710
 	addi %a12 %zero 0
-	bne %a1 %a12 beq_else.8681
+	bne %a1 %a12 beq_else.8738
 	jalr %zero %ra 0 #1724
-beq_else.8681:
+beq_else.8738:
 	lw %a0 %sp 112 #1713
 	lw %a1 %sp 104 #1713
 	sw %ra %sp 124 #1713 call dir
@@ -6321,9 +6471,9 @@ beq_else.8681:
 	addi %sp %sp -144 #1715
 	lw %ra %sp 140 #1715
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8684
+	bne %a0 %a12 beq_else.8741
 	jalr %zero %ra 0 #1723
-beq_else.8684:
+beq_else.8741:
 	lw %f0 %sp 128 #1718
 	sw %ra %sp 140 #1718 call dir
 	addi %sp %sp 144 #1718	
@@ -6348,7 +6498,7 @@ beq_else.8684:
 	fadd %f0 %f1 %f0 #1721
 	sw %f0 %a0 8 #1721
 	jalr %zero %ra 0 #1721
-beq_else.8680:
+beq_else.8737:
 	lw %a0 %sp 84 #44
 	lw %a0 %a0 0 #44
 	slli %a2 %a0 2 #19
@@ -6446,14 +6596,14 @@ beq_else.8680:
 	jal %ra o_diffuse.2314 #1665
 	addi %sp %sp -168 #1665
 	lw %ra %sp 164 #1665
-	li %f1 l.6017 #1665
+	li %f1 l.6042 #1665
 	sw %ra %sp 164 #1665 call dir
 	addi %sp %sp 168 #1665	
 	jal %ra min_caml_fless #1665
 	addi %sp %sp -168 #1665
 	lw %ra %sp 164 #1665
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8687 # nontail if
+	bne %a0 %a12 beq_else.8744 # nontail if
 	addi %a0 %zero 1 #1668
 	lw %a1 %sp 108 #1668
 	slli %a2 %a1 2 #1668
@@ -6484,7 +6634,9 @@ beq_else.8680:
 	lw %a2 %sp 164 #1670
 	add %a12 %a2 %a1 #1670
 	lw %a1 %a12 0 #1670
-	li %f0 l.6079 #1671
+	li %f0 l.5555 #1671
+	li %f1 l.6105 #1671
+	fdiv %f0 %f0 %f1 #1671
 	lw %f1 %sp 152 #1671
 	fmul %f0 %f0 %f1 #1671
 	add %a0 %a1 %zero
@@ -6510,16 +6662,16 @@ beq_else.8680:
 	jal %ra veccpy.2254 #1673
 	addi %sp %sp -176 #1673
 	lw %ra %sp 172 #1673
-	jal %zero beq_cont.8688 # then sentence ends
-beq_else.8687:
+	jal %zero beq_cont.8745 # then sentence ends
+beq_else.8744:
 	lw %a0 %sp 108 #1666
 	slli %a1 %a0 2 #1666
 	lw %a2 %sp 160 #1666
 	lw %a3 %sp 136 #1666
 	add %a12 %a2 %a1 #1666
 	sw %a3 %a12 0 #1666
-beq_cont.8688:
-	li %f0 l.6082 #1676
+beq_cont.8745:
+	li %f0 l.6108 #1676
 	lw %a0 %sp 112 #1676
 	lw %a1 %sp 24 #1676
 	sw %f0 %sp 168 #1676
@@ -6557,7 +6709,7 @@ beq_cont.8688:
 	addi %sp %sp -192 #1683
 	lw %ra %sp 188 #1683
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8689 # nontail if
+	bne %a0 %a12 beq_else.8746 # nontail if
 	lw %a0 %sp 24 #1684
 	lw %a1 %sp 104 #1684
 	sw %ra %sp 188 #1684 call dir
@@ -6595,9 +6747,9 @@ beq_cont.8688:
 	jalr %ra %a10 0 #1686
 	addi %sp %sp -200 #1686
 	lw %ra %sp 196 #1686
-	jal %zero beq_cont.8690 # then sentence ends
-beq_else.8689:
-beq_cont.8690:
+	jal %zero beq_cont.8747 # then sentence ends
+beq_else.8746:
+beq_cont.8747:
 	lw %a0 %sp 40 #1690
 	lw %a11 %sp 8 #1690
 	sw %ra %sp 196 #1690 call cls
@@ -6619,7 +6771,7 @@ beq_cont.8690:
 	jalr %ra %a10 0 #1691
 	addi %sp %sp -200 #1691
 	lw %ra %sp 196 #1691
-	li %f0 l.6086 #1694
+	li %f0 l.6112 #1694
 	lw %f1 %sp 96 #1694
 	sw %ra %sp 196 #1694 call dir
 	addi %sp %sp 200 #1694	
@@ -6627,24 +6779,25 @@ beq_cont.8690:
 	addi %sp %sp -200 #1694
 	lw %ra %sp 196 #1694
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8691
+	bne %a0 %a12 beq_else.8748
 	jalr %zero %ra 0 #1705
-beq_else.8691:
+beq_else.8748:
 	lw %a0 %sp 108 #1644
 	addi %a12 %zero 4
-	blt %a0 %a12 bge_else.8693 # nontail if
-	jal %zero bge_cont.8694 # then sentence ends
-bge_else.8693:
+	blt %a0 %a12 bge_else.8750 # nontail if
+	jal %zero bge_cont.8751 # then sentence ends
+bge_else.8750:
 	addi %a1 %a0 1 #1697
-	addi %a2 %zero -1 #1697
+	addi %a2 %zero 1 #1697
+	sub %a2 %zero %a2 #1697
 	slli %a1 %a1 2 #1697
 	lw %a3 %sp 120 #1697
 	add %a12 %a3 %a1 #1697
 	sw %a2 %a12 0 #1697
-bge_cont.8694:
+bge_cont.8751:
 	lw %a1 %sp 148 #19
 	addi %a12 %zero 2
-	bne %a1 %a12 beq_else.8695
+	bne %a1 %a12 beq_else.8752
 	li %f0 l.5555 #1701
 	lw %a1 %sp 144 #1701
 	sw %f0 %sp 192 #1701
@@ -6669,9 +6822,9 @@ bge_cont.8694:
 	lw %a11 %sp 44 #1702
 	lw %a10 %a11 0 #1702
 	jalr %zero %a10 0 #1702
-beq_else.8695:
+beq_else.8752:
 	jalr %zero %ra 0 #1703
-bge_else.8678:
+bge_else.8735:
 	jalr %zero %ra 0 #1726
 trace_diffuse_ray.2577:
 	lw %a1 %a11 48 #1734
@@ -6708,9 +6861,9 @@ trace_diffuse_ray.2577:
 	lw %ra %sp 60 #1737
 	addi %a1 %zero 0 #1737
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8698
+	bne %a0 %a12 beq_else.8755
 	jalr %zero %ra 0 #1748
-beq_else.8698:
+beq_else.8755:
 	lw %a0 %sp 52 #44
 	lw %a0 %a0 0 #44
 	slli %a0 %a0 2 #19
@@ -6755,7 +6908,7 @@ beq_else.8698:
 	addi %sp %sp -72 #1743
 	lw %ra %sp 68 #1743
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8700
+	bne %a0 %a12 beq_else.8757
 	lw %a0 %sp 20 #1744
 	lw %a1 %sp 16 #1744
 	sw %ra %sp 68 #1744 call dir
@@ -6775,12 +6928,12 @@ beq_else.8698:
 	addi %sp %sp -80 #1745
 	lw %ra %sp 76 #1745
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8701 # nontail if
+	bne %a0 %a12 beq_else.8758 # nontail if
 	li %f0 l.5553 #1745
-	jal %zero beq_cont.8702 # then sentence ends
-beq_else.8701:
+	jal %zero beq_cont.8759 # then sentence ends
+beq_else.8758:
 	lw %f0 %sp 64 #555
-beq_cont.8702:
+beq_cont.8759:
 	lw %f1 %sp 8 #1746
 	fmul %f0 %f1 %f0 #1746
 	lw %a0 %sp 60 #1746
@@ -6795,12 +6948,12 @@ beq_cont.8702:
 	lw %a0 %sp 4 #1746
 	lw %a1 %sp 0 #1746
 	jal	%zero vecaccum.2273
-beq_else.8700:
+beq_else.8757:
 	jalr %zero %ra 0 #1747
 iter_trace_diffuse_rays.2580:
 	lw %a4 %a11 4 #1752
 	addi %a12 %zero 0
-	blt %a3 %a12 bge_else.8704
+	blt %a3 %a12 bge_else.8761
 	slli %a5 %a3 2 #1754
 	add %a12 %a0 %a5 #1754
 	lw %a5 %a12 0 #1754
@@ -6829,13 +6982,13 @@ iter_trace_diffuse_rays.2580:
 	addi %sp %sp -40 #1757
 	lw %ra %sp 36 #1757
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8705 # nontail if
+	bne %a0 %a12 beq_else.8762 # nontail if
 	lw %a0 %sp 16 #1754
 	slli %a1 %a0 2 #1754
 	lw %a2 %sp 12 #1754
 	add %a12 %a2 %a1 #1754
 	lw %a1 %a12 0 #1754
-	li %f0 l.6108 #1760
+	li %f0 l.6134 #1760
 	lw %f1 %sp 24 #1760
 	fdiv %f0 %f1 %f0 #1760
 	lw %a11 %sp 8 #1760
@@ -6846,15 +6999,15 @@ iter_trace_diffuse_rays.2580:
 	jalr %ra %a10 0 #1760
 	addi %sp %sp -40 #1760
 	lw %ra %sp 36 #1760
-	jal %zero beq_cont.8706 # then sentence ends
-beq_else.8705:
+	jal %zero beq_cont.8763 # then sentence ends
+beq_else.8762:
 	lw %a0 %sp 16 #1758
 	addi %a1 %a0 1 #1758
 	slli %a1 %a1 2 #1754
 	lw %a2 %sp 12 #1754
 	add %a12 %a2 %a1 #1754
 	lw %a1 %a12 0 #1754
-	li %f0 l.6105 #1758
+	li %f0 l.6131 #1758
 	lw %f1 %sp 24 #1758
 	fdiv %f0 %f1 %f0 #1758
 	lw %a11 %sp 8 #1758
@@ -6865,7 +7018,7 @@ beq_else.8705:
 	jalr %ra %a10 0 #1758
 	addi %sp %sp -40 #1758
 	lw %ra %sp 36 #1758
-beq_cont.8706:
+beq_cont.8763:
 	lw %a0 %sp 16 #1762
 	addi %a3 %a0 -2 #1762
 	lw %a0 %sp 12 #1762
@@ -6874,7 +7027,7 @@ beq_cont.8706:
 	lw %a11 %sp 4 #1762
 	lw %a10 %a11 0 #1762
 	jalr %zero %a10 0 #1762
-bge_else.8704:
+bge_else.8761:
 	jalr %zero %ra 0 #1763
 trace_diffuse_rays.2585:
 	lw %a3 %a11 8 #1767
@@ -6907,9 +7060,9 @@ trace_diffuse_ray_80percent.2589:
 	sw %a4 %sp 12 #1777
 	sw %a0 %sp 16 #1777
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8708 # nontail if
-	jal %zero beq_cont.8709 # then sentence ends
-beq_else.8708:
+	bne %a0 %a12 beq_else.8765 # nontail if
+	jal %zero beq_cont.8766 # then sentence ends
+beq_else.8765:
 	lw %a5 %a4 0 #80
 	add %a0 %a5 %zero
 	add %a11 %a3 %zero
@@ -6919,12 +7072,12 @@ beq_else.8708:
 	jalr %ra %a10 0 #1778
 	addi %sp %sp -24 #1778
 	lw %ra %sp 20 #1778
-beq_cont.8709:
+beq_cont.8766:
 	lw %a0 %sp 16 #1777
 	addi %a12 %zero 1
-	bne %a0 %a12 beq_else.8710 # nontail if
-	jal %zero beq_cont.8711 # then sentence ends
-beq_else.8710:
+	bne %a0 %a12 beq_else.8767 # nontail if
+	jal %zero beq_cont.8768 # then sentence ends
+beq_else.8767:
 	lw %a1 %sp 12 #80
 	lw %a2 %a1 4 #80
 	lw %a3 %sp 4 #1782
@@ -6939,12 +7092,12 @@ beq_else.8710:
 	jalr %ra %a10 0 #1782
 	addi %sp %sp -24 #1782
 	lw %ra %sp 20 #1782
-beq_cont.8711:
+beq_cont.8768:
 	lw %a0 %sp 16 #1777
 	addi %a12 %zero 2
-	bne %a0 %a12 beq_else.8712 # nontail if
-	jal %zero beq_cont.8713 # then sentence ends
-beq_else.8712:
+	bne %a0 %a12 beq_else.8769 # nontail if
+	jal %zero beq_cont.8770 # then sentence ends
+beq_else.8769:
 	lw %a1 %sp 12 #80
 	lw %a2 %a1 8 #80
 	lw %a3 %sp 4 #1786
@@ -6959,12 +7112,12 @@ beq_else.8712:
 	jalr %ra %a10 0 #1786
 	addi %sp %sp -24 #1786
 	lw %ra %sp 20 #1786
-beq_cont.8713:
+beq_cont.8770:
 	lw %a0 %sp 16 #1777
 	addi %a12 %zero 3
-	bne %a0 %a12 beq_else.8714 # nontail if
-	jal %zero beq_cont.8715 # then sentence ends
-beq_else.8714:
+	bne %a0 %a12 beq_else.8771 # nontail if
+	jal %zero beq_cont.8772 # then sentence ends
+beq_else.8771:
 	lw %a1 %sp 12 #80
 	lw %a2 %a1 12 #80
 	lw %a3 %sp 4 #1790
@@ -6979,12 +7132,12 @@ beq_else.8714:
 	jalr %ra %a10 0 #1790
 	addi %sp %sp -24 #1790
 	lw %ra %sp 20 #1790
-beq_cont.8715:
+beq_cont.8772:
 	lw %a0 %sp 16 #1777
 	addi %a12 %zero 4
-	bne %a0 %a12 beq_else.8716
+	bne %a0 %a12 beq_else.8773
 	jalr %zero %ra 0 #1795
-beq_else.8716:
+beq_else.8773:
 	lw %a0 %sp 12 #80
 	lw %a0 %a0 16 #80
 	lw %a1 %sp 4 #1794
@@ -7226,7 +7379,7 @@ calc_diffuse_using_5points.2596:
 do_without_neighbors.2602:
 	lw %a2 %a11 4 #1838
 	addi %a12 %zero 4
-	blt %a12 %a1 bge_else.8718
+	blt %a12 %a1 bge_else.8775
 	sw %a11 %sp 0 #1841
 	sw %a2 %sp 4 #1841
 	sw %a0 %sp 8 #1841
@@ -7241,7 +7394,7 @@ do_without_neighbors.2602:
 	add %a12 %a0 %a2 #1658
 	lw %a0 %a12 0 #1658
 	addi %a12 %zero 0
-	blt %a0 %a12 bge_else.8719
+	blt %a0 %a12 bge_else.8776
 	lw %a0 %sp 8 #1843
 	sw %ra %sp 20 #1843 call dir
 	addi %sp %sp 24 #1843	
@@ -7253,9 +7406,9 @@ do_without_neighbors.2602:
 	add %a12 %a0 %a2 #1666
 	lw %a0 %a12 0 #1666
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8720 # nontail if
-	jal %zero beq_cont.8721 # then sentence ends
-beq_else.8720:
+	bne %a0 %a12 beq_else.8777 # nontail if
+	jal %zero beq_cont.8778 # then sentence ends
+beq_else.8777:
 	lw %a0 %sp 8 #1845
 	lw %a11 %sp 4 #1845
 	sw %ra %sp 20 #1845 call cls
@@ -7264,41 +7417,42 @@ beq_else.8720:
 	jalr %ra %a10 0 #1845
 	addi %sp %sp -24 #1845
 	lw %ra %sp 20 #1845
-beq_cont.8721:
+beq_cont.8778:
 	lw %a0 %sp 12 #1847
 	addi %a1 %a0 1 #1847
 	lw %a0 %sp 8 #1847
 	lw %a11 %sp 0 #1847
 	lw %a10 %a11 0 #1847
 	jalr %zero %a10 0 #1847
-bge_else.8719:
+bge_else.8776:
 	jalr %zero %ra 0 #1848
-bge_else.8718:
+bge_else.8775:
 	jalr %zero %ra 0 #1849
 neighbors_exist.2605:
 	lw %a2 %a11 4 #1853
 	lw %a3 %a2 4 #56
 	addi %a4 %a1 1 #1854
-	blt %a4 %a3 bge_else.8724
+	blt %a4 %a3 bge_else.8781
 	addi %a0 %zero 0 #1862
 	jalr %zero %ra 0 #1862
-bge_else.8724:
+bge_else.8781:
+	addi %a3 %zero 0 #1855
 	addi %a12 %zero 0
-	blt %a12 %a1 bge_else.8725
-	addi %a0 %zero 0 #1855
+	blt %a12 %a1 bge_else.8782
+	addi %a0 %a3 0 #1855
 	jalr %zero %ra 0 #1855
-bge_else.8725:
+bge_else.8782:
 	lw %a1 %a2 0 #56
 	addi %a2 %a0 1 #1856
-	blt %a2 %a1 bge_else.8726
-	addi %a0 %zero 0 #1855
+	blt %a2 %a1 bge_else.8783
+	addi %a0 %a3 0 #1855
 	jalr %zero %ra 0 #1855
-bge_else.8726:
+bge_else.8783:
 	addi %a12 %zero 0
-	blt %a12 %a0 bge_else.8727
-	addi %a0 %zero 0 #1855
+	blt %a12 %a0 bge_else.8784
+	addi %a0 %a3 0 #1855
 	jalr %zero %ra 0 #1855
-bge_else.8727:
+bge_else.8784:
 	addi %a0 %zero 1 #1858
 	jalr %zero %ra 0 #1858
 get_surface_id.2609:
@@ -7344,7 +7498,7 @@ neighbors_are_available.2612:
 	addi %sp %sp -32 #1874
 	lw %ra %sp 28 #1874
 	lw %a1 %sp 20 #1658
-	bne %a0 %a1 beq_else.8728
+	bne %a0 %a1 beq_else.8785
 	lw %a0 %sp 16 #1875
 	slli %a2 %a0 2 #1875
 	lw %a3 %sp 4 #1875
@@ -7359,7 +7513,7 @@ neighbors_are_available.2612:
 	addi %sp %sp -32 #1875
 	lw %ra %sp 28 #1875
 	lw %a1 %sp 20 #1658
-	bne %a0 %a1 beq_else.8729
+	bne %a0 %a1 beq_else.8786
 	lw %a0 %sp 16 #1876
 	addi %a2 %a0 -1 #1876
 	slli %a2 %a2 2 #1872
@@ -7375,7 +7529,7 @@ neighbors_are_available.2612:
 	addi %sp %sp -32 #1876
 	lw %ra %sp 28 #1876
 	lw %a1 %sp 20 #1658
-	bne %a0 %a1 beq_else.8730
+	bne %a0 %a1 beq_else.8787
 	lw %a0 %sp 16 #1877
 	addi %a0 %a0 1 #1877
 	slli %a0 %a0 2 #1872
@@ -7390,19 +7544,19 @@ neighbors_are_available.2612:
 	addi %sp %sp -32 #1877
 	lw %ra %sp 28 #1877
 	lw %a1 %sp 20 #1658
-	bne %a0 %a1 beq_else.8731
+	bne %a0 %a1 beq_else.8788
 	addi %a0 %zero 1 #1878
 	jalr %zero %ra 0 #1878
-beq_else.8731:
+beq_else.8788:
 	addi %a0 %zero 0 #1879
 	jalr %zero %ra 0 #1879
-beq_else.8730:
+beq_else.8787:
 	addi %a0 %zero 0 #1880
 	jalr %zero %ra 0 #1880
-beq_else.8729:
+beq_else.8786:
 	addi %a0 %zero 0 #1881
 	jalr %zero %ra 0 #1881
-beq_else.8728:
+beq_else.8785:
 	addi %a0 %zero 0 #1882
 	jalr %zero %ra 0 #1882
 try_exploit_neighbors.2618:
@@ -7412,7 +7566,7 @@ try_exploit_neighbors.2618:
 	add %a12 %a3 %a8 #1888
 	lw %a8 %a12 0 #1888
 	addi %a12 %zero 4
-	blt %a12 %a5 bge_else.8732
+	blt %a12 %a5 bge_else.8789
 	sw %a1 %sp 0 #1892
 	sw %a11 %sp 4 #1892
 	sw %a7 %sp 8 #1892
@@ -7431,7 +7585,7 @@ try_exploit_neighbors.2618:
 	addi %sp %sp -48 #1892
 	lw %ra %sp 44 #1892
 	addi %a12 %zero 0
-	blt %a0 %a12 bge_else.8733
+	blt %a0 %a12 bge_else.8790
 	lw %a0 %sp 36 #1894
 	lw %a1 %sp 32 #1894
 	lw %a2 %sp 28 #1894
@@ -7443,13 +7597,13 @@ try_exploit_neighbors.2618:
 	addi %sp %sp -48 #1894
 	lw %ra %sp 44 #1894
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8734
+	bne %a0 %a12 beq_else.8791
 	lw %a0 %sp 12 #1906
 	lw %a1 %sp 20 #1906
 	lw %a11 %sp 16 #1906
 	lw %a10 %a11 0 #1906
 	jalr %zero %a10 0 #1906
-beq_else.8734:
+beq_else.8791:
 	lw %a0 %sp 12 #1897
 	sw %ra %sp 44 #1897 call dir
 	addi %sp %sp 48 #1897	
@@ -7461,9 +7615,9 @@ beq_else.8734:
 	add %a12 %a0 %a1 #1666
 	lw %a0 %a12 0 #1666
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8735 # nontail if
-	jal %zero beq_cont.8736 # then sentence ends
-beq_else.8735:
+	bne %a0 %a12 beq_else.8792 # nontail if
+	jal %zero beq_cont.8793 # then sentence ends
+beq_else.8792:
 	lw %a0 %sp 36 #1899
 	lw %a1 %sp 32 #1899
 	lw %a2 %sp 28 #1899
@@ -7475,7 +7629,7 @@ beq_else.8735:
 	jalr %ra %a10 0 #1899
 	addi %sp %sp -48 #1899
 	lw %ra %sp 44 #1899
-beq_cont.8736:
+beq_cont.8793:
 	lw %a0 %sp 20 #1903
 	addi %a5 %a0 1 #1903
 	lw %a0 %sp 36 #1903
@@ -7486,9 +7640,9 @@ beq_cont.8736:
 	lw %a11 %sp 4 #1903
 	lw %a10 %a11 0 #1903
 	jalr %zero %a10 0 #1903
-bge_else.8733:
+bge_else.8790:
 	jalr %zero %ra 0 #1907
-bge_else.8732:
+bge_else.8789:
 	jalr %zero %ra 0 #1908
 write_ppm_header.2625:
 	lw %a0 %a11 4 #1912
@@ -7500,7 +7654,8 @@ write_ppm_header.2625:
 	jal %ra min_caml_print_char #1914
 	addi %sp %sp -8 #1914
 	lw %ra %sp 4 #1914
-	addi %a0 %zero 51 #1915
+	addi %a0 %zero 48 #1915
+	addi %a0 %a0 3 #1915
 	sw %ra %sp 4 #1915 call dir
 	addi %sp %sp 8 #1915	
 	jal %ra min_caml_print_char #1915
@@ -7553,18 +7708,20 @@ write_rgb_element.2627:
 	jal %ra min_caml_int_of_float #1927
 	addi %sp %sp -8 #1927
 	lw %ra %sp 4 #1927
+	addi %a1 %zero 255 #1928
 	addi %a12 %zero 255
-	blt %a12 %a0 bge_else.8739 # nontail if
+	blt %a12 %a0 bge_else.8796 # nontail if
+	addi %a1 %zero 0 #1928
 	addi %a12 %zero 0
-	blt %a0 %a12 bge_else.8741 # nontail if
-	jal %zero bge_cont.8742 # then sentence ends
-bge_else.8741:
-	addi %a0 %zero 0 #1928
-bge_cont.8742:
-	jal %zero bge_cont.8740 # then sentence ends
-bge_else.8739:
-	addi %a0 %zero 255 #1928
-bge_cont.8740:
+	blt %a0 %a12 bge_else.8798 # nontail if
+	jal %zero bge_cont.8799 # then sentence ends
+bge_else.8798:
+	addi %a0 %a1 0 #1928
+bge_cont.8799:
+	jal %zero bge_cont.8797 # then sentence ends
+bge_else.8796:
+	addi %a0 %a1 0 #1928
+bge_cont.8797:
 	jal	%zero min_caml_print_int
 write_rgb.2629:
 	lw %a0 %a11 4 #1932
@@ -7608,7 +7765,7 @@ pretrace_diffuse_rays.2631:
 	lw %a3 %a11 8 #1946
 	lw %a4 %a11 4 #1946
 	addi %a12 %zero 4
-	blt %a12 %a1 bge_else.8743
+	blt %a12 %a1 bge_else.8800
 	sw %a11 %sp 0 #1950
 	sw %a2 %sp 4 #1950
 	sw %a3 %sp 8 #1950
@@ -7621,7 +7778,7 @@ pretrace_diffuse_rays.2631:
 	addi %sp %sp -32 #1950
 	lw %ra %sp 28 #1950
 	addi %a12 %zero 0
-	blt %a0 %a12 bge_else.8744
+	blt %a0 %a12 bge_else.8801
 	lw %a0 %sp 20 #1953
 	sw %ra %sp 28 #1953 call dir
 	addi %sp %sp 32 #1953	
@@ -7633,9 +7790,9 @@ pretrace_diffuse_rays.2631:
 	add %a12 %a0 %a2 #1666
 	lw %a0 %a12 0 #1666
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8745 # nontail if
-	jal %zero beq_cont.8746 # then sentence ends
-beq_else.8745:
+	bne %a0 %a12 beq_else.8802 # nontail if
+	jal %zero beq_cont.8803 # then sentence ends
+beq_else.8802:
 	lw %a0 %sp 20 #1955
 	sw %ra %sp 28 #1955 call dir
 	addi %sp %sp 32 #1955	
@@ -7704,16 +7861,16 @@ beq_else.8745:
 	jal %ra veccpy.2254 #1966
 	addi %sp %sp -40 #1966
 	lw %ra %sp 36 #1966
-beq_cont.8746:
+beq_cont.8803:
 	lw %a0 %sp 16 #1968
 	addi %a1 %a0 1 #1968
 	lw %a0 %sp 20 #1968
 	lw %a11 %sp 0 #1968
 	lw %a10 %a11 0 #1968
 	jalr %zero %a10 0 #1968
-bge_else.8744:
+bge_else.8801:
 	jalr %zero %ra 0 #1969
-bge_else.8743:
+bge_else.8800:
 	jalr %zero %ra 0 #1970
 pretrace_pixels.2634:
 	lw %a3 %a11 36 #1975
@@ -7729,7 +7886,7 @@ pretrace_pixels.2634:
 	sw %a10 %sp 4 #1976
 	addi %a10 %zero 0 #1976
 	addi %a12 %zero 0
-	blt %a1 %a12 bge_else.8749
+	blt %a1 %a12 bge_else.8806
 	lw %f3 %a7 0 #60
 	lw %a7 %a11 0 #58
 	sub %a7 %a1 %a7 #1978
@@ -7878,7 +8035,7 @@ pretrace_pixels.2634:
 	lw %a11 %sp 0 #1994
 	lw %a10 %a11 0 #1994
 	jalr %zero %a10 0 #1994
-bge_else.8749:
+bge_else.8806:
 	jalr %zero %ra 0 #1996
 pretrace_line.2641:
 	lw %a3 %a11 24 #2000
@@ -7939,9 +8096,9 @@ scan_pixel.2645:
 	lw %a9 %a11 8 #2014
 	lw %a10 %a11 4 #2014
 	lw %a9 %a9 0 #56
-	blt %a0 %a9 bge_else.8753
+	blt %a0 %a9 bge_else.8810
 	jalr %zero %ra 0 #2030
-bge_else.8753:
+bge_else.8810:
 	slli %a9 %a0 2 #2018
 	add %a12 %a3 %a9 #2018
 	lw %a9 %a12 0 #2018
@@ -7981,7 +8138,7 @@ bge_else.8753:
 	lw %ra %sp 44 #2021
 	addi %a1 %zero 0 #2021
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8755 # nontail if
+	bne %a0 %a12 beq_else.8812 # nontail if
 	lw %a0 %sp 32 #2018
 	slli %a2 %a0 2 #2018
 	lw %a3 %sp 20 #2018
@@ -7995,8 +8152,8 @@ bge_else.8753:
 	jalr %ra %a10 0 #2024
 	addi %sp %sp -48 #2024
 	lw %ra %sp 44 #2024
-	jal %zero beq_cont.8756 # then sentence ends
-beq_else.8755:
+	jal %zero beq_cont.8813 # then sentence ends
+beq_else.8812:
 	lw %a0 %sp 32 #2022
 	lw %a2 %sp 28 #2022
 	lw %a3 %sp 8 #2022
@@ -8015,7 +8172,7 @@ beq_else.8755:
 	jalr %ra %a10 0 #2022
 	addi %sp %sp -48 #2022
 	lw %ra %sp 44 #2022
-beq_cont.8756:
+beq_cont.8813:
 	lw %a11 %sp 4 #2027
 	sw %ra %sp 44 #2027 call cls
 	lw %a10 %a11 0 #2027
@@ -8037,9 +8194,9 @@ scan_line.2651:
 	lw %a6 %a11 8 #2034
 	lw %a7 %a11 4 #2034
 	lw %a8 %a7 4 #56
-	blt %a0 %a8 bge_else.8757
+	blt %a0 %a8 bge_else.8814
 	jalr %zero %ra 0 #2043
-bge_else.8757:
+bge_else.8814:
 	lw %a7 %a7 4 #56
 	addi %a7 %a7 -1 #2038
 	sw %a11 %sp 0 #2038
@@ -8049,9 +8206,9 @@ bge_else.8757:
 	sw %a1 %sp 16 #2038
 	sw %a0 %sp 20 #2038
 	sw %a5 %sp 24 #2038
-	blt %a0 %a7 bge_else.8759 # nontail if
-	jal %zero bge_cont.8760 # then sentence ends
-bge_else.8759:
+	blt %a0 %a7 bge_else.8816 # nontail if
+	jal %zero bge_cont.8817 # then sentence ends
+bge_else.8816:
 	addi %a7 %a0 1 #2039
 	add %a2 %a4 %zero
 	add %a1 %a7 %zero
@@ -8063,7 +8220,7 @@ bge_else.8759:
 	jalr %ra %a10 0 #2039
 	addi %sp %sp -32 #2039
 	lw %ra %sp 28 #2039
-bge_cont.8760:
+bge_cont.8817:
 	addi %a0 %zero 0 #2041
 	lw %a1 %sp 20 #2041
 	lw %a2 %sp 16 #2041
@@ -8233,7 +8390,7 @@ create_pixel.2659:
 	jalr %zero %ra 0 #2071
 init_line_elements.2661:
 	addi %a12 %zero 0
-	blt %a1 %a12 bge_else.8761
+	blt %a1 %a12 bge_else.8818
 	sw %a0 %sp 0 #2077
 	sw %a1 %sp 4 #2077
 	sw %ra %sp 12 #2077 call dir
@@ -8249,7 +8406,7 @@ init_line_elements.2661:
 	addi %a1 %a1 -1 #2078
 	add %a0 %a3 %zero
 	jal	%zero init_line_elements.2661
-bge_else.8761:
+bge_else.8818:
 	jalr %zero %ra 0 #2080
 create_pixelline.2664:
 	lw %a0 %a11 4 #2084
@@ -8292,7 +8449,7 @@ tan.2666:
 	jalr %zero %ra 0 #2094
 adjust_position.2668:
 	fmul %f0 %f0 %f0 #2099
-	li %f2 l.6086 #2099
+	li %f2 l.6112 #2099
 	fadd %f0 %f0 %f2 #2099
 	sw %f1 %sp 0 #2099
 	sw %ra %sp 12 #2099 call dir
@@ -8322,7 +8479,7 @@ adjust_position.2668:
 calc_dirvec.2671:
 	lw %a3 %a11 4 #2107
 	addi %a12 %zero 5
-	blt %a0 %a12 bge_else.8762
+	blt %a0 %a12 bge_else.8819
 	sw %a2 %sp 0 #2109
 	sw %a3 %sp 4 #2109
 	sw %a1 %sp 8 #2109
@@ -8549,7 +8706,7 @@ calc_dirvec.2671:
 	lw %f2 %sp 56 #2121
 	lw %a0 %sp 128 #2121
 	jal	%zero vecset.2244
-bge_else.8762:
+bge_else.8819:
 	sw %f2 %sp 136 #2123
 	sw %a2 %sp 0 #2123
 	sw %a1 %sp 8 #2123
@@ -8587,7 +8744,7 @@ calc_dirvecs.2679:
 	lw %a3 %a11 4 #2128
 	addi %a4 %zero 0 #2129
 	addi %a12 %zero 0
-	blt %a0 %a12 bge_else.8770
+	blt %a0 %a12 bge_else.8827
 	sw %a11 %sp 0 #2131
 	sw %a0 %sp 4 #2131
 	sw %f0 %sp 8 #2131
@@ -8600,9 +8757,9 @@ calc_dirvecs.2679:
 	jal %ra min_caml_float_of_int #2131
 	addi %sp %sp -40 #2131
 	lw %ra %sp 36 #2131
-	li %f1 l.6214 #2131
+	li %f1 l.6240 #2131
 	fmul %f0 %f0 %f1 #2131
-	li %f1 l.6216 #2131
+	li %f1 l.6242 #2131
 	fsub %f2 %f0 %f1 #2131
 	li %f0 l.5553 #2132
 	li %f1 l.5553 #2132
@@ -8623,9 +8780,9 @@ calc_dirvecs.2679:
 	jal %ra min_caml_float_of_int #2134
 	addi %sp %sp -40 #2134
 	lw %ra %sp 36 #2134
-	li %f1 l.6214 #2134
+	li %f1 l.6240 #2134
 	fmul %f0 %f0 %f1 #2134
-	li %f1 l.6086 #2134
+	li %f1 l.6112 #2134
 	fadd %f2 %f0 %f1 #2134
 	li %f0 l.5553 #2135
 	li %f1 l.5553 #2135
@@ -8661,12 +8818,12 @@ calc_dirvecs.2679:
 	lw %a11 %sp 0 #2137
 	lw %a10 %a11 0 #2137
 	jalr %zero %a10 0 #2137
-bge_else.8770:
+bge_else.8827:
 	jalr %zero %ra 0 #2138
 calc_dirvec_rows.2684:
 	lw %a3 %a11 4 #2142
 	addi %a12 %zero 0
-	blt %a0 %a12 bge_else.8772
+	blt %a0 %a12 bge_else.8829
 	sw %a11 %sp 0 #2144
 	sw %a0 %sp 4 #2144
 	sw %a2 %sp 8 #2144
@@ -8677,9 +8834,9 @@ calc_dirvec_rows.2684:
 	jal %ra min_caml_float_of_int #2144
 	addi %sp %sp -24 #2144
 	lw %ra %sp 20 #2144
-	li %f1 l.6214 #2144
+	li %f1 l.6240 #2144
 	fmul %f0 %f0 %f1 #2144
-	li %f1 l.6216 #2144
+	li %f1 l.6242 #2144
 	fsub %f0 %f0 %f1 #2144
 	addi %a0 %zero 4 #2145
 	lw %a1 %sp 12 #2145
@@ -8709,7 +8866,7 @@ calc_dirvec_rows.2684:
 	lw %a11 %sp 0 #2146
 	lw %a10 %a11 0 #2146
 	jalr %zero %a10 0 #2146
-bge_else.8772:
+bge_else.8829:
 	jalr %zero %ra 0 #2147
 create_dirvec.2688:
 	lw %a0 %a11 4 #2153
@@ -8741,7 +8898,7 @@ create_dirvec.2688:
 create_dirvec_elements.2690:
 	lw %a2 %a11 4 #2159
 	addi %a12 %zero 0
-	blt %a1 %a12 bge_else.8774
+	blt %a1 %a12 bge_else.8831
 	sw %a11 %sp 0 #2161
 	sw %a0 %sp 4 #2161
 	sw %a1 %sp 8 #2161
@@ -8762,14 +8919,14 @@ create_dirvec_elements.2690:
 	add %a0 %a3 %zero
 	lw %a10 %a11 0 #2162
 	jalr %zero %a10 0 #2162
-bge_else.8774:
+bge_else.8831:
 	jalr %zero %ra 0 #2163
 create_dirvecs.2693:
 	lw %a1 %a11 12 #2166
 	lw %a2 %a11 8 #2166
 	lw %a3 %a11 4 #2166
 	addi %a12 %zero 0
-	blt %a0 %a12 bge_else.8776
+	blt %a0 %a12 bge_else.8833
 	addi %a4 %zero 120 #2168
 	sw %a11 %sp 0 #2168
 	sw %a2 %sp 4 #2168
@@ -8812,12 +8969,12 @@ create_dirvecs.2693:
 	lw %a11 %sp 0 #2170
 	lw %a10 %a11 0 #2170
 	jalr %zero %a10 0 #2170
-bge_else.8776:
+bge_else.8833:
 	jalr %zero %ra 0 #2171
 init_dirvec_constants.2695:
 	lw %a2 %a11 4 #2176
 	addi %a12 %zero 0
-	blt %a1 %a12 bge_else.8778
+	blt %a1 %a12 bge_else.8835
 	slli %a3 %a1 2 #2178
 	add %a12 %a0 %a3 #2178
 	lw %a3 %a12 0 #2178
@@ -8838,13 +8995,13 @@ init_dirvec_constants.2695:
 	lw %a11 %sp 4 #2179
 	lw %a10 %a11 0 #2179
 	jalr %zero %a10 0 #2179
-bge_else.8778:
+bge_else.8835:
 	jalr %zero %ra 0 #2180
 init_vecset_constants.2698:
 	lw %a1 %a11 8 #2183
 	lw %a2 %a11 4 #2183
 	addi %a12 %zero 0
-	blt %a0 %a12 bge_else.8780
+	blt %a0 %a12 bge_else.8837
 	slli %a3 %a0 2 #80
 	add %a12 %a2 %a3 #80
 	lw %a2 %a12 0 #80
@@ -8865,7 +9022,7 @@ init_vecset_constants.2698:
 	lw %a11 %sp 0 #2186
 	lw %a10 %a11 0 #2186
 	jalr %zero %a10 0 #2186
-bge_else.8780:
+bge_else.8837:
 	jalr %zero %ra 0 #2187
 init_dirvecs.2700:
 	lw %a0 %a11 12 #2190
@@ -9104,7 +9261,7 @@ setup_surface_reflection.2712:
 	jal %ra veciprod.2265 #2227
 	addi %sp %sp -48 #2227
 	lw %ra %sp 44 #2227
-	li %f1 l.5690 #2230
+	li %f1 l.5715 #2230
 	lw %a0 %sp 20 #2230
 	sw %f0 %sp 40 #2230
 	sw %f1 %sp 48 #2230
@@ -9120,7 +9277,7 @@ setup_surface_reflection.2712:
 	lw %a0 %sp 16 #26
 	lw %f2 %a0 0 #26
 	fsub %f0 %f0 %f2 #2230
-	li %f2 l.5690 #2231
+	li %f2 l.5715 #2231
 	lw %a1 %sp 20 #2231
 	sw %f0 %sp 56 #2231
 	sw %f2 %sp 64 #2231
@@ -9137,7 +9294,7 @@ setup_surface_reflection.2712:
 	lw %a0 %sp 16 #26
 	lw %f2 %a0 4 #26
 	fsub %f0 %f0 %f2 #2231
-	li %f2 l.5690 #2232
+	li %f2 l.5715 #2232
 	lw %a1 %sp 20 #2232
 	sw %f0 %sp 72 #2232
 	sw %f2 %sp 80 #2232
@@ -9176,7 +9333,7 @@ setup_reflections.2715:
 	lw %a2 %a11 8 #2238
 	lw %a3 %a11 4 #2238
 	addi %a12 %zero 0
-	blt %a0 %a12 bge_else.8787
+	blt %a0 %a12 bge_else.8844
 	slli %a4 %a0 2 #19
 	add %a12 %a3 %a4 #19
 	lw %a3 %a12 0 #19
@@ -9191,7 +9348,7 @@ setup_reflections.2715:
 	addi %sp %sp -24 #2241
 	lw %ra %sp 20 #2241
 	addi %a12 %zero 2
-	bne %a0 %a12 beq_else.8788
+	bne %a0 %a12 beq_else.8845
 	lw %a0 %sp 12 #2242
 	sw %ra %sp 20 #2242 call dir
 	addi %sp %sp 24 #2242	
@@ -9205,9 +9362,9 @@ setup_reflections.2715:
 	addi %sp %sp -24 #2242
 	lw %ra %sp 20 #2242
 	addi %a12 %zero 0
-	bne %a0 %a12 beq_else.8789
+	bne %a0 %a12 beq_else.8846
 	jalr %zero %ra 0 #2250
-beq_else.8789:
+beq_else.8846:
 	lw %a0 %sp 12 #2243
 	sw %ra %sp 20 #2243 call dir
 	addi %sp %sp 24 #2243	
@@ -9215,25 +9372,25 @@ beq_else.8789:
 	addi %sp %sp -24 #2243
 	lw %ra %sp 20 #2243
 	addi %a12 %zero 1
-	bne %a0 %a12 beq_else.8791
+	bne %a0 %a12 beq_else.8848
 	lw %a0 %sp 4 #2246
 	lw %a1 %sp 12 #2246
 	lw %a11 %sp 8 #2246
 	lw %a10 %a11 0 #2246
 	jalr %zero %a10 0 #2246
-beq_else.8791:
+beq_else.8848:
 	addi %a12 %zero 2
-	bne %a0 %a12 beq_else.8792
+	bne %a0 %a12 beq_else.8849
 	lw %a0 %sp 4 #2248
 	lw %a1 %sp 12 #2248
 	lw %a11 %sp 0 #2248
 	lw %a10 %a11 0 #2248
 	jalr %zero %a10 0 #2248
-beq_else.8792:
+beq_else.8849:
 	jalr %zero %ra 0 #2249
-beq_else.8788:
+beq_else.8845:
 	jalr %zero %ra 0 #2251
-bge_else.8787:
+bge_else.8844:
 	jalr %zero %ra 0 #2252
 rt.2717:
 	lw %a2 %a11 56 #2258
@@ -9287,7 +9444,7 @@ rt.2717:
 	lw %ra %sp 60 #2263
 	lw %a1 %sp 56 #2263
 	sw %a0 %a1 4 #2263
-	li %f0 l.6265 #2264
+	li %f0 l.6291 #2264
 	lw %a0 %sp 48 #2264
 	sw %f0 %sp 64 #2264
 	sw %ra %sp 76 #2264 call dir
@@ -9396,7 +9553,7 @@ min_caml_start:
 	li %sp 44000
 	li %in 200000
 	li %out 300000
-	li %min_caml_hp 400000
+	li %min_caml_hp 10000000
 	addi %a0 %zero 1 #14
 	addi %a1 %zero 0 #14
 	sw %ra %sp 4 #14 call dir
@@ -9469,7 +9626,7 @@ min_caml_start:
 	addi %sp %sp -24 #26
 	lw %ra %sp 20 #26
 	addi %a1 %zero 1 #28
-	li %f0 l.6021 #28
+	li %f0 l.6046 #28
 	sw %a0 %sp 16 #28
 	add %a0 %a1 %zero
 	sw %ra %sp 20 #28 call dir
@@ -9479,7 +9636,7 @@ min_caml_start:
 	lw %ra %sp 20 #28
 	addi %a1 %zero 50 #30
 	addi %a2 %zero 1 #30
-	addi %a3 %zero -1 #30
+	sub %a3 %zero %a2 #30
 	sw %a0 %sp 20 #30
 	sw %a1 %sp 24 #30
 	add %a1 %a3 %zero
@@ -9534,7 +9691,7 @@ min_caml_start:
 	addi %sp %sp -48 #38
 	lw %ra %sp 44 #38
 	addi %a1 %zero 1 #40
-	li %f0 l.5947 #40
+	li %f0 l.5972 #40
 	sw %a0 %sp 44 #40
 	add %a0 %a1 %zero
 	sw %ra %sp 52 #40 call dir
@@ -10408,8 +10565,8 @@ min_caml_start:
 	sw %a0 %a11 8 #2258
 	lw %a0 %sp 184 #2258
 	sw %a0 %a11 4 #2258
-	addi %a0 %zero 512 #2279
-	addi %a1 %zero 512 #2279
+	addi %a0 %zero 128 #2279
+	addi %a1 %zero 128 #2279
 	sw %ra %sp 188 #2279 call cls
 	lw %a10 %a11 0 #2279
 	addi %sp %sp 192 #2279	

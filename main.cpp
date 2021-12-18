@@ -142,7 +142,9 @@ int main(int argc, char **argv){
         cout << dec << (iteration-1) << " instructions executed" << endl;
         cout << (iteration-1) / (t_end - t_start) << " instructions/sec" << endl;
     }
+
     print_reg(emu);
+    output_image(emu);
     destroy_emulator(emu);
 
     // for (int ind = 0; ind < 128*128; ind++){

@@ -24,16 +24,28 @@ uint32_t hex2int(string hex) {
     return ret;
 }
 
-int main (){
-    while (1) {
-        string s;
-        cin >> s;
-        uint32_t float_bit = hex2int(s);
-        union fi fl;
-        fl.i = float_bit;
-        cout << hex << float_bit << endl;
-        printf("%8.8f\n", fl.f);
-        cout << hex << "0x" << fl.i << endl;
+int main (int argc, char** argv){
+    if (argv[1][0] == 'd'){
+        while (1) {
+            uint32_t s;
+            cin >> s;
+            union fi fl;
+            fl.i = s;
+            printf("%8.8f\n", fl.f);
+            cout << hex << "0x" << fl.i << endl;
+        }
+    }
+    else {
+        // 16¿Ê
+        while (1) {
+            string s;
+            cin >> s;
+            uint32_t float_bit = hex2int(s);
+            union fi fl;
+            fl.i = float_bit;
+            cout << hex << float_bit << endl;
+            printf("%8.8f\n", fl.f);
+        }
     }
     return 0;
 }

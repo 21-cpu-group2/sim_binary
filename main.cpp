@@ -115,6 +115,10 @@ int main(int argc, char **argv){
     while (1){
         uint32_t pc_pred = emu->pc;
         uint32_t inst = emu->instruction_memory[emu->pc];
+        // if (inst == 0b00000001010000101010000000100011){
+        //     cout << "ite : " << dec << iteration << endl;
+        //     print_reg(emu);
+        // }
         flg = ((!emu->args.flg_s || emu->args.start <= iteration)
             && (!emu->args.flg_g || emu->args.goal >= iteration)) ? true : false;
         

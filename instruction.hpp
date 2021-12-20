@@ -134,7 +134,8 @@ inline int SH(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
 inline int SW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    emu->memory[(rs1 + imm)/4] = rs2;
+    uint32_t address = (rs1 + imm) / 4;
+    emu->memory[address] = rs2;
     emu->pc++;
     return 0;
 }
@@ -293,7 +294,7 @@ inline int LUI(Emulator* emu, uint32_t rd_, int imm) {
     // -> addiのimmが負だとrdに突っ込まれる値は0xFFFFF???になるが、0x00000???にしておきたい。
     // luiでは、上位20bitをマスクしてから計算を進める。
     uint32_t rd = emu->reg[rd_] & 0x00000FFF;
-    emu->reg[rd_] = (imm << 12) + rd;
+    emu->reg[rd_] = (imm << 12) | rd;
     emu->pc++;
     return 0;
 }
@@ -526,33 +527,36 @@ inline int FMVXW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
 */
 inline int FISZERO(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
-    uint32_t float_zero = emu->reg[19]; // %fzero
+    // uint32_t float_zero = emu->reg[19]; // %fzero
     union fi frs1, fzero;
     frs1.i = rs1;
-    fzero.i = float_zero;
-    emu->reg[rd_] = (frs1.f == fzero.f) ? 1 : 0;
+    // fzero.i = float_zero;
+    // emu->reg[rd_] = (frs1.f == fzero.f) ? 1 : 0;
+    emu->reg[rd_] = (frs1.f == 0.0) ? 1 : 0;
     emu->pc++;
     return 0;
 }
 
 inline int FISNEG(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
-    uint32_t float_zero = emu->reg[19]; // %fzero
+    // uint32_t float_zero = emu->reg[19]; // %fzero
     union fi frs1, fzero;
     frs1.i = rs1;
-    fzero.i = float_zero;
-    emu->reg[rd_] = (frs1.f < fzero.f) ? 1 : 0;
+    // fzero.i = float_zero;
+    // emu->reg[rd_] = (frs1.f < fzero.f) ? 1 : 0;
+    emu->reg[rd_] = (frs1.f < 0.0) ? 1 : 0;
     emu->pc++;
     return 0;
 }
 
 inline int FISPOS(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
-    uint32_t float_zero = emu->reg[19]; // %fzero
+    // uint32_t float_zero = emu->reg[19]; // %fzero
     union fi frs1, fzero;
     frs1.i = rs1;
-    fzero.i = float_zero;
-    emu->reg[rd_] = (frs1.f > fzero.f) ? 1 : 0;
+    // fzero.i = float_zero;
+    // emu->reg[rd_] = (frs1.f > fzero.f) ? 1 : 0;
+    emu->reg[rd_] = (frs1.f > 0.0) ? 1 : 0;
     emu->pc++;
     return 0;
 }
@@ -589,9 +593,25 @@ inline int ITOF(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
 
 inline int FTOI(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
-    union fi frs1;
+    union fi frs1, ret;
     frs1.i = rs1;
-    emu->reg[rd_] = (uint32_t)frs1.f;
+    int approx = (int)frs1.f;
+    if ((float)approx > frs1.f){
+        if( (float)approx - frs1.f < 0.5) {
+            emu->reg[rd_] = approx;
+        }
+        else{
+            emu->reg[rd_] = approx -1;
+        }
+    }
+    else {
+        if (frs1.f - (float)approx < 0.5) {
+            emu->reg[rd_] = approx;
+        }
+        else {
+            emu->reg[rd_] = approx + 1;
+        }
+    }
     emu->pc++;
     return 0;
 }

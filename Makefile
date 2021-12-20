@@ -17,4 +17,4 @@ simulator: simulator.o instruction.o main.o
 	$(CC) $(CFLAGS) -o simulator simulator.o instruction.o main.o
 
 clean:
-	rm -f *.o *.gch simulator
+	rm -f *.o *.gch simulator h2f 

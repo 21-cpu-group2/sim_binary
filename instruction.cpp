@@ -472,7 +472,7 @@ int inst_fop(Emulator* emu, uint32_t instruction) {
 
     uint32_t rm = (instruction & 0x00007000) >> 12;
     uint32_t funct7 = (instruction & 0xFE000000) >> 22;
-    uint32_t funct = funct7 + rm;
+    uint32_t funct = funct7 | rm;
     uint32_t rs2 = (instruction & 0x01F00000) >> 20;
     uint32_t rs1 = (instruction & 0x000F8000) >> 15;
     uint32_t rd = (instruction & 0x00000F80) >> 7;
@@ -760,5 +760,6 @@ int exec_one_instruction(Emulator* emu, uint32_t instruction){
             return 1;
     }
     emu->reg[0] = 0x00000000;
+    emu->reg[19] = 0x00000000;
     return 0;
 }

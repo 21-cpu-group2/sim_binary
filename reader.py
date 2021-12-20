@@ -237,7 +237,7 @@ def sld_reader(sld_file_name: str, endian: str='<'):
     sld.read_or_network()
 
     sld_bytes = b''.join([num2bytes(n, endian) for n in sld.sld_data])
-
+    print(sld_bytes.hex())
     print("\tdone.")
     return sld_bytes
 
@@ -296,3 +296,9 @@ def data_reader(data_file_name: str, endian: str='<'):
         return txt_reader(data_file_name, endian)
     else:
         return bin_reader(data_file_name)
+
+def split_hex(s):
+    l = int(len(s)/8)
+    for i in range(l):
+        tmp = s[i*8:(i+1)*8]
+        print(int(tmp, 16))

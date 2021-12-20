@@ -184,8 +184,9 @@ void output_image(Emulator* emu){
     // %out の開始時 : 300000
     // %out の終了時 : 6591488
     int out_start = 300000;
-    int out_goal = 693248; // if 128 * 128
-    // int out_goal = 6591488; // if 512 * 512
+    // int out_goal = 300040;
+    // int out_goal = 693248; // if 128 * 128
+    int out_goal = 6591488; // if 512 * 512
     ofstream writing_file;
     FILE *fp;
     fp = fopen("output.ppm", "w");
@@ -197,13 +198,13 @@ void output_image(Emulator* emu){
             fprintf(fp, "P3");
         }
         else if (emu->memory[i/4] == 538976266){ // 0x2020200A SPC SPC SPC LF
-            fprintf(fp, "   \n");
+            fprintf(fp, "\n");
         }
         else if (emu->memory[i/4] == 538976288){ // 0x20202020 SPC SPC SPC SPC
-            fprintf(fp, "    ");
+            fprintf(fp, " ");
         }
         else{
-            fprintf(fp, "%d", (emu->memory[i/4]));
+            fprintf(fp, "%03d", (emu->memory[i/4]));
         }
     }
     return;

@@ -103,3 +103,17 @@ inline velilog_data mul(velilog_data r1, velilog_data r2, uint32_t output_bit_nu
     velilog_data ret = {ret_data, output_bit_num};
     return ret;
 }
+
+// shift right
+inline velilog_data sr(velilog_data r1, uint32_t shamt){ 
+    uint32_t ret_data = r1.data >> shamt;
+    velilog_data ret = {ret_data, r1.bit_num};
+    return ret;
+}
+
+// shift left
+inline velilog_data sl(velilog_data r1, uint32_t shamt){ 
+    uint32_t ret_data = (r1.data << shamt) & bit_mask(r1.bit_num);
+    velilog_data ret = {ret_data, r1.bit_num};
+    return ret;
+}

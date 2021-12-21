@@ -10585,8 +10585,8 @@ min_caml_start:
 	sw %a0 %a11 8 #2260
 	lw %a0 %sp 184 #2260
 	sw %a0 %a11 4 #2260
-	addi %a0 %zero 512 #2281
-	addi %a1 %zero 512 #2281
+	addi %a0 %zero 128 #2281
+	addi %a1 %zero 128 #2281
 	sw %ra %sp 188 #2281 call cls
 	lw %a10 %a11 0 #2281
 	addi %sp %sp 192 #2281	

@@ -57,6 +57,11 @@ int main(int argc, char **argv){
                     emu->args.mem_s = stoi(argv[i+1], 0, 10);
                     i++;
                     break;
+                case 'e':
+                    emu->args.flg_e = true;
+                    emu->args.endpc = stoi(argv[i+1], 0, 10);
+                    i++;
+                    break;
                 case 'R':
                     emu->args.flg_R = true;
                     int j;
@@ -112,13 +117,10 @@ int main(int argc, char **argv){
         cout << dec << "   pc   " << endl;
     }
     bool flg;
+    cout << "flg_R : " << emu->args.flg_R << endl;
     while (1){
         uint32_t pc_pred = emu->pc;
         uint32_t inst = emu->instruction_memory[emu->pc];
-        // if (inst == 0b00000001010000101010000000100011){
-        //     cout << "ite : " << dec << iteration << endl;
-        //     print_reg(emu);
-        // }
         flg = ((!emu->args.flg_s || emu->args.start <= iteration)
             && (!emu->args.flg_g || emu->args.goal >= iteration)) ? true : false;
         
@@ -135,10 +137,13 @@ int main(int argc, char **argv){
         exec_one_instruction(emu, inst);
         iteration++;
         if (flg && emu->args.flg_r) print_reg(emu);
-        else if (flg && emu->args.flg_R) print_reg_for_debug(emu);
-        else if (flg && emu->args.flg_m) print_mem(emu, emu->args.mem_s);
-        if (pc_pred == emu->pc) break;  
+        //else if (flg && emu->args.flg_R) print_reg_for_debug(emu);
+        else if (flg && emu->args.flg_m) print_mem(emu, emu->args.mem_s);  
         if (iteration % 1000000000 == 0) cout << iteration / 1000000000 << endl;
+        if ((pc_pred == emu->pc) || (emu->args.flg_e && (emu->pc-1) == emu->args.endpc)) {
+            // pcに変化なし or 指定されたpcなら終了
+            break;
+        }
     }
     double t_end = elapsed();
     if (PRINT_STAT){

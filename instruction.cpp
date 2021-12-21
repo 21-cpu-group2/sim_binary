@@ -754,7 +754,6 @@ int exec_one_instruction(Emulator* emu, uint32_t instruction){
                 cout << "nop " << endl;
                 }
             }
-            break;
         default :
             cout << "no opcode matched" << endl;
             return 1;

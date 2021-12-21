@@ -7,7 +7,7 @@ how to debug
 ├── sim_binary
 '''
 
-2. let "test.asm", "contest.txt" file be in sim_binary/data directory like below
+2. let "test.asm", "contest.txt"(from contest.sld) file be in sim_binary/data directory like below
 '''
 sim_binary
 |
@@ -32,17 +32,21 @@ sim_binary
     ・test_disassembled.txt
         disassembled code got from test.bin
         any instruction in test.bin has the same line-number in test_disassembled.txt
+        there is no pseudo instructions.
     ・pc_label.txt
         you can check label, with pc
     ・label_pc.txt
         you can check pc, with label
 
 5. the simulator is ready.
-    ./simulator (-p file path) (-a) (-r) (-m n)
+    ./simulator (-p file path) (-a) (-r) (-m n) (-R n1 n2 ...)
     <options>
-        -p path : specify file path (relative path)
-        -a      : show assembly code
-        -r      : show register
-        -m n    : showing memory from memory-address n
+        -p path      : specify file path (relative path)
+        -a           : show assembly code
+        -r           : show register
+        -m n         : showing memory from memory-address n
+        -R n1 n2 ... : showing state of specified registers like vivado simulator
+                       please let -R option be the last.
+                       
 
 

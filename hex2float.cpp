@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include <string>
 #include <stdlib.h>
 using namespace std;
@@ -23,6 +24,8 @@ uint32_t hex2int(string hex) {
     }
     return ret;
 }
+
+
 
 int main (int argc, char** argv){
     if (argv[1][0] == 'd'){

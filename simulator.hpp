@@ -83,9 +83,11 @@ typedef struct {
     bool flg_g;
     bool flg_R;
     bool flg_m;
+    bool flg_e;
     bool print_asm;
     long long int start;
     long long int goal;
+    int endpc;
     int mem_s; // if print memory, show from memory address "mem_s"
     bool reg_for_print[64];
 } cmdline_args;

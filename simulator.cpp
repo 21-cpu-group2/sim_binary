@@ -64,10 +64,12 @@ void init_emulator(Emulator* emu){
     emu->args.flg_g = false;
     emu->args.flg_R = false;
     emu->args.flg_m = false;
+    emu->args.flg_e = false;
     emu->args.print_asm = false;
     emu->args.start = 0;
     emu->args.goal = 0;
     emu->args.mem_s = 0;
+    emu->args.endpc = 0;
     for (int i=0; i<REG_SIZE; i++){
         emu->args.reg_for_print[i] = false;
     }
@@ -182,18 +184,15 @@ void print_mem(Emulator* emu, int start){
 
 void output_image(Emulator* emu){
     // %out の開始時 : 300000
-    // %out の終了時 : 6591488
+    // %out の終了時 : 6591488 if 512 * 512
+    //                693248 if 128 * 128
     int out_start = 300000;
-    // int out_goal = 300040;
-    // int out_goal = 693248; // if 128 * 128
-    int out_goal = 6591488; // if 512 * 512
+    int out_goal = 693248; // if 128 * 128
+    // int out_goal = 6591488; // if 512 * 512
     ofstream writing_file;
     FILE *fp;
     fp = fopen("output.ppm", "w");
     for (int i=out_start; i<out_goal; i += 4){
-        // for (int j=0; j<4; j++){
-        //     fprintf(fp, "%c", (int)((emu->memory[i/4] >> (8*j)) & 0x000000FF) );
-        // }
         if (emu->memory[i/4] == 538981200){
             fprintf(fp, "P3");
         }

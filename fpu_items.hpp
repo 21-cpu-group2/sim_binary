@@ -79,8 +79,7 @@ inline velilog_data add(velilog_data r1, velilog_data r2){
         cout << "error input length differ" << endl;
         exit(1);
     }
-    uint32_t ret_data = 0;
-    ret_data = (r1.data + r2.data) & bit_mask(r1.bit_num);
+    uint32_t ret_data = (r1.data + r2.data) & bit_mask(r1.bit_num);
     velilog_data ret = {ret_data, r1.bit_num};
     return ret;
 }
@@ -90,19 +89,17 @@ inline velilog_data sub(velilog_data r1, velilog_data r2){
         cout << "error input length differ" << endl;
         exit(1);
     }
-    uint32_t ret_data = 0;
-    ret_data = (r1.data - r2.data) & bit_mask(r1.bit_num);
+    uint32_t ret_data = (r1.data - r2.data) & bit_mask(r1.bit_num);
     velilog_data ret = {ret_data, r1.bit_num};
     return ret;
 }
 
-inline velilog_data mul(velilog_data r1, velilog_data r2){
+inline velilog_data mul(velilog_data r1, velilog_data r2, uint32_t output_bit_num){
     if (r1.bit_num != r2.bit_num) {
         cout << "error input length differ" << endl;
         exit(1);
     }
-    uint32_t ret_data = 0;
-    ret_data = (r1.data * r2.data) & bit_mask(r1.bit_num);
-    velilog_data ret = {ret_data, r1.bit_num};
+    uint32_t ret_data = (r1.data * r2.data) & bit_mask(output_bit_num);
+    velilog_data ret = {ret_data, output_bit_num};
     return ret;
 }

@@ -45,8 +45,9 @@ sim_binary
         -a           : show assembly code
         -r           : show register
         -m n         : showing memory from memory-address n
+        -e n         : end simulator at specified pc
         -R n1 n2 ... : showing state of specified registers like vivado simulator
-                       please let -R option be the last.
+                       (please let -R option be the last.)
                        
 
 

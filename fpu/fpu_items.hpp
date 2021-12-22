@@ -17,6 +17,11 @@ typedef struct {
     verilog_data fra;
 } my_float;
 
+union fi {
+    uint32_t i;
+    float f;
+};
+
 #define vd verilog_data
 
 inline uint32_t bit_mask(uint32_t n){
@@ -32,6 +37,7 @@ inline verilog_data concat2(verilog_data dat1, verilog_data dat2){
     ret_data <<= dat2.bit_num;
     ret_data |= (dat2.data) & bit_mask(dat2.bit_num);
     ret_bit_num += dat2.bit_num;
+    ret_data &= bit_mask(ret_bit_num);
     verilog_data ret = {ret_data, ret_bit_num};
     return ret;
 }
@@ -47,6 +53,7 @@ inline verilog_data concat3(verilog_data dat1, verilog_data dat2, verilog_data d
     ret_data <<= dat3.bit_num;
     ret_data |= (dat3.data) & bit_mask(dat3.bit_num);
     ret_bit_num += dat3.bit_num;
+    ret_data &= bit_mask(ret_bit_num);
     verilog_data ret = {ret_data, ret_bit_num};
     return ret;
 }
@@ -65,6 +72,7 @@ inline verilog_data concat4(verilog_data dat1, verilog_data dat2, verilog_data d
     ret_data <<= dat4.bit_num;
     ret_data |= (dat4.data) & bit_mask(dat4.bit_num);
     ret_bit_num += dat4.bit_num;
+    ret_data &= bit_mask(ret_bit_num);
     verilog_data ret = {ret_data, ret_bit_num};
     return ret;
 }
@@ -94,6 +102,18 @@ inline verilog_data sub(verilog_data r1, verilog_data r2){
         exit(1);
     }
     uint32_t ret_data = (r1.data - r2.data) & bit_mask(r1.bit_num);
+    verilog_data ret = {ret_data, r1.bit_num};
+    return ret;
+}
+
+inline verilog_data addi(verilog_data r1, int imm) {
+    uint32_t ret_data = (r1.data + imm) & bit_mask(r1.bit_num);
+    verilog_data ret = {ret_data, r1.bit_num};
+    return ret;
+}
+
+inline verilog_data subi(verilog_data r1, int imm) {
+    uint32_t ret_data = (r1.data - imm) & bit_mask(r1.bit_num);
     verilog_data ret = {ret_data, r1.bit_num};
     return ret;
 }
@@ -178,6 +198,27 @@ inline verilog_data vd_and(verilog_data op1, verilog_data op2) {
     verilog_data ret;
     ret.data = (op1.data & op2.data) & bit_mask(op1.bit_num);
     ret.bit_num = op1.bit_num;
+    return ret;
+}
+
+inline bool equal(verilog_data r1, verilog_data r2){
+    if (r1.bit_num == r2.bit_num){
+        if ((r1.data & bit_mask(r1.bit_num)) == (r2.data & bit_mask(r2.bit_num))){
+            return true;
+        }
+    }
+    return false;
+}
+
+inline bool equali(verilog_data r1, uint32_t imm){
+    if ((r1.data & bit_mask(r1.bit_num)) == imm){
+        return true;
+    }
+    return false;
+}
+
+inline verilog_data make_vd(uint32_t bit, uint32_t imm) {
+    vd ret = {imm & bit_mask(bit), bit};
     return ret;
 }
 

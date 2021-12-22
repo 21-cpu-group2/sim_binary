@@ -4,6 +4,7 @@
 #include <iomanip>
 #include "fpu_items.hpp"
 #include "fabs.hpp"
+#include "fisneg.hpp"
 
 using namespace std;
 
@@ -22,7 +23,12 @@ int main(void){
     cout << sub(v0, v1).data << endl;
     cout << mul(v1, v2, 4).data << endl;
     vd v4 = {0x12345678, 32};
+    vd zero = {0, 32};
+    cout << fisneg(v4).data << endl;
+    cout << fisneg(v4).bit_num << endl;
     assign(&v4, v0, 31, 28);
     cout << hex << fabs(v4).data << endl;
+    cout << fisneg(v4).data << endl;
+    cout << fisneg(zero).data << endl;
     return 0;
 }

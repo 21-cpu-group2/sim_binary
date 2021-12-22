@@ -128,4 +128,30 @@ inline void assign(verilog_data* op1, verilog_data op2, uint32_t to, uint32_t fr
     op1->data |= ((op2.data & bit_mask(op2.bit_num)) << from);
 }
 
+inline verilog_data vd_or(verilog_data op) {
+    verilog_data ret;
+    if (op.data & bit_mask(op.bit_num)){
+        ret.data = 0x00000001;
+        ret.bit_num = 1;
+    }
+    else {
+        ret.data = 0x00000000;
+        ret.bit_num = 1;
+    }
+    return ret;
+}
+
+inline verilog_data vd_and(verilog_data op) {
+    verilog_data ret;
+    if (~op.data & bit_mask(op.bit_num)){
+        ret.data = 0x00000001;
+        ret.bit_num = 1;
+    }
+    else {
+        ret.data = 0x00000000;
+        ret.bit_num = 1;
+    }
+    return ret;
+}
+
 #endif

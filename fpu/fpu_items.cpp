@@ -3,14 +3,14 @@
 #include <stdlib.h>
 #include <iomanip>
 #include "fpu_items.hpp"
+#include "fabs.hpp"
 
-#define vd velilog_data
 using namespace std;
 
 int main(void){
-    velilog_data v0 = {0x00000005, 4};
-    velilog_data v1 = {0x00000002, 4};
-    velilog_data v2 = {0x0000000D, 4};
+    verilog_data v0 = {0x0000000F, 4};
+    verilog_data v1 = {0x00000002, 4};
+    verilog_data v2 = {0x0000000D, 4};
     vd v3 = {0x0000FE33, 16};
     cout << hex << sr(v3, 4).data << endl;
     cout << sl(v3, 3).data << endl;
@@ -21,6 +21,8 @@ int main(void){
     cout << add(v0, v1).data << endl;
     cout << sub(v0, v1).data << endl;
     cout << mul(v1, v2, 4).data << endl;
-
+    vd v4 = {0x12345678, 32};
+    assign(&v4, v0, 31, 28);
+    cout << hex << fabs(v4).data << endl;
     return 0;
 }

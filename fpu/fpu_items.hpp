@@ -88,7 +88,7 @@ inline verilog_data slice(verilog_data dat, uint32_t to, uint32_t from){
 // //adder subtracter multiplier shift
 inline verilog_data add(verilog_data r1, verilog_data r2){
     if (r1.bit_num != r2.bit_num) {
-        cout << "error input length differ" << endl;
+        cout << "error input length differ in add" << endl;
         exit(1);
     }
     uint32_t ret_data = (r1.data + r2.data) & bit_mask(r1.bit_num);
@@ -98,7 +98,7 @@ inline verilog_data add(verilog_data r1, verilog_data r2){
 
 inline verilog_data sub(verilog_data r1, verilog_data r2){
     if (r1.bit_num != r2.bit_num) {
-        cout << "error input length differ" << endl;
+        cout << "error input length differ in sub" << endl;
         exit(1);
     }
     uint32_t ret_data = (r1.data - r2.data) & bit_mask(r1.bit_num);
@@ -119,10 +119,10 @@ inline verilog_data subi(verilog_data r1, int imm) {
 }
 
 inline verilog_data mul(verilog_data r1, verilog_data r2, uint32_t output_bit_num){
-    if (r1.bit_num != r2.bit_num) {
-        cout << "error input length differ" << endl;
-        exit(1);
-    }
+    // if (r1.bit_num != r2.bit_num) {
+    //     cout << "error input length differ in mul" << endl;
+    //     exit(1);
+    // }
     uint32_t ret_data = (r1.data * r2.data) & bit_mask(output_bit_num);
     verilog_data ret = {ret_data, output_bit_num};
     return ret;
@@ -183,7 +183,7 @@ inline verilog_data vd_and_red(verilog_data op) {
 
 inline verilog_data vd_or(verilog_data op1, verilog_data op2) {
     if (op1.bit_num != op2.bit_num) {
-        cout << "error : input bit num differ" << endl;
+        cout << "error : input bit num differ in vd_or" << endl;
     }
     verilog_data ret;
     ret.data = (op1.data | op2.data) & bit_mask(op1.bit_num);
@@ -193,7 +193,7 @@ inline verilog_data vd_or(verilog_data op1, verilog_data op2) {
 
 inline verilog_data vd_and(verilog_data op1, verilog_data op2) {
     if (op1.bit_num != op2.bit_num) {
-        cout << "error : input bit num differ" << endl;
+        cout << "error : input bit num differ in vd_and" << endl;
     }
     verilog_data ret;
     ret.data = (op1.data & op2.data) & bit_mask(op1.bit_num);
@@ -225,7 +225,7 @@ inline verilog_data make_vd(uint32_t bit, uint32_t imm) {
 
 inline verilog_data vd_xor(verilog_data op1, verilog_data op2) {
     if (op1.bit_num != op2.bit_num) {
-        cout << "error : input length differ" << endl;
+        cout << "error : input length differ in vd_xor" << endl;
         exit(1);
     }
     verilog_data ret;
@@ -240,6 +240,19 @@ inline verilog_data constant(uint32_t data, uint32_t bit_num){
         exit(1);
     }
     verilog_data ret = {data, bit_num};
+    return ret;
+}
+
+inline double mf_to_d(my_float f){
+    double ret;
+    if (f.exp.data == 0){
+        ret = 0;
+    } else {
+        ret = f.fra.data * pow(2, -23);
+        ret += 1;
+        ret *= pow(2, f.exp.data - 127);
+        ret *= pow(-1, f.sgn.data);
+    }
     return ret;
 }
 

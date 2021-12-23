@@ -50,7 +50,7 @@ inline my_float fmul(my_float op1, my_float op2){
     assign(&HL, mul(H1, L2, 26), 25, 0);
     assign(&LH, mul(L1, H2, 26), 25, 0);
     assign(&res_exp, add(add(ex_exp1, ex_exp2), constant(129, 9)), 8, 0);
-    printf("line53 %d \n", res_exp.data);
+    // printf("line53 %d \n", res_exp.data);
     assign(&res_sig, vd_xor(sig1, sig2), 0, 0);
     //ここまで1clk目　これから2clk目
     assign(&sum, add(add(add(HH, sr(HL, 11)), sr(LH, 11)), constant(2, 26)), 25, 0);
@@ -61,10 +61,10 @@ inline my_float fmul(my_float op1, my_float op2){
     if (slice(sum, 25, 25).data){
         if (slice(res_exp_plus1, 8, 8).data){
             assign(&(result.sgn), res_sig_2, 0, 0);
-            assign(&(result.exp), res_exp_plus1, 7, 0);
-            assign(&(result.fra), sum, 24, 2);
-            printf("line66 %d \n", result.exp.data);
-            printf("line67 %d \n", slice(sum, 25, 25).data);
+            assign(&(result.exp), slice(res_exp_plus1, 7, 0), 7, 0);
+            assign(&(result.fra), slice(sum, 24, 2), 22, 0);
+            // printf("line66 %d \n", result.exp.data);
+            // printf("line67 %d \n", slice(sum, 25, 25).data);
         } else {
             cout << "fmul ovf" << endl;
         }
@@ -72,8 +72,8 @@ inline my_float fmul(my_float op1, my_float op2){
         if(slice(res_exp_2, 8, 8).data){
             assign(&(result.sgn), res_sig_2, 0, 0);
             assign(&(result.exp), res_exp_2, 7, 0);
-            assign(&(result.fra), sum, 23, 1);
-            printf("line74 %d \n", res_exp_2.data);
+            assign(&(result.fra), slice(sum, 23, 1), 22, 0);
+            // printf("line74 %d \n", res_exp_2.data);
         } else {
             cout << "fmul ovf" << endl;
         }

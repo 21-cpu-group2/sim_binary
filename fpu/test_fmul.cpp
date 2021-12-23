@@ -19,6 +19,9 @@ int main(){
     cout << "op1 = " << mf_to_d(f1) << endl;
     cout << "op2 = " << mf_to_d(f2) << endl;
     cout << "result = " << mf_to_d(result) << endl;
+    cout << result.sgn.data << endl;
+    cout << result.exp.data << endl;
+    cout << result.fra.data << endl;
     cout << hex;
     cout << result.sgn.data << endl;
     cout << result.exp.data << endl;

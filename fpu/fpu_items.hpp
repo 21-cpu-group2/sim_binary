@@ -224,19 +224,19 @@ inline verilog_data make_vd(uint32_t bit, uint32_t imm) {
 
 
 inline verilog_data vd_xor(verilog_data op1, verilog_data op2) {
-    verilog_data ret;
     if (op1.bit_num != op2.bit_num) {
-        cout << "error input length differ" << endl;
+        cout << "error : input length differ" << endl;
         exit(1);
     }
+    verilog_data ret;
+    ret.data = (op1.data ^ op2.data) & bit_mask(op1.bit_num);
     ret.bit_num = op1.bit_num;
-    ret.data = op1.data ^ op2.data;
     return ret;
 }
 
 inline verilog_data constant(uint32_t data, uint32_t bit_num){
     if (pow(2, bit_num) < data){
-        cout << "constant data declared doesn't fit in indicated len" << endl;
+        cout << "error : constant data declared doesn't fit in indicated len" << endl;
         exit(1);
     }
     verilog_data ret = {data, bit_num};

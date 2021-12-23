@@ -5,6 +5,9 @@ using namespace std;
 
 inline my_float fabs(my_float op){
     my_float result;
+    result.sgn.bit_num = 1;
+    result.exp.bit_num = 8;
+    result.fra.bit_num = 23;
     assign(&(result.sgn), constant(0, 32), 31, 0);
     assign(&(result.fra), constant(0, 32), 31, 0);
     assign(&(result.exp), constant(0, 32), 31, 0);

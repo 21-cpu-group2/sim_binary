@@ -3,11 +3,12 @@
 #include "fpu_items.hpp"
 using namespace std;
 
-inline vd fabs(vd op){
-    vd result;
+inline my_float fabs(my_float op){
+    my_float result;
     vd pos = {0,1};
-    assign(&result, pos, 31, 31);
-    assign(&result, slice(op, 30, 0), 30, 0);
+    assign(&(result.sgn), pos, 0, 0);
+    assign(&(result.fra), op.fra, 22, 0);
+    assign(&(result.exp), op.exp, 7, 0);
     return result;
 }
 

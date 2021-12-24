@@ -271,4 +271,21 @@ inline double mf_to_d(my_float f){
     return ret;
 }
 
+inline double vd_to_d(verilog_data op){
+    if (op.bit_num != 32){
+        cout << "error : vd.bit_num is not 32 in vd_to_d " << endl;
+        exit(1);
+    }
+    double ret;
+    if (slice(op, 30, 23).data == 0){
+        ret = 0;
+    } else {
+        ret = slice(op, 22, 0).data * pow(2, -23);
+        ret += 1;
+        ret *= pow(2, slice(op, 30, 23).data - 127);
+        ret *= pow(-1, slice(op, 31, 31).data);
+    }
+    return ret;
+}
+
 #endif

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
+#include <math.h>
 
 using namespace std;
 
@@ -143,6 +144,10 @@ inline verilog_data sl(verilog_data r1, uint32_t shamt){
 }
 
 inline void assign(verilog_data* op1, verilog_data op2, uint32_t to, uint32_t from) {
+    if (to == 0xFFFFFFFF) {
+        to = op1->bit_num - 1;
+        from = 0;
+    }
     uint32_t msk1 = bit_mask(to-from+1) << from;
     op1->data &= ~msk1;
     op1->data |= ((op2.data & bit_mask(op2.bit_num)) << from);

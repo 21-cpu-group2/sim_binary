@@ -217,6 +217,15 @@ inline bool equali(verilog_data r1, uint32_t imm){
     return false;
 }
 
+inline bool lt(verilog_data r1, verilog_data r2){
+    if (r1.bit_num == r2.bit_num){
+        if ((r1.data & bit_mask(r1.bit_num)) < (r2.data & bit_mask(r2.bit_num))){
+            return true;
+        }
+    }
+    return false;
+}
+
 inline verilog_data make_vd(uint32_t bit, uint32_t imm) {
     vd ret = {imm & bit_mask(bit), bit};
     return ret;

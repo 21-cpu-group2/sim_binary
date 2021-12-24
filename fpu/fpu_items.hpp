@@ -90,6 +90,7 @@ inline verilog_data slice(verilog_data dat, uint32_t to, uint32_t from){
 inline verilog_data add(verilog_data r1, verilog_data r2){
     if (r1.bit_num != r2.bit_num) {
         cout << "error input length differ in add" << endl;
+        cout << r1.bit_num << " " << r2.bit_num << endl;
         exit(1);
     }
     uint32_t ret_data = (r1.data + r2.data) & bit_mask(r1.bit_num);

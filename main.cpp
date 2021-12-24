@@ -42,12 +42,12 @@ int main(int argc, char **argv){
                     break;
                 case 's':
                     emu->args.flg_s = true;
-                    emu->args.start = stoi(argv[i+1], 0, 10);
+                    emu->args.start = stoll(argv[i+1], 0, 10);
                     i++;
                     break;
                 case 'g':
                     emu->args.flg_g = true;
-                    emu->args.goal = stoi(argv[i+1], 0, 10);
+                    emu->args.goal = stoll(argv[i+1], 0, 10);
                     i++;
                     break;
                 case 'm':
@@ -117,7 +117,6 @@ int main(int argc, char **argv){
         cout << dec << "   pc   " << endl;
     }
     bool flg;
-    cout << "flg_R : " << emu->args.flg_R << endl;
     while (1){
         uint32_t pc_pred = emu->pc;
         uint32_t inst = emu->instruction_memory[emu->pc];

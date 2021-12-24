@@ -114,12 +114,12 @@ int load_instructions(Emulator* emu, string file_path){
     string str;
     bool fst = true;
     while (getline(ifs, str)){
-        if (fst) {
-            uint32_t pc_init = (uint32_t)stoi(str, nullptr, 10);
-            emu->pc = pc_init;
-            fst = false;
-            continue;
-        }
+        // if (fst) {
+        //     uint32_t pc_init = (uint32_t)stoi(str, nullptr, 10);
+        //     emu->pc = pc_init;
+        //     fst = false;
+        //     continue;
+        // }
         if (str.at(0) == '/' && str.at(1) == '/'){
             continue;
         }

@@ -322,14 +322,8 @@ int disassemble_instructions(string file_path) {
         return 1;
     }
     string str;
-    bool fst = true;
     int pc = 0;
     while (getline(ifs, str)){
-        if (fst) {
-            fst = false;
-            cout << endl;
-            continue;
-        }
         uint32_t inst = bin2int(str);
         disassemble_one_instruction(inst);
         cout << "   # pc = " << pc << endl;

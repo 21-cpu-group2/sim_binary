@@ -66,7 +66,7 @@ inline vd fmul(vd op1, vd op2){
             assign(&result, slice(res_exp_plus1, 7, 0), 30, 23);
             assign(&result, slice(sum, 24, 2), 22, 0);
         } else {
-            cout << "fmul ovf" << endl;
+            cout << "fmul ovf1" << endl;
         }
     } else {
         if(slice(res_exp_2, 8, 8).data){
@@ -75,7 +75,7 @@ inline vd fmul(vd op1, vd op2){
             assign(&result, slice(sum, 23, 1), 22, 0);
             // printf("line74 %d \n", res_exp_2.data);
         } else {
-            cout << "fmul ovf" << endl;
+            cout << "fmul ovf2" << endl;
         }
     }
     return result;

@@ -265,7 +265,7 @@ inline double mf_to_d(my_float f){
     } else {
         ret = f.fra.data * pow(2, -23);
         ret += 1;
-        ret *= pow(2, f.exp.data - 127);
+        ret *= pow(2, int(f.exp.data) - 127);
         ret *= pow(-1, f.sgn.data);
     }
     return ret;
@@ -281,8 +281,8 @@ inline double vd_to_d(verilog_data op){
         ret = 0;
     } else {
         ret = slice(op, 22, 0).data * pow(2, -23);
-        ret += 1;
-        ret *= pow(2, slice(op, 30, 23).data - 127);
+        ret += 1.0;
+        ret *= pow(double(2.0), int(slice(op, 30, 23).data) - 127);
         ret *= pow(-1, slice(op, 31, 31).data);
     }
     return ret;

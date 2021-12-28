@@ -134,6 +134,10 @@ vd itof(vd op){
         assign(&is_zero_reg, is_zero, -1, -1);
     }
 
+    assign(&zero_fra_zero_count, concat2(constant(0, 3), fra_zero_count_reg), -1, -1);
+    assign(&exp_exact, sub(sub_from, zero_fra_zero_count), -1, -1);
+    assign(&zero_exp_zero_count, concat2(constant(0, 5), exp_zero_count_reg), -1, -1);
+    assign(&exp_not_exact, sub(sub_from, zero_exp_zero_count), -1, -1);
     assign(&result_use_fra_plus_1, concat3(sig_result, exp_not_exact, slice(fra_plus_1, 22, 0)), -1, -1);
     assign(&result_not_exact, concat3(sig_result, exp_not_exact, fra_result), -1, -1);
     assign(&result_exact, concat3(sig_result, exp_exact, fra_result), -1, -1);

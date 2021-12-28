@@ -4,7 +4,7 @@
 using namespace std;
 
 
-inline void fadd(vd op, vd* out, vd* ans_shift_out){
+inline void ZLC(vd op, vd* out, vd* ans_shift_out){
     assign(out, (slice(op, 27, 27).data ? constant(0, 5) :
                 slice(op, 26, 26).data ? constant(1, 5) :
                 slice(op, 25, 25).data ? constant(2, 5) :
@@ -60,6 +60,8 @@ inline void fadd(vd op, vd* out, vd* ans_shift_out){
 }
 
 inline vd fadd(vd op1, vd op2){
+    vd result = {0, 32};
+
     vd sig1 = {0, 1};
     vd sig2 = {0, 1};
     vd exp1 = {0, 8};
@@ -88,9 +90,168 @@ inline vd fadd(vd op1, vd op2){
     vd sig_small = {0, 1};
 
     //ここから1clk目
+    if (op1_is_abs_bigger.data){
+        assign(&op_big, fra1, -1, 0);
+        assign(&exp_big, exp1, -1, 0);
+        assign(&sig_big, sig1, -1, 0);
+        assign(&sig_small, sig2, -1, 0);
+        switch (shift_2.data) {
+            case 0 : assign(&op_small, fra2, -1, 0); break;
+            case 1 : assign(&op_small, sr(fra2, 1), -1, 0); break;
+            case 2 : assign(&op_small, sr(fra2, 2), -1, 0); break;
+            case 3 : assign(&op_small, sr(fra2, 3), -1, 0); break;
+            case 4 : assign(&op_small, sr(fra2, 4), -1, 0); break;
+            case 5 : assign(&op_small, sr(fra2, 5), -1, 0); break;
+            case 6 : assign(&op_small, sr(fra2, 6), -1, 0); break;
+            case 7 : assign(&op_small, sr(fra2, 7), -1, 0); break;
+            case 8 : assign(&op_small, sr(fra2, 8), -1, 0); break;
+            case 9 : assign(&op_small, sr(fra2, 9), -1, 0); break;
+            case 10 : assign(&op_small, sr(fra2, 10), -1, 0); break;
+            case 11 : assign(&op_small, sr(fra2, 11), -1, 0); break;
+            case 12 : assign(&op_small, sr(fra2, 12), -1, 0); break;
+            case 13 : assign(&op_small, sr(fra2, 13), -1, 0); break;
+            case 14 : assign(&op_small, sr(fra2, 14), -1, 0); break;
+            case 15 : assign(&op_small, sr(fra2, 15), -1, 0); break;
+            case 16 : assign(&op_small, sr(fra2, 16), -1, 0); break;
+            case 17 : assign(&op_small, sr(fra2, 17), -1, 0); break;
+            case 18 : assign(&op_small, sr(fra2, 18), -1, 0); break;
+            case 19 : assign(&op_small, sr(fra2, 19), -1, 0); break;
+            case 20 : assign(&op_small, sr(fra2, 20), -1, 0); break;
+            case 21 : assign(&op_small, sr(fra2, 21), -1, 0); break;
+            case 22 : assign(&op_small, sr(fra2, 22), -1, 0); break;
+            case 23 : assign(&op_small, sr(fra2, 23), -1, 0); break;
+            case 24 : assign(&op_small, sr(fra2, 24), -1, 0); break;
+            case 25 : assign(&op_small, sr(fra2, 25), -1, 0); break;
+            case 26 : assign(&op_small, sr(fra2, 26), -1, 0); break;
+            default : assign(&op_small, concat2(constant(0, 27), vd_or_red(fra2)), -1, 0); break;
+        }
+    } else {
+        assign(&op_big, fra2, -1, 0);
+        assign(&exp_big, exp2, -1, 0);
+        assign(&sig_big, sig2, -1, 0);
+        assign(&sig_small, sig1, -1, 0);
+        switch (shift_2.data) {
+            case 0 : assign(&op_small, fra1, -1, 0); break;
+            case 1 : assign(&op_small, sr(fra1, 1), -1, 0); break;
+            case 2 : assign(&op_small, sr(fra1, 2), -1, 0); break;
+            case 3 : assign(&op_small, sr(fra1, 3), -1, 0); break;
+            case 4 : assign(&op_small, sr(fra1, 4), -1, 0); break;
+            case 5 : assign(&op_small, sr(fra1, 5), -1, 0); break;
+            case 6 : assign(&op_small, sr(fra1, 6), -1, 0); break;
+            case 7 : assign(&op_small, sr(fra1, 7), -1, 0); break;
+            case 8 : assign(&op_small, sr(fra1, 8), -1, 0); break;
+            case 9 : assign(&op_small, sr(fra1, 9), -1, 0); break;
+            case 10 : assign(&op_small, sr(fra1, 10), -1, 0); break;
+            case 11 : assign(&op_small, sr(fra1, 11), -1, 0); break;
+            case 12 : assign(&op_small, sr(fra1, 12), -1, 0); break;
+            case 13 : assign(&op_small, sr(fra1, 13), -1, 0); break;
+            case 14 : assign(&op_small, sr(fra1, 14), -1, 0); break;
+            case 15 : assign(&op_small, sr(fra1, 15), -1, 0); break;
+            case 16 : assign(&op_small, sr(fra1, 16), -1, 0); break;
+            case 17 : assign(&op_small, sr(fra1, 17), -1, 0); break;
+            case 18 : assign(&op_small, sr(fra1, 18), -1, 0); break;
+            case 19 : assign(&op_small, sr(fra1, 19), -1, 0); break;
+            case 20 : assign(&op_small, sr(fra1, 20), -1, 0); break;
+            case 21 : assign(&op_small, sr(fra1, 21), -1, 0); break;
+            case 22 : assign(&op_small, sr(fra1, 22), -1, 0); break;
+            case 23 : assign(&op_small, sr(fra1, 23), -1, 0); break;
+            case 24 : assign(&op_small, sr(fra1, 24), -1, 0); break;
+            case 25 : assign(&op_small, sr(fra1, 25), -1, 0); break;
+            case 26 : assign(&op_small, sr(fra1, 26), -1, 0); break;
+            default : assign(&op_small, concat2(constant(0, 27), vd_or_red(fra1)), -1, 0); break;
+        }
+    }
+    //1-2
 
-    // vd ans = {0, 28};
-    // assign(&ans, ((sig_big)), -1, 0)
+    vd ans = {0, 28};
+    assign(&ans, (vd_or(sig_big, sig_small).data) ? sub(op_big, op_small) : add(op_big, op_small), -1, 0);
+    vd ans_reg = {0, 28};
+    vd zero_count = {0, 5};
+    vd ans_shift = {0, 23};
+    vd ans_shift_reg = {0, 23};
+    ZLC(ans, &zero_count, &ans_shift);
+    vd marume_up = {0, 1};
+    assign(&marume_up, vd_and(vd_and(vd_not(slice(ans, 27, 27)), vd_or(slice(ans, 26, 26), slice(ans, 1, 1))), vd_and_red(slice(ans, 25, 2))), -1, 0);
+
+    vd exp_next = {0, 8};
+    vd sig_next = {0, 1};
+    vd zero_count_reg = {0, 5};
+
+    vd for_exp_next = {0, 8};
+    assign(&for_exp_next, concat2(constant(0, 7), marume_up), -1, 0);
+
+    assign(&ans_reg, ans, -1, 0);
+    assign(&ans_shift_reg, ans_shift, -1, 0);
+    assign(&exp_next, add(exp_big, for_exp_next), -1, 0);
+    assign(&sig_next, sig_big, -1, 0);
+    assign(&zero_count_reg, zero_count, -1, 0);
+
+    vd exp_next_zero = {0, 9};
+    assign(&exp_next_zero, concat2(constant(0, 1), exp_next), -1, 0);
+
+    //2-3
+
+    vd for_ZLC0_fra = {0, 23};
+    assign(&for_ZLC0_fra, concat2(constant(0, 22), vd_or_red(slice(ans_reg, 3, 0))), -1, 0);
+    vd ZLC0_fra = {0, 23};
+    assign(&ZLC0_fra, add(ans_shift_reg, for_ZLC0_fra), -1, 0);
+    vd ZLC0_exp = {0, 8};
+    assign(&ZLC0_exp, add(exp_next, constant(1, 8)), -1, 0);
+
+    vd for_ZLC1_fra = {0, 23};
+    assign(&for_ZLC1_fra, concat2(constant(0, 22), vd_or_red(slice(ans_reg, 2, 0))), -1, 0);
+    vd ZLC1_fra = {0, 23};
+    assign(&ZLC1_fra, add(ans_shift_reg, for_ZLC1_fra), -1, 0);
+    vd ZLC1_exp = {0, 8};
+    assign(&ZLC1_exp, exp_next, -1, 0);
+
+    vd for_ZLC2_fra = {0, 23};
+    assign(&for_ZLC2_fra, concat2(constant(0, 22), vd_or_red(slice(ans_reg, 1, 0))), -1, 0);
+    vd ZLC2_fra = {0, 23};
+    assign(&ZLC2_fra, add(ans_shift_reg, for_ZLC2_fra), -1, 0);
+    vd ZLC2_exp = {0, 8};
+    assign(&ZLC2_exp, sub(exp_next_zero, constant(1, 9)), -1, 0);
+
+    vd for_ZLC3_fra = {0, 23};
+    assign(&for_ZLC3_fra, concat2(constant(0, 22), slice(ans_reg, 0, 0)), -1, 0);
+    vd ZLC3_fra = {0, 23};
+    assign(&ZLC3_fra, add(ans_shift_reg, for_ZLC3_fra), -1, 0);
+    vd ZLC3_exp = {0, 8};
+    assign(&ZLC3_exp, sub(exp_next_zero, constant(2, 9)), -1, 0);
+
+    vd ZLC_lt3_fra = {0, 23};
+    assign(&ZLC_lt3_fra, ans_shift_reg, -1, 0);
+    vd for_ZLC_lt3_exp = {0, 9};
+    assign(&for_ZLC_lt3_exp, concat2(constant(0, 4), zero_count_reg), -1, 0);
+    vd for2_ZLC_lt3_exp = {0, 9};
+    assign(&for2_ZLC_lt3_exp, constant(1, 9), -1, 0);
+    vd ZLC_lt3_exp = {0, 9};
+    assign(&ZLC_lt3_exp, add(sub(exp_next_zero, for_ZLC_lt3_exp), for2_ZLC_lt3_exp), -1, 0);
+
+    if (equali(zero_count_reg, 0)){
+        assign(&result, concat3(sig_next, ZLC0_exp, ZLC0_fra), -1, 0);
+    } else if (equali(zero_count_reg, 1)){
+        assign(&result, concat3(sig_next, ZLC1_exp, ZLC1_fra), -1, 0);
+    } else if (equali(zero_count_reg, 2)){
+        if (slice(ZLC2_exp,8, 8).data){
+            assign(&result, concat3(sig_next, constant(0, 8), ZLC2_fra), -1, 0);
+        } else {
+            assign(&result, concat3(sig_next, slice(ZLC2_exp, 7, 0), ZLC2_fra), -1, 0);
+        } 
+    } else if (equali(zero_count_reg, 3)){
+        if (slice(ZLC3_exp,8, 8).data){
+            assign(&result, concat3(sig_next, constant(0, 8), ZLC3_fra), -1, 0);
+        } else {
+            assign(&result, concat3(sig_next, slice(ZLC3_exp, 7, 0), ZLC3_fra), -1, 0);
+        } 
+    } else {
+        if (slice(ZLC_lt3_exp, 8, 8).data){
+            assign(&result, concat3(sig_next, constant(0, 8), ZLC3_fra), -1, 0);
+        } else {
+            assign(&result, concat3(sig_next, slice(ZLC_lt3_exp, 7, 0), ZLC_lt3_fra), -1, 0);
+        }
+    }
+    return result;
 }
 
 #endif

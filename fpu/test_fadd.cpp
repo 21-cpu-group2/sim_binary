@@ -5,11 +5,22 @@
 #include "fadd.hpp"
 
 int main(){
-    vd v0 = {0xF01321FF, 32};
-    vd v1 = {0x701321FF, 32};
-    vd zero = {0x00000000, 32};
-    cout << fadd(v0, v1).data << endl;
-    // cout << fless(v1, v0).data << endl;
-    // cout << fless(v0, v0).data << endl;
+    vd sig1 = {0x1, 1};
+    vd exp1 = {50, 8};
+    vd fra1 = {0x123450, 23};
+    vd sig2 = {0x0, 1};
+    vd exp2 = {51, 8};
+    vd fra2 = {0x4fff00, 23};
+    vd f1 = concat3(sig1, exp1, fra1);
+    vd f2 = concat3(sig2, exp2, fra2);
+    vd result = fadd(f1, f2);
+    cout << "op1 = " << vd_to_d(f1) << endl;
+    cout << "op2 = " << vd_to_d(f2) << endl;
+    cout << "result = " << vd_to_d(result) << endl;
+    cout << hex;
+    cout << result.data << endl;
+    cout << slice(result, 31, 31).data << endl;
+    cout << slice(result, 30, 23).data << endl;
+    cout << slice(result, 22, 0).data << endl;
     return 0;
 }

@@ -16,11 +16,15 @@ int main(){
     vd v2 = {c.i, 32};
     vd v3 = {d.i, 32};
     a.i = fdiv(v0, v1).data;
+    b.i = fdiv(v1, v2).data;
     // b.i = floor(v1).data;
     // c.i = floor(v2).data;
     // d.i = floor(v3).data;
     cout << fixed << setprecision(10);
     cout << a.f << endl;
+    cout << 2.3 / 3.5 << endl;
+    cout << b.f << endl;
+    cout << 3.5 / -20.0 << endl;
     // cout << b.f << endl;
     // cout << c.f << endl;
     // cout << d.f << endl;

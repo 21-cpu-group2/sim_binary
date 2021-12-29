@@ -3,7 +3,7 @@
 #include "fpu_items.hpp"
 using namespace std;
 
-vd ZLC_exp(vd op) {
+inline vd ZLC_exp(vd op) {
     vd out = {0, 28};
     assign(&out, (slice(op, 30, 30).data) ? concat2(constant(0, 3), slice(op, 30, 6)) :
                  (slice(op, 29, 29).data) ? concat2(constant(1, 3), slice(op, 29, 5)) :
@@ -15,7 +15,7 @@ vd ZLC_exp(vd op) {
     return out;
 }
 
-vd ZLC_fra(vd op){
+inline vd ZLC_fra(vd op){
     vd out = {0, 29};
     assign(&out,(slice(op, 23, 23).data) ? concat3(constant(0, 5), slice(op, 22, 0), constant(0, 1)) :
                 (slice(op, 22, 22).data) ? concat3(constant(1, 5), slice(op, 21, 0), constant(0, 2)) :
@@ -47,7 +47,7 @@ vd ZLC_fra(vd op){
 
 // 01100000001100110110001101101110
 
-vd itof(vd op){
+inline vd itof(vd op){
     vd result = {0, 32};
     vd sig = {0, 1};
     vd abs_op = {0, 31};

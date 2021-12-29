@@ -1035,7 +1035,7 @@ const fra_gra ram[1024] = {
     {0b01101001110111001010001,0b0101101010001},
 };
 
-vd fsqrt(vd op) {
+inline vd fsqrt(vd op) {
     vd result = {0, 32};
 
     vd ram_read_top = {0, 23};

@@ -3,7 +3,7 @@
 #include "fpu_items.hpp"
 using namespace std;
 
-vd fless(vd op1, vd op2){
+inline vd fless(vd op1, vd op2){
     vd sig1 = slice(op1, 31, 31);
     vd sig2 = slice(op2, 31, 31);
     vd exp1 = slice(op1, 30, 23);

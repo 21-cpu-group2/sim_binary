@@ -3,7 +3,7 @@
 #include "fpu_items.hpp"
 using namespace std;
 
-vd fhalf(vd op){
+inline vd fhalf(vd op){
     vd result;
     vd exp = slice(op, 30, 23);
     vd exp_sub1 = subi(slice(op, 30, 23), 1);

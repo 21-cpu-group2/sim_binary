@@ -3,7 +3,7 @@
 #include "fpu_items.hpp"
 using namespace std;
 
-vd floor(vd op){
+inline vd floor(vd op){
     vd result = {0, 32};
     vd sig = {0, 1};
     vd exp = {0, 8};

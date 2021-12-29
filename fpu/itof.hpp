@@ -45,6 +45,8 @@ vd ZLC_fra(vd op){
     return out;
 }
 
+// 01100000001100110110001101101110
+
 vd itof(vd op){
     vd result = {0, 32};
     vd sig = {0, 1};
@@ -102,6 +104,7 @@ vd itof(vd op){
     assign(&fra_zero_count_reg, fra_zero_count, -1, -1);
     assign(&fra, slice(outpre, 24, 1), -1, -1);
     assign(&for_fra_plus_1, fra, -1, -1);
+    assign(&fra_plus_1, add(for_fra_plus_1, constant(1, 24)), -1, -1);
 
     assign(&kuriagari, slice(outpre, 0, 0), -1, -1);
     assign(&fra_all_one, vd_and_red(fra), -1, -1);

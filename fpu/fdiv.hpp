@@ -1,9 +1,25 @@
 #ifndef _FDIV
 #define _FDIV
 #include "fpu_items.hpp"
+
+#define DEBUG 1
+
 using namespace std;
 
-vd fdiv(vd op1, vd op2) {
+void bit_print(uint32_t n) {
+    for (int i=0; i<32; i++){
+        if (n & (1 << (31 - i))) {
+            cout << "1";
+        }
+        else {
+            cout << "0";
+        }
+    }
+    cout << endl;
+    return;
+}
+
+inline vd fdiv(vd op1, vd op2) {
     vd result = {0, 32};
 
     vd fra1 = {0, 25};
@@ -12,7 +28,6 @@ vd fdiv(vd op1, vd op2) {
     vd exp2 = {0, 9};
     vd sig1 = {0, 1};
     vd sig2 = {0, 1};
-
 
     assign(&fra1, (slice(op1, 30, 23).data == 0) ? concat2(constant(0, 2), slice(op1, 22, 0)) : 
                 concat2(constant(1, 2), slice(op1, 22, 0)), -1, -1);
@@ -62,15 +77,15 @@ vd fdiv(vd op1, vd op2) {
     assign(&ans2_6, (slice(sub5, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 3, 3);
     
     vd sub6 = sub(x5, fra2_2);
-    vd x6 = (slice(sub2, 24, 24).data == 1) ? sl(x5, 1) : sl(sub6, 1);
+    vd x6 = (slice(sub6, 24, 24).data == 1) ? sl(x5, 1) : sl(sub6, 1);
     assign(&ans2_6, (slice(sub6, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 2, 2);
 
     vd sub7 = sub(x6, fra2_2);
-    vd x7 = (slice(sub3, 24, 24).data == 1) ? sl(x6, 1) : sl(sub7, 1);
+    vd x7 = (slice(sub7, 24, 24).data == 1) ? sl(x6, 1) : sl(sub7, 1);
     assign(&ans2_6, (slice(sub7, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 1, 1);
 
     vd sub8 = sub(x7, fra2_2);
-    vd x8 = (slice(sub4, 24, 24).data == 1) ? sl(x7, 1) : sl(sub8, 1);
+    vd x8 = (slice(sub8, 24, 24).data == 1) ? sl(x7, 1) : sl(sub8, 1);
     assign(&ans2_6, (slice(sub8, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
     // 3clkÌÜ
@@ -159,7 +174,6 @@ vd fdiv(vd op1, vd op2) {
     vd fra2_6 = fra2_5;
     vd ans_exp_6 = ans_exp_5;
     vd ans_sig_reg_6 = ans_sig_reg_5;
-    cout << "ans_sig_reg_6 : " << ans_sig_reg_6.data << endl;
 
     vd sub21 = sub(x20_reg, fra2_6);
     vd x21 = (slice(sub21, 24, 24).data == 1) ? sl(x20_reg, 1) : sl(sub21, 1);
@@ -199,20 +213,21 @@ vd fdiv(vd op1, vd op2) {
         else{
             vd temp1 = {0, 15};
             vd temp2 = {0, 16};
-            cout << "ans_sig_reg_6 : " << ans_sig_reg_6.data << endl;
-            cout << slice(ans_exp_6_minus1, 7, 0).data << endl;
-            cout << "ans1_6_6 : " << slice(ans1_6_6, 1, 0).data << endl;
-            cout << "ans2_6_6 : " << ans2_6_6.data << endl;
-            cout << "ans3_6_6 : " << ans3_6_6.data << endl;
-            cout << "ans4_6_6 : " << ans4_6_6.data << endl;
-            cout << "ans5_6_6 : " << ans5_6_6.data << endl;
-            cout << "ans6_6_6 : " << ans6_6.data << endl;
+
+            // cout << "ans_sig_reg_6 : " << ans_sig_reg_6.data << endl;
+            // cout << slice(ans_exp_6_minus1, 7, 0).data << endl;
+            // cout << "ans1_6_6 : " << slice(ans1_6_6, 1, 0).data << endl;
+            // cout << "ans2_6_6 : " << ans2_6_6.data << endl;
+            // cout << "ans3_6_6 : " << ans3_6_6.data << endl;
+            // cout << "ans4_6_6 : " << ans4_6_6.data << endl;
+            // cout << "ans5_6_6 : " << ans5_6_6.data << endl;
+            // cout << "ans6_6_6 : " << ans6_6.data << endl;
             assign(&temp1, concat4(ans_sig_reg_6, slice(ans_exp_6_minus1, 7, 0), slice(ans1_6_6, 1, 0), ans2_6_6), -1, -1);
             assign(&temp2, concat4(ans3_6_6, ans4_6_6, ans5_6_6, ans6_6), -1, -1);
-            cout << temp1.data << endl;
-            cout << temp2.data << endl;
+            // cout << temp1.data << endl;
+            // cout << temp2.data << endl;
             assign(&result, concat3(temp1, temp2, constant(0, 1)), -1, -1);
-            cout << result.data << endl;
+            // cout << result.data << endl;
         }
     }
     return result;

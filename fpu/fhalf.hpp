@@ -8,8 +8,6 @@ inline vd fhalf(vd op){
     vd exp = slice(op, 30, 23);
     vd exp_sub1 = subi(slice(op, 30, 23), 1);
     vd fra_shift = sr(slice(op, 22, 0), 1);
-    cout << hex << slice(op, 22, 0).data << endl;
-    cout << hex << fra_shift.data << endl;
     if (equal(exp, make_vd(8,0))) {
         assign(&result, concat2(slice(op, 31, 23), fra_shift), 31, 0);
     }

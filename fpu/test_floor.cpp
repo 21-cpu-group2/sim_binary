@@ -2,27 +2,36 @@
 #include <string>
 #include <stdlib.h>
 #include <iomanip>
+#include <cmath>
 #include "fpu_items.hpp"
 #include "floor.hpp"
 
 int main(){
-    union fi a, b, c, d;
-    a.f = 2.3;
-    b.f = 3.5;
-    c.f = -20.0; // 0x41A00000
-    d.f = -6.1;
-    vd v0 = {a.i, 32};
-    vd v1 = {b.i, 32};
-    vd v2 = {c.i, 32};
-    vd v3 = {d.i, 32};
-    a.i = floor(v0).data;
-    b.i = floor(v1).data;
-    c.i = floor(v2).data;
-    d.i = floor(v3).data;
-    cout << fixed << setprecision(10);
-    cout << a.f << endl;
-    cout << b.f << endl;
-    cout << c.f << endl;
-    cout << d.f << endl;
+    cout << hex ;
+    union fi v_fi1, v_fi2;
+    int limit_print = 10;
+    int print_num = 0;
+    cout << std::floor(-1.0) << endl;
+    for (uint32_t ite=0x00000000; ite<0xFFFFFFFF; ite++){
+        union fi v_fi1, v_fi2;
+        v_fi1.i = ite;
+        if (!isNaN(v_fi1.f)) continue;
+        vd v = {v_fi1.i, 32};
+        vd result;
+        result = floor(v);
+        v_fi2.i = result.data;
+        if(v_fi2.f != std::floor(v_fi1.f)) {
+            cout << "error" << endl;
+            bit_print(v_fi1.i);
+            cout << v_fi2.f << " " << std::floor(v_fi1.f) << endl;
+            print_num++;
+        }
+        if (print_num > limit_print){
+            break;
+        }
+        if ((ite & 0x0FFFFFFF) == 0){
+            cout << "10%" << endl;
+        }
+    }
     return 0;
 }

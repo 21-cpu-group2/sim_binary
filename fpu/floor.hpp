@@ -38,7 +38,6 @@ inline vd floor(vd op){
     }
     else {
         assign(&new_exp_reg, exp, -1 ,-1);
-        cout << dec << "exp : " << exp.data << endl;
         switch (exp.data) {
             case 127 : 
                 assign(&new_fra_reg, concat2(constant(1,2), constant(0, 23)), -1, -1);
@@ -161,11 +160,7 @@ inline vd floor(vd op){
                 assign(&for_add, constant(0, 25), -1, -1);
         }
     }
-    cout << hex;
     assign(&add_fra, add(new_fra_reg, for_add), -1, -1);
-    cout << new_fra_reg.data << endl;
-    cout << for_add.data << endl;
-    cout << add_fra.data << endl;
     assign(&exp_plus_1, add(new_exp_reg, constant(1, 8)), -1, -1);
     if (new_sig_reg.data == 0 || (vd_or_red(fra_decimal)).data == 0) {
         assign(&result, concat3(new_sig_reg, new_exp_reg, slice(new_fra_reg, 22, 0)), -1, -1);

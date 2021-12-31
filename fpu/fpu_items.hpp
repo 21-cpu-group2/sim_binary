@@ -4,6 +4,7 @@
 #include <string>
 #include <stdlib.h>
 #include <math.h>
+#define eps pow(2, -126)
 
 using namespace std;
 
@@ -287,5 +288,57 @@ inline double vd_to_d(verilog_data op){
     }
     return ret;
 }
+
+inline bool isNaN(float f) {
+    union fi f_i;
+    f_i.f = f;
+    if ((0x7F800000 & f_i.i) == 0) {
+        // exp == 0
+        if ((0x007FFFFF & f_i.i) == 0) {
+            // 符号付きの0
+            return true;
+        }
+        else {
+            // 非正規化数
+            return false;
+        }
+    }
+    else if (((0x7F800000 & f_i.i) >> 23) < 255){
+        // 0 < exp < 255
+        // 正規化数
+        return true;
+    }
+    else {
+        // exp == 255
+        if ((0x007FFFFF & f_i.i) == 0){
+            if (0x80000000 & f_i.i){
+                // 負の無限大
+                return false;
+            }
+            else {
+                // 正の無限大
+                return false;
+            }
+        }
+        else {
+            // 非数
+            return false;
+        }
+    }
+}
+
+void bit_print(uint32_t n) {
+    for (int i=0; i<32; i++){
+        if (n & (1 << (31 - i))) {
+            cout << "1";
+        }
+        else {
+            cout << "0";
+        }
+    }
+    cout << endl;
+    return;
+}
+
 
 #endif

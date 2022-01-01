@@ -1038,6 +1038,9 @@ const fra_gra ram[1024] = {
 inline vd fsqrt(vd op) {
     vd result = {0, 32};
 
+    // ram_read の 
+    // 仮数部分をram_read_top
+    // 勾配をram_read_bottom に保存。
     vd ram_read_top = {0, 23};
     vd ram_read_bottom = {0, 13};
     vd ram_main = {0, 24};
@@ -1050,6 +1053,7 @@ inline vd fsqrt(vd op) {
 
     vd exp2 = {0, 9};
     vd res = {0, 14};
+
     vd exp3 = {0, 8};
     vd grad_mul_res = {0, 27};
     vd frac = {0, 24};
@@ -1072,19 +1076,28 @@ inline vd fsqrt(vd op) {
     assign(&ram_main, concat2(constant(1, 1), ram_read_top), -1, -1);
     assign(&ram_grad, ram_read_bottom, -1, -1);
     assign(&exp2, for_exp2, -1, -1);
+    // cout << ram_main.data << endl;
+    // cout << ram_grad.data << endl;
+
     if (slice(op, 23, 23).data){
         assign(&res, concat2(constant(0, 1), slice(op, 13, 1)), -1, -1);
     }
     else {
         assign(&res, slice(op, 13, 0), -1, -1);
     }
-    assign(&grad_mul_res, sr(mul(ram_grad, res, 23), 8), -1, -1);
+    // cout << "res " << res.data << endl;
+    vd temp = sr(mul(ram_grad, res, 32), 8);
+    temp.data &= 0x007FFFFF;
+    temp.bit_num = 23;
+    assign(&grad_mul_res, temp, -1, -1);
+    // cout << grad_mul_res.data << endl;
     assign(&exp3, slice(exp2, 8, 1), -1, -1);
     assign(&frac, ram_main, -1, -1);
 
     assign(&grad_mul_res_need, concat2(constant(0,1), slice(grad_mul_res, 26, 4)), -1, -1);
     assign(&result_1, add(frac, grad_mul_res_need), -1, -1);
     assign(&result_plus1_1, add(result_1, constant(1, 24)), -1, -1);
+    
     if (slice(grad_mul_res, 3, 3).data) {
         assign(&result, concat3(constant(0,1), exp3, slice(result_plus1_1, 22, 0)), -1, -1);
     }

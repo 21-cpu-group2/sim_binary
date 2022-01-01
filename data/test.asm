@@ -40,24 +40,24 @@ min_caml_srl:
     jalr %zero %ra 0
 
 min_caml_create_array:
-    add %a2 %a0 %zero #%a0���array length %a1�����������ゃ����ャ�ｃ��������
-    add %a0 %min_caml_hp %zero # 菴������ゃ��array�����≪�������鴻����祉�����
+    add %a2 %a0 %zero #%a0???array length %a1???????????鐃緒申????鐃緒申?鐃緒申????????
+    add %a0 %min_caml_hp %zero # 鐃�??????鐃緒申??array?????鐃緒申???????鐃緒申????鐃緒申?????
 create_array_loop:
-    beq %a2 %zero create_array_exit # array length���0�����ｃ�����腟�篋�
-    sw %a1 %min_caml_hp 0                 # %a1�����＜�≪�������主��
-    addi %min_caml_hp %min_caml_hp 4       # hp���紜�������
-    addi %a2 %a2 -1                      # array length���1羝�������
-    beq %zero %zero create_array_loop    # create_array_loop�����吾�ｃ�潟��
+    beq %a2 %zero create_array_exit # array length???0?????鐃緒申?????鐃�?鐃�?
+    sw %a1 %min_caml_hp 0                 # %a1?????鐃緒申?鐃緒申???????鐃緒申??
+    addi %min_caml_hp %min_caml_hp 4       # hp???鐃�???????
+    addi %a2 %a2 -1                      # array length???1鐃�???????
+    beq %zero %zero create_array_loop    # create_array_loop?????鐃緒申?鐃緒申?鐃緒申??
 create_array_exit:
-    jalr %zero %ra 0 # 菴������ゃ�������≪��array�����≪�������鴻����ャ�ｃ�������������с��������������腟�篋�
+    jalr %zero %ra 0 # 鐃�??????鐃緒申???????鐃緒申??array?????鐃緒申???????鐃緒申????鐃緒申?鐃緒申?????????????鐃緒申??????????????鐃�?鐃�?
 
-min_caml_create_float_array: # min_caml_create_array�����������������������ゃ��%f0�����ャ�ｃ��������������������
-    add %a2 %a0 %zero #%a0���array length %f0�����������ゃ����ャ�ｃ��������
-    add %a0 %min_caml_hp %zero # 菴������ゃ��array�����≪�������鴻����祉�����
+min_caml_create_float_array: # min_caml_create_array???????????????????????鐃緒申??%f0?????鐃緒申?鐃緒申????????????????????
+    add %a2 %a0 %zero #%a0???array length %f0???????????鐃緒申????鐃緒申?鐃緒申????????
+    add %a0 %min_caml_hp %zero # 鐃�??????鐃緒申??array?????鐃緒申???????鐃緒申????鐃緒申?????
 create_float_array_loop:
     beq %a2 %zero create_float_array_exit
-    sw %f0 %min_caml_hp 0                 # %f0�����＜�≪�������主��
-    addi %min_caml_hp %min_caml_hp 4       # hp���紜�������
+    sw %f0 %min_caml_hp 0                 # %f0?????鐃緒申?鐃緒申???????鐃緒申??
+    addi %min_caml_hp %min_caml_hp 4       # hp???鐃�???????
     addi %a2 %a2 -1
     beq %zero %zero create_float_array_loop
 create_float_array_exit:
@@ -112,8 +112,8 @@ min_caml_float_of_int:
     jalr %zero %ra 0
 
 reduction_2pi:
-    li %f1 ll.1 # PI�����ゃ����祉����� PC�����ゃ����祉�����
-    li %f2 ll.2 # 2.0�����祉�����
+    li %f1 ll.1 # PI?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
+    li %f2 ll.2 # 2.0?????鐃緒申?????
     fmul %f3 %f1 %f2 # P = PI * 2.0
     fmul %f1 %f1 %f2 # PI * 2.0 PC:53 26th
 reduction_continue:
@@ -131,12 +131,12 @@ reduction_break3:
     fhalf %f3 %f3     # P = P / 2
     beq %zero %zero reduction_break
 reduction_break2:
-    jalr %zero %ra 0  # A���f0�����ャ�ｃ�������������с�������障�丞��篋� PC: 61 29th
+    jalr %zero %ra 0  # A???f0?????鐃緒申?鐃緒申?????????????鐃緒申???????鐃緒申?鐃緒申??鐃�? PC: 61 29th
 
 kernel_sin:
-    li %f1 ll.3 # S3�����ゃ����祉����� PC�����ゃ����祉�����
-    li %f4 ll.4 # S5�����ゃ����祉����� PC�����ゃ����祉�����
-    li %f6 ll.5 # S7�����ゃ����祉����� PC�����ゃ����祉�����
+    li %f1 ll.3 # S3?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
+    li %f4 ll.4 # S5?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
+    li %f6 ll.5 # S7?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
     fmul %f2 %f0 %f0 # A^2
     fmul %f3 %f2 %f0 # A^3
     fmul %f1 %f1 %f3 # S3*A^3
@@ -147,12 +147,12 @@ kernel_sin:
     fadd %f0 %f0 %f1 # A - S3*S7
     fadd %f0 %f0 %f4 # A - S3*S7 + S5*A^5
     fadd %f0 %f0 %f6 # A - S3*S7 + S5*A^5 - S7 * A^7
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 
 kernel_cos:
-    li %f1 ll.6 # C1 (1.0) �����ゃ����祉����� PC�����ゃ����祉�����
-    li %f4 ll.7 # C4 (1.0) �����ゃ����祉����� PC�����ゃ����祉�����
-    li %f6 ll.8 # C6 (1.0) �����ゃ����祉����� PC�����ゃ����祉�����
+    li %f1 ll.6 # C1 (1.0) ?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
+    li %f4 ll.7 # C4 (1.0) ?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
+    li %f6 ll.8 # C6 (1.0) ?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
     fmul %f2 %f0 %f0 # A^2
     fmul %f3 %f2 %f2 # A^4
     fmul %f5 %f2 %f3 # A^6
@@ -162,25 +162,25 @@ kernel_cos:
     fsub %f0 %f1 %f2 # 1.0 - 0.5*A^2
     fadd %f0 %f0 %f4 # 1.0 - 0.5*A^2 + C4*A^4
     fadd %f0 %f0 %f6 # 1.0 - 0.5*A^2 + C4*A^4 - C6*A^6
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 
 reverse:
     beq %a0 %zero a_beq_zero # if %a0 == 0 jump to a_beq_zero
     add %a0 %zero %zero # return 0
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 a_beq_zero:
     addi %a0 %zero 1 # return 1
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 
 min_caml_sin:
-    fispos %a1 %f0 # %a1 = flag(%f0), %a0���reduction_2pi��т戎��������с�������с��%a1���篏帥��
+    fispos %a1 %f0 # %a1 = flag(%f0), %a0???reduction_2pi??鐃巡戎????????鐃緒申???????鐃緒申??%a1???篏随申??
     fabs %f0 %f0 # A = abs(A)
     sw %ra %sp 4
     addi %sp %sp 8
     jal %ra reduction_2pi # %f0 = reduction_2pi(%f0)
     addi %sp %sp -8 # return from reduction_2pi PC:105 30th
     lw %ra %sp 4
-    li %f1 ll.1 # PI �����ゃ����祉����� PC�����ゃ����祉�����
+    li %f1 ll.1 # PI ?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
     fless %a0 %f0 %f1 # if A < PI PC:109 34th
     blt %zero %a0 a_less_than_pi # if 0 < %a0 jump to a_less_than_pi
     fsub %f0 %f0 %f1 # A = A - PI
@@ -207,7 +207,7 @@ a_less_than_pi_2:
     lw %ra %sp 4
     blt %zero %a1 fsin_end # if 0 < FLAG jump to fsin_end
     fneg %f0 %f0 # A = - A
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 pi_4_less_than_a:
     fsub %f0 %f2 %f0    # A = PI/2 - A PC: 134
     sw %ra %sp 4
@@ -218,7 +218,7 @@ pi_4_less_than_a:
     blt %zero %a1 fsin_end # if 0 < FLAG jump to fsin_end
     fneg %f0 %f0 # A = - A
 fsin_end:
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 
 min_caml_cos:
     addi %a1 %zero 1 # FLAG = 1
@@ -228,7 +228,7 @@ min_caml_cos:
     jal %ra reduction_2pi # A = reduction_2pi(A)
     addi %sp %sp -8 # return from reduction_2pi
     lw %ra %sp 4
-    li %f1 ll.1 # PI �����ゃ����祉����� PC�����ゃ����祉�����
+    li %f1 ll.1 # PI ?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
     fless %a0 %f0 %f1 # if A < PI
     blt %zero %a0 a_less_than_pi_cos
     fsub %f0 %f0 %f1 # A = A - PI
@@ -262,7 +262,7 @@ a_less_than_pi_2_cos:
     lw %ra %sp 4
     blt %zero %a1 fcos_end # if 0 < FLAG jump to fcos_end
     fneg %f0 %f0 # A = - A
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 pi_4_less_than_a_cos:
     fsub %f0 %f2 %f0    # A = PI/2 - A
     sw %ra %sp 4
@@ -273,15 +273,15 @@ pi_4_less_than_a_cos:
     blt %zero %a1 fcos_end # if FLAG = 1
     fneg %f0 %f0 # A = - A
 fcos_end:
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 
 kernel_atan:
-    li %f1 ll.9 # A3�����ゃ����祉����� PC�����ゃ����祉�����
-    li %f2 ll.10 # A5�����ゃ����祉����� PC�����ゃ����祉�����
-    li %f3 ll.11 # A7�����ゃ����祉����� PC�����ゃ����祉�����
-    li %f4 ll.12 # A9�����ゃ����祉����� PC�����ゃ����祉�����
-    li %f5 ll.13 # A11�����ゃ����祉����� PC�����ゃ����祉�����
-    li %f6 ll.14 # A13�����ゃ����祉����� PC�����ゃ����祉�����
+    li %f1 ll.9 # A3?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
+    li %f2 ll.10 # A5?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
+    li %f3 ll.11 # A7?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
+    li %f4 ll.12 # A9?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
+    li %f5 ll.13 # A11?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
+    li %f6 ll.14 # A13?????鐃緒申????鐃緒申????? PC?????鐃緒申????鐃緒申?????
     fmul %f7 %f0 %f0 # A^2
     fmul %f8 %f0 %f7 # A^3
     fmul %f9 %f7 %f8 # A^5
@@ -301,14 +301,14 @@ kernel_atan:
     fadd %f0 %f0 %f4 # A - A3*A^3 + A5*A^5 - A7*A^7 + A9*A^9
     fadd %f0 %f0 %f5 # A - A3*A^3 + A5*A^5 - A7*A^7 + A9*A^9 - A11*A^11
     fadd %f0 %f0 %f6 # A - A3*A^3 + A5*A^5 - A7*A^7 + A9*A^9 - A11*A^11 + A13*A^13
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 
 min_caml_atan:
     fispos %a11 %f0
     fabs %f1 %f0 # |A|
-    li %f2 ll.15 # 0.4375 PC�����ゃ����祉�����
-    li %f3 ll.16 # 2.4375 PC�����ゃ����祉�����
-    li %f4 ll.6 # 1.0 PC�����ゃ����祉�����
+    li %f2 ll.15 # 0.4375 PC?????鐃緒申????鐃緒申?????
+    li %f3 ll.16 # 2.4375 PC?????鐃緒申????鐃緒申?????
+    li %f4 ll.6 # 1.0 PC?????鐃緒申????鐃緒申?????
     fless %a0 %f1 %f2 # |A| < 0.4375
     blt %zero %a0 atan_break1 # if 0 < %a0
     fless %a0 %f1 %f3 # |A| < 2.4375
@@ -319,21 +319,21 @@ min_caml_atan:
     jal %ra kernel_atan # kernel_atan(1/|A|)
     addi %sp %sp -8 # return from kernel_atan
     lw %ra %sp 4
-    li %f5 ll.1 # PI PC�����ゃ����祉�����
+    li %f5 ll.1 # PI PC?????鐃緒申????鐃緒申?????
     fhalf %f5 %f5 # PI/2
     fsub %f0 %f5 %f0 # PI/2 - kernel_atan(1/|A|)
     beq %a11 %zero atan_neg
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 atan_neg:
     fneg %f0 %f0
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 atan_break1:
     sw %ra %sp 4 # call kernel_atan
     addi %sp %sp 8
     jal %ra kernel_atan # kernel_atan(A)
     addi %sp %sp -8 # return from kernel_atan
     lw %ra %sp 4
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 atan_break2:
     fsub %f5 %f1 %f4 # |A| - 1.0
     fadd %f6 %f1 %f4 # |A| + 1.0
@@ -343,64 +343,108 @@ atan_break2:
     jal %ra kernel_atan # kernel_atan (|A| - 1.0)/(|A| + 1.0)
     addi %sp %sp -8 # return from kernel_atan
     lw %ra %sp 4
-    li %f5 ll.1 # PI PC�����ゃ����祉�����
+    li %f5 ll.1 # PI PC?????鐃緒申????鐃緒申?????
     fhalf %f5 %f5 # PI/2
     fhalf %f5 %f5 # PI/4
     fadd %f0 %f5 %f0 # PI/4 + kernel_atan((|A| - 1.0)/(|A| + 1.0))
     beq %a11 %zero atan_break2_neg # if A < 0 then jump
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 atan_break2_neg:
     fneg %f0 %f0
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 
 min_caml_read_int:
     lw %a0 %in 0
     addi %in %in 4
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 
 min_caml_read_float:
     lw %f0 %in 0
     addi %in %in 4
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 
 min_caml_print_float:
     sw %f0 %out 0
     addi %out %out 4
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 
 min_caml_print_int:
+    addi %a1 %zero 0
+    addi %a2 %zero 0
+    addi %a3 %zero 0
+    addi %a4 %zero 0
+    addi %a5 %zero 0
+    addi %a6 %zero 0
+    addi %a7 %zero 0
+    addi %a8 %zero 48
+find_100_digit:
+    blt %a0 %a1 finish_find_100_digit
+    addi %a4 %a4 1
+    addi %a1 %a1 100
+    beq %zero %zero find_100_digit
+finish_find_100_digit:
+    addi %a4 %a4 -1
+    add %a9 %a4 %a8
+    add %a7 %a7 %a9 # convert to ascii
+    slli %a7 %a7 8
+    addi %a1 %a1 -100
+    sub %a0 %a0 %a1    
+find_10_digit:
+    blt %a0 %a2 finish_find_10_digit
+    addi %a5 %a5 1
+    addi %a2 %a2 10
+    beq %zero %zero find_10_digit
+finish_find_10_digit:
+    addi %a5 %a5 -1
+    add %a9 %a5 %a8
+    add %a7 %a7 %a9 # convert to ascii
+    slli %a7 %a7 8
+    addi %a2 %a2 -10
+    sub %a0 %a0 %a2  
+find_1_digit:
+    blt %a0 %a3 finish_find_1_digit
+    addi %a6 %a6 1
+    addi %a3 %a3 1
+    beq %zero %zero find_1_digit
+finish_find_1_digit:
+    addi %a6 %a6 -1
+    add %a9 %a6 %a8
+    add %a7 %a7 %a9 # convert to ascii
+    slli %a7 %a7 8
+    addi %a0 %a7 32 # add space 0x20
+finish_print_int:
     sw %a0 %out 0
     addi %out %out 4
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 
 min_caml_print_char:
     addi %a1 %zero 80 # P
     beq %a0 %a1 break_print_char
     addi %a2 %zero 51 # 3
     beq %a0 %a2 break_print_charP3
-    addi %a3 %zero 32 # 腥榊�醇��絖�
-    slli %a3 %a3 8 # 腥榊�醇��絖����1byte���������
+    addi %a3 %zero 32 # 腥削申?鐃緒申??鐃�?
+    slli %a3 %a3 8 # 腥削申?鐃緒申??鐃�????1byte?????????
     add %a0 %a0 %a3 # 00 00 32 %a0
-    slli %a3 %a3 8 # ���������1byte���������
+    slli %a3 %a3 8 # ?????????1byte?????????
     add %a0 %a0 %a3 # 00 32 32 %a0
-    slli %a3 %a3 8 # ���������1byte���������
+    slli %a3 %a3 8 # ?????????1byte?????????
     add %a0 %a0 %a3 # 32 32 32 %a0
     sw %a0 %out 0
     addi %out %out 4
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 break_print_char:
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 break_print_charP3:
-    slli %a2 %a2 8 # 51���1byte���������
-    add %a0 %a1 %a2 # 00 00 51 80
-    addi %a3 %zero 32 # 腥榊�醇��絖�
-    slli %a3 %a3 16 # 腥榊�醇��絖����2byte���������
-    add %a0 %a0 %a3 # 00 32 51 80
-    slli %a3 %a3 8 # ���������1byte���������
-    add %a0 %a0 %a3 # 32 32 51 80
+    slli %a1 %a1 8 # 51???1byte?????????
+    add %a0 %a1 %a2 # 00 00 80 51
+    addi %a3 %zero 32 # 腥削申?鐃緒申??鐃�?
+    slli %a0 %a0 8 # 腥削申?鐃緒申??鐃�????2byte?????????
+    add %a0 %a0 %a3 # 00 80 51 32
+    slli %a0 %a0 8 # ?????????1byte?????????
+    add %a0 %a0 %a3 # 80 51 32 32
     sw %a0 %out 0
     addi %out %out 4
-    jalr %zero %ra 0  # 腟�篋�
+    jalr %zero %ra 0  # 鐃�?鐃�?
 
 
 l.6289:	# 128.000000
@@ -9570,7 +9614,7 @@ rt.2716:
 	lw %a10 %a11 0 #2277
 	jalr %zero %a10 0 #2277
 min_caml_start:
-	li %sp 44000
+	li %sp 100000
 	li %in 200000
 	li %out 300000
 	li %min_caml_hp 10000000

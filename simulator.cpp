@@ -4,6 +4,7 @@
 #include <fstream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <iterator>
 
 #include "simulator.hpp"
 
@@ -181,7 +182,32 @@ void print_mem(Emulator* emu, int start){
     }
     cout << "----------------------------------------------------------------------------------------------------------------" << endl;
 }
-
+// void output_image(Emulator* emu){
+//     // %out ?¦Ã???? : 300000
+//     // %out ?¦Í?¦Ë?? : 6591488 if 512 * 512
+//     //                693248 if 128 * 128
+//     int out_start = 300000;
+//     int out_goal = 693248; // if 128 * 128
+//     // int out_goal = 6591488; // if 512 * 512
+//     ofstream writing_file;
+//     FILE *fp;
+//     fp = fopen("output.ppm", "w");
+//     for (int i=out_start; i<out_goal; i += 4){
+//         if (emu->memory[i/4] == 538981200){
+//             fprintf(fp, "P3");
+//         }
+//         else if (emu->memory[i/4] == 538976266){ // 0x2020200A SPC SPC SPC LF
+//             fprintf(fp, "\n");
+//         }
+//         else if (emu->memory[i/4] == 538976288){ // 0x20202020 SPC SPC SPC SPC
+//             fprintf(fp, " ");
+//         }
+//         else{
+//             fprintf(fp, "%03d", (emu->memory[i/4]));
+//         }
+//     }
+//     return;
+// }
 void output_image(Emulator* emu){
     // %out ¤Î³«»Ï»þ : 300000
     // %out ¤Î½ªÎ»»þ : 6591488 if 512 * 512
@@ -193,18 +219,16 @@ void output_image(Emulator* emu){
     FILE *fp;
     fp = fopen("output.ppm", "w");
     for (int i=out_start; i<out_goal; i += 4){
-        if (emu->memory[i/4] == 538981200){
-            fprintf(fp, "P3");
-        }
-        else if (emu->memory[i/4] == 538976266){ // 0x2020200A SPC SPC SPC LF
-            fprintf(fp, "\n");
-        }
-        else if (emu->memory[i/4] == 538976288){ // 0x20202020 SPC SPC SPC SPC
-            fprintf(fp, " ");
-        }
-        else{
-            fprintf(fp, "%03d", (emu->memory[i/4]));
-        }
+        uint32_t temp = emu->memory[i/4];
+        uint32_t t1, t2, t3, t4;
+        t1 = (temp & 0xFF000000) >> 24;
+        t2 = (temp & 0x00FF0000) >> 16;
+        t3 = (temp & 0x0000FF00) >> 8;
+        t4 = (temp & 0x000000FF);
+        fprintf(fp, "%c", t1);
+        fprintf(fp, "%c", t2);
+        fprintf(fp, "%c", t3);
+        fprintf(fp, "%c", t4);
     }
     return;
 }

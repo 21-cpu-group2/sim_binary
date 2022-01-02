@@ -47,6 +47,10 @@ inline vd fmul(vd op1, vd op2){
     vd res_exp_2 = {0, 9};
     vd res_sig_2 = {0, 1};
 
+    vd is_zero = {0, ((exp1.data == 0) || (exp2.data == 0)) ? 1 : 0};
+    vd is_zero_reg = {0, 1};
+    vd is_zero_reg2 = {0, 1};
+
     //ここから1clk目
     assign(&HH, mul(H1, H2, 26), 25, 0);
     assign(&HL, mul(H1, L2, 26), 25, 0);
@@ -54,28 +58,34 @@ inline vd fmul(vd op1, vd op2){
     assign(&res_exp, add(add(ex_exp1, ex_exp2), constant(129, 9)), 8, 0);
     // printf("line53 %d \n", res_exp.data);
     assign(&res_sig, vd_xor(sig1, sig2), 0, 0);
+    assign(&is_zero_reg, is_zero, -1, -1);
     //ここまで1clk目　これから2clk目
     assign(&sum, add(add(add(HH, sr(HL, 11)), sr(LH, 11)), constant(2, 26)), 25, 0);
     assign(&res_exp_plus1, add(res_exp, constant(1, 9)), 8, 0);
     assign(&res_sig_2, res_sig, 0, 0);
     assign(&res_exp_2, res_exp, 8, 0);
+    assign(&is_zero_reg2, is_zero_reg, -1, -1);
     //2-3
-    if (slice(sum, 25, 25).data){
-        if (slice(res_exp_plus1, 8, 8).data){
-            assign(&result, res_sig_2, 31, 31);
-            assign(&result, slice(res_exp_plus1, 7, 0), 30, 23);
-            assign(&result, slice(sum, 24, 2), 22, 0);
-        } else {
-            cout << "fmul ovf1" << endl;
-        }
+    if (is_zero_reg2.data){
+        assign(&result, constant(0, 32), -1, -1);
     } else {
-        if(slice(res_exp_2, 8, 8).data){
-            assign(&result, res_sig_2, 31, 31);
-            assign(&result, res_exp_2, 30, 23);
-            assign(&result, slice(sum, 23, 1), 22, 0);
-            // printf("line74 %d \n", res_exp_2.data);
+        if (slice(sum, 25, 25).data){
+            if (slice(res_exp_plus1, 8, 8).data){
+                assign(&result, res_sig_2, 31, 31);
+                assign(&result, slice(res_exp_plus1, 7, 0), 30, 23);
+                assign(&result, slice(sum, 24, 2), 22, 0);
+            } else {
+                assign(&result, constant(0, 32), -1, -1);
+            }
         } else {
-            cout << "fmul ovf2" << endl;
+            if(slice(res_exp_2, 8, 8).data){
+                assign(&result, res_sig_2, 31, 31);
+                assign(&result, res_exp_2, 30, 23);
+                assign(&result, slice(sum, 23, 1), 22, 0);
+                // printf("line74 %d \n", res_exp_2.data);
+            } else {
+                assign(&result, constant(0, 32), -1, -1);
+            }
         }
     }
     return result;

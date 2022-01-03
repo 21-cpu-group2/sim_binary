@@ -44,6 +44,10 @@ int test_simulator(){
 int main(){
     cout << hex ;
     if (DEBUG) {
+        uint32_t a = 8471974;
+        bit_print(a);
+        bit_print(~a);
+        bit_print(a + ~a + 1);
         // cout << vd_xor(v2, v2).data << endl;
         // cout << vd_xor(v1, v2).data << endl;
         // cout << vd_xor(v2, v1).data << endl;

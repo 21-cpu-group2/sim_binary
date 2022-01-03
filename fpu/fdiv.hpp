@@ -230,7 +230,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x23 = (slice(sub23, 24, 24).data == 1) ? sl(x22_reg, 1) : sl(sub23, 1);
     assign(&ans12_12, (slice(sub23, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 1, 1);
 
-    vd sub24 = {(x23.data < fra2_12.data) ? 1 : 0, 1};
+    vd sub24 = {(sub(x23, fra2_12).data < 0) ? 1 : 0, 1};
     assign(&ans12_12, (sub24.data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
     vd ans_exp_12_minus1 = {0, 9};
@@ -254,7 +254,8 @@ inline vd fdiv(vd op1, vd op2) {
             assign(&result, constant(0, 32), -1, -1);
         }
         else{
-            vd temp = concat4(ans_sig_reg_12, slice(ans_exp_12_minus1, 7, 0), slice(ans1to11, 19, 0), ans12_12);
+            vd temp = {0, 31};
+            assign(&temp, concat4(ans_sig_reg_12, slice(ans_exp_12_minus1, 7, 0), slice(ans1to11, 19, 0), ans12_12), -1, -1);
             assign(&result, concat2(temp, constant(0, 1)), -1, -1);
 
             // cout << "ans_sig_reg_6 : " << ans_sig_reg_6.data << endl;

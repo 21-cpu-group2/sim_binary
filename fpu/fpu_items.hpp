@@ -96,7 +96,15 @@ inline verilog_data add(verilog_data r1, verilog_data r2){
         cout << r1.bit_num << " " << r2.bit_num << endl;
         exit(1);
     }
-    uint32_t ret_data = (r1.data + r2.data) & bit_mask(r1.bit_num);
+    uint32_t op1 = r1.data;
+    uint32_t op2 = r2.data;
+    if (op1 & (1 << (r1.bit_num - 1))){
+        op1 |= (0xFFFFFFFF << (r1.bit_num));
+    }
+    if (op2 & (1 << (r2.bit_num - 1))){
+        op2 |= (0xFFFFFFFF << (r2.bit_num));
+    }
+    uint32_t ret_data = (op1 + op2) & bit_mask(r1.bit_num);
     verilog_data ret = {ret_data, r1.bit_num};
     return ret;
 }
@@ -106,7 +114,16 @@ inline verilog_data sub(verilog_data r1, verilog_data r2){
         cout << "error input length differ in sub" << endl;
         exit(1);
     }
-    uint32_t ret_data = (r1.data - r2.data) & bit_mask(r1.bit_num);
+    // 符号拡張
+    uint32_t op1 = r1.data;
+    uint32_t op2 = r2.data;
+    if (op1 & (1 << (r1.bit_num - 1))){
+        op1 |= (0xFFFFFFFF << (r1.bit_num));
+    }
+    if (op2 & (1 << (r2.bit_num - 1))){
+        op2 |= (0xFFFFFFFF << (r2.bit_num));
+    }
+    uint32_t ret_data = (op1 + ~op2 + 1) & bit_mask(r1.bit_num);
     verilog_data ret = {ret_data, r1.bit_num};
     return ret;
 }

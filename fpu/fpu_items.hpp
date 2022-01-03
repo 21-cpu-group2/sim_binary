@@ -289,14 +289,21 @@ inline double vd_to_d(verilog_data op){
     return ret;
 }
 
-inline bool isNaN(float f) {
+inline bool isNumber(float f) {
     union fi f_i;
     f_i.f = f;
     if ((0x7F800000 & f_i.i) == 0) {
         // exp == 0
         if ((0x007FFFFF & f_i.i) == 0) {
-            // 符号付きの0
-            return true;
+            // signed zero
+            if ((0x80000000 & f_i.i) == 0) {
+                // positive zero
+                return true;
+            }
+            else {
+                // positive zero
+                return false;
+            }
         }
         else {
             // 非正規化数
@@ -342,3 +349,4 @@ void bit_print(uint32_t n) {
 
 
 #endif
+

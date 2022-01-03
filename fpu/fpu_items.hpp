@@ -4,6 +4,8 @@
 #include <string>
 #include <stdlib.h>
 #include <math.h>
+#include <fstream>
+#include <istream>
 #define eps pow(2, -126)
 
 using namespace std;
@@ -208,6 +210,17 @@ inline verilog_data vd_and(verilog_data op1, verilog_data op2) {
     return ret;
 }
 
+inline verilog_data vd_xor(verilog_data op1, verilog_data op2) {
+    if (op1.bit_num != op2.bit_num) {
+        cout << "error : input length differ in vd_xor" << endl;
+        exit(1);
+    }
+    verilog_data ret;
+    ret.data = (op1.data ^ op2.data) & bit_mask(op1.bit_num);
+    ret.bit_num = op1.bit_num;
+    return ret;
+}
+
 inline bool equal(verilog_data r1, verilog_data r2){
     if (r1.bit_num == r2.bit_num){
         if ((r1.data & bit_mask(r1.bit_num)) == (r2.data & bit_mask(r2.bit_num))){
@@ -235,18 +248,6 @@ inline bool lt(verilog_data r1, verilog_data r2){
 
 inline verilog_data make_vd(uint32_t bit, uint32_t imm) {
     vd ret = {imm & bit_mask(bit), bit};
-    return ret;
-}
-
-
-inline verilog_data vd_xor(verilog_data op1, verilog_data op2) {
-    if (op1.bit_num != op2.bit_num) {
-        cout << "error : input length differ in vd_xor" << endl;
-        exit(1);
-    }
-    verilog_data ret;
-    ret.data = (op1.data ^ op2.data) & bit_mask(op1.bit_num);
-    ret.bit_num = op1.bit_num;
     return ret;
 }
 

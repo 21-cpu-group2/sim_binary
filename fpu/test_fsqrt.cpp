@@ -19,7 +19,7 @@ int main(){
         vd result;
         result = fsqrt(v);
         v_fi2.i = result.data;
-        if(abs(v_fi2.f - sqrt(v_fi1.f)) >= max(sqrt(v_fi1.f) * pow(2, -23), eps)) {
+        if(abs(v_fi2.f - sqrt(v_fi1.f)) >= max(sqrt(v_fi1.f) * pow(2, -20), eps)) {
             cout << "error" << endl;
             fi3.f = sqrt(v_fi1.f);
             bit_print(v_fi1.i);

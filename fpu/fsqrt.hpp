@@ -521,7 +521,7 @@ const fra_gra ram[1024] = {
     {0b11111111001111111101101,0b0100000000010},
     {0b11111111011111111110111,0b0100000000001},
     {0b11111111101111111111101,0b0100000000000},
-    {0b00000000000000000000000,0b1000000000000}, // 512 exp¤¬´ñ¿ô
+    {0b00000000000000000000000,0b1000000000000}, // 512 expï¿½ï¿½ï¿½ï¿½ï¿½
     {0b00000000001111111111100,0b0111111111100},
     {0b00000000011111111110000,0b0111111111000},
     {0b00000000101111111011100,0b0111111110100},
@@ -1038,9 +1038,9 @@ const fra_gra ram[1024] = {
 inline vd fsqrt(vd op) {
     vd result = {0, 32};
 
-    // ram_read ¤Î 
-    // ²¾¿ôÉôÊ¬¤òram_read_top
-    // ¸ûÇÛ¤òram_read_bottom ¤ËÊÝÂ¸¡£
+    // ram_read ï¿½ï¿½ 
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¬ï¿½ï¿½ram_read_top
+    // ï¿½ï¿½ï¿½Û¤ï¿½ram_read_bottom ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ï¿½
     vd ram_read_top = {0, 23};
     vd ram_read_bottom = {0, 13};
     vd ram_main = {0, 24};
@@ -1062,6 +1062,10 @@ inline vd fsqrt(vd op) {
     vd result_1 = {0, 24};
     vd result_plus1_1 = {0, 24};
 
+    vd is_zero = {0, 1};
+    is_zero.data = (slice(op, 30, 23).data == 0) ? 1 : 0;
+    vd is_zero_2 = {0, 1};
+    vd is_zero_3 = {0, 1};
 
     // first clk;
     assign(&result, constant(0, 32), -1, -1);
@@ -1069,6 +1073,7 @@ inline vd fsqrt(vd op) {
     assign(&exp3, constant(0, 8), -1, -1);
     assign(&grad_mul_res, constant(0, 27), -1, -1);
     assign(&frac, constant(0, 24), -1, -1);
+    
 
     // second clk;
     assign(&ram_read_top, constant(ram[slice(op, 23, 14).data].fra, 23), -1, -1);
@@ -1085,6 +1090,7 @@ inline vd fsqrt(vd op) {
     else {
         assign(&res, slice(op, 13, 0), -1, -1);
     }
+    assign(&is_zero_2, is_zero, -1, -1);
     // cout << "res " << res.data << endl;
     vd temp = sr(mul(ram_grad, res, 32), 8);
     temp.data &= 0x007FFFFF;
@@ -1093,12 +1099,15 @@ inline vd fsqrt(vd op) {
     // cout << grad_mul_res.data << endl;
     assign(&exp3, slice(exp2, 8, 1), -1, -1);
     assign(&frac, ram_main, -1, -1);
+    assign(&is_zero_3, is_zero_2, -1, -1);
 
     assign(&grad_mul_res_need, concat2(constant(0,1), slice(grad_mul_res, 26, 4)), -1, -1);
     assign(&result_1, add(frac, grad_mul_res_need), -1, -1);
     assign(&result_plus1_1, add(result_1, constant(1, 24)), -1, -1);
     
-    if (slice(grad_mul_res, 3, 3).data) {
+    if (is_zero_3.data) {
+        assign(&result, constant(0, 32), -1, -1);
+    } else if (slice(grad_mul_res, 3, 3).data) {
         assign(&result, concat3(constant(0,1), exp3, slice(result_plus1_1, 22, 0)), -1, -1);
     }
     else {

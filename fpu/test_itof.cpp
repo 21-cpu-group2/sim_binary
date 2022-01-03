@@ -5,23 +5,38 @@
 #include <random>
 #include "fpu_items.hpp"
 #include "itof.hpp"
+#define DEBUG 1
 
-using namespace std;
-
-void bit_print(uint32_t n) {
-    for (int i=0; i<32; i++){
-        if (n & (1 << (31 - i))) {
-            cout << "1";
-        }
-        else {
-            cout << "0";
+int test_simulator(){
+    ifstream in("../../fpu/itof/sample_itof.txt");
+    cin.rdbuf(in.rdbuf());
+    string op, res;
+    union fi op_ui, res_ui;
+    cout << dec;
+    for (int i=0; i<11001; i++){
+        cin >> op >> res;
+        // cout << op << " " << res << endl;
+        op_ui.i = stoul(op, 0, 2);
+        res_ui.i = stoul(res, 0, 2);
+        vd v = {op_ui.i, 32};
+        vd result = itof(v);
+        if (result.data != res_ui.i){
+            cout << "error in " << i+1 << "line" << endl;
+            bit_print(op_ui.i);
+            bit_print(res_ui.i);
+            bit_print(result.data);
         }
     }
-    cout << endl;
-    return;
+    return 0;
 }
 
 int main(){
+    cout << hex ;
+    if (DEBUG) {
+        cout << "testing_simulator" << endl;
+        test_simulator();
+        return 0;
+    }
     union fi a, b, c, d;
     a.f = 2.3;
     b.f = 3.5;

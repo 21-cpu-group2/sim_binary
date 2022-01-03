@@ -11,7 +11,7 @@ int test_simulator(){
     string op1, op2, res;
     union fi op1_ui, op2_ui, res_ui, result_ui;
     cout << dec;
-    for (int i=0; i<10001; i++){
+    for (int i=0; i<14001; i++){
         cin >> op1 >> op2 >> res;
         // cout << op << " " << res << endl;
         op1_ui.i = stoul(op1, 0, 2);

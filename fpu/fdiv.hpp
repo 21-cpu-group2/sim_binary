@@ -60,7 +60,7 @@ inline vd fdiv(vd op1, vd op2) {
     }
 
 
-    // 1clk目
+    // 1clk???
     vd sub1 = sub(fra1, fra2);
     vd x1 = (slice(sub1, 24, 24).data == 1) ? sl(fra1, 1) : sl(sub1, 1);
     assign(&ans1_12, (slice(sub1, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 1, 1);
@@ -69,7 +69,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x2 = (slice(sub2, 24, 24).data == 1) ? sl(x1, 1) : sl(sub2, 1);
     assign(&ans1_12, (slice(sub2, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
-    //2clk目
+    //2clk???
     vd ans1to1 = ans1_12;
     vd x2_reg = x2;
     vd fra2_2 = fra2;
@@ -84,7 +84,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x4 = (slice(sub4, 24, 24).data == 1) ? sl(x3, 1) : sl(sub4, 1);
     assign(&ans2_12, (slice(sub4, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
-    // 3clk目
+    // 3clk???
     vd ans1to2 = concat2(ans1to1, ans2_12);
     vd x4_reg = x4;
     vd fra2_3 = fra2_2;
@@ -99,7 +99,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x6 = (slice(sub6, 24, 24).data == 1) ? sl(x5, 1) : sl(sub6, 1);
     assign(&ans3_12, (slice(sub6, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
-    // 4clk目
+    // 4clk???
     vd ans1to3 = concat2(ans1to2, ans3_12);
     vd x6_reg = x6;
     vd fra2_4 = fra2_3;
@@ -114,7 +114,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x8 = (slice(sub8, 24, 24).data == 1) ? sl(x7, 1) : sl(sub8, 1);
     assign(&ans4_12, (slice(sub8, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
-    // 5clk目
+    // 5clk???
     vd ans1to4 = concat2(ans1to3, ans4_12);
     vd x8_reg = x8;
     vd fra2_5 = fra2_4;
@@ -129,7 +129,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x10 = (slice(sub10, 24, 24).data == 1) ? sl(x9, 1) : sl(sub10, 1);
     assign(&ans5_12, (slice(sub10, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
-    // 6clk目
+    // 6clk???
     vd ans1to5 = concat2(ans1to4, ans5_12);
     vd x10_reg = x10;
     vd fra2_6 = fra2_5;
@@ -144,7 +144,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x12 = (slice(sub12, 24, 24).data == 1) ? sl(x11, 1) : sl(sub12, 1);
     assign(&ans6_12, (slice(sub12, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
-    // 7clk目
+    // 7clk???
     vd ans1to6 = concat2(ans1to5, ans6_12);
     vd x12_reg = x12;
     vd fra2_7 = fra2_6;
@@ -159,7 +159,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x14 = (slice(sub14, 24, 24).data == 1) ? sl(x13, 1) : sl(sub14, 1);
     assign(&ans7_12, (slice(sub14, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
-    // 8clk目
+    // 8clk???
     vd ans1to7 = concat2(ans1to6, ans7_12);
     vd x14_reg = x14;
     vd fra2_8 = fra2_7;
@@ -174,7 +174,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x16 = (slice(sub16, 24, 24).data == 1) ? sl(x15, 1) : sl(sub16, 1);
     assign(&ans8_12, (slice(sub16, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
-    // 9clk目
+    // 9clk???
     vd ans1to8 = concat2(ans1to7, ans8_12);
     vd x16_reg = x16;
     vd fra2_9 = fra2_8;
@@ -189,7 +189,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x18 = (slice(sub18, 24, 24).data == 1) ? sl(x17, 1) : sl(sub18, 1);
     assign(&ans9_12, (slice(sub18, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
-    // 10clk目
+    // 10clk???
     vd ans1to9 = concat2(ans1to8, ans9_12);
     vd x18_reg = x18;
     vd fra2_10 = fra2_9;
@@ -204,7 +204,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x20 = (slice(sub20, 24, 24).data == 1) ? sl(x19, 1) : sl(sub20, 1);
     assign(&ans10_12, (slice(sub20, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
-    // 11clk目
+    // 11clk???
     vd ans1to10 = concat2(ans1to9, ans10_12);
     vd x20_reg = x20;
     vd fra2_11 = fra2_10;
@@ -219,7 +219,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x22 = (slice(sub22, 24, 24).data == 1) ? sl(x21, 1) : sl(sub22, 1);
     assign(&ans11_12, (slice(sub22, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
-    // 12clk目
+    // 12clk???
     vd ans1to11 = concat2(ans1to10, ans11_12);
     vd x22_reg = x22;
     vd fra2_12 = fra2_11;
@@ -230,7 +230,7 @@ inline vd fdiv(vd op1, vd op2) {
     vd x23 = (slice(sub23, 24, 24).data == 1) ? sl(x22_reg, 1) : sl(sub23, 1);
     assign(&ans12_12, (slice(sub23, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 1, 1);
 
-    vd sub24 = {(sub(x23, fra2_12).data < 0) ? 1 : 0, 1};
+    vd sub24 = {(x23.data < fra2_12.data) ? 1 : 0, 1};
     assign(&ans12_12, (sub24.data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
     vd ans_exp_12_minus1 = {0, 9};

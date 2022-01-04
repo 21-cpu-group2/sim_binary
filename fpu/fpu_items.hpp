@@ -307,14 +307,12 @@ inline double vd_to_d(verilog_data op){
     return ret;
 }
 
-inline bool isNumber(float f) {
-    union fi f_i;
-    f_i.f = f;
-    if ((0x7F800000 & f_i.i) == 0) {
+inline bool isNumber(uint32_t n) {
+    if ((0x7F800000 & n) == 0) {
         // exp == 0
-        if ((0x007FFFFF & f_i.i) == 0) {
+        if ((0x007FFFFF & n) == 0) {
             // signed zero
-            if ((0x80000000 & f_i.i) == 0) {
+            if ((0x80000000 & n) == 0) {
                 // positive zero
                 return true;
             }
@@ -328,15 +326,15 @@ inline bool isNumber(float f) {
             return false;
         }
     }
-    else if (((0x7F800000 & f_i.i) >> 23) < 255){
+    else if (((0x7F800000 & n) >> 23) < 255){
         // 0 < exp < 255
         // 正規化数
         return true;
     }
     else {
         // exp == 255
-        if ((0x007FFFFF & f_i.i) == 0){
-            if (0x80000000 & f_i.i){
+        if ((0x007FFFFF & n) == 0){
+            if (0x80000000 & n){
                 // 負の無限大
                 return false;
             }

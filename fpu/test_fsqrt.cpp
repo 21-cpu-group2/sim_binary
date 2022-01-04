@@ -6,6 +6,31 @@
 #include "fpu_items.hpp"
 #include "fsqrt.hpp"
 #define DEBUG 1
+#define CHECK 1
+
+int check(){
+    bool flg = true;
+    for (uint32_t ite=0; ite<0xFFFFFFFF; ite++){
+        if (isNumber(ite) && (ite & 0x80000000) == 0){
+            union fi input, output;
+            input.i = ite;
+            vd v = {ite, 32};
+            vd result = fsqrt(v);
+            output.i = result.data;
+            double correct = sqrt((double)input.f);
+            if (abs((double)output.f - correct) >= max(abs(correct)*pow(2, -20), eps)){
+                flg = false;
+            }
+        }
+    }
+    if (flg){
+        cout << "test passed" << endl;
+    }
+    else {
+        cout << "test failed" << endl;
+    }
+    return 0;
+}
 
 int test_simulator(){
     ifstream in("../../fpu/fsqrt/sample_fsqrt.txt");
@@ -35,38 +60,16 @@ int test_simulator(){
 }
 
 int main(){
+    if (CHECK){
+        cout << "check_simulator" << endl;
+        check();
+        return 0;
+    }
     cout << hex ;
     if (DEBUG) {
         cout << "testing_simulator" << endl;
         test_simulator();
         return 0;
-    }
-    int limit_print = 10;
-    int print_num = 0;
-
-    for (uint32_t ite=0x00000000; ite<0xFFFFFFFF; ite++){
-        union fi v_fi1, v_fi2, fi3;
-        v_fi1.i = ite;
-        if (!isNumber(v_fi1.f) || v_fi1.f < 0) continue;
-        vd v = {v_fi1.i, 32};
-        vd result;
-        result = fsqrt(v);
-        v_fi2.i = result.data;
-        if(abs(v_fi2.f - sqrt(v_fi1.f)) >= max(sqrt(v_fi1.f) * pow(2, -20), eps)) {
-            cout << "error" << endl;
-            fi3.f = sqrt(v_fi1.f);
-            bit_print(v_fi1.i);
-            bit_print(v_fi2.i);
-            bit_print(fi3.i);
-            cout << v_fi2.f << " " << sqrt(v_fi1.f) << endl;
-            print_num++;
-        }
-        if (print_num > limit_print){
-            break;
-        }
-        if ((ite & 0x0FFFFFFF) == 0){
-            cout << "10%" << endl;
-        }
     }
     return 0;
 }

@@ -4,6 +4,40 @@
 #include <iomanip>
 #include "fneg.hpp"
 #define DEBUG 1
+#define CHECK 1
+
+int check(){
+    bool flg = true;
+    for (uint32_t ite=0; ite<0xFFFFFFFF; ite++){
+        if (isNumber(ite)){
+            union fi input, correct;
+            input.i = ite;
+            vd v = {ite, 32};
+            vd result = fneg(v);
+            if (ite == 0) {
+                correct.f = 0.0;
+            }
+            else {
+                correct.f = -(input.f);
+            }
+            if (result.data != correct.i){
+                flg = false;
+                bit_print(result.data);
+                cout << result.data << endl;
+                bit_print(correct.i);
+                cout << correct.i << endl;
+                break;
+            }
+        }
+    }
+    if (flg){
+        cout << "test passed" << endl;
+    }
+    else {
+        cout << "test failed" << endl;
+    }
+    return 0;
+}
 
 int test_simulator(){
     ifstream in("../../fpu/fneg/sample_fneg.txt");
@@ -29,36 +63,16 @@ int test_simulator(){
 }
 
 int main(){
+    if (CHECK){
+        cout << "check_simulator" << endl;
+        check();
+        return 0;
+    }
     cout << hex ;
     if (DEBUG) {
         cout << "testing_simulator" << endl;
         test_simulator();
         return 0;
-    }
-    union fi v_fi1, v_fi2;
-    int limit_print = 10;
-    int print_num = 0;
-    for (uint32_t ite=0x00000000; ite<0xFFFFFFFF; ite++){
-        union fi v_fi1, v_fi2;
-        v_fi1.i = ite;
-        if (!isNumber(v_fi1.f)) continue;
-        vd v = {v_fi1.i, 32};
-        vd result;
-        result = fneg(v);
-        v_fi2.i = result.data;
-        if(v_fi2.f != -(v_fi1.f)) {
-            cout << "error" << endl;
-            bit_print(v_fi1.i);
-            bit_print(v_fi2.i);
-            cout << v_fi2.f << " " << (-v_fi1.f) << endl;
-            print_num++;
-        }
-        if (print_num > limit_print){
-            break;
-        }
-        if ((ite & 0x0FFFFFFF) == 0){
-            cout << "10%" << endl;
-        }
     }
     return 0;
 }

@@ -89,8 +89,8 @@ inline vd fadd(vd op1, vd op2){
     // bit_print(op1_is_abs_bigger.data);
     vd shift_1 = {0, 8};
     vd shift_2 = {0, 8};
-    assign(&shift_1, sub(exp1, exp2), -1, 0);
-    assign(&shift_2, sub(exp2, exp1), -1, 0);
+    assign(&shift_1, sub(exp2, exp1), -1, 0);
+    assign(&shift_2, sub(exp1, exp2), -1, 0);
     // bit_print(shift_1.data);
     // bit_print(shift_2.data);
 
@@ -196,7 +196,7 @@ inline vd fadd(vd op1, vd op2){
     // bit_print(ans_shift.data);
     vd marume_up = {0, 1};
     assign(&marume_up, vd_and(vd_and(vd_not(slice(ans, 27, 27)), vd_or(slice(ans, 26, 26), slice(ans, 1, 1))), vd_and_red(slice(ans, 25, 2))), -1, 0);
-    cout << marume_up.data << endl;
+    // cout << marume_up.data << endl;
     vd exp_next = {0, 8};
     vd sig_next = {0, 1};
     vd zero_count_reg = {0, 5};
@@ -205,6 +205,7 @@ inline vd fadd(vd op1, vd op2){
     assign(&for_exp_next, concat2(constant(0, 7), marume_up), -1, 0);
 
     assign(&ans_reg, ans, -1, 0);
+    // bit_print(ans.data);
     assign(&ans_shift_reg, ans_shift, -1, 0);
     assign(&exp_next, add(exp_big, for_exp_next), -1, 0);
     assign(&sig_next, sig_big, -1, 0);
@@ -212,11 +213,15 @@ inline vd fadd(vd op1, vd op2){
 
     vd exp_next_zero = {0, 9};
     assign(&exp_next_zero, concat2(constant(0, 1), exp_next), -1, 0);
-    bit_print(exp_next_zero.data);
+    // bit_print(exp_next_zero.data);
 
     //2-3
 
     vd for_ZLC0_fra = {0, 23};
+    // cout << slice(ans_reg, 3, 0).data << endl;
+    // cout << slice(ans_reg, 3, 0).bit_num << endl;
+    // cout << vd_or_red(slice(ans_reg, 3, 0)).data << endl;
+    
     assign(&for_ZLC0_fra, concat2(constant(0, 22), vd_or_red(slice(ans_reg, 3, 0))), -1, 0);
     vd ZLC0_fra = {0, 23};
     assign(&ZLC0_fra, add(ans_shift_reg, for_ZLC0_fra), -1, 0);
@@ -227,7 +232,7 @@ inline vd fadd(vd op1, vd op2){
     assign(&for_ZLC1_fra, concat2(constant(0, 22), vd_or_red(slice(ans_reg, 2, 0))), -1, 0);
     // cout << for_ZLC1_fra.data << endl;
     vd ZLC1_fra = {0, 23};
-    bit_print(ans_shift_reg.data);
+    // bit_print(ans_shift_reg.data);
     assign(&ZLC1_fra, add(ans_shift_reg, for_ZLC1_fra), -1, 0);
     vd ZLC1_exp = {0, 8};
     assign(&ZLC1_exp, exp_next, -1, 0);
@@ -256,41 +261,81 @@ inline vd fadd(vd op1, vd op2){
     assign(&ZLC_lt3_exp, add(sub(exp_next_zero, for_ZLC_lt3_exp), for2_ZLC_lt3_exp), -1, 0);
 
     if (zero_count_reg.data == 0){
-        cout << "a" << endl;
+        // cout << "a" << endl;
         assign(&result, concat3(sig_next, ZLC0_exp, ZLC0_fra), -1, 0);
     } else if (zero_count_reg.data == 1){
-        cout << "b" << endl;
+        // cout << "b" << endl;
         assign(&result, concat3(sig_next, ZLC1_exp, ZLC1_fra), -1, 0);
     } else if (zero_count_reg.data == 2){
-        cout << "c" << endl;
+        // cout << "c" << endl;
         if (slice(ZLC2_exp,8, 8).data){
             assign(&result, concat3(sig_next, constant(0, 8), ZLC2_fra), -1, 0);
         } else {
             assign(&result, concat3(sig_next, slice(ZLC2_exp, 7, 0), ZLC2_fra), -1, 0);
         } 
     } else if (zero_count_reg.data == 3){
-        cout << "d" << endl;
+        // cout << "d" << endl;
         if (slice(ZLC3_exp,8, 8).data){
             assign(&result, concat3(sig_next, constant(0, 8), ZLC3_fra), -1, 0);
         } else {
             assign(&result, concat3(sig_next, slice(ZLC3_exp, 7, 0), ZLC3_fra), -1, 0);
         } 
     } else {
-        cout << "e" << endl;
+        // cout << "e" << endl;
         if (slice(ZLC_lt3_exp, 8, 8).data){
             assign(&result, concat3(sig_next, constant(0, 8), ZLC3_fra), -1, 0);
         } else {
             assign(&result, concat3(sig_next, slice(ZLC_lt3_exp, 7, 0), ZLC_lt3_fra), -1, 0);
         }
     }
-    bit_print(concat3(sig_next, ZLC0_exp, ZLC0_fra).data);
-    bit_print(concat3(sig_next, ZLC1_exp, ZLC1_fra).data);
-    bit_print(concat3(sig_next, constant(0, 8), ZLC2_fra).data);
-    bit_print(concat3(sig_next, slice(ZLC2_exp, 7, 0), ZLC2_fra).data);
-    bit_print(concat3(sig_next, constant(0, 8), ZLC3_fra).data);
-    bit_print(concat3(sig_next, slice(ZLC3_exp, 7, 0), ZLC3_fra).data);
-    bit_print(concat3(sig_next, constant(0, 8), ZLC3_fra).data);
-    bit_print(concat3(sig_next, slice(ZLC_lt3_exp, 7, 0), ZLC_lt3_fra).data);
+    // bit_print(concat3(sig_next, ZLC0_exp, ZLC0_fra).data);
+    // bit_print(concat3(sig_next, ZLC1_exp, ZLC1_fra).data);
+    // bit_print(concat3(sig_next, constant(0, 8), ZLC2_fra).data);
+    // bit_print(concat3(sig_next, slice(ZLC2_exp, 7, 0), ZLC2_fra).data);
+    // bit_print(concat3(sig_next, constant(0, 8), ZLC3_fra).data);
+    // bit_print(concat3(sig_next, slice(ZLC3_exp, 7, 0), ZLC3_fra).data);
+    // bit_print(concat3(sig_next, constant(0, 8), ZLC3_fra).data);
+    // bit_print(concat3(sig_next, slice(ZLC_lt3_exp, 7, 0), ZLC_lt3_fra).data);
+    // cout << hex;
+    // cout << "exp1 : " << exp1.data << endl;
+    // cout << "exp2 : " << exp2.data << endl;
+    // cout << "fra1 : " << fra1.data << endl;
+    // cout << "fra2 : " << fra2.data << endl;
+    // cout << "op1_is_abs_bigger : " << op1_is_abs_bigger.data << endl;
+    // cout << "shift_1 : " << shift_1.data << endl;
+    // cout << "shift_2 : " << shift_2.data << endl;
+    // cout << "op_big : " << op_big.data << endl;
+    // cout << "op_small : " << op_small.data << endl;
+    // cout << "exp_big : " << exp_big.data << endl;
+    // cout << "sig_big : " << sig_big.data << endl;
+    // cout << "sig_small : " << sig_small.data << endl;
+    // cout << "ans : " << ans.data << endl;
+    // cout << "ans_reg : " << ans_reg.data << endl;
+    // cout << "zero_count : " << zero_count.data << endl;
+    // cout << "ans_shift : " << ans_shift.data << endl;
+    // cout << "ans_shift_reg : " << ans_shift_reg.data << endl;
+    // cout << "marume_up : " << marume_up.data << endl;
+    // cout << "exp_next : " << exp_next.data << endl;
+    // cout << "sig_next : " << sig_next.data << endl;
+    // cout << "zero_count_reg : " << zero_count_reg.data << endl;
+    // cout << "exp_next_zero: " << exp_next_zero.data << endl;
+    // cout << "for_exp_next : " << for_exp_next.data << endl;
+    // cout << "for_ZLC0_fra : " << for_ZLC0_fra.data << endl;
+    // cout << "ZLC0_fra : " << ZLC0_fra.data << endl;
+    // cout << "ZLC0_exp : " << ZLC0_exp.data << endl;
+    // cout << "for_ZLC1_fra : " << for_ZLC1_fra.data << endl;
+    // cout << "ZLC1_fra : " << ZLC1_fra.data << endl;
+    // cout << "ZLC1_exp : " << ZLC1_exp.data << endl;
+    // cout << "for_ZLC2_fra : " << for_ZLC2_fra.data << endl;
+    // cout << "ZLC2_fra : " << ZLC2_fra.data << endl;
+    // cout << "ZLC2_exp : " << ZLC2_exp.data << endl;
+    // cout << "for_ZLC3_fra : " << for_ZLC3_fra.data << endl;
+    // cout << "ZLC3_fra : " << ZLC3_fra.data << endl;
+    // cout << "ZLC3_exp : " << ZLC3_exp.data << endl;
+
+
+
+
     return result;
 }
 

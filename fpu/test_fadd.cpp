@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <iomanip>
 #include "fadd.hpp"
-#include "fsub.hpp"
 #define DEBUG 1
 #define DEBUG2 0
 
@@ -13,7 +12,7 @@ int test_simulator(){
     string op1, op2, res;
     union fi op1_ui, op2_ui, res_ui, result_ui;
     cout << dec;
-    for (int i=0; i<3000; i++){
+    for (int i=0; i<14001; i++){
         cin >> op1 >> op2 >> res;
         // cout << op << " " << res << endl;
         op1_ui.i = stoul(op1, 0, 2);
@@ -21,7 +20,7 @@ int test_simulator(){
         res_ui.i = stoul(res, 0, 2);
         vd v1 = {op1_ui.i, 32};
         vd v2 = {op2_ui.i, 32};
-        vd result = fsub(v1, v2);
+        vd result = fadd(v1, v2);
         result_ui.i = result.data;
         if (result.data != res_ui.i){
             cout << "error in " << i+1 << "line" << endl;
@@ -47,6 +46,8 @@ int test_simulator_instance() {
     union fi op1_ui, op2_ui, res_ui, result_ui;
     op1_ui.i = 0b01111111010010111100101111001111;
     op2_ui.i = 0b01110101100110011111100011001111;
+    // op1_ui.i = 0x7F3A1DC2;
+    // op2_ui.i = 0x881DB280;
     vd v1 = {op1_ui.i, 32};
     vd v2 = {op2_ui.i, 32};
     vd result = fadd(v1, v2);

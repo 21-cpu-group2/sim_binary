@@ -6,6 +6,39 @@
 #include "fpu_items.hpp"
 #include "itof.hpp"
 #define DEBUG 1
+#define CHECK 1
+
+int check(){
+    bool flg = true;
+    for (uint32_t ite=0; ite<0xFFFFFFFF; ite++){
+        int i = (int)ite;
+        union fi result_fi;
+        vd op = {ite, 32};
+        vd result = itof(op);
+        result_fi.i = result.data;
+        if (ite == 0) {
+            if (result_fi.i == 0) continue;
+        }
+        // 候補
+        union fi c1, c2, c3;
+        c2.i = result_fi.i - 1;
+        c3.i = result_fi.i + 1;
+        if ( ((abs((double)c2.f - (double)i) < abs((double)result_fi.f - (double)i))
+           || (abs((double)c3.f - (double)i) < abs((double)result_fi.f - (double)i))) ){
+            cout << c2.f << endl;
+            cout << result_fi.f << endl;
+            flg = false;
+            break;
+        }
+    }
+    if (flg){
+        cout << "test passed" << endl;
+    }
+    else {
+        cout << "test failed" << endl;
+    }
+    return 0;
+}
 
 int test_simulator(){
     ifstream in("../../fpu/itof/sample_itof.txt");
@@ -31,40 +64,16 @@ int test_simulator(){
 }
 
 int main(){
+    if (CHECK){
+        cout << "check_simulator" << endl;
+        check();
+        return 0;
+    }
     cout << hex ;
     if (DEBUG) {
         cout << "testing_simulator" << endl;
         test_simulator();
         return 0;
     }
-    union fi a, b, c, d;
-    a.f = 2.3;
-    b.f = 3.5;
-    c.f = -20.0; // 0x41A00000
-    d.f = -6.1;
-    random_device rnd;
-    mt19937 mt(rnd());
-    normal_distribution<> norm(0.0, 10000.0);
-    for (int ite =0; ite<1000; ite++){
-        int a = mt();
-        vd a_vd = {a, 32};
-        union fi a_fi;
-        a_fi.i = (itof(a_vd).data);
-        //bit_print((uint32_t)a);
-        //cout << (float)a << " " << a_fi.f << endl;
-    }
-    vd v0 = {3, 32};
-    vd v1 = {100, 32};
-    vd v2 = {3245, 32};
-    vd v3 = {-13245, 32};
-    a.i = itof(v0).data;
-    b.i = itof(v1).data;
-    c.i = itof(v2).data;
-    d.i = itof(v3).data;
-    cout << fixed << setprecision(10);
-    cout << a.f << endl;
-    cout << b.f << endl;
-    cout << c.f << endl;
-    cout << d.f << endl;
     return 0;
 }

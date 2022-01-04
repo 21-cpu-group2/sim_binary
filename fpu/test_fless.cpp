@@ -4,9 +4,69 @@
 #include <iomanip>
 #include "fless.hpp"
 #define DEBUG 1
-#define CHECK 0
+#define CHECK 1
+
+const float FLOAT_MIN = pow(2, -126);
+const float FLOAT_MAX = pow(2, 127);
 
 int check(){
+    bool flg = true;
+    random_device rd;
+    default_random_engine eng(rd());
+    uniform_real_distribution<float> distr(FLOAT_MIN, FLOAT_MAX);
+    for (uint32_t ite=0; ite<0xFFFFFFFF; ite++){
+        if (isNumber(ite)){
+            union fi op1_fi, op2_fi, min_fi, max_fi;
+            op1_fi.i = ite;
+            op2_fi.f = distr(eng);
+            min_fi.f = FLOAT_MIN;
+            max_fi.f = FLOAT_MAX;
+            vd op1 = {op1_fi.i, 32};
+            vd op2 = {op2_fi.i, 32};
+            vd zero = {0, 32};
+            vd min_f = {min_fi.i, 32}; 
+            vd max_f = {max_fi.i, 32}; 
+            if ((fless(op1, op2).data == 1) ^ (op1_fi.f < op2_fi.f)){
+                cout << "error" << endl;
+            } 
+            if ((fless(op1, constant(0, 32)).data == 1) ^ (op1_fi.f < 0.0)){
+                cout << "error" << endl;
+            }
+            if ((fless(op1, min_f).data == 1) ^ (op1_fi.f < FLOAT_MIN)){
+                cout << "error" << endl;
+            }
+            if ((fless(op1, max_f).data == 1) ^ (op1_fi.f < FLOAT_MAX)){
+                cout << "error" << endl;
+            }
+        }
+    }
+    cout << "half" << endl;
+    for (uint32_t ite=0; ite<0xFFFFFFFF; ite++){
+        if (isNumber(ite)){
+            union fi op1_fi, op2_fi, min_fi, max_fi;
+            op2_fi.i = ite;
+            op1_fi.i = distr(eng);
+            min_fi.f = FLOAT_MIN;
+            max_fi.f = FLOAT_MAX;
+            vd op1 = {op1_fi.i, 32};
+            vd op2 = {op2_fi.i, 32};
+            vd zero = {0, 32};
+            vd min_f = {min_fi.i, 32}; 
+            vd max_f = {max_fi.i, 32}; 
+            if ((fless(op1, op2).data == 1) ^ (op1_fi.f < op2_fi.f)){
+                cout << "error" << endl;
+            } 
+            if ((fless(constant(0, 32), op2).data == 1) ^ (0.0 < op2_fi.f)){
+                cout << "error" << endl;
+            }
+            if ((fless(min_f, op2).data == 1) ^ (FLOAT_MIN < op2_fi.f)){
+                cout << "error" << endl;
+            }
+            if ((fless(max_f, op2).data == 1) ^ (FLOAT_MAX < op2_fi.f)){
+                cout << "error" << endl;
+            }
+        }
+    }
     return 1;
 }
 

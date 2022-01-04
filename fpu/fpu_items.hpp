@@ -6,7 +6,10 @@
 #include <math.h>
 #include <fstream>
 #include <istream>
+#include <random>
 #define eps pow(2, -126)
+const float FLOAT_MIN = pow(2, -126);
+const float FLOAT_MAX = pow(2, 127);
 
 using namespace std;
 
@@ -363,6 +366,15 @@ void bit_print(uint32_t n) {
     return;
 }
 
+inline uint32_t make_random_float(){
+    random_device rnd;
+    uint32_t ret;
+    while (1) {
+        ret = rnd();
+        if (isNumber(ret)) break;
+    }
+    return ret;
+}
 
 #endif
 

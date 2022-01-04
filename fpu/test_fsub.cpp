@@ -2,53 +2,73 @@
 #include <string>
 #include <stdlib.h>
 #include <iomanip>
-#include <random>
-#include "fpu_items.hpp"
 #include "fsub.hpp"
+#define DEBUG 1
+#define DEBUG2 0
 
-using namespace std;
+int test_simulator(){
+    ifstream in("../../fpu/fsub/sample_fsub.txt");
+    cin.rdbuf(in.rdbuf());
+    string op1, op2, res;
+    union fi op1_ui, op2_ui, res_ui, result_ui;
+    cout << dec;
+    for (int i=0; i<3000; i++){
+        cin >> op1 >> op2 >> res;
+        // cout << op << " " << res << endl;
+        op1_ui.i = stoul(op1, 0, 2);
+        op2_ui.i = stoul(op2, 0, 2);
+        res_ui.i = stoul(res, 0, 2);
+        vd v1 = {op1_ui.i, 32};
+        vd v2 = {op2_ui.i, 32};
+        vd result = fsub(v1, v2);
+        result_ui.i = result.data;
+        if (result.data != res_ui.i){
+            cout << "error in " << i+1 << "line" << endl;
+            cout << "  op1" << endl;
+            bit_print(op1_ui.i);
+            cout << op1_ui.f << endl;
+            cout << "  op2" << endl;
+            bit_print(op2_ui.i);
+            cout << op2_ui.f << endl;
+            cout << "  result" << endl;
+            bit_print(result_ui.i);
+            cout << result_ui.f << endl;
+            cout << "  correct output" << endl;
+            bit_print(res_ui.i);
+            cout << res_ui.f << endl << endl; 
+        }
+    }
+    return 0;
+}
 
- #define eps pow(2, -126)
+int test_simulator_instance() {
+    cout << dec;
+    union fi op1_ui, op2_ui, res_ui, result_ui;
+    op1_ui.i = 0b01111111010010111100101111001111;
+    op2_ui.i = 0b01110101100110011111100011001111;
+    vd v1 = {op1_ui.i, 32};
+    vd v2 = {op2_ui.i, 32};
+    vd result = fsub(v1, v2);
+    result_ui.i = result.data;
+    res_ui.i = 0b01111111010010111100101111100011;
+    cout << endl;
+    bit_print(op1_ui.i);
+    bit_print(op2_ui.i);
+    bit_print(result_ui.i);
+    bit_print(res_ui.i);
+    return 0;
+}
 
 int main(){
-    union fi a, b, c, d;
-    a.f = 2.3;
-    b.f = 3.5;
-    c.f = -20.0; // 0x41A00000
-    d.f = -6.1;
-    vd v0 = {a.i, 32};
-    vd v1 = {b.i, 32};
-    a.i = fsub(v0, v1).data;
-    cout << a.f<< endl;
-
-    // random_device rnd;
-    // default_random_engine eng(rnd());
-    // uniform_real_distribution<> distr(FLOAT_MIN, FLOAT_MAX);
-    // mt19937 mt(rnd());
-    // for (int ite=0; ite<100000000; ite++){
-    //     int ai = mt();
-    //     int bi = mt();
-    //     // a.i = ai;
-    //     // b.i = bi;
-    //     a.f = distr(eng);
-    //     b.f = distr(eng);
-    //     vd v0 = {a.i, 32};
-    //     vd v1 = {b.i, 32};
-    //     c.i = fdiv(v0, v1).data;
-    //     cout << fixed << setprecision(10);
-    //     if ((abs(c.f - (a.f / b.f)) >= max(abs(a.f / b.f) * pow(2, -20), eps))) {
-    //         cout << "error" << endl;
-    //         cout << a.f << endl;
-    //         cout << b.f << endl;
-    //         cout << c.f << " " << (a.f / b.f) << endl;
-    //     }
-    //     if ((ite-1) % 10000000 == 0) cout << "10%" << endl;
-    // }
-    // b.i = floor(v1).data;
-    // c.i = floor(v2).data;
-    // d.i = floor(v3).data;
-    // cout << b.f << endl;
-    // cout << c.f << endl;
-    // cout << d.f << endl;
+    cout << hex ;
+    if (DEBUG2) {
+        test_simulator_instance();
+        return 0;
+    }
+    if (DEBUG) {
+        cout << "testing_simulator" << endl;
+        test_simulator();
+        return 0;
+    }
     return 0;
 }

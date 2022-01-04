@@ -4,6 +4,7 @@
 #include <iomanip>
 #include "fadd.hpp"
 #define DEBUG 1
+#define DEBUG2 0
 
 int test_simulator(){
     ifstream in("../../fpu/fadd/sample_fadd.txt");
@@ -40,8 +41,32 @@ int test_simulator(){
     return 0;
 }
 
+int test_simulator_instance() {
+    cout << dec;
+    union fi op1_ui, op2_ui, res_ui, result_ui;
+    op1_ui.i = 0b01111111010010111100101111001111;
+    op2_ui.i = 0b01110101100110011111100011001111;
+    // op1_ui.i = 0x7F3A1DC2;
+    // op2_ui.i = 0x881DB280;
+    vd v1 = {op1_ui.i, 32};
+    vd v2 = {op2_ui.i, 32};
+    vd result = fadd(v1, v2);
+    result_ui.i = result.data;
+    res_ui.i = 0b01111111010010111100101111100011;
+    cout << endl;
+    bit_print(op1_ui.i);
+    bit_print(op2_ui.i);
+    bit_print(result_ui.i);
+    bit_print(res_ui.i);
+    return 0;
+}
+
 int main(){
     cout << hex ;
+    if (DEBUG2) {
+        test_simulator_instance();
+        return 0;
+    }
     if (DEBUG) {
         cout << "testing_simulator" << endl;
         test_simulator();

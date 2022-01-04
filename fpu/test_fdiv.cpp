@@ -18,7 +18,7 @@ int test_simulator(){
     string op1, op2, res;
     union fi op1_ui, op2_ui, res_ui, result_ui;
     cout << dec;
-    for (int i=0; i<10000; i++){
+    for (int i=0; i<13001; i++){
         cin >> op1 >> op2 >> res;
         // cout << op << " " << res << endl;
         op1_ui.i = stoul(op1, 0, 2);
@@ -30,14 +30,18 @@ int test_simulator(){
         result_ui.i = result.data;
         if (result.data != res_ui.i){
             cout << "error in " << i+1 << "line" << endl;
+            cout << "  op1" << endl;
             bit_print(op1_ui.i);
             cout << op1_ui.f << endl;
+            cout << "  op2" << endl;
             bit_print(op2_ui.i);
             cout << op2_ui.f << endl;
-            bit_print(res_ui.i);
-            cout << res_ui.f << endl;
+            cout << "  result" << endl;
             bit_print(result_ui.i);
-            cout << result_ui.f << endl << endl;
+            cout << result_ui.f << endl;
+            cout << "  correct output" << endl;
+            bit_print(res_ui.i);
+            cout << res_ui.f << endl << endl; 
         }
     }
     return 0;

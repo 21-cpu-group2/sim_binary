@@ -7,6 +7,39 @@
 #include "floor.hpp"
 
 #define DEBUG 1
+#define CHECK 1
+
+int check(){
+    bool flg = true;
+    int ratio = 0;
+    for (uint32_t ite=0; ite<0xFFFFFFFF; ite++){
+        if (isNumber(ite)){
+            union fi input, output, correct;
+            input.i = ite;
+            vd v = {ite, 32};
+            vd result = floor(v);
+            output.i = result.data;
+            if (!((output.f <= input.f && input.f < output.f + 1.0) || (output.f == input.f))){
+                cout << input.f << endl;
+                bit_print(input.i);
+                cout << output.f << endl;
+                bit_print(output.i);
+                return 0;
+            }
+        }
+        if ((ite & 0x0FFFFFFF) == 0){
+        cout << 100 * ratio /16 << "%" << endl; 
+        ratio++;
+    }
+    }
+    if (flg){
+        cout << "test passed" << endl;
+    }
+    else {
+        cout << "test failed" << endl;
+    }
+    return 0;
+}
 
 int test_simulator(){
     ifstream in("../../fpu/floor/sample_floor.txt");
@@ -30,36 +63,16 @@ int test_simulator(){
 }
 
 int main(){
+    if (CHECK){
+        cout << "check_simulator" << endl;
+        check();
+        return 0;
+    }
     cout << hex ;
     if (DEBUG) {
         cout << "testing_simulator" << endl;
         test_simulator();
         return 0;
-    }
-    union fi v_fi1, v_fi2;
-    int limit_print = 10;
-    int print_num = 0;
-    cout << std::floor(-1.0) << endl;
-    for (uint32_t ite=0x00000000; ite<0xFFFFFFFF; ite++){
-        union fi v_fi1, v_fi2;
-        v_fi1.i = ite;
-        if (!isNumber(v_fi1.f)) continue;
-        vd v = {v_fi1.i, 32};
-        vd result;
-        result = floor(v);
-        v_fi2.i = result.data;
-        if(v_fi2.f != std::floor(v_fi1.f)) {
-            cout << "error" << endl;
-            bit_print(v_fi1.i);
-            cout << v_fi2.f << " " << std::floor(v_fi1.f) << endl;
-            print_num++;
-        }
-        if (print_num > limit_print){
-            break;
-        }
-        if ((ite & 0x0FFFFFFF) == 0){
-            cout << "10%" << endl;
-        }
     }
     return 0;
 }

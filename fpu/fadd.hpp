@@ -5,7 +5,8 @@ using namespace std;
 
 
 inline void ZLC(vd op, vd* out, vd* ans_shift_out){
-    assign(out, (slice(op, 27, 27).data ? constant(0, 5) :
+    assign(out, (
+                slice(op, 27, 27).data ? constant(0, 5) :
                 slice(op, 26, 26).data ? constant(1, 5) :
                 slice(op, 25, 25).data ? constant(2, 5) :
                 slice(op, 24, 24).data ? constant(3, 5) :
@@ -31,7 +32,8 @@ inline void ZLC(vd op, vd* out, vd* ans_shift_out){
                 slice(op, 4, 4).data ? constant(23, 5) :
                 slice(op, 3, 3).data ? constant(24, 5) :
                 slice(op, 2, 2).data ? constant(25, 5) : constant(28, 5)), -1, 0);
-    assign(ans_shift_out, (slice(op, 27, 27).data ? slice(op, 26, 4) :
+    assign(ans_shift_out, (
+                slice(op, 27, 27).data ? slice(op, 26, 4) :
                 slice(op, 26, 26).data ? slice(op, 25, 3) :
                 slice(op, 25, 25).data ? slice(op, 24, 2) :
                 slice(op, 24, 24).data ? slice(op, 23, 1) :
@@ -69,19 +71,28 @@ inline vd fadd(vd op1, vd op2){
     vd fra1 = {0, 28};
     vd fra2 = {0, 28};
     assign(&sig1, slice(op1, 31, 31), -1, 0);
+    // bit_print(sig1.data);
     assign(&sig2, slice(op2, 31, 31), -1, 0);
+    // bit_print(sig2.data);
     assign(&exp1, slice(op1, 30, 23), -1, 0);
+    // bit_print(exp1.data);
     assign(&exp2, slice(op2, 30, 23), -1, 0);
+    // bit_print(exp2.data);
     assign(&fra1, ((exp1.data == 0) ? concat3(constant(0, 2), slice(op1, 22, 0), constant(0, 3)) : concat3(constant(1, 2), slice(op1, 22, 0), constant(0, 3))), -1, 0);
+    // bit_print(fra1.data);
     assign(&fra2, ((exp2.data == 0) ? concat3(constant(0, 2), slice(op2, 22, 0), constant(0, 3)) : concat3(constant(1, 2), slice(op2, 22, 0), constant(0, 3))), -1, 0);
+    // bit_print(fra2.data);
+    // cout << "end" << endl;
 
     vd op1_is_abs_bigger = {0, 1};
-    assign(&op1_is_abs_bigger, ((exp1.data == exp2.data) ? constant(uint32_t (slice(op1, 22, 0).data > slice(op2, 22, 0).data), 1) : constant(uint32_t (exp1.data > exp2.data), 1)), -1, 0);
-
+    assign(&op1_is_abs_bigger, ((exp1.data == exp2.data) ? constant((slice(op1, 22, 0).data > slice(op2, 22, 0).data) ? 1 : 0, 1) : constant((exp1.data > exp2.data)? 1 : 0, 1)), -1, 0);
+    // bit_print(op1_is_abs_bigger.data);
     vd shift_1 = {0, 8};
     vd shift_2 = {0, 8};
     assign(&shift_1, sub(exp1, exp2), -1, 0);
     assign(&shift_2, sub(exp2, exp1), -1, 0);
+    // bit_print(shift_1.data);
+    // bit_print(shift_2.data);
 
     vd op_big = {0, 28};
     vd op_small = {0, 28};
@@ -89,12 +100,19 @@ inline vd fadd(vd op1, vd op2){
     vd sig_big = {0, 1};
     vd sig_small = {0, 1};
 
-    //ここから1clk目
+    //????????????1clk???
     if (op1_is_abs_bigger.data){
+        // cout << "pass" << endl;
         assign(&op_big, fra1, -1, 0);
+        // bit_print(op_big.data);
         assign(&exp_big, exp1, -1, 0);
+        // bit_print(exp_big.data);
         assign(&sig_big, sig1, -1, 0);
+        // bit_print(sig_big.data);
         assign(&sig_small, sig2, -1, 0);
+        // bit_print(sig_small.data);
+        // cout << "end" << endl;
+        // cout << shift_2.data << endl;
         switch (shift_2.data) {
             case 0 : assign(&op_small, fra2, -1, 0); break;
             case 1 : assign(&op_small, sr(fra2, 1), -1, 0); break;
@@ -130,7 +148,7 @@ inline vd fadd(vd op1, vd op2){
         assign(&exp_big, exp2, -1, 0);
         assign(&sig_big, sig2, -1, 0);
         assign(&sig_small, sig1, -1, 0);
-        switch (shift_2.data) {
+        switch (shift_1.data) {
             case 0 : assign(&op_small, fra1, -1, 0); break;
             case 1 : assign(&op_small, sr(fra1, 1), -1, 0); break;
             case 2 : assign(&op_small, sr(fra1, 2), -1, 0); break;
@@ -162,17 +180,23 @@ inline vd fadd(vd op1, vd op2){
         }
     }
     //1-2
-
+    // bit_print(op_small.data);
     vd ans = {0, 28};
-    assign(&ans, (vd_or(sig_big, sig_small).data) ? sub(op_big, op_small) : add(op_big, op_small), -1, 0);
+    // cout << vd_xor(sig_big, sig_small).data << endl;
+    assign(&ans, (vd_xor(sig_big, sig_small).data) ? sub(op_big, op_small) : add(op_big, op_small), -1, 0);
+    // bit_print(sub(op_big, op_small).data);
+    // bit_print(add(op_big, op_small).data);
+    // bit_print(ans.data);
     vd ans_reg = {0, 28};
     vd zero_count = {0, 5};
     vd ans_shift = {0, 23};
     vd ans_shift_reg = {0, 23};
     ZLC(ans, &zero_count, &ans_shift);
+    // bit_print(zero_count.data);
+    // bit_print(ans_shift.data);
     vd marume_up = {0, 1};
     assign(&marume_up, vd_and(vd_and(vd_not(slice(ans, 27, 27)), vd_or(slice(ans, 26, 26), slice(ans, 1, 1))), vd_and_red(slice(ans, 25, 2))), -1, 0);
-
+    cout << marume_up.data << endl;
     vd exp_next = {0, 8};
     vd sig_next = {0, 1};
     vd zero_count_reg = {0, 5};
@@ -188,6 +212,7 @@ inline vd fadd(vd op1, vd op2){
 
     vd exp_next_zero = {0, 9};
     assign(&exp_next_zero, concat2(constant(0, 1), exp_next), -1, 0);
+    bit_print(exp_next_zero.data);
 
     //2-3
 
@@ -200,7 +225,9 @@ inline vd fadd(vd op1, vd op2){
 
     vd for_ZLC1_fra = {0, 23};
     assign(&for_ZLC1_fra, concat2(constant(0, 22), vd_or_red(slice(ans_reg, 2, 0))), -1, 0);
+    // cout << for_ZLC1_fra.data << endl;
     vd ZLC1_fra = {0, 23};
+    bit_print(ans_shift_reg.data);
     assign(&ZLC1_fra, add(ans_shift_reg, for_ZLC1_fra), -1, 0);
     vd ZLC1_exp = {0, 8};
     assign(&ZLC1_exp, exp_next, -1, 0);
@@ -228,29 +255,42 @@ inline vd fadd(vd op1, vd op2){
     vd ZLC_lt3_exp = {0, 9};
     assign(&ZLC_lt3_exp, add(sub(exp_next_zero, for_ZLC_lt3_exp), for2_ZLC_lt3_exp), -1, 0);
 
-    if (equali(zero_count_reg, 0)){
+    if (zero_count_reg.data == 0){
+        cout << "a" << endl;
         assign(&result, concat3(sig_next, ZLC0_exp, ZLC0_fra), -1, 0);
-    } else if (equali(zero_count_reg, 1)){
+    } else if (zero_count_reg.data == 1){
+        cout << "b" << endl;
         assign(&result, concat3(sig_next, ZLC1_exp, ZLC1_fra), -1, 0);
-    } else if (equali(zero_count_reg, 2)){
+    } else if (zero_count_reg.data == 2){
+        cout << "c" << endl;
         if (slice(ZLC2_exp,8, 8).data){
             assign(&result, concat3(sig_next, constant(0, 8), ZLC2_fra), -1, 0);
         } else {
             assign(&result, concat3(sig_next, slice(ZLC2_exp, 7, 0), ZLC2_fra), -1, 0);
         } 
-    } else if (equali(zero_count_reg, 3)){
+    } else if (zero_count_reg.data == 3){
+        cout << "d" << endl;
         if (slice(ZLC3_exp,8, 8).data){
             assign(&result, concat3(sig_next, constant(0, 8), ZLC3_fra), -1, 0);
         } else {
             assign(&result, concat3(sig_next, slice(ZLC3_exp, 7, 0), ZLC3_fra), -1, 0);
         } 
     } else {
+        cout << "e" << endl;
         if (slice(ZLC_lt3_exp, 8, 8).data){
             assign(&result, concat3(sig_next, constant(0, 8), ZLC3_fra), -1, 0);
         } else {
             assign(&result, concat3(sig_next, slice(ZLC_lt3_exp, 7, 0), ZLC_lt3_fra), -1, 0);
         }
     }
+    bit_print(concat3(sig_next, ZLC0_exp, ZLC0_fra).data);
+    bit_print(concat3(sig_next, ZLC1_exp, ZLC1_fra).data);
+    bit_print(concat3(sig_next, constant(0, 8), ZLC2_fra).data);
+    bit_print(concat3(sig_next, slice(ZLC2_exp, 7, 0), ZLC2_fra).data);
+    bit_print(concat3(sig_next, constant(0, 8), ZLC3_fra).data);
+    bit_print(concat3(sig_next, slice(ZLC3_exp, 7, 0), ZLC3_fra).data);
+    bit_print(concat3(sig_next, constant(0, 8), ZLC3_fra).data);
+    bit_print(concat3(sig_next, slice(ZLC_lt3_exp, 7, 0), ZLC_lt3_fra).data);
     return result;
 }
 

@@ -164,7 +164,7 @@ inline vd fsub(vd op1, vd op2){
     //1-2
 
     vd ans = {0, 28};
-    assign(&ans, (vd_or(sig_big, sig_small).data) ? sub(op_big, op_small) : add(op_big, op_small), -1, 0);
+    assign(&ans, (vd_xor(sig_big, sig_small).data) ? sub(op_big, op_small) : add(op_big, op_small), -1, 0);
     vd ans_reg = {0, 28};
     vd zero_count = {0, 5};
     vd ans_shift = {0, 23};

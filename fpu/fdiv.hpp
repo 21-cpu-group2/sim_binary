@@ -230,12 +230,12 @@ inline vd fdiv(vd op1, vd op2) {
     vd x23 = (slice(sub23, 24, 24).data == 1) ? sl(x22_reg, 1) : sl(sub23, 1);
     assign(&ans12_12, (slice(sub23, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 1, 1);
 
-    vd sub24 = {(sub(x23, fra2_12).data < 0) ? 1 : 0, 1};
+    vd sub24 = {(x23.data < fra2_12.data) ? 1 : 0, 1};
     assign(&ans12_12, (sub24.data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
     vd ans_exp_12_minus1 = {0, 9};
     if (exp1.data == 0){
-        ans_exp_12_minus1 = constant(pow(2, 8), 9);
+        ans_exp_12_minus1 = constant((uint32_t)pow(2, 8), 9);
     } else {
         ans_exp_12_minus1 = sub(ans_exp_12, constant(1, 9));
     }

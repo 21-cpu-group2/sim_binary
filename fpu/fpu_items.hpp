@@ -123,7 +123,7 @@ inline verilog_data sub(verilog_data r1, verilog_data r2){
     if (op2 & (1 << (r2.bit_num - 1))){
         op2 |= (0xFFFFFFFF << (r2.bit_num));
     }
-    uint32_t ret_data = (op1 + ~op2 + 1) & bit_mask(r1.bit_num);
+    uint32_t ret_data = (uint32_t)(op1 - op2) & bit_mask(r1.bit_num);
     verilog_data ret = {ret_data, r1.bit_num};
     return ret;
 }

@@ -11,8 +11,8 @@ inline vd ftoi(vd op){
     assign(&sig, slice(op, 31, 31), 0, 0);
     assign(&exp, slice(op, 30, 23), 7, 0);
     assign(&fra, slice(op, 22, 0), 22, 0);
-    vd flag_ans_top = {0, 1};  // ¾å°Ì1bit
-    vd flag_ans_bottom = {0, 32}; // ²¼°Ì32bit
+    vd flag_ans_top = {0, 1};  // ï¿½ï¿½ï¿½1bit
+    vd flag_ans_bottom = {0, 32}; // ï¿½ï¿½ï¿½ï¿½32bit
     vd sig_reg = {0, 1};
 
     // initialization
@@ -22,7 +22,7 @@ inline vd ftoi(vd op){
     assign(&sig_reg, sig, 0, 0);
     switch (exp.data) {
         case 126:
-            assign(&flag_ans_top, constant(0, 1), 0, 0);
+            assign(&flag_ans_top, constant(1, 1), 0, 0);
             assign(&flag_ans_bottom, constant(0, 32), 31, 0);
             break;
         case 127:

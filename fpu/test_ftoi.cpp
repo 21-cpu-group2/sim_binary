@@ -4,6 +4,39 @@
 #include <iomanip>
 #include "ftoi.hpp"
 #define DEBUG 1
+#define CHECK 1
+
+int check(){
+    bool flg = true;
+    for (uint32_t ite=0; ite<0xFFFFFFFF; ite++){
+        union fi op_fi;
+        op_fi.i = ite;
+        if (isNumber(ite) && -pow(2, 31) + 1.0 <= op_fi.f && op_fi.f <= pow(2, 31) - 1.0) {
+            int i = (int)ite;
+            union fi result_fi;
+            vd op = {ite, 32};
+            vd result = ftoi(op);
+            result_fi.i = result.data;
+            union fi c1, c2, c3;
+            c2.i = result_fi.i - 1;
+            c3.i = result_fi.i + 1;
+            if ( (abs((double)((int)c2.i) - (double)op_fi.f) < abs((double)((int)result_fi.i) - (double)op_fi.f))
+               ||(abs((double)((int)c3.i) - (double)op_fi.f) < abs((double)((int)result_fi.i) - (double)op_fi.f)) ){
+                cout << c2.i << endl;
+                cout << result_fi.i << endl;
+                flg = false;
+                break;
+            }
+        }
+    }
+    if (flg){
+        cout << "test passed" << endl;
+    }
+    else {
+        cout << "test failed" << endl;
+    }
+    return 0;
+}
 
 int test_simulator(){
     ifstream in("../../fpu/ftoi/sample_ftoi.txt");
@@ -29,14 +62,17 @@ int test_simulator(){
 }
 
 int main(){
+    if (CHECK){
+        cout << "check_simulator" << endl;
+        check();
+        return 0;
+    }
     cout << hex ;
     if (DEBUG) {
         cout << "testing_simulator" << endl;
         test_simulator();
         return 0;
     }
-    vd v0 = {0b00111111001110000110111011001101, 32}; // -5.0
-    cout << ftoi(v0).data << endl;
     return 0;
 }
 

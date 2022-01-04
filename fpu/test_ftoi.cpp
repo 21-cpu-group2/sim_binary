@@ -35,12 +35,9 @@ int main(){
         test_simulator();
         return 0;
     }
-    vd v0 = {0xC0A9999A, 32}; // -5.0
-    vd v1 = {0x40ACCCCD, 32};
-    vd zero = {0x00000000, 32};
-    cout << hex ;
+    vd v0 = {0b00111111001110000110111011001101, 32}; // -5.0
     cout << ftoi(v0).data << endl;
-    cout << ftoi(v1).data << endl;
-    cout << ftoi(zero).data << endl;
     return 0;
 }
+
+// 0 01111110 01110000110111011001101

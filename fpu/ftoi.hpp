@@ -11,7 +11,7 @@ inline vd ftoi(vd op){
     assign(&sig, slice(op, 31, 31), 0, 0);
     assign(&exp, slice(op, 30, 23), 7, 0);
     assign(&fra, slice(op, 22, 0), 22, 0);
-    vd flag_ans_top = {0, 1};  // ï¿½ï¿½ï¿½1bit
+    vd flag_ans_top = {0, 1};  // ï¿½ï¿½ï¿?1bit
     vd flag_ans_bottom = {0, 32}; // ï¿½ï¿½ï¿½ï¿½32bit
     vd sig_reg = {0, 1};
 
@@ -162,13 +162,28 @@ inline vd ftoi(vd op){
     vd add_ans_reverse = {0, 32};
     assign(&add_ans_reverse, vd_not(add_ans), 31, 0);
     vd minus_add_ans = {0, 32};
-    assign(&minus_add_ans, add(add_ans_reverse, constant(1, 32)), 31, 0);
+    assign(&minus_add_ans, constant(add_ans_reverse.data + (uint32_t)1, 32), 31, 0);
     if (sig_reg.data){
         assign(&result, minus_add_ans, 31, 0);
     }
     else {
         assign(&result, add_ans, 31, 0);
     }
+    // cout << hex;
+    // cout << "result : " << result.data << endl;
+    // cout << "sig : " << sig.data << endl;
+    // cout << "exp : " << exp.data << endl;
+    // cout << "fra : " << fra.data << endl;
+    // cout << "flag_ans : " << flag_ans_top.data;
+    // cout << flag_ans_bottom.data << endl;
+    // cout << "sig_reg : " << sig_reg.data << endl;
+    // cout << "add : " << ad.data << endl;
+    // cout << "ans : " << ans.data << endl;
+    // cout << "add_ans : " << add_ans.data << endl;
+    // cout << "add_ans_revrese : " << add_ans_reverse.data << endl;
+    // cout << "minus_add_ans : " << minus_add_ans.data << endl;
+    // bit_print(exp.data);
+    // bit_print(fra.data);
     return result;
 }
 

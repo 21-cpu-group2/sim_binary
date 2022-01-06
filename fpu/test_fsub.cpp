@@ -7,12 +7,12 @@
 #define DEBUG2 0
 
 int test_simulator(){
-    ifstream in("../../fpu/fsub/sample_fsub.txt");
+    ifstream in("../../fpu/fadd/sample_fsub.txt");
     cin.rdbuf(in.rdbuf());
     string op1, op2, res;
     union fi op1_ui, op2_ui, res_ui, result_ui;
     cout << dec;
-    for (int i=0; i<3000; i++){
+    for (int i=0; i<20000; i++){
         cin >> op1 >> op2 >> res;
         // cout << op << " " << res << endl;
         op1_ui.i = stoul(op1, 0, 2);

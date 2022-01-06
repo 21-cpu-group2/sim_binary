@@ -2,22 +2,7 @@
 #define _FDIV
 #include "fpu_items.hpp"
 
-#define DEBUG 1
-
 using namespace std;
-
-// void bit_print(uint32_t n) {
-//     for (int i=0; i<32; i++){
-//         if (n & (1 << (31 - i))) {
-//             cout << "1";
-//         }
-//         else {
-//             cout << "0";
-//         }
-//     }
-//     cout << endl;
-//     return;
-// }
 
 inline vd fdiv(vd op1, vd op2) {
     vd result = {0, 32};
@@ -230,7 +215,8 @@ inline vd fdiv(vd op1, vd op2) {
     vd x23 = (slice(sub23, 24, 24).data == 1) ? sl(x22_reg, 1) : sl(sub23, 1);
     assign(&ans12_12, (slice(sub23, 24, 24).data == 1) ? constant(0, 1) : constant(1, 1), 1, 1);
 
-    vd sub24 = {(x23.data < fra2_12.data) ? 1 : 0, 1};
+    vd sub24 = {0, 1};
+    assign(&sub24, (x23.data < fra2_12.data) ? constant(1, 1) : constant(0, 1), -1, 0);
     assign(&ans12_12, (sub24.data == 1) ? constant(0, 1) : constant(1, 1), 0, 0);
 
     vd ans_exp_12_minus1 = {0, 9};

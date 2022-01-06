@@ -13,10 +13,11 @@ int check(){
     bool flg = true;
     random_device rd;
     default_random_engine eng(rd());
-    uniform_real_distribution<float> distr(FLOAT_MIN, FLOAT_MAX);
+    uniform_real_distribution<float> distr1(FLOAT_MIN, FLOAT_MAX);
+    uniform_real_distribution<float> distr2(-FLOAT_MAX, -FLOAT_MIN);
     for (uint32_t ite=0; ite<0xFFFFFFFF; ite++){
         if (isNumber(ite)){
-            union fi op1_fi, op2_fi, min_fi, max_fi;
+            union fi op1_fi, op2_fi, op3_fi, min_fi, max_fi;
             op1_fi.i = ite;
             op2_fi.f = distr(eng);
             min_fi.f = FLOAT_MIN;

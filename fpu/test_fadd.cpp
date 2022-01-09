@@ -158,7 +158,7 @@ int check(){
             }
         }
         if ((ite & 0x07FFFFFF) == 0){
-            cout << 3 << "%" << endl;
+            if (ite != 0) cout << 3 << "%" << endl;
         }
     }
     return 1;

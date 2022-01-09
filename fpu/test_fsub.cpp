@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <iomanip>
 #include "fsub.hpp"
-#define DEBUG 1
-#define DEBUG2 1
-#define CHECK 0
+#define DEBUG 0
+#define DEBUG2 0
+#define CHECK 1
 
 bool check_instance(float op1, float op2, float res){
     double correct = (double)op1 - (double)op2;
@@ -21,14 +21,13 @@ bool check_instance(float op1, float op2, float res){
     }
     return false;
 }
-
 int check(){
     bool flg = true;
     random_device rd;
     default_random_engine eng(rd());
     uniform_real_distribution<float> distr1(FLOAT_MIN, FLOAT_MAX);
     uniform_real_distribution<float> distr2(-FLOAT_MAX, -FLOAT_MIN);
-    for (uint32_t ite=0; ite<0xFFFFFFFF; ite++){
+    for (uint32_t ite=0x00000000; ite<0xFFFFFFFF; ite++){
         if (isNumber(ite)){
             union fi op1_fi, op2_fi, op3_fi, op4_fi, op5_fi, op6_fi, op7_fi;
             union fi min_fi, max_fi, min_fi_minus, max_fi_minus;
@@ -90,10 +89,22 @@ int check(){
                 bit_print(op5_fi.i);
                 bit_print(op6_fi.i);
                 bit_print(op7_fi.i);
+                bit_print(0);
                 bit_print(min_fi.i);
                 bit_print(max_fi.i);
                 bit_print(min_fi_minus.i);
                 bit_print(max_fi_minus.i);
+                cout << check_instance(op1_fi.f, op2_fi.f, res1.f) << endl;
+                cout << check_instance(op1_fi.f, op3_fi.f, res2.f) << endl;
+                cout << check_instance(op1_fi.f, op4_fi.f, res3.f) << endl;
+                cout << check_instance(op1_fi.f, op5_fi.f, res4.f) << endl;
+                cout << check_instance(op1_fi.f, op6_fi.f, res5.f) << endl;
+                cout << check_instance(op1_fi.f, op7_fi.f, res6.f) << endl;
+                cout << check_instance(op1_fi.f, 0.0, res7.f) << endl;
+                cout << check_instance(op1_fi.f, min_fi.f, res8.f) << endl;
+                cout << check_instance(op1_fi.f, max_fi.f, res9.f) << endl;
+                cout << check_instance(op1_fi.f, min_fi_minus.f, res10.f) << endl;
+                cout << check_instance(op1_fi.f, max_fi_minus.f, res11.f) << endl;
                 return 1;
             }
             res1.i = fsub(op2, op1).data;
@@ -131,11 +142,22 @@ int check(){
                 bit_print(max_fi.i);
                 bit_print(min_fi_minus.i);
                 bit_print(max_fi_minus.i);
+                cout << check_instance(op1_fi.f, op2_fi.f, res1.f) << endl;
+                cout << check_instance(op1_fi.f, op3_fi.f, res2.f) << endl;
+                cout << check_instance(op1_fi.f, op4_fi.f, res3.f) << endl;
+                cout << check_instance(op1_fi.f, op5_fi.f, res4.f) << endl;
+                cout << check_instance(op1_fi.f, op6_fi.f, res5.f) << endl;
+                cout << check_instance(op1_fi.f, op7_fi.f, res6.f) << endl;
+                cout << check_instance(op1_fi.f, 0.0, res7.f) << endl;
+                cout << check_instance(op1_fi.f, min_fi.f, res8.f) << endl;
+                cout << check_instance(op1_fi.f, max_fi.f, res9.f) << endl;
+                cout << check_instance(op1_fi.f, min_fi_minus.f, res10.f) << endl;
+                cout << check_instance(op1_fi.f, max_fi_minus.f, res11.f) << endl;
                 return 1;
             }
         }
         if ((ite & 0x07FFFFFF) == 0){
-            cout << 3 << "%" << endl;
+            if (ite != 0) cout << 3 << "%" << endl;
         }
     }
     return 1;
@@ -202,16 +224,16 @@ int test_instance(){
     fmax.f = FLOAT_MAX; fmax.i -= 1;
     fmin.f = FLOAT_MIN;
     op1_fi.i = 0b00001100111111111111111111111111;
-op2_fi.i = 0b01111110110011100101010000100101;
-op3_fi.i = 0b01111100110000001101011100100110;
-op4_fi.i = 0b01111110100110110111111111111100;
-op5_fi.i = 0b11111101100110010000001011101000;
-op6_fi.i = 0b11111110111001101100101111100111;
-op7_fi.i = 0b11111110101010011100000001100101;
-op8_fi.i = 0b00000000100000000000000000000000;
-op9_fi.i = 0b01111110111111111111111111111111;
-op10_fi.i = 0b10000000100000000000000000000000;
-op11_fi.i = 0b11111111000000000000000000000001;
+    op2_fi.i = 0b01111110110011100101010000100101;
+    op3_fi.i = 0b01111100110000001101011100100110;
+    op4_fi.i = 0b01111110100110110111111111111100;
+    op5_fi.i = 0b11111101100110010000001011101000;
+    op6_fi.i = 0b11111110111001101100101111100111;
+    op7_fi.i = 0b11111110101010011100000001100101;
+    op8_fi.i = 0b00000000100000000000000000000000;
+    op9_fi.i = 0b01111110111111111111111111111111;
+    op10_fi.i = 0b10000000100000000000000000000000;
+    op11_fi.i = 0b11111111000000000000000000000001;
     vd op1 = {op1_fi.i, 32};
     vd op2 = {op2_fi.i, 32};
     vd op3 = {op3_fi.i, 32};

@@ -90,6 +90,7 @@ int check(){
                 bit_print(op5_fi.i);
                 bit_print(op6_fi.i);
                 bit_print(op7_fi.i);
+                bit_print(0);
                 bit_print(min_fi.i);
                 bit_print(max_fi.i);
                 bit_print(min_fi_minus.i);

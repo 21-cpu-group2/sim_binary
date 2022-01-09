@@ -3,9 +3,10 @@
 #include <stdlib.h>
 #include <iomanip>
 #include "fadd.hpp"
-#define DEBUG 1
+#define DEBUG 0
 #define DEBUG2 0
-#define CHECK 0
+#define CHECK 1
+#define TEST_INSTANCE 0
 
 bool check_instance(float op1, float op2, float res){
     double correct = (double)op1 + (double)op2;
@@ -27,7 +28,7 @@ int check(){
     default_random_engine eng(rd());
     uniform_real_distribution<float> distr1(FLOAT_MIN, FLOAT_MAX);
     uniform_real_distribution<float> distr2(-FLOAT_MAX, -FLOAT_MIN);
-    for (uint32_t ite=0; ite<0xFFFFFFFF; ite++){
+    for (uint32_t ite=0x00000000; ite<0xFFFFFFFF; ite++){
         if (isNumber(ite)){
             union fi op1_fi, op2_fi, op3_fi, op4_fi, op5_fi, op6_fi, op7_fi;
             union fi min_fi, max_fi, min_fi_minus, max_fi_minus;
@@ -93,6 +94,17 @@ int check(){
                 bit_print(max_fi.i);
                 bit_print(min_fi_minus.i);
                 bit_print(max_fi_minus.i);
+                cout << check_instance(op1_fi.f, op2_fi.f, res1.f) << endl;
+                cout << check_instance(op1_fi.f, op3_fi.f, res2.f) << endl;
+                cout << check_instance(op1_fi.f, op4_fi.f, res3.f) << endl;
+                cout << check_instance(op1_fi.f, op5_fi.f, res4.f) << endl;
+                cout << check_instance(op1_fi.f, op6_fi.f, res5.f) << endl;
+                cout << check_instance(op1_fi.f, op7_fi.f, res6.f) << endl;
+                cout << check_instance(op1_fi.f, 0.0, res7.f) << endl;
+                cout << check_instance(op1_fi.f, min_fi.f, res8.f) << endl;
+                cout << check_instance(op1_fi.f, max_fi.f, res9.f) << endl;
+                cout << check_instance(op1_fi.f, min_fi_minus.f, res10.f) << endl;
+                cout << check_instance(op1_fi.f, max_fi_minus.f, res11.f) << endl;
                 return 1;
             }
             res1.i = fadd(op2, op1).data;
@@ -130,6 +142,17 @@ int check(){
                 bit_print(max_fi.i);
                 bit_print(min_fi_minus.i);
                 bit_print(max_fi_minus.i);
+                cout << check_instance(op1_fi.f, op2_fi.f, res1.f) << endl;
+                cout << check_instance(op1_fi.f, op3_fi.f, res2.f) << endl;
+                cout << check_instance(op1_fi.f, op4_fi.f, res3.f) << endl;
+                cout << check_instance(op1_fi.f, op5_fi.f, res4.f) << endl;
+                cout << check_instance(op1_fi.f, op6_fi.f, res5.f) << endl;
+                cout << check_instance(op1_fi.f, op7_fi.f, res6.f) << endl;
+                cout << check_instance(op1_fi.f, 0.0, res7.f) << endl;
+                cout << check_instance(op1_fi.f, min_fi.f, res8.f) << endl;
+                cout << check_instance(op1_fi.f, max_fi.f, res9.f) << endl;
+                cout << check_instance(op1_fi.f, min_fi_minus.f, res10.f) << endl;
+                cout << check_instance(op1_fi.f, max_fi_minus.f, res11.f) << endl;
                 return 1;
             }
         }
@@ -178,8 +201,8 @@ int test_simulator(){
 int test_simulator_instance() {
     cout << dec;
     union fi op1_ui, op2_ui, res_ui, result_ui;
-    op1_ui.i = 0b10000000001101000101010111000100;
-    op2_ui.i = 0b00000000000000000000000000000000;
+    op1_ui.i = 0b00001100111111111111111111111111;
+    op2_ui.i = 0b00000000100000000000000000000000;
     // op1_ui.i = 0x7F3A1DC2;
     // op2_ui.i = 0x881DB280;
     vd v1 = {op1_ui.i, 32};
@@ -195,14 +218,80 @@ int test_simulator_instance() {
     return 0;
 }
 
+int test_instance(){
+    union fi op1_fi, op2_fi, op3_fi, op4_fi, op5_fi, op6_fi, op7_fi, op8_fi, op9_fi, op10_fi, op11_fi, fmax, fmin;
+    union fi result2_fi, result3_fi, result4_fi, result5_fi, result6_fi, result7_fi, result8_fi, result9_fi, result10_fi, result11_fi;
+    fmax.f = FLOAT_MAX; fmax.i -= 1;
+    fmin.f = FLOAT_MIN;
+    op1_fi.i = 0b00001100111111111111111111111111;
+    op2_fi.i = 0b01111110110011100101010000100101;
+    op3_fi.i = 0b01111100110000001101011100100110;
+    op4_fi.i = 0b01111110100110110111111111111100;
+    op5_fi.i = 0b11111101100110010000001011101000;
+    op6_fi.i = 0b11111110111001101100101111100111;
+    op7_fi.i = 0b11111110101010011100000001100101;
+    op8_fi.i = 0b00000000100000000000000000000000;
+    op9_fi.i = 0b01111110111111111111111111111111;
+    op10_fi.i = 0b10000000100000000000000000000000;
+    op11_fi.i = 0b11111111000000000000000000000001;
+    vd op1 = {op1_fi.i, 32};
+    vd op2 = {op2_fi.i, 32};
+    vd op3 = {op3_fi.i, 32};
+    vd op4 = {op4_fi.i, 32};
+    vd op5 = {op5_fi.i, 32};
+    vd op6 = {op6_fi.i, 32};
+    vd op7 = {op7_fi.i, 32};
+    vd op8 = {op8_fi.i, 32};
+    vd op9 = {op9_fi.i, 32};
+    vd op10 = {op10_fi.i, 32};
+    vd op11 = {op11_fi.i, 32};
+    vd result2 = fadd(op1, op2);
+    vd result3 = fadd(op1, op3);
+    vd result4 = fadd(op1, op4);
+    vd result5 = fadd(op1, op5);
+    vd result6 = fadd(op1, op6);
+    vd result7 = fadd(op1, op7);
+    vd result8 = fadd(op1, op8);
+    vd result9 = fadd(op1, op9);
+    vd result10 = fadd(op1, op10);
+    vd result11 = fadd(op1, op11);
+    result2_fi.i = result2.data;
+    result3_fi.i = result3.data;
+    result4_fi.i = result4.data;
+    result5_fi.i = result5.data;
+    result6_fi.i = result6.data;
+    result7_fi.i = result7.data;
+    result8_fi.i = result8.data;
+    result9_fi.i = result9.data;
+    result10_fi.i = result10.data;
+    result11_fi.i = result11.data;
+    cout << (check_instance(op1_fi.f, op2_fi.f, result2_fi.f)) << endl;
+    cout << (check_instance(op1_fi.f, op3_fi.f, result3_fi.f)) << endl;
+    cout << (check_instance(op1_fi.f, op4_fi.f, result4_fi.f)) << endl;
+    cout << (check_instance(op1_fi.f, op5_fi.f, result5_fi.f)) << endl;
+    cout << (check_instance(op1_fi.f, op6_fi.f, result6_fi.f)) << endl;
+    cout << (check_instance(op1_fi.f, op7_fi.f, result7_fi.f)) << endl;
+    cout << (check_instance(op1_fi.f, op8_fi.f, result8_fi.f)) << endl;
+    cout << (check_instance(op1_fi.f, op9_fi.f, result9_fi.f)) << endl;
+    cout << (check_instance(op1_fi.f, op10_fi.f, result10_fi.f)) << endl;
+    cout << (check_instance(op1_fi.f, op11_fi.f, result11_fi.f)) << endl;
+    return 0;
+}
+
 int main(){
     if (CHECK){
         cout << "check_simulator" << endl;
         check();
         return 0;
     }
-    if (DEBUG2){
+    if (TEST_INSTANCE){
+        cout << "test_specific_instance" << endl;
         test_simulator_instance();
+        return 0;
+    }
+    if (DEBUG2){
+        cout << 
+        test_instance();
         return 0;
     }
     cout << hex ;

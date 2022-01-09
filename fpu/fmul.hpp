@@ -1,5 +1,5 @@
-#ifndef _FABS
-#define _FABS
+#ifndef _FMUL
+#define _FMUL
 #include "fpu_items.hpp"
 using namespace std;
 
@@ -47,7 +47,7 @@ inline vd fmul(vd op1, vd op2){
     vd res_exp_2 = {0, 9};
     vd res_sig_2 = {0, 1};
 
-    vd is_zero = {((exp1.data == 0) || (exp2.data == 0)) ? 1 : 0, 1};
+    vd is_zero = ((exp1.data == 0) || (exp2.data == 0)) ? constant(1, 1) : constant(0, 1);
     vd is_zero_reg = {0, 1};
     vd is_zero_reg2 = {0, 1};
 

@@ -72,7 +72,7 @@ inline vd fsub(vd op1, vd op2){
     vd fra2 = {0, 28};
     assign(&sig1, slice(op1, 31, 31), -1, 0);
     // bit_print(sig1.data);
-    assign(&sig2, slice(vd_not(op2), 31, 31), -1, 0);
+    assign(&sig2, vd_not(slice(op2, 31, 31)), -1, 0);
     // bit_print(sig2.data);
     assign(&exp1, slice(op1, 30, 23), -1, 0);
     // bit_print(exp1.data);
@@ -141,7 +141,7 @@ inline vd fsub(vd op1, vd op2){
             case 24 : assign(&op_small, sr(fra2, 24), -1, 0); break;
             case 25 : assign(&op_small, sr(fra2, 25), -1, 0); break;
             case 26 : assign(&op_small, sr(fra2, 26), -1, 0); break;
-            default : assign(&op_small, concat2(constant(0, 27), vd_or_red(fra2)), -1, 0); break;
+            default : assign(&op_small, constant(0, 28), -1, 0); break;
         }
     } else {
         assign(&op_big, fra2, -1, 0);
@@ -176,7 +176,7 @@ inline vd fsub(vd op1, vd op2){
             case 24 : assign(&op_small, sr(fra1, 24), -1, 0); break;
             case 25 : assign(&op_small, sr(fra1, 25), -1, 0); break;
             case 26 : assign(&op_small, sr(fra1, 26), -1, 0); break;
-            default : assign(&op_small, concat2(constant(0, 27), vd_or_red(fra1)), -1, 0); break;
+            default : assign(&op_small, constant(0, 28), -1, 0); break;
         }
     }
     //1-2
@@ -190,7 +190,7 @@ inline vd fsub(vd op1, vd op2){
     vd ans_reg = {0, 28};
     vd zero_count = {0, 5};
     vd ans_shift = {0, 23};
-    vd ans_shift_reg = {0, 23};
+    vd ans_shift_reg = {0, 24};
     ZLC(ans, &zero_count, &ans_shift);
     // bit_print(zero_count.data);
     // bit_print(ans_shift.data);
@@ -206,7 +206,7 @@ inline vd fsub(vd op1, vd op2){
 
     assign(&ans_reg, ans, -1, 0);
     // bit_print(ans.data);
-    assign(&ans_shift_reg, ans_shift, -1, 0);
+    assign(&ans_shift_reg, concat2(constant(0, 1), ans_shift), -1, 0);
     assign(&exp_next, add(exp_big, for_exp_next), -1, 0);
     assign(&sig_next, sig_big, -1, 0);
     assign(&zero_count_reg, zero_count, -1, 0);
@@ -217,42 +217,81 @@ inline vd fsub(vd op1, vd op2){
 
     //2-3
 
-    vd for_ZLC0_fra = {0, 23};
     // cout << slice(ans_reg, 3, 0).data << endl;
     // cout << slice(ans_reg, 3, 0).bit_num << endl;
     // cout << vd_or_red(slice(ans_reg, 3, 0)).data << endl;
-    
-    assign(&for_ZLC0_fra, concat2(constant(0, 22), vd_or_red(slice(ans_reg, 3, 0))), -1, 0);
+    vd for_ZLC0_fra = {0, 24};
+    assign(&for_ZLC0_fra, concat2(constant(0, 23), vd_or_red(slice(ans_reg, 3, 0))), -1, 0);
+    vd for_ZLC0_fra_sum = {0, 24};
+    assign(&for_ZLC0_fra_sum, add(ans_shift_reg, for_ZLC0_fra), -1, -1);
     vd ZLC0_fra = {0, 23};
-    assign(&ZLC0_fra, add(ans_shift_reg, for_ZLC0_fra), -1, 0);
+    assign(&ZLC0_fra, 
+         (slice(for_ZLC0_fra_sum, 23, 23).data) ? 
+         concat2(constant(0, 1), slice(for_ZLC0_fra_sum, 22, 1)) :
+         slice(for_ZLC0_fra_sum, 22, 0),
+         -1, -1);
     vd ZLC0_exp = {0, 8};
-    assign(&ZLC0_exp, add(exp_next, constant(1, 8)), -1, 0);
+    assign(&ZLC0_exp, 
+        (slice(for_ZLC0_fra_sum, 23, 23).data) ?
+        add(exp_next, constant(2, 8)) :
+        add(exp_next, constant(1, 8)),
+        -1, -1);
 
-    vd for_ZLC1_fra = {0, 23};
-    assign(&for_ZLC1_fra, concat2(constant(0, 22), vd_or_red(slice(ans_reg, 2, 0))), -1, 0);
+    vd for_ZLC1_fra = {0, 24};
+    assign(&for_ZLC1_fra, concat2(constant(0, 23), vd_or_red(slice(ans_reg, 2, 0))), -1, 0);
     // cout << for_ZLC1_fra.data << endl;
+    vd for_ZLC1_fra_sum = {0, 24};
+    assign(&for_ZLC1_fra_sum, add(ans_shift_reg, for_ZLC1_fra), -1, -1);
     vd ZLC1_fra = {0, 23};
     // bit_print(ans_shift_reg.data);
-    assign(&ZLC1_fra, add(ans_shift_reg, for_ZLC1_fra), -1, 0);
+    assign(&ZLC1_fra, 
+        (slice(for_ZLC1_fra_sum, 23, 23).data) ? 
+        concat2(constant(0, 1), slice(for_ZLC1_fra_sum, 22, 1)) :
+        slice(for_ZLC1_fra_sum, 22, 0),
+        -1, -1);
     vd ZLC1_exp = {0, 8};
-    assign(&ZLC1_exp, exp_next, -1, 0);
+    assign(&ZLC1_exp, 
+        (slice(for_ZLC1_fra_sum, 23, 23).data) ?
+        add(exp_next, constant(1, 8)) :
+        exp_next,
+        -1, -1);
 
-    vd for_ZLC2_fra = {0, 23};
-    assign(&for_ZLC2_fra, concat2(constant(0, 22), vd_or_red(slice(ans_reg, 1, 0))), -1, 0);
+    vd for_ZLC2_fra = {0, 24};
+    assign(&for_ZLC2_fra, concat2(constant(0, 23), vd_or_red(slice(ans_reg, 1, 0))), -1, 0);
+    vd for_ZLC2_fra_sum = {0, 24};
+    assign(&for_ZLC2_fra_sum, add(ans_shift_reg, for_ZLC2_fra), -1, -1);
     vd ZLC2_fra = {0, 23};
-    assign(&ZLC2_fra, add(ans_shift_reg, for_ZLC2_fra), -1, 0);
-    vd ZLC2_exp = {0, 8};
-    assign(&ZLC2_exp, sub(exp_next_zero, constant(1, 9)), -1, 0);
+    assign(&ZLC2_fra, 
+        (slice(for_ZLC2_fra_sum, 23, 23).data) ? 
+        concat2(constant(0, 1), slice(for_ZLC2_fra_sum, 22, 1)) :
+        slice(for_ZLC2_fra_sum, 22, 0),
+        -1, -1);
+    vd ZLC2_exp = {0, 9};
+    assign(&ZLC2_exp, 
+        (slice(for_ZLC2_fra_sum, 23, 23).data) ?
+        exp_next_zero :
+        sub(exp_next_zero, constant(1, 9)),
+        -1, -1);
 
-    vd for_ZLC3_fra = {0, 23};
-    assign(&for_ZLC3_fra, concat2(constant(0, 22), slice(ans_reg, 0, 0)), -1, 0);
+    vd for_ZLC3_fra = {0, 24};
+    assign(&for_ZLC3_fra, concat2(constant(0, 23), slice(ans_reg, 0, 0)), -1, 0);
+    vd for_ZLC3_fra_sum = {0, 24};
+    assign(&for_ZLC3_fra_sum, add(ans_shift_reg, for_ZLC3_fra), -1, -1);
     vd ZLC3_fra = {0, 23};
-    assign(&ZLC3_fra, add(ans_shift_reg, for_ZLC3_fra), -1, 0);
-    vd ZLC3_exp = {0, 8};
-    assign(&ZLC3_exp, sub(exp_next_zero, constant(2, 9)), -1, 0);
+    assign(&ZLC3_fra, 
+        (slice(for_ZLC3_fra_sum, 23, 23).data) ?
+        concat2(constant(0, 1), slice(for_ZLC3_fra_sum, 22, 1)) :
+        slice(for_ZLC3_fra_sum, 22, 0),
+        -1, -1);
+    vd ZLC3_exp = {0, 9};
+    assign(&ZLC3_exp, 
+        (slice(for_ZLC3_fra_sum, 23, 23).data) ?
+        sub(exp_next_zero, constant(1, 9)) :
+        sub(exp_next_zero, constant(2, 9)),
+        -1, -1);
 
     vd ZLC_lt3_fra = {0, 23};
-    assign(&ZLC_lt3_fra, ans_shift_reg, -1, 0);
+    assign(&ZLC_lt3_fra, slice(ans_shift_reg, 22, 0), -1, 0);
     vd for_ZLC_lt3_exp = {0, 9};
     assign(&for_ZLC_lt3_exp, concat2(constant(0, 4), zero_count_reg), -1, 0);
     vd for2_ZLC_lt3_exp = {0, 9};
@@ -276,8 +315,10 @@ inline vd fsub(vd op1, vd op2){
     } else if (zero_count_reg.data == 3){
         // cout << "d" << endl;
         if (slice(ZLC3_exp,8, 8).data){
+            // cout << "da" << endl;
             assign(&result, concat3(sig_next, constant(0, 8), ZLC3_fra), -1, 0);
         } else {
+            // cout << "db" << endl;
             assign(&result, concat3(sig_next, slice(ZLC3_exp, 7, 0), ZLC3_fra), -1, 0);
         } 
     } else {
@@ -288,6 +329,7 @@ inline vd fsub(vd op1, vd op2){
             assign(&result, concat3(sig_next, slice(ZLC_lt3_exp, 7, 0), ZLC_lt3_fra), -1, 0);
         }
     }
+    cout << dec;
     // bit_print(concat3(sig_next, ZLC0_exp, ZLC0_fra).data);
     // bit_print(concat3(sig_next, ZLC1_exp, ZLC1_fra).data);
     // bit_print(concat3(sig_next, constant(0, 8), ZLC2_fra).data);
@@ -317,12 +359,15 @@ inline vd fsub(vd op1, vd op2){
     // cout << "marume_up : " << marume_up.data << endl;
     // cout << "exp_next : " << exp_next.data << endl;
     // cout << "sig_next : " << sig_next.data << endl;
+    // cout << "sig_next.bit_num : " << sig_next.bit_num << endl;
     // cout << "zero_count_reg : " << zero_count_reg.data << endl;
     // cout << "exp_next_zero: " << exp_next_zero.data << endl;
     // cout << "for_exp_next : " << for_exp_next.data << endl;
     // cout << "for_ZLC0_fra : " << for_ZLC0_fra.data << endl;
     // cout << "ZLC0_fra : " << ZLC0_fra.data << endl;
+    // cout << "ZLC0_fra.bit_num : " << ZLC0_fra.bit_num << endl;
     // cout << "ZLC0_exp : " << ZLC0_exp.data << endl;
+    // cout << "ZLC0_exp.bit_num : " << ZLC0_exp.bit_num << endl;
     // cout << "for_ZLC1_fra : " << for_ZLC1_fra.data << endl;
     // cout << "ZLC1_fra : " << ZLC1_fra.data << endl;
     // cout << "ZLC1_exp : " << ZLC1_exp.data << endl;
@@ -332,6 +377,9 @@ inline vd fsub(vd op1, vd op2){
     // cout << "for_ZLC3_fra : " << for_ZLC3_fra.data << endl;
     // cout << "ZLC3_fra : " << ZLC3_fra.data << endl;
     // cout << "ZLC3_exp : " << ZLC3_exp.data << endl;
+
+
+
 
     return result;
 }

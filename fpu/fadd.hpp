@@ -141,7 +141,7 @@ inline vd fadd(vd op1, vd op2){
             case 24 : assign(&op_small, sr(fra2, 24), -1, 0); break;
             case 25 : assign(&op_small, sr(fra2, 25), -1, 0); break;
             case 26 : assign(&op_small, sr(fra2, 26), -1, 0); break;
-            default : assign(&op_small, concat2(constant(0, 27), vd_or_red(fra2)), -1, 0); break;
+            default : assign(&op_small, constant(0, 28), -1, 0); break;
         }
     } else {
         assign(&op_big, fra2, -1, 0);
@@ -176,7 +176,7 @@ inline vd fadd(vd op1, vd op2){
             case 24 : assign(&op_small, sr(fra1, 24), -1, 0); break;
             case 25 : assign(&op_small, sr(fra1, 25), -1, 0); break;
             case 26 : assign(&op_small, sr(fra1, 26), -1, 0); break;
-            default : assign(&op_small, concat2(constant(0, 27), vd_or_red(fra1)), -1, 0); break;
+            default : assign(&op_small, constant(0, 28), -1, 0); break;
         }
     }
     //1-2
@@ -269,8 +269,8 @@ inline vd fadd(vd op1, vd op2){
     vd ZLC2_exp = {0, 9};
     assign(&ZLC2_exp, 
         (slice(for_ZLC2_fra_sum, 23, 23).data) ?
-        concat2(constant(0, 1), exp_next) :
-        sub(concat2(constant(0, 1), exp_next), constant(1, 9)),
+        exp_next_zero :
+        sub(exp_next_zero, constant(1, 9)),
         -1, -1);
 
     vd for_ZLC3_fra = {0, 24};
@@ -286,8 +286,8 @@ inline vd fadd(vd op1, vd op2){
     vd ZLC3_exp = {0, 9};
     assign(&ZLC3_exp, 
         (slice(for_ZLC3_fra_sum, 23, 23).data) ?
-        sub(concat2(constant(0, 1), exp_next), constant(1, 9)) :
-        sub(concat2(constant(0, 1), exp_next), constant(2, 9)),
+        sub(exp_next_zero, constant(1, 9)) :
+        sub(exp_next_zero, constant(2, 9)),
         -1, -1);
 
     vd ZLC_lt3_fra = {0, 23};

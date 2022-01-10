@@ -194,20 +194,21 @@ inline vd fadd(vd op1, vd op2){
     ZLC(ans, &zero_count, &ans_shift);
     // bit_print(zero_count.data);
     // bit_print(ans_shift.data);
-    vd marume_up = {0, 1};
-    assign(&marume_up, vd_and(vd_and(vd_not(slice(ans, 27, 27)), vd_or(slice(ans, 26, 26), slice(ans, 1, 1))), vd_and_red(slice(ans, 25, 2))), -1, 0);
+    // vd marume_up = {0, 1};
+    // assign(&marume_up, vd_and(vd_and(vd_not(slice(ans, 27, 27)), vd_or(slice(ans, 26, 26), slice(ans, 1, 1))), vd_and_red(slice(ans, 25, 2))), -1, 0);
     // cout << marume_up.data << endl;
     vd exp_next = {0, 8};
     vd sig_next = {0, 1};
     vd zero_count_reg = {0, 5};
 
-    vd for_exp_next = {0, 8};
-    assign(&for_exp_next, concat2(constant(0, 7), marume_up), -1, 0);
+    // vd for_exp_next = {0, 8};
+    // assign(&for_exp_next, concat2(constant(0, 7), marume_up), -1, 0);
 
     assign(&ans_reg, ans, -1, 0);
     // bit_print(ans.data);
     assign(&ans_shift_reg, concat2(constant(0, 1), ans_shift), -1, 0);
-    assign(&exp_next, add(exp_big, for_exp_next), -1, 0);
+    // assign(&exp_next, add(exp_big, for_exp_next), -1, 0);
+    assign(&exp_next, exp_big, -1, 0);
     assign(&sig_next, sig_big, -1, 0);
     assign(&zero_count_reg, zero_count, -1, 0);
 

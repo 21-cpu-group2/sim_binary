@@ -40,6 +40,7 @@ inline int BEQ(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
     emu->pc = ((int)rs1 == (int)rs2) ? emu->pc + imm : emu->pc + 1; 
+    emu->stats.beq++;
     return 0;
 }
 
@@ -47,6 +48,7 @@ inline int BNE(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
     emu->pc = ((int)rs1 != (int)rs2) ? emu->pc + imm : emu->pc + 1; 
+    emu->stats.bne++;
     return 0;
 }
 
@@ -54,6 +56,7 @@ inline int BLT(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
     emu->pc = ((int)rs1 < (int)rs2) ? emu->pc + imm : emu->pc + 1; 
+    emu->stats.blt++;
     return 0;
 }
 
@@ -61,6 +64,7 @@ inline int BGE(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
     emu->pc = ((int)rs1 >= (int)rs2) ? emu->pc + imm : emu->pc + 1; 
+    emu->stats.bge++;
     return 0;
 }
 /*
@@ -110,6 +114,7 @@ inline int LW(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
     uint32_t address = (rs1 + imm) / 4;
     emu->reg[rd_] = emu->memory[address];
     emu->pc++;
+    emu->stats.lw++;
     return 0;
 }
 /*
@@ -153,6 +158,7 @@ inline int SW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t address = (rs1 + imm) / 4;
     emu->memory[address] = rs2;
     emu->pc++;
+    emu->stats.sw++;
     return 0;
 }
 
@@ -161,6 +167,7 @@ inline int ADDI(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     emu->reg[rd_] = rs1 + imm;
     emu->pc++;
+    emu->stats.addi++;
     return 0;
 }
 
@@ -168,6 +175,7 @@ inline int SLLI(Emulator* emu, uint32_t rs1_, uint32_t rd_, uint32_t shamt) {
     uint32_t rs1 = emu->reg[rs1_];
     emu->reg[rd_] = rs1 << shamt;
     emu->pc++;
+    emu->stats.slli++;
     return 0;
 }
 
@@ -175,6 +183,7 @@ inline int SRLI(Emulator* emu, uint32_t rs1_, uint32_t rd_, uint32_t shamt) {
     uint32_t rs1 = emu->reg[rs1_];
     emu->reg[rd_] = rs1 >> shamt;
     emu->pc++;
+    emu->stats.srli++;
     return 0;
 }
 /*
@@ -219,6 +228,7 @@ inline int ADD(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     uint32_t rs2 = emu->reg[rs2_];
     emu->reg[rd_] = rs1 + rs2;
     emu->pc++;
+    emu->stats.add++;
     return 0;
 }
 
@@ -227,6 +237,7 @@ inline int SUB(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     uint32_t rs2 = emu->reg[rs2_];
     emu->reg[rd_] = rs1 - rs2;
     emu->pc++;
+    emu->stats.sub++;
     return 0;
 }
 
@@ -236,6 +247,7 @@ inline int SLL(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     uint32_t shift = rs2 & 0x0000001F;
     emu->reg[rd_] = rs1 << shift;
     emu->pc++;
+    emu->stats.sll++;
     return 0;
 }
 
@@ -312,6 +324,7 @@ inline int LUI(Emulator* emu, uint32_t rd_, int imm) {
     uint32_t rd = emu->reg[rd_] & 0x00000FFF;
     emu->reg[rd_] = (imm << 12) | rd;
     emu->pc++;
+    emu->stats.lui++;
     return 0;
 }
 /*
@@ -330,6 +343,7 @@ inline int JAL(Emulator* emu, uint32_t rd_, int imm) {
     // }
     emu->reg[rd_] = emu->pc + 1;
     emu->pc += imm;
+    emu->stats.jal++;
     return 0;
 }
 
@@ -341,6 +355,7 @@ inline int JALR(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     emu->reg[rd_] = emu->pc + 1;
     emu->pc = rs1 + imm;
+    emu->stats.jalr++;
     return 0;
 }
 
@@ -379,6 +394,7 @@ inline int FADDS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     // frd.f = frs1.f + frs2.f;
     emu->reg[rd_] = fadd(rs1_vd, rs2_vd).data;
     emu->pc++;
+    emu->stats.fadd++;
     return 0;
 }
 
@@ -393,6 +409,7 @@ inline int FSUBS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     // frd.f = frs1.f + frs2.f;
     emu->reg[rd_] = fsub(rs1_vd, rs2_vd).data;
     emu->pc++;
+    emu->stats.fsub++;
     return 0;
 }
 
@@ -409,6 +426,7 @@ inline int FMULS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     // frd.f = frs1.f + frs2.f;
     emu->reg[rd_] = fmul(rs1_vd, rs2_vd).data;
     emu->pc++;
+    emu->stats.fmul++;
     return 0;
 }
 
@@ -424,6 +442,7 @@ inline int FDIVS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     vd rs2_vd = {rs2, 32};
     emu->reg[rd_] = fdiv(rs1_vd, rs2_vd).data;
     emu->pc++;
+    emu->stats.fdiv++;
     return 0;
 }
 
@@ -436,6 +455,7 @@ inline int FHALF(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     vd rs1_vd = {rs1, 32};
     emu->reg[rd_] = fhalf(rs1_vd).data;
     emu->pc++;
+    emu->stats.fhalf++;
     return 0;
 }
 
@@ -448,6 +468,7 @@ inline int FSQRT(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     vd rs1_vd = {rs1, 32};
     emu->reg[rd_] = fsqrt(rs1_vd).data;
     emu->pc++;
+    emu->stats.fsqrt++;
     return 0;
 }
 
@@ -460,6 +481,7 @@ inline int FABS(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     vd rs1_vd = {rs1, 32};
     emu->reg[rd_] = fabs(rs1_vd).data;
     emu->pc++;
+    emu->stats.fabs++;
     return 0;
 }
 
@@ -472,6 +494,7 @@ inline int FNEG(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     vd rs1_vd = {rs1, 32};
     emu->reg[rd_] = fneg(rs1_vd).data;
     emu->pc++;
+    emu->stats.fneg++;
     return 0;
 }
 
@@ -571,6 +594,7 @@ inline int FISZERO(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     vd rs1_vd = {rs1, 32};
     emu->reg[rd_] = fiszero(rs1_vd).data;
     emu->pc++;
+    emu->stats.fiszero++;
     return 0;
 }
 
@@ -585,6 +609,7 @@ inline int FISNEG(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     vd rs1_vd = {rs1, 32};
     emu->reg[rd_] = fisneg(rs1_vd).data;
     emu->pc++;
+    emu->stats.fisneg++;
     return 0;
 }
 
@@ -599,6 +624,7 @@ inline int FISPOS(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     vd rs1_vd = {rs1, 32};
     emu->reg[rd_] = fispos(rs1_vd).data;
     emu->pc++;
+    emu->stats.fispos++;
     return 0;
 }
 
@@ -613,6 +639,7 @@ inline int FLESS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     vd rs2_vd = {rs2, 32};
     emu->reg[rd_] = fless(rs1_vd, rs2_vd).data;
     emu->pc++;
+    emu->stats.fless++;
     return 0;
 }
 
@@ -625,6 +652,7 @@ inline int FLOOR(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     vd rs1_vd = {rs1, 32};
     emu->reg[rd_] = floor(rs1_vd).data;
     emu->pc++;
+    emu->stats.floor++;
     return 0;
 }
 
@@ -637,6 +665,7 @@ inline int ITOF(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     vd rs1_vd = {rs1, 32};
     emu->reg[rd_] = itof(rs1_vd).data;
     emu->pc++;
+    emu->stats.itof++;
     return 0;
 }
 
@@ -664,6 +693,7 @@ inline int FTOI(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     vd rs1_vd = {rs1, 32};
     emu->reg[rd_] = ftoi(rs1_vd).data;
     emu->pc++;
+    emu->stats.ftoi++;
     return 0;
 }
 

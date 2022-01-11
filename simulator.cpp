@@ -75,6 +75,37 @@ void init_emulator(Emulator* emu){
         emu->args.reg_for_print[i] = false;
     }
 
+    emu->stats.beq = 0ll;
+    emu->stats.bne = 0ll;
+    emu->stats.blt = 0ll;
+    emu->stats.bge = 0ll;
+    emu->stats.lw = 0ll;
+    emu->stats.sw = 0ll;
+    emu->stats.addi = 0ll;
+    emu->stats.slli = 0ll;
+    emu->stats.srli = 0ll;
+    emu->stats.add = 0ll;
+    emu->stats.sub = 0ll;
+    emu->stats.sll = 0ll;
+    emu->stats.lui = 0ll;
+    emu->stats.jal = 0ll;
+    emu->stats.jalr = 0ll;
+    emu->stats.fadd = 0ll;
+    emu->stats.fsub = 0ll;
+    emu->stats.fmul = 0ll;
+    emu->stats.fdiv = 0ll;
+    emu->stats.fhalf = 0ll;
+    emu->stats.fsqrt = 0ll;
+    emu->stats.fabs = 0ll;
+    emu->stats.fneg = 0ll;
+    emu->stats.fiszero = 0ll;
+    emu->stats.fisneg = 0ll;
+    emu->stats.fispos = 0ll;
+    emu->stats.fless = 0ll;
+    emu->stats.floor = 0ll;
+    emu->stats.ftoi = 0ll;
+    emu->stats.itof = 0ll;
+    
     // memory <- input_data
     int input_start = 50000; // 200000 / 4
     ifstream ifs("data/contest.txt");

@@ -93,6 +93,39 @@ typedef struct {
 } cmdline_args;
 
 typedef struct {
+    long long int beq;
+    long long int bne;
+    long long int blt;
+    long long int bge;
+    long long int lw;
+    long long int sw;
+    long long int addi;
+    long long int slli;
+    long long int srli;
+    long long int add;
+    long long int sub;
+    long long int sll;
+    long long int lui;
+    long long int jal;
+    long long int jalr;
+    long long int fadd;
+    long long int fsub;
+    long long int fmul;
+    long long int fdiv;
+    long long int fhalf;
+    long long int fsqrt;
+    long long int fabs;
+    long long int fneg;
+    long long int fiszero;
+    long long int fisneg;
+    long long int fispos;
+    long long int fless;
+    long long int floor;
+    long long int ftoi;
+    long long int itof;   
+} statistics;
+
+typedef struct {
     uint32_t reg[REG_SIZE];
     // uint32_t freg[FREG_SIZE];
     int32_t pc;
@@ -102,6 +135,7 @@ typedef struct {
     cmdline_args args;
     cache_line *cache;
     masks mask;
+    statistics stats;
 } Emulator;
 
 uint32_t bin2int(string bin);

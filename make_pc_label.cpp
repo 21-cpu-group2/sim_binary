@@ -22,13 +22,13 @@ int compare(const void* a, const void* b) {
 }
 
 int main(int argc, char** argv){
-    label_pc data[1000];
+    label_pc data[10000];
     string file_path = argv[1];
     ifstream ifs(file_path);
     if (ifs.fail()){
         return 1;
     }
-    cout << "floating-point imm table" << endl;
+    // cout << "floating-point imm table" << endl;
     string str;
     int ind = 0;
     while (getline(ifs, str)){
@@ -36,7 +36,7 @@ int main(int argc, char** argv){
         string l, p;
         iss >> l >> p;
         if (l.at(0) == 'l'){
-            cout << str << endl;
+            // cout << str << endl;
         }
         else {
             data[ind].label = l;
@@ -44,11 +44,13 @@ int main(int argc, char** argv){
             ind++;
         }
     }
-    cout << endl;
-    cout << "pc -> label" << endl;
+    // cout << endl;
+    // cout << "pc -> label" << endl;
     qsort(data, ind, sizeof(label_pc), compare);
     for (int i=0; i<ind; i++){
         cout << data[i].pc << "  " << data[i].label << endl;
     }
+    // ラベルの読み込み用
+    cout << "-1 break" << endl;
     return 0;
 }

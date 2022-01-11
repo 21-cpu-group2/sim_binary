@@ -122,7 +122,9 @@ typedef struct {
     long long int fless;
     long long int floor;
     long long int ftoi;
-    long long int itof;   
+    long long int itof;
+    long long int exec_times[100000];
+
 } statistics;
 
 typedef struct {

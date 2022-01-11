@@ -105,7 +105,10 @@ void init_emulator(Emulator* emu){
     emu->stats.floor = 0ll;
     emu->stats.ftoi = 0ll;
     emu->stats.itof = 0ll;
-    
+    for (int i=0; i<100000; i++){
+        emu->stats.exec_times[i] = 0ll;
+    }
+
     // memory <- input_data
     int input_start = 50000; // 200000 / 4
     ifstream ifs("data/contest.txt");

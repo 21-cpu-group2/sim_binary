@@ -5,6 +5,10 @@
 #include <fstream>
 #include <vector>
 #include <stdlib.h>
+#include <iostream>
+#include <iomanip>
+#include <stdio.h>
+#include <iterator>
 #include "instruction.hpp"
 #include "simulator.hpp"
 
@@ -120,6 +124,7 @@ int main(int argc, char **argv){
     while (1){
         uint32_t pc_pred = emu->pc;
         uint32_t inst = emu->instruction_memory[emu->pc];
+        emu->stats.exec_times[emu->pc]++;
         flg = ((!emu->args.flg_s || emu->args.start <= iteration)
             && (!emu->args.flg_g || emu->args.goal >= iteration)) ? true : false;
         
@@ -211,6 +216,22 @@ int main(int argc, char **argv){
         cout << "  | floor : " << emu->stats.floor << " ( " << ((double)emu->stats.floor / (double)sum ) * 100 << " % )" << endl;
         cout << "  | ftoi : " << emu->stats.ftoi << " ( " << ((double)emu->stats.ftoi / (double)sum ) * 100 << " % )" << endl;
         cout << "  | itof : " << emu->stats.itof << " ( " << ((double)emu->stats.itof / (double)sum ) * 100 << " % )" << endl;
+
+        // print how many times each label is called
+        FILE *fp;
+        fp = fopen("data/stats.txt", "w");
+        ifstream in("data/pc_label.txt");
+        cin.rdbuf(in.rdbuf());
+        int pc_temp;
+        string label_temp;
+        fprintf(fp, "Times Each Label Called\n");
+        for (int i=0; i<100000; i++){
+            cin >> pc_temp >> label_temp;
+            if (pc_temp == -1){
+                break;
+            }
+            fprintf(fp, "%s : %lld\n", label_temp.c_str(), emu->stats.exec_times[pc_temp]);
+        }
     }
 
     print_reg(emu);

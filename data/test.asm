@@ -369,9 +369,9 @@ min_caml_print_float:
     jalr %zero %ra 0  # 鐃�?鐃�?
 
 min_caml_print_int:
-    addi %a1 %zero 0
-    addi %a2 %zero 0
-    addi %a3 %zero 0
+    addi %a1 %zero 100
+    addi %a2 %zero 10
+    addi %a3 %zero 1
     addi %a4 %zero 0
     addi %a5 %zero 0
     addi %a6 %zero 0
@@ -383,7 +383,6 @@ find_100_digit:
     addi %a1 %a1 100
     beq %zero %zero find_100_digit
 finish_find_100_digit:
-    addi %a4 %a4 -1
     add %a9 %a4 %a8
     add %a7 %a7 %a9 # convert to ascii
     slli %a7 %a7 8
@@ -395,7 +394,6 @@ find_10_digit:
     addi %a2 %a2 10
     beq %zero %zero find_10_digit
 finish_find_10_digit:
-    addi %a5 %a5 -1
     add %a9 %a5 %a8
     add %a7 %a7 %a9 # convert to ascii
     slli %a7 %a7 8
@@ -407,7 +405,6 @@ find_1_digit:
     addi %a3 %a3 1
     beq %zero %zero find_1_digit
 finish_find_1_digit:
-    addi %a6 %a6 -1
     add %a9 %a6 %a8
     add %a7 %a7 %a9 # convert to ascii
     slli %a7 %a7 8

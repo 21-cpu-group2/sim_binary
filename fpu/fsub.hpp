@@ -4,7 +4,7 @@
 using namespace std;
 
 
-inline void ZLC(vd op, vd* out, vd* ans_shift_out){
+inline void ZLC_sub(vd op, vd* out, vd* ans_shift_out){
     assign(out, (
                 slice(op, 27, 27).data ? constant(0, 5) :
                 slice(op, 26, 26).data ? constant(1, 5) :
@@ -191,7 +191,7 @@ inline vd fsub(vd op1, vd op2){
     vd zero_count = {0, 5};
     vd ans_shift = {0, 23};
     vd ans_shift_reg = {0, 24};
-    ZLC(ans, &zero_count, &ans_shift);
+    ZLC_sub(ans, &zero_count, &ans_shift);
     // bit_print(zero_count.data);
     // bit_print(ans_shift.data);
     // vd marume_up = {0, 1};

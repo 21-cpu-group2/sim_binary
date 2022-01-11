@@ -5,12 +5,28 @@
 #include <stdlib.h>
 #include <cmath>
 #include "simulator.hpp"
+#include "fpu/fabs.hpp"
+#include "fpu/fadd.hpp"
+#include "fpu/fdiv.hpp"
+#include "fpu/fhalf.hpp"
+#include "fpu/fisneg.hpp"
+#include "fpu/fispos.hpp"
+#include "fpu/fiszero.hpp"
+#include "fpu/fless.hpp"
+#include "fpu/floor.hpp"
+#include "fpu/fmul.hpp"
+#include "fpu/fneg.hpp"
+#include "fpu/fsqrt.hpp"
+#include "fpu/fsub.hpp"
+#include "fpu/ftoi.hpp"
+#include "fpu/itof.hpp"
+
 using namespace std;
 
-union fi{
-    uint32_t i;
-    float f;
-} ;
+// union fi{
+//     uint32_t i;
+//     float f;
+// } ;
 
 int disassemble_one_instruction(Emulator * emu, uint32_t instruction);
 void disassemble_instructions(Emulator* emu);
@@ -355,11 +371,13 @@ inline int FSW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
 inline int FADDS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    union fi frs1, frs2, frd;
-    frs1.i = rs1;
-    frs2.i = rs2;
-    frd.f = frs1.f + frs2.f;
-    emu->reg[rd_] = frd.i;
+    // union fi frs1, frs2, frd;
+    // frs1.i = rs1;
+    // frs2.i = rs2;
+    vd rs1_vd = {rs1, 32};
+    vd rs2_vd = {rs2, 32};
+    // frd.f = frs1.f + frs2.f;
+    emu->reg[rd_] = fadd(rs1_vd, rs2_vd).data;
     emu->pc++;
     return 0;
 }
@@ -367,11 +385,13 @@ inline int FADDS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
 inline int FSUBS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    union fi frs1, frs2, frd;
-    frs1.i = rs1;
-    frs2.i = rs2;
-    frd.f = frs1.f - frs2.f;
-    emu->reg[rd_] = frd.i;
+    // union fi frs1, frs2, frd;
+    // frs1.i = rs1;
+    // frs2.i = rs2;
+    vd rs1_vd = {rs1, 32};
+    vd rs2_vd = {rs2, 32};
+    // frd.f = frs1.f + frs2.f;
+    emu->reg[rd_] = fsub(rs1_vd, rs2_vd).data;
     emu->pc++;
     return 0;
 }
@@ -379,11 +399,15 @@ inline int FSUBS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
 inline int FMULS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    union fi frs1, frs2, frd;
-    frs1.i = rs1;
-    frs2.i = rs2;
-    frd.f = frs1.f * frs2.f;
-    emu->reg[rd_] = frd.i;
+    // union fi frs1, frs2, frd;
+    // frs1.i = rs1;
+    // frs2.i = rs2;
+    // frd.f = frs1.f * frs2.f;
+    // emu->reg[rd_] = frd.i;
+    vd rs1_vd = {rs1, 32};
+    vd rs2_vd = {rs2, 32};
+    // frd.f = frs1.f + frs2.f;
+    emu->reg[rd_] = fmul(rs1_vd, rs2_vd).data;
     emu->pc++;
     return 0;
 }
@@ -391,51 +415,62 @@ inline int FMULS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
 inline int FDIVS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    union fi frs1, frs2, frd;
-    frs1.i = rs1;
-    frs2.i = rs2;
-    frd.f = frs1.f / frs2.f;
-    emu->reg[rd_] = frd.i;
+    // union fi frs1, frs2, frd;
+    // frs1.i = rs1;
+    // frs2.i = rs2;
+    // frd.f = frs1.f / frs2.f;
+    // emu->reg[rd_] = frd.i;
+    vd rs1_vd = {rs1, 32};
+    vd rs2_vd = {rs2, 32};
+    emu->reg[rd_] = fdiv(rs1_vd, rs2_vd).data;
     emu->pc++;
     return 0;
 }
 
 inline int FHALF(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
-    union fi frs1, frd;
-    frs1.i = rs1;
-    frd.f = frs1.f / 2.;
-    emu->reg[rd_] = frd.i;
+    // union fi frs1, frd;
+    // frs1.i = rs1;
+    // frd.f = frs1.f / 2.;
+    // emu->reg[rd_] = frd.i;
+    vd rs1_vd = {rs1, 32};
+    emu->reg[rd_] = fhalf(rs1_vd).data;
     emu->pc++;
     return 0;
 }
 
 inline int FSQRT(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
-    union fi frs1, frd;
-    frs1.i = rs1;
-    frd.f = sqrt(frs1.f);
-    emu->reg[rd_] = frd.i;
+    // union fi frs1, frd;
+    // frs1.i = rs1;
+    // frd.f = sqrt(frs1.f);
+    // emu->reg[rd_] = frd.i;
+    vd rs1_vd = {rs1, 32};
+    emu->reg[rd_] = fsqrt(rs1_vd).data;
     emu->pc++;
     return 0;
 }
 
 inline int FABS(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
-    union fi frs1, frd;
-    frs1.i = rs1;
-    frd.f = abs(frs1.f);
-    emu->reg[rd_] = frd.i;
+    // union fi frs1, frd;
+    // frs1.i = rs1;
+    // frd.f = abs(frs1.f);
+    // emu->reg[rd_] = frd.i;
+    vd rs1_vd = {rs1, 32};
+    emu->reg[rd_] = fabs(rs1_vd).data;
     emu->pc++;
     return 0;
 }
 
 inline int FNEG(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
-    union fi frs1, frd;
-    frs1.i = rs1;
-    frd.f = -frs1.f;
-    emu->reg[rd_] = frd.i;
+    // union fi frs1, frd;
+    // frs1.i = rs1;
+    // frd.f = -frs1.f;
+    // emu->reg[rd_] = frd.i;
+    vd rs1_vd = {rs1, 32};
+    emu->reg[rd_] = fneg(rs1_vd).data;
     emu->pc++;
     return 0;
 }
@@ -528,11 +563,13 @@ inline int FMVXW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
 inline int FISZERO(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
     // uint32_t float_zero = emu->reg[19]; // %fzero
-    union fi frs1, fzero;
-    frs1.i = rs1;
+    // union fi frs1, fzero;
+    // frs1.i = rs1;
     // fzero.i = float_zero;
     // emu->reg[rd_] = (frs1.f == fzero.f) ? 1 : 0;
-    emu->reg[rd_] = (frs1.f == 0.0) ? 1 : 0;
+    // emu->reg[rd_] = (frs1.f == 0.0) ? 1 : 0;
+    vd rs1_vd = {rs1, 32};
+    emu->reg[rd_] = fiszero(rs1_vd).data;
     emu->pc++;
     return 0;
 }
@@ -540,11 +577,13 @@ inline int FISZERO(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
 inline int FISNEG(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
     // uint32_t float_zero = emu->reg[19]; // %fzero
-    union fi frs1, fzero;
-    frs1.i = rs1;
+    // union fi frs1, fzero;
+    // frs1.i = rs1;
     // fzero.i = float_zero;
     // emu->reg[rd_] = (frs1.f < fzero.f) ? 1 : 0;
-    emu->reg[rd_] = (frs1.f < 0.0) ? 1 : 0;
+    // emu->reg[rd_] = (frs1.f < 0.0) ? 1 : 0;
+    vd rs1_vd = {rs1, 32};
+    emu->reg[rd_] = fisneg(rs1_vd).data;
     emu->pc++;
     return 0;
 }
@@ -552,11 +591,13 @@ inline int FISNEG(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
 inline int FISPOS(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
     // uint32_t float_zero = emu->reg[19]; // %fzero
-    union fi frs1, fzero;
-    frs1.i = rs1;
+    // union fi frs1, fzero;
+    // frs1.i = rs1;
     // fzero.i = float_zero;
     // emu->reg[rd_] = (frs1.f > fzero.f) ? 1 : 0;
-    emu->reg[rd_] = (frs1.f > 0.0) ? 1 : 0;
+    // emu->reg[rd_] = (frs1.f > 0.0) ? 1 : 0;
+    vd rs1_vd = {rs1, 32};
+    emu->reg[rd_] = fispos(rs1_vd).data;
     emu->pc++;
     return 0;
 }
@@ -564,54 +605,64 @@ inline int FISPOS(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
 inline int FLESS(Emulator* emu, uint32_t rs1_, uint32_t rs2_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    union fi frs1, frs2;
-    frs1.i = rs1;
-    frs2.i = rs2;
-    emu->reg[rd_] = (frs1.f < frs2.f) ? 1 : 0;
+    // union fi frs1, frs2;
+    // frs1.i = rs1;
+    // frs2.i = rs2;
+    // emu->reg[rd_] = (frs1.f < frs2.f) ? 1 : 0;
+    vd rs1_vd = {rs1, 32};
+    vd rs2_vd = {rs2, 32};
+    emu->reg[rd_] = fless(rs1_vd, rs2_vd).data;
     emu->pc++;
     return 0;
 }
 
 inline int FLOOR(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
-    union fi frs1, frd;
-    frs1.i = rs1;
-    frd.f = floor(frs1.f);
-    emu->reg[rd_] = frd.i;
+    // union fi frs1, frd;
+    // frs1.i = rs1;
+    // frd.f = floor(frs1.f);
+    // emu->reg[rd_] = frd.i;
+    vd rs1_vd = {rs1, 32};
+    emu->reg[rd_] = floor(rs1_vd).data;
     emu->pc++;
     return 0;
 }
 
 inline int ITOF(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
-    int rs1 = (int)emu->reg[rs1_];
-    union fi frd;
-    frd.f = (float)rs1;
-    emu->reg[rd_] = frd.i;
+    // int rs1 = (int)emu->reg[rs1_];
+    uint32_t rs1 = emu->reg[rs1_];
+    // union fi frd;
+    // frd.f = (float)rs1;
+    // emu->reg[rd_] = frd.i;
+    vd rs1_vd = {rs1, 32};
+    emu->reg[rd_] = itof(rs1_vd).data;
     emu->pc++;
     return 0;
 }
 
 inline int FTOI(Emulator* emu, uint32_t rs1_, uint32_t rd_) {
     uint32_t rs1 = emu->reg[rs1_];
-    union fi frs1, ret;
-    frs1.i = rs1;
-    int approx = (int)frs1.f;
-    if ((float)approx > frs1.f){
-        if( (float)approx - frs1.f < 0.5) {
-            emu->reg[rd_] = approx;
-        }
-        else{
-            emu->reg[rd_] = approx -1;
-        }
-    }
-    else {
-        if (frs1.f - (float)approx < 0.5) {
-            emu->reg[rd_] = approx;
-        }
-        else {
-            emu->reg[rd_] = approx + 1;
-        }
-    }
+    // union fi frs1, ret;
+    // frs1.i = rs1;
+    // int approx = (int)frs1.f;
+    // if ((float)approx > frs1.f){
+    //     if( (float)approx - frs1.f < 0.5) {
+    //         emu->reg[rd_] = approx;
+    //     }
+    //     else{
+    //         emu->reg[rd_] = approx -1;
+    //     }
+    // }
+    // else {
+    //     if (frs1.f - (float)approx < 0.5) {
+    //         emu->reg[rd_] = approx;
+    //     }
+    //     else {
+    //         emu->reg[rd_] = approx + 1;
+    //     }
+    // }
+    vd rs1_vd = {rs1, 32};
+    emu->reg[rd_] = ftoi(rs1_vd).data;
     emu->pc++;
     return 0;
 }

@@ -111,8 +111,18 @@ inline int LH(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
 */
 inline int LW(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
-    uint32_t address = (rs1 + imm) / 4;
-    emu->reg[rd_] = emu->memory[address];
+    uint32_t address = (rs1 + imm);
+    if (cache_hit(emu, address)){
+        uint32_t index = (address & INDEX_MASK) >> (OFFSET_BIT);
+        uint32_t offset = address & OFFSET_MASK;
+        uint32_t dat = emu->cache[index].data[offset/4];
+        emu->reg[rd_] = dat;
+    }
+    else {
+        cache_save(emu, address);
+        emu->reg[rd_] = emu->memory[address/4];
+    }
+    emu->reg[rd_] = emu->memory[address/4];
     emu->pc++;
     emu->stats.lw++;
     return 0;
@@ -155,8 +165,19 @@ inline int SH(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
 inline int SW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
     uint32_t rs1 = emu->reg[rs1_];
     uint32_t rs2 = emu->reg[rs2_];
-    uint32_t address = (rs1 + imm) / 4;
-    emu->memory[address] = rs2;
+    // uint32_t address = (rs1 + imm) / 4;
+    uint32_t address = rs1 + imm;
+    if (cache_hit(emu, address)){
+        uint32_t index = (address & INDEX_MASK) >> (OFFSET_BIT);
+        uint32_t offset = address & OFFSET_MASK;
+        emu->cache[index].data[offset/4] = rs2;
+        emu->memory[address/4] = rs2;
+    }
+    else {
+        emu->memory[address/4] = rs2;
+        cache_save(emu, address);
+    }
+    emu->memory[address/4] = rs2;
     emu->pc++;
     emu->stats.sw++;
     return 0;

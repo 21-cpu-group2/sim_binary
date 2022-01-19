@@ -217,6 +217,11 @@ int main(int argc, char **argv){
         cout << "  | ftoi : " << emu->stats.ftoi << " ( " << ((double)emu->stats.ftoi / (double)sum ) * 100 << " % )" << endl;
         cout << "  | itof : " << emu->stats.itof << " ( " << ((double)emu->stats.itof / (double)sum ) * 100 << " % )" << endl;
 
+        cout << endl ;
+        cout << "cache_hit_num : " << emu->stats.cache_hit << endl;
+        cout << "cache_miss_num : " << emu->stats.cache_miss << endl;
+        double hit_rate = (double)emu->stats.cache_hit / (double)(emu->stats.cache_hit + emu->stats.cache_miss);
+        cout << fixed << setprecision(10) << hit_rate * (double)100.0 << " %" << endl;
         // print how many times each label is called
         FILE *fp;
         fp = fopen("data/stats.txt", "w");
@@ -230,7 +235,7 @@ int main(int argc, char **argv){
             if (pc_temp == -1){
                 break;
             }
-            fprintf(fp, "%s : %lld\n", label_temp.c_str(), emu->stats.exec_times[pc_temp]);
+            fprintf(fp, "%30s : %lld\n", label_temp.c_str(), emu->stats.exec_times[pc_temp]);
         }
     }
 

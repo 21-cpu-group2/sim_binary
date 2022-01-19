@@ -47,7 +47,7 @@ void init_emulator(Emulator* emu){
     //メモリを動的に確保
     emu->memory = (uint32_t*)malloc(sizeof(uint32_t) * MEMORY_SIZE);
     emu->instruction_memory = (uint32_t*)malloc(sizeof(uint32_t) * INSTRUCTION_MEMORY_SIZE);
-    emu->cache = (cache_line*)malloc(sizeof(cache_line) * BLOCK_NUM);
+    emu->cache = (cache_line*)malloc(sizeof(cache_line) * CACHE_LINE_NUM);
 
     if (emu->memory == NULL || emu->instruction_memory == NULL){
         printf("error : cannot allocate memory\n");
@@ -55,7 +55,10 @@ void init_emulator(Emulator* emu){
     }
     memset(emu->memory, 0, sizeof(uint32_t) * MEMORY_SIZE);
     memset(emu->instruction_memory, 0, sizeof(uint32_t) * INSTRUCTION_MEMORY_SIZE);
-    memset(emu->cache, 0, sizeof(cache_line) * BLOCK_NUM);
+    memset(emu->cache, 0, sizeof(cache_line) * CACHE_LINE_NUM);
+    for (int i=0; i<CACHE_LINE_NUM; i++) {
+        emu->cache[i].valid = false;
+    }
 
     emu->instruction_size = 0x00000000;
     emu->args.flg_p = false;
@@ -108,6 +111,8 @@ void init_emulator(Emulator* emu){
     for (int i=0; i<100000; i++){
         emu->stats.exec_times[i] = 0ll;
     }
+    emu->stats.cache_hit = 0ll;
+    emu->stats.cache_miss = 0ll;
 
     // memory <- input_data
     int input_start = 50000; // 200000 / 4
@@ -128,10 +133,10 @@ void init_emulator(Emulator* emu){
         }
     }
 
-    uint32_t address_mask = 0x07FFFFFF;
-    emu->mask.tag_mask = (0xFFFFFFFF << (BLOCK_SIZE_BIT + BLOCK_NUM_BIT)) & address_mask;
-    emu->mask.index_mask = ((0xFFFFFFFF << (BLOCK_SIZE_BIT)) ^ emu->mask.tag_mask) & address_mask;
-    emu->mask.offset_mask = ((0xFFFFFFFF ^ emu->mask.tag_mask) ^ emu->mask.index_mask) & address_mask;
+    // uint32_t address_mask = 0x07FFFFFF;
+    // emu->mask.tag_mask = (0xFFFFFFFF << (BLOCK_SIZE_BIT + BLOCK_NUM_BIT)) & address_mask;
+    // emu->mask.index_mask = ((0xFFFFFFFF << (BLOCK_SIZE_BIT)) ^ emu->mask.tag_mask) & address_mask;
+    // emu->mask.offset_mask = ((0xFFFFFFFF ^ emu->mask.tag_mask) ^ emu->mask.index_mask) & address_mask;
 }
 
 void destroy_emulator(Emulator* emu) {
@@ -267,25 +272,25 @@ void output_image(Emulator* emu){
     return;
 }
 
-void cache_save(Emulator* emu, uint32_t mem_address) {
-    uint32_t block_address = (mem_address & emu->mask.index_mask) >> BLOCK_SIZE_BIT;
-    uint32_t tag = (mem_address & emu->mask.tag_mask) >> (BLOCK_SIZE_BIT + BLOCK_NUM_BIT);
-    //uint32_t index = (mem_address & )
-    emu->cache[block_address].valid = true;
-    emu->cache[block_address].tag = tag;
-    // emu->cache[block_address].index = block_address;
-    uint32_t start_ind = (mem_address >> BLOCK_SIZE_BIT) << (BLOCK_SIZE_BIT - 2);
-    for (int i=0; i<BLOCK_SIZE/4; i++) {
-        emu->cache[block_address].data[i] = emu->memory[start_ind + i];
-    }
-}
+// void cache_save(Emulator* emu, uint32_t mem_address) {
+//     uint32_t block_address = (mem_address & emu->mask.index_mask) >> BLOCK_SIZE_BIT;
+//     uint32_t tag = (mem_address & emu->mask.tag_mask) >> (BLOCK_SIZE_BIT + BLOCK_NUM_BIT);
+//     //uint32_t index = (mem_address & )
+//     emu->cache[block_address].valid = true;
+//     emu->cache[block_address].tag = tag;
+//     // emu->cache[block_address].index = block_address;
+//     uint32_t start_ind = (mem_address >> BLOCK_SIZE_BIT) << (BLOCK_SIZE_BIT - 2);
+//     for (int i=0; i<BLOCK_SIZE/4; i++) {
+//         emu->cache[block_address].data[i] = emu->memory[start_ind + i];
+//     }
+// }
 
-bool cache_hit(Emulator* emu, uint32_t mem_address) {
-    // 暫定的に
-    uint32_t block_address = (mem_address & emu->mask.index_mask) >> BLOCK_SIZE_BIT;
-    uint32_t tag = (mem_address & emu->mask.tag_mask) >> (BLOCK_SIZE_BIT + BLOCK_NUM_BIT);
-    if (emu->cache[block_address].tag == tag){
-        return true;
-    }
-    return false;
-}
+// bool cache_hit(Emulator* emu, uint32_t mem_address) {
+//     // 暫定的に
+//     uint32_t block_address = (mem_address & emu->mask.index_mask) >> BLOCK_SIZE_BIT;
+//     uint32_t tag = (mem_address & emu->mask.tag_mask) >> (BLOCK_SIZE_BIT + BLOCK_NUM_BIT);
+//     if (emu->cache[block_address].tag == tag){
+//         return true;
+//     }
+//     return false;
+// }

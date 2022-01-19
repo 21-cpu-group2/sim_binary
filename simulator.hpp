@@ -14,7 +14,19 @@
 #include <stdlib.h>
 #include <string>
 #include <map>
-#include "cache.hpp"
+//#include "cache.hpp"
+
+// とりあえず、direct-mapped
+#define ADDRESS_BIT 27
+// #define CACHE_SIZE 512
+#define CACHE_LINE_NUM 128
+#define CACHE_LINE_SIZE 32 // 8 words
+#define TAG_BIT 13
+#define TAG_MASK 0x07FFC0000
+#define INDEX_BIT 7
+#define INDEX_MASK 0x00003F80 
+#define OFFSET_BIT 7
+#define OFFSET_MASK 0x000007F
 
 using namespace std;
 
@@ -124,8 +136,17 @@ typedef struct {
     long long int ftoi;
     long long int itof;
     long long int exec_times[100000];
+    long long int cache_hit;
+    long long int cache_miss;
 
 } statistics;
+
+typedef struct {
+    bool valid;
+    uint32_t tag; // 実際は下位13bitのみを使用
+    // uint32_t index;  emu->cache[ind] の indでわかる。
+    uint32_t data[CACHE_LINE_SIZE];
+} cache_line;
 
 typedef struct {
     uint32_t reg[REG_SIZE];
@@ -136,9 +157,34 @@ typedef struct {
     int instruction_size;
     cmdline_args args;
     cache_line *cache;
-    masks mask;
+    //masks mask;
     statistics stats;
 } Emulator;
+
+inline bool cache_hit(Emulator* emu, uint32_t mem_address) {
+    // mem_address : 27bitとする。
+    uint32_t tag = (mem_address & TAG_MASK) >> (INDEX_BIT + OFFSET_BIT);
+    uint32_t index = (mem_address & INDEX_MASK) >> (OFFSET_BIT);
+    // uint32_t offset = mem_address & OFFSET_MASK;
+    if (emu->cache[index].tag == tag && emu->cache[index].valid){
+        emu->stats.cache_hit += 1ll;
+        return true;
+    }
+    emu->stats.cache_miss += 1ll;
+    return false;
+}
+
+inline void cache_save(Emulator* emu, uint32_t mem_address) {
+    uint32_t tag = (mem_address & TAG_MASK) >> (INDEX_BIT + OFFSET_BIT);
+    uint32_t index = (mem_address & INDEX_MASK) >> (OFFSET_BIT);
+
+    emu->cache[index].valid = true;
+    emu->cache[index].tag = tag;
+    uint32_t start_ind = (mem_address & 0xFFFFFFF0) >> 2;
+    for (int i=0; i<CACHE_LINE_SIZE; i++) {
+        emu->cache[index].data[i] = emu->memory[start_ind + i];
+    }
+}
 
 uint32_t bin2int(string bin);
 uint32_t hex2int(string hex);
@@ -149,5 +195,5 @@ void print_reg(Emulator* emu);
 void print_reg_for_debug(Emulator* emu);
 void print_mem(Emulator* emu, int start);
 void output_image(Emulator* emu);
-bool cache_hit(Emulator* emu, uint32_t mem_address);
+//bool cache_hit(Emulator* emu, uint32_t mem_address);
 #endif

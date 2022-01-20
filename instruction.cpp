@@ -48,6 +48,8 @@ int inst_branch(Emulator* emu, uint32_t instruction) {
     }
     uint32_t rs2 = (instruction & 0x01F00000) >> 20;
     uint32_t rs1 = (instruction & 0x000F8000) >> 15;
+    emu->stats.reg_used[rs1]++;
+    emu->stats.reg_used[rs2]++;
     switch (funct3) {
         case 0b000 :
             BEQ(emu, rs1, rs2, imm);
@@ -104,6 +106,8 @@ int inst_load(Emulator* emu, uint32_t instruction) {
     }
     uint32_t rs1 = (instruction & 0x000F8000) >> 15;
     uint32_t rd = (instruction & 0x00000F80) >> 7;
+    emu->stats.reg_used[rs1]++;
+    emu->stats.reg_used[rd]++;
     switch (funct3) {
         // case 0b000 :
         //     LB(emu, rs1, rd, imm);
@@ -151,6 +155,8 @@ int inst_store(Emulator* emu, uint32_t instruction) {
     }
     uint32_t rs2 = (instruction & 0x01F00000) >> 20;
     uint32_t rs1 = (instruction & 0x000F8000) >> 15;
+    emu->stats.reg_used[rs1]++;
+    emu->stats.reg_used[rs2]++;
     switch (funct3) {
         // case 0b000 :
         //     SB(emu, rs1, rs2, imm);
@@ -189,6 +195,8 @@ int inst_imm(Emulator* emu, uint32_t instruction) {
     uint32_t shamt = (uint32_t)(imm & 0x0000001F);
     uint32_t rs1 = (instruction & 0x000F8000) >> 15;
     uint32_t rd = (instruction & 0x00000F80) >> 7;
+    emu->stats.reg_used[rs1]++;
+    emu->stats.reg_used[rd]++;
     switch (funct3) {
         case 0b000 :
             ADDI(emu, rs1, rd, imm);
@@ -248,6 +256,9 @@ int inst_op(Emulator* emu, uint32_t instruction) {
     uint32_t rs2 = (instruction & 0x01F00000) >> 20;
     uint32_t rs1 = (instruction & 0x000F8000) >> 15;
     uint32_t rd = (instruction & 0x00000F80) >> 7;
+    emu->stats.reg_used[rs1]++;
+    emu->stats.reg_used[rs2]++;
+    emu->stats.reg_used[rd]++;
     switch (funct) {
         // 下位10bit(7bit->funct7, 3bit->funct3)
         case 0b0000000000 :
@@ -314,6 +325,7 @@ int inst_lui(Emulator* emu, uint32_t instruction) {
 
     int imm = (instruction & 0xFFFFF000) >> 12;
     uint32_t rd = (instruction & 0x00000F80) >> 7;
+    emu->stats.reg_used[rd]++;
     LUI(emu, rd, imm);
     if (emu->args.print_asm) {
         cout << "lui " << reg_name[rd] << " " << imm << endl;
@@ -354,6 +366,7 @@ int inst_jal(Emulator* emu, uint32_t instruction) {
         imm = (imm | 0xFFF00000);
     }
     uint32_t rd = (instruction & 0x00000F80) >> 7;
+    emu->stats.reg_used[rd]++;
     JAL(emu, rd, imm);
     if (emu->args.print_asm) {
         cout << "jal " << reg_name[rd] << " " << imm << endl;
@@ -376,6 +389,8 @@ int inst_jalr(Emulator* emu, uint32_t instruction) {
     }
     uint32_t rs1 = (instruction & 0x000F8000) >> 15;
     uint32_t rd = (instruction & 0x00000F80) >> 7;
+    emu->stats.reg_used[rs1]++;
+    emu->stats.reg_used[rd]++;
     switch (funct3) {
         case 0b000 :
             JALR(emu, rs1, rd, imm);
@@ -476,6 +491,9 @@ int inst_fop(Emulator* emu, uint32_t instruction) {
     uint32_t rs2 = (instruction & 0x01F00000) >> 20;
     uint32_t rs1 = (instruction & 0x000F8000) >> 15;
     uint32_t rd = (instruction & 0x00000F80) >> 7;
+    emu->stats.reg_used[rs1]++;
+    emu->stats.reg_used[rs2]++;
+    emu->stats.reg_used[rd]++;
     switch (funct) {
         // 上位7bit->funct7, 下位3bit->funct3
         case 0b0000000000 :

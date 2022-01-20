@@ -237,6 +237,10 @@ int main(int argc, char **argv){
             }
             fprintf(fp, "%30s : %lld\n", label_temp.c_str(), emu->stats.exec_times[pc_temp]);
         }
+        fprintf(fp, "\n times registers are used\n");
+        for (int i=0; i<32; i++){
+            fprintf(fp, "%10s : %lld\n", reg_name[i], emu->stats.reg_used[i]);
+        }
     }
 
     print_reg(emu);

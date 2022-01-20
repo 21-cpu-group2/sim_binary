@@ -138,7 +138,7 @@ typedef struct {
     long long int exec_times[100000];
     long long int cache_hit;
     long long int cache_miss;
-
+    long long int reg_used[32];
 } statistics;
 
 typedef struct {

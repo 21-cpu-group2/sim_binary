@@ -113,6 +113,9 @@ void init_emulator(Emulator* emu){
     }
     emu->stats.cache_hit = 0ll;
     emu->stats.cache_miss = 0ll;
+    for (int i=0; i<32; i++){
+        emu->stats.reg_used[i] = 0ll;
+    }
 
     // memory <- input_data
     int input_start = 50000; // 200000 / 4

@@ -5,7 +5,8 @@
 #   |__sim_binary
 ###################
 make clean
-cp data/test.asm ../assembler/test.asm
+SRC_ASM="data/test_cache.asm"
+cp $SRC_ASM ../assembler/test.asm
 rm -f data/test.bin data/label_pc.txt data/pc_label.txt
 cd ../assembler
 make clean

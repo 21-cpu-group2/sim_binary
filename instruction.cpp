@@ -118,10 +118,10 @@ int inst_load(Emulator* emu, uint32_t instruction) {
         //     if (DEBUG) cout << "LH" << endl;
         //     break;
         case 0b010 :
-            LW(emu, rs1, rd, imm);
             if (emu->args.print_asm) {
                 cout << "lw " << reg_name[rd] << " " << reg_name[rs1] << " " << imm << endl;
             }
+            LW(emu, rs1, rd, imm);
             break;
         // case 0b100 :
         //     LBU(emu, rs1, rd, imm);
@@ -167,10 +167,10 @@ int inst_store(Emulator* emu, uint32_t instruction) {
         //     if (DEBUG) cout << "SH" << endl;
         //     break;
         case 0b010 :
-            SW(emu, rs1, rs2, imm);
             if (emu->args.print_asm) {
                 cout << "sw " << reg_name[rs2] << " " << reg_name[rs1] << " " << imm << endl;
             }
+            SW(emu, rs1, rs2, imm);
             break;
         default :
             cout << "no function matched" << endl;

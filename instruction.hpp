@@ -117,10 +117,12 @@ inline int LW(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
         uint32_t offset = address & OFFSET_MASK;
         uint32_t dat = emu->cache[index].data[offset/4];
         emu->reg[rd_] = dat;
+        if (emu->args.print_asm) cout << "cache hit!!" << endl;
     }
     else {
         cache_save(emu, address);
         emu->reg[rd_] = emu->memory[address/4];
+        if (emu->args.print_asm) cout << "cache miss..." << endl;
     }
     emu->reg[rd_] = emu->memory[address/4];
     emu->pc++;
@@ -172,10 +174,12 @@ inline int SW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
         uint32_t offset = address & OFFSET_MASK;
         emu->cache[index].data[offset/4] = rs2;
         emu->memory[address/4] = rs2;
+        if (emu->args.print_asm) cout << "cache hit!!" << endl;
     }
     else {
         emu->memory[address/4] = rs2;
         cache_save(emu, address);
+        if (emu->args.print_asm) cout << "cache miss..." << endl;
     }
     emu->memory[address/4] = rs2;
     emu->pc++;

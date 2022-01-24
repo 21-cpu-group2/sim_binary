@@ -11,6 +11,7 @@
 //#define DEBUG2 0 // if 1 then showing specific registers
 #define RM 0b000 // Round Mode(float)
 
+#include <iostream>
 #include <stdlib.h>
 #include <string>
 #include <map>
@@ -22,7 +23,7 @@
 #define CACHE_LINE_NUM 128
 #define CACHE_LINE_SIZE 32 // 8 words
 #define TAG_BIT 13
-#define TAG_MASK 0x07FFC0000
+#define TAG_MASK 0x07FFC000
 #define INDEX_BIT 7
 #define INDEX_MASK 0x00003F80 
 #define OFFSET_BIT 7
@@ -161,11 +162,24 @@ typedef struct {
     statistics stats;
 } Emulator;
 
+inline void print_masked_num(uint32_t num, uint32_t mask_size){
+    for (int i=0; i<mask_size; i++){
+        cout << ((num & (1<<(mask_size-i-1))) != 0);
+    }
+    cout << endl;
+}
+
 inline bool cache_hit(Emulator* emu, uint32_t mem_address) {
     // mem_address : 27bitとする。
     uint32_t tag = (mem_address & TAG_MASK) >> (INDEX_BIT + OFFSET_BIT);
     uint32_t index = (mem_address & INDEX_MASK) >> (OFFSET_BIT);
+    uint32_t offset = (mem_address & OFFSET_MASK);
     // uint32_t offset = mem_address & OFFSET_MASK;
+    if (emu->args.print_asm){
+        cout << "     tag : "; print_masked_num(tag, TAG_BIT);
+        cout << "   index : "; print_masked_num(index, INDEX_BIT);
+        cout << "  offset : "; print_masked_num(offset, OFFSET_BIT);
+    }
     if (emu->cache[index].tag == tag && emu->cache[index].valid){
         emu->stats.cache_hit += 1ll;
         return true;
@@ -177,7 +191,7 @@ inline bool cache_hit(Emulator* emu, uint32_t mem_address) {
 inline void cache_save(Emulator* emu, uint32_t mem_address) {
     uint32_t tag = (mem_address & TAG_MASK) >> (INDEX_BIT + OFFSET_BIT);
     uint32_t index = (mem_address & INDEX_MASK) >> (OFFSET_BIT);
-
+    uint32_t offset = (mem_address & OFFSET_MASK);
     emu->cache[index].valid = true;
     emu->cache[index].tag = tag;
     uint32_t start_ind = (mem_address & 0xFFFFFFF0) >> 2;

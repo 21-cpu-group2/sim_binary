@@ -9,3 +9,5 @@ cache.hpp
 simulator
 *.DS_Store
 *.out
+__pycache__
+

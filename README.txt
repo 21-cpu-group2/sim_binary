@@ -13,11 +13,11 @@ sim_binary
 |
 ...
 ├── data
-│   ├── contest.txt
+│   ├── contest.txt  <------
 │   ├── label_pc.txt
 │   ├── output.txt
 │   ├── pc_label.txt
-│   ├── test.asm    <------
+│   ├── test.asm     <------
 │   ├── test.bin
 │   └── test_disassembled.txt
 ...

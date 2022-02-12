@@ -24,10 +24,10 @@
 #define CACHE_LINE_SIZE 32 // 8 words
 #define TAG_BIT 13
 #define TAG_MASK 0x07FFC000
-#define INDEX_BIT 7
-#define INDEX_MASK 0x00003F80 
-#define OFFSET_BIT 7
-#define OFFSET_MASK 0x000007F
+#define INDEX_BIT 10
+#define INDEX_MASK 0x00003FF0 
+#define OFFSET_BIT 4
+#define OFFSET_MASK 0x0000000F
 
 using namespace std;
 
@@ -156,6 +156,7 @@ typedef struct {
     uint32_t* memory;
     uint32_t *instruction_memory;
     int instruction_size;
+    long long int clks;
     cmdline_args args;
     cache_line *cache;
     //masks mask;
@@ -184,8 +185,10 @@ inline bool cache_hit(Emulator* emu, uint32_t mem_address) {
         emu->stats.cache_hit += 1ll;
         return true;
     }
-    emu->stats.cache_miss += 1ll;
-    return false;
+    else{
+        emu->stats.cache_miss += 1ll;
+        return false;
+    }
 }
 
 inline void cache_save(Emulator* emu, uint32_t mem_address) {

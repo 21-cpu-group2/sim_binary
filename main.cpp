@@ -11,6 +11,7 @@
 #include <iterator>
 #include "instruction.hpp"
 #include "simulator.hpp"
+#include "time_pred.hpp"
 
 using namespace std;
 
@@ -222,6 +223,19 @@ int main(int argc, char **argv){
         cout << "cache_miss_num : " << emu->stats.cache_miss << endl;
         double hit_rate = (double)emu->stats.cache_hit / (double)(emu->stats.cache_hit + emu->stats.cache_miss);
         cout << fixed << setprecision(10) << hit_rate * (double)100.0 << " %" << endl;
+        cout << endl;
+        cout << "clks : " << emu->clks << endl;
+        cout << "predicted time (calculate) : " << (double)emu->clks / freq << " [s]" << endl;
+
+        double speed_to_write_program_and_sld_to_fpga = (double)(1300 + 84248) / 7.5;
+        int program_size = 84248;
+        double time_to_write_program_and_sld_to_fpga = (double)(emu->reg[4] - in_start + program_size) / speed_to_write_program_and_sld_to_fpga;
+        cout << "time to write_program and sld content to FPGA : " << time_to_write_program_and_sld_to_fpga << endl;
+        // time to send output data to server
+        double speed_to_send_output_data_to_server = (double)1572896.0 / 75.0;
+        double time_to_send_output_data_to_server = (double)(emu->reg[5] - out_start) / speed_to_send_output_data_to_server;
+        cout << "time to send output data to server : " << time_to_send_output_data_to_server << " [s]" << endl;
+
         // print how many times each label is called
         FILE *fp;
         fp = fopen("data/stats.txt", "w");

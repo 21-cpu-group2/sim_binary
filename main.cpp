@@ -152,10 +152,12 @@ int main(int argc, char **argv){
     }
     double t_end = elapsed();
     if (PRINT_STAT){
+        /*
         cout << t_end - t_start << "[s] elapsed" << endl;
         cout << dec << (iteration-1) << " instructions executed" << endl;
         cout << (iteration-1) / (t_end - t_start) << " instructions/sec" << endl;
         cout << "STATISTICS" << endl; 
+        */
         long long int sum = 0ll;
         sum += emu->stats.beq;
         sum += emu->stats.bne;
@@ -187,6 +189,7 @@ int main(int argc, char **argv){
         sum += emu->stats.floor;
         sum += emu->stats.ftoi;
         sum += emu->stats.itof; 
+        /*
         cout << "  | beq : " << emu->stats.beq << " ( " << ((double)emu->stats.beq / (double)sum ) * 100 << " % )" << endl;
         cout << "  | bne : " << emu->stats.bne << " ( " << ((double)emu->stats.bne / (double)sum ) * 100 << " % )" << endl;
         cout << "  | blt : " << emu->stats.blt << " ( " << ((double)emu->stats.blt / (double)sum ) * 100 << " % )" << endl;
@@ -217,16 +220,16 @@ int main(int argc, char **argv){
         cout << "  | floor : " << emu->stats.floor << " ( " << ((double)emu->stats.floor / (double)sum ) * 100 << " % )" << endl;
         cout << "  | ftoi : " << emu->stats.ftoi << " ( " << ((double)emu->stats.ftoi / (double)sum ) * 100 << " % )" << endl;
         cout << "  | itof : " << emu->stats.itof << " ( " << ((double)emu->stats.itof / (double)sum ) * 100 << " % )" << endl;
-
         cout << endl ;
         cout << "cache_hit_num : " << emu->stats.cache_hit << endl;
         cout << "cache_miss_num : " << emu->stats.cache_miss << endl;
         double hit_rate = (double)emu->stats.cache_hit / (double)(emu->stats.cache_hit + emu->stats.cache_miss);
         cout << fixed << setprecision(10) << hit_rate * (double)100.0 << " %" << endl;
+        */
         cout << endl;
         cout << "clks : " << emu->clks << endl;
         cout << "predicted time (calculate) : " << (double)emu->clks / freq << " [s]" << endl;
-
+        /*
         double speed_to_write_program_and_sld_to_fpga = (double)(1300 + 84248) / 7.5;
         int program_size = 84248;
         double time_to_write_program_and_sld_to_fpga = (double)(emu->reg[4] - in_start + program_size) / speed_to_write_program_and_sld_to_fpga;
@@ -235,15 +238,75 @@ int main(int argc, char **argv){
         double speed_to_send_output_data_to_server = (double)1572896.0 / 75.0;
         double time_to_send_output_data_to_server = (double)(emu->reg[5] - out_start) / speed_to_send_output_data_to_server;
         cout << "time to send output data to server : " << time_to_send_output_data_to_server << " [s]" << endl;
+        */
 
         // print how many times each label is called
         FILE *fp;
         fp = fopen("data/stats.txt", "w");
+
+        fprintf(fp, "%.5f [sec] Elapsed\n", t_end - t_start);
+        fprintf(fp, "%lld [Instructions] Executed\n", (iteration -1));
+        fprintf(fp, "%lld [Instructions/sec]\n", (iteration - 1)/(long long int)(t_end - t_start));
+
+        // ¼Â¹Ô»þ´ÖÍ½Â¬
+        double speed_to_write_program_and_sld_to_fpga = (double)(1300 + 84248) / 7.5;
+        int program_size = 84248;
+        double time_to_write_program_and_sld_to_fpga = (double)(emu->reg[4] - in_start + program_size) / speed_to_write_program_and_sld_to_fpga;
+        fprintf(fp, "time to write program and sld content to FPGA : %.4f [s]\n", time_to_write_program_and_sld_to_fpga);
+        double speed_to_send_output_data_to_server = (double)1572896.0 / 75.0;
+        double time_to_send_output_data_to_server = (double)(emu->reg[5] - out_start) / speed_to_send_output_data_to_server;
+        fprintf(fp, "time to send output data to server : %.4f [s]\n", time_to_send_output_data_to_server);
+
+
+        fprintf(fp, "\n\n----------Times Each Registers Used----------\n\n");
+        for (int i=0; i<32; i++){
+            fprintf(fp, "%10s : %lld\n", reg_name[i], emu->stats.reg_used[i]);
+        }
+        fprintf(fp, "\n\n----------Ratio Each Instructions Called----------\n");
+        fprintf(fp, "       beq : %.4f %%\n", ((double)emu->stats.beq / (double)sum) * 100.0);
+        fprintf(fp, "       bne : %.4f %%\n", ((double)emu->stats.bne / (double)sum) * 100.0);
+        fprintf(fp, "       blt : %.4f %%\n", ((double)emu->stats.blt / (double)sum) * 100.0);
+        fprintf(fp, "       bge : %.4f %%\n", ((double)emu->stats.bge / (double)sum) * 100.0);
+        fprintf(fp, "        lw : %.4f %% (%lld) \n", ((double)emu->stats.lw / (double)sum) * 100.0, emu->stats.lw);
+        fprintf(fp, "        sw : %.4f %% (%lld) \n", ((double)emu->stats.sw / (double)sum) * 100.0, emu->stats.sw);
+        fprintf(fp, "      addi : %.4f %%\n", ((double)emu->stats.addi / (double)sum) * 100.0);
+        fprintf(fp, "      slli : %.4f %%\n", ((double)emu->stats.slli / (double)sum) * 100.0);
+        fprintf(fp, "      srli : %.4f %%\n", ((double)emu->stats.srli / (double)sum) * 100.0);
+        fprintf(fp, "       add : %.4f %%\n", ((double)emu->stats.add / (double)sum) * 100.0);
+        fprintf(fp, "       sub : %.4f %%\n", ((double)emu->stats.sub / (double)sum) * 100.0);
+        fprintf(fp, "       sll : %.4f %%\n", ((double)emu->stats.sll / (double)sum) * 100.0);
+        fprintf(fp, "       lui : %.4f %%\n", ((double)emu->stats.lui / (double)sum) * 100.0);
+        fprintf(fp, "       jal : %.4f %%\n", ((double)emu->stats.jal / (double)sum) * 100.0);
+        fprintf(fp, "      jalr : %.4f %%\n", ((double)emu->stats.jalr / (double)sum) * 100.0);
+        fprintf(fp, "      fadd : %.4f %%\n", ((double)emu->stats.fadd / (double)sum) * 100.0);
+        fprintf(fp, "      fsub : %.4f %%\n", ((double)emu->stats.fsub / (double)sum) * 100.0);
+        fprintf(fp, "      fmul : %.4f %%\n", ((double)emu->stats.fmul / (double)sum) * 100.0);
+        fprintf(fp, "      fdiv : %.4f %%\n", ((double)emu->stats.fdiv / (double)sum) * 100.0);
+        fprintf(fp, "     fhalf : %.4f %%\n", ((double)emu->stats.fhalf / (double)sum) * 100.0);
+        fprintf(fp, "     fsqrt : %.4f %%\n", ((double)emu->stats.fsqrt / (double)sum) * 100.0);
+        fprintf(fp, "      fabs : %.4f %%\n", ((double)emu->stats.fabs / (double)sum) * 100.0);
+        fprintf(fp, "      fneg : %.4f %%\n", ((double)emu->stats.fneg / (double)sum) * 100.0);
+        fprintf(fp, "   fiszero : %.4f %%\n", ((double)emu->stats.fiszero / (double)sum) * 100.0);
+        fprintf(fp, "    fisneg : %.4f %%\n", ((double)emu->stats.fisneg / (double)sum) * 100.0);
+        fprintf(fp, "    fispos : %.4f %%\n", ((double)emu->stats.fispos / (double)sum) * 100.0);
+        fprintf(fp, "     fless : %.4f %%\n", ((double)emu->stats.fless / (double)sum) * 100.0);
+        fprintf(fp, "     floor : %.4f %%\n", ((double)emu->stats.floor / (double)sum) * 100.0);
+        fprintf(fp, "      ftoi : %.4f %%\n", ((double)emu->stats.ftoi / (double)sum) * 100.0);
+        fprintf(fp, "      itof : %.4f %%\n", ((double)emu->stats.itof / (double)sum) * 100.0);
+
+        // print cache statistics
+        fprintf(fp, "\n----------Cache Stats----------\n");
+        fprintf(fp, "   cache hit : %lld [times]\n", emu->stats.cache_hit);
+        fprintf(fp, "  cache miss : %lld [times]\n", emu->stats.cache_miss);
+        fprintf(fp, "total access : %lld [times]\n", emu->stats.cache_hit + emu->stats.cache_miss);
+        fprintf(fp, "   hit ratio : %.8f %%\n", (double)emu->stats.cache_hit / (double)(emu->stats.cache_hit + emu->stats.cache_miss) * 100.0);
+        fprintf(fp, "  miss ratio : %.8f %%\n", (double)emu->stats.cache_miss / (double)(emu->stats.cache_hit + emu->stats.cache_miss) * 100.0);
+
         ifstream in("data/pc_label.txt");
         cin.rdbuf(in.rdbuf());
         int pc_temp;
         string label_temp;
-        fprintf(fp, "Times Each Label Called\n");
+        fprintf(fp, "\n\n----------Times Each Label Called----------\n");
         for (int i=0; i<100000; i++){
             cin >> pc_temp >> label_temp;
             if (pc_temp == -1){
@@ -251,10 +314,8 @@ int main(int argc, char **argv){
             }
             fprintf(fp, "%30s : %lld\n", label_temp.c_str(), emu->stats.exec_times[pc_temp]);
         }
-        fprintf(fp, "\n times registers are used\n");
-        for (int i=0; i<32; i++){
-            fprintf(fp, "%10s : %lld\n", reg_name[i], emu->stats.reg_used[i]);
-        }
+
+        fclose(fp);
     }
 
     print_reg(emu);

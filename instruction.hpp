@@ -123,15 +123,15 @@ inline int LW(Emulator* emu, uint32_t rs1_, uint32_t rd_, int imm) {
         uint32_t dat = emu->cache[index].data[offset/4];
         emu->reg[rd_] = dat;
         if (emu->args.print_asm) cout << "cache hit!!" << endl;
-        emu->clks += lw_miss_clk; //lw_hit_clk;
+        emu->clks += lw_miss_clk - 2ll; //lw_hit_clk;
     }
     else {
         cache_save(emu, address);
         emu->reg[rd_] = emu->memory[address/4];
         if (emu->args.print_asm) cout << "cache miss..." << endl;
-        emu->clks += lw_miss_clk;
+        emu->clks += lw_miss_clk - 2ll;
     }
-    emu->reg[rd_] = emu->memory[address/4];
+    // emu->reg[rd_] = emu->memory[address/4];
     emu->pc++;
     emu->stats.lw++;
     return 0;
@@ -182,15 +182,15 @@ inline int SW(Emulator* emu, uint32_t rs1_, uint32_t rs2_, int imm) {
         emu->cache[index].data[offset/4] = rs2;
         emu->memory[address/4] = rs2;
         if (emu->args.print_asm) cout << "cache hit!!" << endl;
-        emu->clks += sw_miss_clk; //sw_hit_clk;
+        emu->clks += sw_miss_clk - 2ll; //sw_hit_clk;
     }
     else {
         emu->memory[address/4] = rs2;
         cache_save(emu, address);
         if (emu->args.print_asm) cout << "cache miss..." << endl;
-        emu->clks += sw_miss_clk;
+        emu->clks += sw_miss_clk - 2ll;
     }
-    emu->memory[address/4] = rs2;
+    // emu->memory[address/4] = rs2;
     emu->pc++;
     emu->stats.sw++;
     return 0;

@@ -190,6 +190,39 @@ int main(int argc, char **argv){
         sum += emu->stats.ftoi;
         sum += emu->stats.itof; 
         /*
+        long long int total_clks = 0ll;
+        total_clks += 4ll * emu->stats.beq;
+        total_clks += 4ll * emu->stats.bne;
+        total_clks += 4ll * emu->stats.blt;
+        total_clks += 4ll * emu->stats.bge;
+        total_clks += 44ll * emu->stats.lw;
+        total_clks += 55ll * emu->stats.sw;
+        total_clks += emu->stats.addi;
+        total_clks += emu->stats.slli;
+        total_clks += emu->stats.srli;
+        total_clks += emu->stats.add;
+        total_clks += emu->stats.sub;
+        total_clks += emu->stats.sll;
+        total_clks += emu->stats.lui;
+        total_clks += emu->stats.jal;
+        total_clks += 3ll * emu->stats.jalr;
+        total_clks += fadd_clk * emu->stats.fadd;
+        total_clks += fsub_clk * emu->stats.fsub;
+        total_clks += fmul_clk * emu->stats.fmul;
+        total_clks += fdiv_clk * emu->stats.fdiv;
+        total_clks += emu->stats.fhalf;
+        total_clks += fsqrt_clk * emu->stats.fsqrt;
+        total_clks += emu->stats.fabs;
+        total_clks += emu->stats.fneg;
+        total_clks += emu->stats.fiszero;
+        total_clks += emu->stats.fisneg;
+        total_clks += emu->stats.fispos;
+        total_clks += emu->stats.fless;
+        total_clks += floor_clk * emu->stats.floor;
+        total_clks += ftoi_clk * emu->stats.ftoi;
+        total_clks += itof_clk * emu->stats.itof; 
+        */
+        /*
         cout << "  | beq : " << emu->stats.beq << " ( " << ((double)emu->stats.beq / (double)sum ) * 100 << " % )" << endl;
         cout << "  | bne : " << emu->stats.bne << " ( " << ((double)emu->stats.bne / (double)sum ) * 100 << " % )" << endl;
         cout << "  | blt : " << emu->stats.blt << " ( " << ((double)emu->stats.blt / (double)sum ) * 100 << " % )" << endl;
@@ -225,8 +258,11 @@ int main(int argc, char **argv){
         cout << "cache_miss_num : " << emu->stats.cache_miss << endl;
         double hit_rate = (double)emu->stats.cache_hit / (double)(emu->stats.cache_hit + emu->stats.cache_miss);
         cout << fixed << setprecision(10) << hit_rate * (double)100.0 << " %" << endl;
-        */
+
         cout << endl;
+        cout << "clks : " << total_clks << endl;
+        cout << "predicted time (calculate) : " << total_clks / freq << " [s]" << endl;
+        */
         cout << "clks : " << emu->clks << endl;
         cout << "predicted time (calculate) : " << (double)emu->clks / freq << " [s]" << endl;
         /*
@@ -249,50 +285,56 @@ int main(int argc, char **argv){
         fprintf(fp, "%lld [Instructions/sec]\n", (iteration - 1)/(long long int)(t_end - t_start));
 
         // ¼Â¹Ô»þ´ÖÍ½Â¬
+        fprintf(fp, "----------Time Prediction----------\n");
         double speed_to_write_program_and_sld_to_fpga = (double)(1300 + 84248) / 7.5;
         int program_size = 84248;
         double time_to_write_program_and_sld_to_fpga = (double)(emu->reg[4] - in_start + program_size) / speed_to_write_program_and_sld_to_fpga;
         fprintf(fp, "time to write program and sld content to FPGA : %.4f [s]\n", time_to_write_program_and_sld_to_fpga);
-        double speed_to_send_output_data_to_server = (double)1572896.0 / 75.0;
+        double speed_to_send_output_data_to_server = (double)(104770.0 / 8.0);
         double time_to_send_output_data_to_server = (double)(emu->reg[5] - out_start) / speed_to_send_output_data_to_server;
         fprintf(fp, "time to send output data to server : %.4f [s]\n", time_to_send_output_data_to_server);
-
+        double time_to_calculate = (double)emu->clks / freq;
+        fprintf(fp, "time to calculate : %.4f [s]\n" ,time_to_calculate);
+        double total_time =  time_to_send_output_data_to_server + time_to_write_program_and_sld_to_fpga + time_to_calculate;
+        fprintf(fp, "Total time : %4.f [s]\n", total_time);
+        double error_ratio = abs(227.6222 - total_time) / (227.6222);
+        fprintf(fp, "Error ratio : %.4f %%\n", error_ratio * 100);
 
         fprintf(fp, "\n\n----------Times Each Registers Used----------\n\n");
         for (int i=0; i<32; i++){
             fprintf(fp, "%10s : %lld\n", reg_name[i], emu->stats.reg_used[i]);
         }
         fprintf(fp, "\n\n----------Ratio Each Instructions Called----------\n");
-        fprintf(fp, "       beq : %.4f %%\n", ((double)emu->stats.beq / (double)sum) * 100.0);
-        fprintf(fp, "       bne : %.4f %%\n", ((double)emu->stats.bne / (double)sum) * 100.0);
-        fprintf(fp, "       blt : %.4f %%\n", ((double)emu->stats.blt / (double)sum) * 100.0);
-        fprintf(fp, "       bge : %.4f %%\n", ((double)emu->stats.bge / (double)sum) * 100.0);
-        fprintf(fp, "        lw : %.4f %% (%lld) \n", ((double)emu->stats.lw / (double)sum) * 100.0, emu->stats.lw);
-        fprintf(fp, "        sw : %.4f %% (%lld) \n", ((double)emu->stats.sw / (double)sum) * 100.0, emu->stats.sw);
-        fprintf(fp, "      addi : %.4f %%\n", ((double)emu->stats.addi / (double)sum) * 100.0);
-        fprintf(fp, "      slli : %.4f %%\n", ((double)emu->stats.slli / (double)sum) * 100.0);
-        fprintf(fp, "      srli : %.4f %%\n", ((double)emu->stats.srli / (double)sum) * 100.0);
-        fprintf(fp, "       add : %.4f %%\n", ((double)emu->stats.add / (double)sum) * 100.0);
-        fprintf(fp, "       sub : %.4f %%\n", ((double)emu->stats.sub / (double)sum) * 100.0);
-        fprintf(fp, "       sll : %.4f %%\n", ((double)emu->stats.sll / (double)sum) * 100.0);
-        fprintf(fp, "       lui : %.4f %%\n", ((double)emu->stats.lui / (double)sum) * 100.0);
-        fprintf(fp, "       jal : %.4f %%\n", ((double)emu->stats.jal / (double)sum) * 100.0);
-        fprintf(fp, "      jalr : %.4f %%\n", ((double)emu->stats.jalr / (double)sum) * 100.0);
-        fprintf(fp, "      fadd : %.4f %%\n", ((double)emu->stats.fadd / (double)sum) * 100.0);
-        fprintf(fp, "      fsub : %.4f %%\n", ((double)emu->stats.fsub / (double)sum) * 100.0);
-        fprintf(fp, "      fmul : %.4f %%\n", ((double)emu->stats.fmul / (double)sum) * 100.0);
-        fprintf(fp, "      fdiv : %.4f %%\n", ((double)emu->stats.fdiv / (double)sum) * 100.0);
-        fprintf(fp, "     fhalf : %.4f %%\n", ((double)emu->stats.fhalf / (double)sum) * 100.0);
-        fprintf(fp, "     fsqrt : %.4f %%\n", ((double)emu->stats.fsqrt / (double)sum) * 100.0);
-        fprintf(fp, "      fabs : %.4f %%\n", ((double)emu->stats.fabs / (double)sum) * 100.0);
-        fprintf(fp, "      fneg : %.4f %%\n", ((double)emu->stats.fneg / (double)sum) * 100.0);
-        fprintf(fp, "   fiszero : %.4f %%\n", ((double)emu->stats.fiszero / (double)sum) * 100.0);
-        fprintf(fp, "    fisneg : %.4f %%\n", ((double)emu->stats.fisneg / (double)sum) * 100.0);
-        fprintf(fp, "    fispos : %.4f %%\n", ((double)emu->stats.fispos / (double)sum) * 100.0);
-        fprintf(fp, "     fless : %.4f %%\n", ((double)emu->stats.fless / (double)sum) * 100.0);
-        fprintf(fp, "     floor : %.4f %%\n", ((double)emu->stats.floor / (double)sum) * 100.0);
-        fprintf(fp, "      ftoi : %.4f %%\n", ((double)emu->stats.ftoi / (double)sum) * 100.0);
-        fprintf(fp, "      itof : %.4f %%\n", ((double)emu->stats.itof / (double)sum) * 100.0);
+        fprintf(fp, "       beq : %.4f %% (%lld)\n", ((double)emu->stats.beq / (double)sum) * 100.0, emu->stats.beq);
+        fprintf(fp, "       bne : %.4f %% (%lld)\n", ((double)emu->stats.bne / (double)sum) * 100.0, emu->stats.bne);
+        fprintf(fp, "       blt : %.4f %% (%lld)\n", ((double)emu->stats.blt / (double)sum) * 100.0, emu->stats.blt);
+        fprintf(fp, "       bge : %.4f %% (%lld)\n", ((double)emu->stats.bge / (double)sum) * 100.0, emu->stats.bge);
+        fprintf(fp, "        lw : %.4f %% (%lld)\n", ((double)emu->stats.lw / (double)sum) * 100.0, emu->stats.lw);
+        fprintf(fp, "        sw : %.4f %% (%lld)\n", ((double)emu->stats.sw / (double)sum) * 100.0, emu->stats.sw);
+        fprintf(fp, "      addi : %.4f %% (%lld)\n", ((double)emu->stats.addi / (double)sum) * 100.0, emu->stats.addi);
+        fprintf(fp, "      slli : %.4f %% (%lld)\n", ((double)emu->stats.slli / (double)sum) * 100.0, emu->stats.slli);
+        fprintf(fp, "      srli : %.4f %% (%lld)\n", ((double)emu->stats.srli / (double)sum) * 100.0, emu->stats.srli);
+        fprintf(fp, "       add : %.4f %% (%lld)\n", ((double)emu->stats.add / (double)sum) * 100.0, emu->stats.add);
+        fprintf(fp, "       sub : %.4f %% (%lld)\n", ((double)emu->stats.sub / (double)sum) * 100.0, emu->stats.sub);
+        fprintf(fp, "       sll : %.4f %% (%lld)\n", ((double)emu->stats.sll / (double)sum) * 100.0, emu->stats.sll);
+        fprintf(fp, "       lui : %.4f %% (%lld)\n", ((double)emu->stats.lui / (double)sum) * 100.0, emu->stats.lui);
+        fprintf(fp, "       jal : %.4f %% (%lld)\n", ((double)emu->stats.jal / (double)sum) * 100.0, emu->stats.jal);
+        fprintf(fp, "      jalr : %.4f %% (%lld)\n", ((double)emu->stats.jalr / (double)sum) * 100.0, emu->stats.jalr);
+        fprintf(fp, "      fadd : %.4f %% (%lld)\n", ((double)emu->stats.fadd / (double)sum) * 100.0, emu->stats.fadd);
+        fprintf(fp, "      fsub : %.4f %% (%lld)\n", ((double)emu->stats.fsub / (double)sum) * 100.0, emu->stats.fsub);
+        fprintf(fp, "      fmul : %.4f %% (%lld)\n", ((double)emu->stats.fmul / (double)sum) * 100.0, emu->stats.fmul);
+        fprintf(fp, "      fdiv : %.4f %% (%lld)\n", ((double)emu->stats.fdiv / (double)sum) * 100.0, emu->stats.fdiv);
+        fprintf(fp, "     fhalf : %.4f %% (%lld)\n", ((double)emu->stats.fhalf / (double)sum) * 100.0, emu->stats.fhalf);
+        fprintf(fp, "     fsqrt : %.4f %% (%lld)\n", ((double)emu->stats.fsqrt / (double)sum) * 100.0, emu->stats.fsqrt);
+        fprintf(fp, "      fabs : %.4f %% (%lld)\n", ((double)emu->stats.fabs / (double)sum) * 100.0, emu->stats.fabs);
+        fprintf(fp, "      fneg : %.4f %% (%lld)\n", ((double)emu->stats.fneg / (double)sum) * 100.0, emu->stats.fneg);
+        fprintf(fp, "   fiszero : %.4f %% (%lld)\n", ((double)emu->stats.fiszero / (double)sum) * 100.0, emu->stats.fiszero);
+        fprintf(fp, "    fisneg : %.4f %% (%lld)\n", ((double)emu->stats.fisneg / (double)sum) * 100.0, emu->stats.fisneg);
+        fprintf(fp, "    fispos : %.4f %% (%lld)\n", ((double)emu->stats.fispos / (double)sum) * 100.0, emu->stats.fispos);
+        fprintf(fp, "     fless : %.4f %% (%lld)\n", ((double)emu->stats.fless / (double)sum) * 100.0, emu->stats.fless);
+        fprintf(fp, "     floor : %.4f %% (%lld)\n", ((double)emu->stats.floor / (double)sum) * 100.0, emu->stats.floor);
+        fprintf(fp, "      ftoi : %.4f %% (%lld)\n", ((double)emu->stats.ftoi / (double)sum) * 100.0, emu->stats.ftoi);
+        fprintf(fp, "      itof : %.4f %% (%lld)\n", ((double)emu->stats.itof / (double)sum) * 100.0, emu->stats.itof);
 
         // print cache statistics
         fprintf(fp, "\n----------Cache Stats----------\n");

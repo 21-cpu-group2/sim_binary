@@ -20,8 +20,8 @@
 // とりあえず、direct-mapped
 #define ADDRESS_BIT 27
 // #define CACHE_SIZE 512
-#define CACHE_LINE_NUM 128
-#define CACHE_LINE_SIZE 32 // 8 words
+#define CACHE_LINE_NUM 1028
+#define CACHE_LINE_SIZE 4 // 8 words
 #define TAG_BIT 13
 #define TAG_MASK 0x07FFC000
 #define INDEX_BIT 10

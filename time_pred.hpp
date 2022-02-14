@@ -1,7 +1,7 @@
 #ifndef _TIME_PRED
 #define _TIME_PRED
 
-const double freq = 100000000.0;
+const double freq = 80000000.0;
 const double baudrate = 115200.0;
 
 const uint32_t in_start = 200000;
@@ -22,9 +22,9 @@ fabs, fhalf, fisneg, fispos, fiszero, fless, fneg,
 #define bne_clk 4ll
 #define blt_clk 4ll
 #define bge_clk 4ll
-#define sw_hit_clk 8ll // 9かも
-#define sw_miss_clk 65ll
-#define lw_hit_clk 2ll
-#define lw_miss_clk 54ll
+#define sw_hit_clk 14ll // 9かも
+#define sw_miss_clk 60ll // 57ll
+#define lw_hit_clk 8ll
+#define lw_miss_clk 60ll //46ll
 
 #endif

@@ -369,6 +369,7 @@ min_caml_print_float:
     jalr %zero %ra 0  # 腟�篋�
 
 min_caml_print_int:
+    addi %a12 %a1 0 #%a1������32���10�����ャ�ｃ��������
     addi %a1 %zero 0
     addi %a2 %zero 0
     addi %a3 %zero 0
@@ -411,13 +412,17 @@ finish_find_1_digit:
     add %a9 %a6 %a8
     add %a7 %a7 %a9 # convert to ascii
     slli %a7 %a7 8
-    addi %a0 %a7 32 # add space 0x20
+    add %a0 %a7 %a12 # add space 0x20
 finish_print_int:
     sw %a0 %out 0
     addi %out %out 4
     jalr %zero %ra 0  # 腟�篋�
 
 min_caml_print_char:
+    addi %a1 %zero 32
+    beq %a0 %a1 finish_print_char
+    addi %a1 %zero 10
+    beq %a0 %a1 finish_print_char
     addi %a1 %zero 80 # P
     beq %a0 %a1 break_print_char
     addi %a2 %zero 51 # 3
@@ -441,9 +446,12 @@ break_print_charP3:
     slli %a0 %a0 8
     add %a0 %a0 %a3 # 00 80 51 32
     slli %a0 %a0 8
+    addi %a3 %zero 10
     add %a0 %a0 %a3 # 80 51 32 32
     sw %a0 %out 0
     addi %out %out 4
+    jalr %zero %ra 0
+finish_print_char:
     jalr %zero %ra 0
 
 l.40359:	# 128.000000
@@ -16676,6 +16684,7 @@ bge_else.45865:
 	addi %a1 %zero 255 #1931
 bge_cont.45866:
 	add %a0 %a1 %zero
+	addi %a1 %zero 32
 	sw %ra %sp 76 #1932 call dir
 	addi %sp %sp 80 #1932	
 	jal %ra min_caml_print_int #1932
@@ -16703,6 +16712,7 @@ bge_else.45869:
 	addi %a1 %zero 255 #1931
 bge_cont.45870:
 	add %a0 %a1 %zero
+	addi %a1 %zero 32
 	sw %ra %sp 76 #1932 call dir
 	addi %sp %sp 80 #1932	
 	jal %ra min_caml_print_int #1932
@@ -16730,6 +16740,7 @@ bge_else.45873:
 	addi %a1 %zero 255 #1931
 bge_cont.45874:
 	add %a0 %a1 %zero
+	addi %a1 %zero 10
 	sw %ra %sp 76 #1932 call dir
 	addi %sp %sp 80 #1932	
 	jal %ra min_caml_print_int #1932
@@ -16923,6 +16934,7 @@ bge_else.45897:
 	addi %a1 %zero 255 #1931
 bge_cont.45898:
 	add %a0 %a1 %zero
+	addi %a1 %zero 32
 	sw %ra %sp 92 #1932 call dir
 	addi %sp %sp 96 #1932	
 	jal %ra min_caml_print_int #1932
@@ -16950,6 +16962,7 @@ bge_else.45901:
 	addi %a1 %zero 255 #1931
 bge_cont.45902:
 	add %a0 %a1 %zero
+	addi %a1 %zero 32
 	sw %ra %sp 92 #1932 call dir
 	addi %sp %sp 96 #1932	
 	jal %ra min_caml_print_int #1932
@@ -16976,6 +16989,7 @@ bge_cont.45908:
 bge_else.45905:
 	addi %a0 %zero 255 #1931
 bge_cont.45906:
+	addi %a1 %zero 10
 	sw %ra %sp 92 #1932 call dir
 	addi %sp %sp 96 #1932	
 	jal %ra min_caml_print_int #1932
@@ -17244,6 +17258,7 @@ bge_else.45931:
 	addi %a1 %zero 255 #1931
 bge_cont.45932:
 	add %a0 %a1 %zero
+	addi %a1 %zero 32
 	sw %ra %sp 84 #1932 call dir
 	addi %sp %sp 88 #1932	
 	jal %ra min_caml_print_int #1932
@@ -17271,6 +17286,7 @@ bge_else.45935:
 	addi %a1 %zero 255 #1931
 bge_cont.45936:
 	add %a0 %a1 %zero
+	addi %a1 %zero 32
 	sw %ra %sp 84 #1932 call dir
 	addi %sp %sp 88 #1932	
 	jal %ra min_caml_print_int #1932
@@ -17297,6 +17313,7 @@ bge_cont.45942:
 bge_else.45939:
 	addi %a0 %zero 255 #1931
 bge_cont.45940:
+	addi %a1 %zero 10
 	sw %ra %sp 84 #1932 call dir
 	addi %sp %sp 88 #1932	
 	jal %ra min_caml_print_int #1932
@@ -22298,6 +22315,7 @@ bge_cont.46065:
 	lw %a0 %sp 76 #57
 	lw %a1 %a0 0 #57
 	add %a0 %a1 %zero
+	addi %a1 %zero 32
 	sw %ra %sp 436 #1920 call dir
 	addi %sp %sp 440 #1920	
 	jal %ra min_caml_print_int #1920
@@ -22312,6 +22330,7 @@ bge_cont.46065:
 	lw %a0 %sp 76 #57
 	lw %a1 %a0 4 #57
 	add %a0 %a1 %zero
+	addi %a1 %zero 32
 	sw %ra %sp 436 #1922 call dir
 	addi %sp %sp 440 #1922	
 	jal %ra min_caml_print_int #1922
@@ -22324,6 +22343,7 @@ bge_cont.46065:
 	addi %sp %sp -440 #1923
 	lw %ra %sp 436 #1923
 	addi %a0 %zero 255 #1924
+	addi %a1 %zero 10
 	sw %ra %sp 436 #1924 call dir
 	addi %sp %sp 440 #1924	
 	jal %ra min_caml_print_int #1924

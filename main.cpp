@@ -296,7 +296,7 @@ int main(int argc, char **argv){
         double time_to_calculate = (double)emu->clks / freq;
         fprintf(fp, "time to calculate : %.4f [s]\n" ,time_to_calculate);
         double total_time =  time_to_send_output_data_to_server + time_to_write_program_and_sld_to_fpga + time_to_calculate;
-        fprintf(fp, "Total time : %4.f [s]\n", total_time);
+        fprintf(fp, "Total time : %.4f [s]\n", total_time);
         double error_ratio = abs(227.6222 - total_time) / (227.6222);
         fprintf(fp, "Error ratio : %.4f %%\n", error_ratio * 100);
 
@@ -356,8 +356,8 @@ int main(int argc, char **argv){
             }
             fprintf(fp, "%30s : %lld\n", label_temp.c_str(), emu->stats.exec_times[pc_temp]);
         }
-
         fclose(fp);
+        cout << "out register when ended" << emu->reg[5] << endl;
     }
 
     print_reg(emu);

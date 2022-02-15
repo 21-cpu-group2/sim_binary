@@ -25,7 +25,7 @@
 #define TAG_BIT 13
 #define TAG_MASK 0x07FFC000
 #define INDEX_BIT 10
-#define INDEX_MASK 0x00003FF0 
+#define INDEX_MASK 0x00003FF0
 #define OFFSET_BIT 4
 #define OFFSET_MASK 0x0000000F
 
@@ -197,7 +197,8 @@ inline void cache_save(Emulator* emu, uint32_t mem_address) {
     uint32_t offset = (mem_address & OFFSET_MASK);
     emu->cache[index].valid = true;
     emu->cache[index].tag = tag;
-    uint32_t start_ind = (mem_address & 0xFFFFFFF0) >> 2;
+    uint32_t mask_for_start_index = 0xFFFFFFFF << OFFSET_BIT;
+    uint32_t start_ind = (mem_address & mask_for_start_index) >> 2;
     for (int i=0; i<CACHE_LINE_SIZE; i++) {
         emu->cache[index].data[i] = emu->memory[start_ind + i];
     }

@@ -1,11 +1,11 @@
-63.68691 [sec] Elapsed
+65.04619 [sec] Elapsed
 2580547844 [Instructions] Executed
-40961076 [Instructions/sec]
+39700736 [Instructions/sec]
 ----------Time Prediction----------
 time to write program and sld content to FPGA : 7.5000 [s]
 time to send output data to server : 15.0138 [s]
 time to calculate : 204.5249 [s]
-Total time :  227 [s]
+Total time : 227.0387 [s]
 Error ratio : 0.2564 %
 
 

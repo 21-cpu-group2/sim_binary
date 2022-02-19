@@ -1,5 +1,3 @@
-how to debug
-
 1. let directy-tree be like below 
 '''
 .
@@ -13,13 +11,9 @@ sim_binary
 |
 ...
 ├── data
+│   ├── contest.bin
 │   ├── contest.txt  <------
-│   ├── label_pc.txt
-│   ├── output.txt
-│   ├── pc_label.txt
-│   ├── test.asm     <------
-│   ├── test.bin
-│   └── test_disassembled.txt
+│   └── test.asm     <------
 ...
 '''
 
@@ -27,12 +21,11 @@ sim_binary
 
 4. then 4 files added to sim_binary/data directory
     ・test.bin 
-        first line       -> initial pc
-        from second line -> machine code
+        machine code
     ・test_disassembled.txt
         disassembled code got from test.bin
         any instruction in test.bin has the same line-number in test_disassembled.txt
-        there is no pseudo instructions.
+        # there is no pseudo instructions.
     ・pc_label.txt
         you can check label, with pc
     ・label_pc.txt

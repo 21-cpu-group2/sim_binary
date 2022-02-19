@@ -38,6 +38,15 @@ int main (int argc, char** argv){
             cout << hex << "0x" << fl.i << endl;
         }
     }
+    else if (argv[1][0] == 'b'){
+        union fi temp;
+        string str;
+        while (1){
+            cin >> str;
+            temp.i = stoul(str, 0, 2);
+            cout << temp.f << endl;
+        }
+    }
     else {
         // 16¿Ê
         while (1) {

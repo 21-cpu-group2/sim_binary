@@ -30,6 +30,9 @@ sim_binary
         you can check label, with pc
     ・label_pc.txt
         you can check pc, with label
+    ・stats.txt
+        you can check statistics
+        (cache hit rate, elapsed time, predicted time, etc...)
 
 5. the simulator is ready.
     ./simulator (-p file path) (-a) (-r) (-m n) (-R n1 n2 ...)

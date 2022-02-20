@@ -256,7 +256,7 @@ void output_image(Emulator* emu){
     // %out ¤Î½ªÎ»»þ : 6591488 if 512 * 512
     //                693248 if 128 * 128
     int out_start = 300000;
-    int out_goal = 693248; // if 128 * 128
+    int out_goal = 496624; // if 128 * 128
     // int out_goal = 1872896; // if 256 * 256
     // int out_goal = 6591488; // if 512 * 512
     ofstream writing_file;

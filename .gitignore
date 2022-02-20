@@ -11,4 +11,6 @@ simulator
 *.out
 __pycache__
 __init__.py
+output*
+
 
